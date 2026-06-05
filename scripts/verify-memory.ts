@@ -140,6 +140,8 @@ function verify(explicitFiles?: string[]): boolean {
   );
 
   // Check 1: Format validation for session files
+  // When explicit files are provided (pre-commit mode), only check the LAST entry
+  // (new entries are appended; existing committed entries are not re-validated)
   const lastEntryOnly = explicitFiles !== undefined && explicitFiles.length > 0;
 
   for (const file of sessionFiles) {

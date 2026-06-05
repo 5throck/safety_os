@@ -58,3 +58,6 @@ Phase B 승격 기준(7개 조건)은 [PROMOTION_CHECKLIST.md](PROMOTION_CHECKLI
 ## 면책 조항
 
 본 시스템은 워크플로우 자동화 지원만 제공합니다. 법적 해석에 대한 책임은 전적으로 자격을 갖춘 법률 전문가 및 사용자 조직에 있습니다.
+
+
+*Last Updated: 2026-06-05*

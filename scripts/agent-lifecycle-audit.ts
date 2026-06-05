@@ -97,12 +97,12 @@ function getRegisteredAgents(): Set<string> {
 function parseAgentFrontmatter(filePath: string): AgentFrontmatter | null {
   try {
     const content = readFileSync(filePath, 'utf-8');
-    const frontmatterMatch = content.match(/^---\r?\n([\s\S]*?)\r?\n---/);
+    const frontmatterMatch = content.match(/^---\n([\s\S]*?)\n---/);
 
     if (!frontmatterMatch) return null;
 
     const frontmatter: Record<string, unknown> = {};
-    const lines = frontmatterMatch[1].split(/\r?\n/);
+    const lines = frontmatterMatch[1].split('\n');
 
     let inTierBlock = false;
     let currentIndentation = 0;
@@ -183,7 +183,7 @@ function findAgentFiles(dir: string): string[] {
                entry.name !== 'SKILL.md') {
       // Check if it looks like an agent file (has frontmatter with role or color)
       const content = readFileSync(fullPath, 'utf-8');
-      const frontmatterMatch = content.match(/^---\r?\n([\s\S]*?)\r?\n---/);
+      const frontmatterMatch = content.match(/^---\n([\s\S]*?)\n---/);
       if (frontmatterMatch) {
         const fm = frontmatterMatch[1];
         // Agents have 'role:' or 'color:' in frontmatter; skills have 'description:' instead
@@ -497,3 +497,4 @@ if (jsonMode) {
 }
 
 process.exit(result.errors.length > 0 ? 1 : 0);
+

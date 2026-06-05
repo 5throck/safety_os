@@ -2,14 +2,13 @@
 /**
  * Skill Lifecycle Validation Script
  * @version 1.0.0
- *
- * Validates skills/<skill_name>/SKILL.md files for required frontmatter
- * and checks governance records in docs/lifecycle/skills/<skill_name>.md
- *
- * Usage:
- *   bun scripts/validate-skills.ts
- *   bun scripts/validate-skills.ts --json
- */
+// Validates skills/*/SKILL.md files for required frontmatter
+// and checks governance records in docs/lifecycle/skills/*.md
+//
+// Usage:
+//   bun scripts/validate-skills.ts
+//   bun scripts/validate-skills.ts --json
+
 import { readFileSync, existsSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { cwd } from 'node:process';
