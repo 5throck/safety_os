@@ -1,0 +1,86 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PSM PHA HAZOP Record",
+  "version": "1.0.0",
+  "type": "object",
+  "properties": {
+    "record_id": {
+      "type": "string",
+      "description": "Unique identifier for the PHA record."
+    },
+    "date": {
+      "type": "string",
+      "format": "date",
+      "description": "Date of the analysis."
+    },
+    "node_id": {
+      "type": "string",
+      "description": "Identifier for the P&ID node."
+    },
+    "node_description": {
+      "type": "string",
+      "description": "Description of the node and its design intent."
+    },
+    "deviations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "guide_word": {
+            "type": "string"
+          },
+          "parameter": {
+            "type": "string"
+          },
+          "deviation": {
+            "type": "string",
+            "description": "The specific deviation (e.g., NO FLOW)."
+          },
+          "causes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "consequences": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "safeguards": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "risk_grade": {
+            "type": "string",
+            "enum": ["Low", "Medium", "High", "Critical"]
+          },
+          "recommendations": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "guide_word",
+          "parameter",
+          "deviation",
+          "causes",
+          "consequences",
+          "risk_grade"
+        ]
+      }
+    }
+  },
+  "required": [
+    "record_id",
+    "date",
+    "node_id",
+    "node_description",
+    "deviations"
+  ]
+}
