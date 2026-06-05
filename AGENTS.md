@@ -21,6 +21,7 @@
 | Agent | File | Tier | Role |
 |-------|------|------|------|
 | **PM / Chief Safety Officer (CSO)** | [`agents/pm.md`](agents/pm.md) | High | PM override — acts as CSO; orchestrates EHS agent team; enforces legal_basis gate on all workflows |
+| Documentation Writer | [`agents/docs-writer.md`](agents/docs-writer.md) | Medium | Formats official documentation; enforces English-only policy and specific translation zones |
 
 ### Safety Management
 
