@@ -19,6 +19,7 @@ metadata:
   legal_basis:
     - 산업안전보건법 제38조 (안전조치)
     - 산업안전보건법 제39조 (보건조치)
+scope: workspace
 ---
 
 # Permit to Work

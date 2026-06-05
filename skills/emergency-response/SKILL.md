@@ -21,6 +21,7 @@ metadata:
   legal_basis:
     - 산업안전보건법 제54조 (중대재해 발생 시 조치)
     - 중대재해처벌법 제6조 (중대산업재해 사업주 의무)
+scope: workspace
 ---
 
 # Emergency Response

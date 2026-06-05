@@ -15,6 +15,7 @@ metadata:
     - risk-assessment-agent
   legal_basis:
     - 산업안전보건법 제36조 (위험성평가 실시)
+scope: workspace
 ---
 
 # Risk Assessment
@@ -41,7 +42,6 @@ Save findings to `memory/findings/risk-assessment-YYYY-MM-DD-<scope>.md` with th
 ```markdown
 # Risk Assessment Record
 date: YYYY-MM-DD
-scope: <workplace/task>
 assessor: <name>
 legal_basis: 산업안전보건법 제36조
 status: draft | approved

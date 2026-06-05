@@ -103,7 +103,7 @@ function checkF(): void {
 
 // Check G: .claude/commands/ parity with templates/common/ (Tier 1 only)
 function checkG(): void {
-  if (IS_TIER3) return;
+  if (IS_TIER3) return; // Tier 3 projects don't have templates/common/
   if (!JSON_MODE) console.log('\n=== Check G: Platform Command propagation to templates/common/ (Tier 1 -> Tier 2) ===');
 
   for (const platform of ['.claude', '.gemini']) {
@@ -128,10 +128,12 @@ function checkG(): void {
 }
 
 // Check H: Platform Skill propagation to templates/common/ (Tier 1 only)
+// Only checks skills declared in common-contract.json common_platform_skills — not ALL workspace skills
 function checkH(): void {
   if (IS_TIER3) return;
   if (!JSON_MODE) console.log('\n=== Check H: Platform Skill propagation to templates/common/ (Tier 1 -> Tier 2) ===');
 
+  // Load common-contract.json to find skills that should be propagated
   const contractPath = join(ROOT, 'docs', 'templates', 'common-contract.json');
   if (!existsSync(contractPath)) {
     if (!JSON_MODE) console.log('       \x1b[2mSkipping: common-contract.json not found\x1b[0m');

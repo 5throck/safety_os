@@ -19,6 +19,7 @@ metadata:
   legal_basis:
     - 산업안전보건법 전반 (Occupational Safety and Health Act — all articles)
     - 중대재해처벌법 전반 (Serious Accidents Punishment Act — all articles)
+scope: workspace
 ---
 
 # Compliance Gap Analysis
@@ -56,7 +57,6 @@ Save gap report to `memory/findings/compliance-gap-YYYY-MM-DD-<scope>.md`:
 ```markdown
 # Compliance Gap Report
 date: YYYY-MM-DD
-scope: <site / activity / regulation>
 assessor: <name>
 legal_basis: 산업안전보건법 전반
 status: draft | under_review | approved

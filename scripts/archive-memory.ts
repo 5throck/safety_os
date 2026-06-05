@@ -30,10 +30,10 @@ for (const file of files) {
     } else {
         fileDate = fs.statSync(fullPath).mtime;
     }
-
+    
     const diffTime = today.getTime() - fileDate.getTime();
     const diffDays = diffTime / (1000 * 3600 * 24);
-
+    
     if (diffDays > 7) {
         fs.renameSync(fullPath, path.join(archiveDir, file));
         console.log(`Archived ${file}`);
