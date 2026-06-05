@@ -1,9 +1,11 @@
 # Manufacturing Industry Profile — MVP
 name: manufacturing
 display_name: "제조업 (Manufacturing)"
+description: Standard manufacturing operations, focusing on equipment safety and general occupational health.
 applicable_laws:
   - 산업안전보건법 (Occupational Safety and Health Act)
   - 중대재해처벌법 (Serious Accidents Punishment Act)
+  - OSHA-KR Article 38
 workflows:
   daily:
     - risk-assessment

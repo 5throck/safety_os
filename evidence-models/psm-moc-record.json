@@ -1,0 +1,74 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PSM MOC Record",
+  "description": "Evidence model for Management of Change (MOC) records.",
+  "type": "object",
+  "properties": {
+    "mocId": {
+      "type": "string",
+      "description": "Unique identifier for the MOC."
+    },
+    "title": {
+      "type": "string",
+      "description": "Title of the proposed change."
+    },
+    "description": {
+      "type": "string",
+      "description": "Detailed description of the change."
+    },
+    "status": {
+      "type": "string",
+      "enum": ["Initiated", "Under Review", "Approved", "Implemented", "Closed", "Rejected"],
+      "description": "Current status of the MOC."
+    },
+    "hazardReview": {
+      "type": "object",
+      "properties": {
+        "assessmentType": {
+          "type": "string"
+        },
+        "findings": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "completedBy": {
+          "type": "string"
+        },
+        "completionDate": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "approvals": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "role": {
+            "type": "string"
+          },
+          "approverName": {
+            "type": "string"
+          },
+          "approvalDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "comments": {
+            "type": "string"
+          }
+        },
+        "required": ["role", "approverName", "approvalDate"]
+      }
+    },
+    "version": {
+      "type": "string",
+      "description": "Schema version.",
+      "default": "1.0.0"
+    }
+  },
+  "required": ["mocId", "title", "status", "version"]
+}

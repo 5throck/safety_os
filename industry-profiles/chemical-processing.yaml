@@ -1,0 +1,16 @@
+# Chemical Processing Industry Profile
+name: chemical-processing
+display_name: "화학물질 제조업 (Chemical & Petrochemical Processing)"
+description: Primary target industry for Process Safety Management (PSM) under OSHA-KR Article 44.
+applicable_laws:
+  - 산업안전보건법 (Occupational Safety and Health Act)
+  - 중대재해처벌법 (Serious Accidents Punishment Act)
+  - OSHA-KR Article 44
+workflows:
+  daily:
+    - risk-assessment
+    - permit-to-work
+    - process-hazard-analysis
+    - management-of-change
+    - pre-startup-safety-review
+status: draft

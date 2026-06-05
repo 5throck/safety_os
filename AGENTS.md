@@ -29,6 +29,7 @@
 | Safety Governance Manager | [`agents/safety-governance-manager.md`](agents/safety-governance-manager.md) | High | Strategy, KPIs, and compliance objectives; owns annual safety targets and SAPA compliance metrics |
 | Safety Workflow Manager | [`agents/safety-workflow-manager.md`](agents/safety-workflow-manager.md) | Medium | Operational dispatch; orchestrates daily workflow agents; manages agent teams for manufacturing floor |
 | Training Agent | [`agents/training-agent.md`](agents/training-agent.md) | Medium | Manages safety training requirements; tracks compliance via Neo4j MCP; generates curricula |
+| PSM Agent | [`agents/psm-agent.md`](agents/psm-agent.md) | Medium | PSM Specialist Agent; oversees 12 elements of OSHA-KR Article 44 |
 
 ### Compliance & Risk
 
@@ -95,6 +96,7 @@ All specialist agents below are dispatched ONLY through PM:
 | **compliance-agent** | 4 | "Compliance monitoring", "Regulatory check", "OSHA-KR/SAPA validation" |
 | **risk-assessment-agent** | 4 | "Risk assessment", "Hazard identification", "Risk register update" |
 | **training-agent** | 4 | "Safety training", "Worker compliance tracking", "Curriculum generation" |
+| **psm-agent** | 4 | "Process Safety Management", "MOC review", "PHA analysis" |
 | **emergency-agent** | 4 | "Emergency response", "Incident escalation", "Emergency protocol activation" |
 | **audit-agent** | 5-6 | "Audit preparation", "Evidence traceability", "Regulatory inspection readiness" |
 
