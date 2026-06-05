@@ -2,12 +2,12 @@
   "mcpServers": {
     "codegraph_search": {
       "command": "node",
-      "args": ["../../node_modules/.bin/codegraph-mcp", "search"],
+      "args": ["../../node_modules/.bin/codegraph", "search"],
       "env": {}
     },
     "codegraph_mutate": {
       "command": "node",
-      "args": ["../../node_modules/.bin/codegraph-mcp", "mutate"],
+      "args": ["../../node_modules/.bin/codegraph", "mutate"],
       "env": {}
     },
     "k_skill": {

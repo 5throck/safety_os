@@ -6,6 +6,19 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+### Added (2026-06-05 — MCP Server Configuration)
+- **[2026-06-05]**: MCP server configuration with 3 stub servers (k_skill, legalize_kr, mcp_kr_legislation)
+- **[2026-06-05]**: `vendor/*/index.ts` - MCP TypeScript SDK-based stub servers
+- **[2026-06-05]**: `@modelcontextprotocol/sdk@1.29.0` - Official MCP TypeScript SDK installed
+- **[2026-06-05]**: `docs/superpowers/specs/2026-06-05-mcp-server-design.md` - Comprehensive design spec
+- **[2026-06-05]**: `docs/superpowers/plans/2026-06-05-mcp-server-implementation.md` - Implementation plan
+- **[2026-06-05]**: `memory/meeting-2026-06-05-mcp-server-design.md` - Meeting transcript
+- **[2026-06-05]**: `.mcp.json` - Updated with vendor/ paths and correct server names
+- **[2026-06-05]**: `.cache/` directories initialized for k_skill and legalize-kr
+
+### Changed (2026-06-05)
+- **[2026-06-05]**: `codegraph` package installation and .mcp.json path fixes
+
 ### Added (2026-06-05 — Phase A completion)
 - **[2026-06-05]**: Platform files: `.claude/settings.json`, `.gemini/settings.json` with Safety OS-specific hooks
 - **[2026-06-05]**: Slash commands: `.claude/commands/` and `.gemini/commands/` (6 commands each)
