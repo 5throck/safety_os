@@ -28,12 +28,14 @@
 |-------|------|------|------|
 | Safety Governance Manager | [`agents/safety-governance-manager.md`](agents/safety-governance-manager.md) | High | Strategy, KPIs, and compliance objectives; owns annual safety targets and SAPA compliance metrics |
 | Safety Workflow Manager | [`agents/safety-workflow-manager.md`](agents/safety-workflow-manager.md) | Medium | Operational dispatch; orchestrates daily workflow agents; manages agent teams for manufacturing floor |
+| Training Agent | [`agents/training-agent.md`](agents/training-agent.md) | Medium | Manages safety training requirements; tracks compliance via Neo4j MCP; generates curricula |
 
 ### Compliance & Risk
 
 | Agent | File | Tier | Role |
 |-------|------|------|------|
 | Compliance Agent | [`agents/compliance-agent.md`](agents/compliance-agent.md) | Medium | Regulatory compliance monitoring; tracks OSHA-KR and SAPA requirements; flags non-compliance |
+| Legal Agent | [`agents/legal-agent.md`](agents/legal-agent.md) | Medium | Real-time legal interpretation and compliance advisory based on South Korean EHS laws |
 | Risk Assessment Agent | [`agents/risk-assessment-agent.md`](agents/risk-assessment-agent.md) | Medium | Risk assessment specialist; executes daily risk assessments; maintains risk register |
 
 ### Emergency & Audit
@@ -89,8 +91,10 @@ All specialist agents below are dispatched ONLY through PM:
 | **auditor** | 6 | "Quality verification", "Documentation consistency check", "QA gate required" (Workspace root only) |
 | **safety-governance-manager** | 1-2 | "EHS strategy", "Compliance objectives", "KPI definition" |
 | **safety-workflow-manager** | 3-4 | "Daily workflow dispatch", "Manufacturing operations", "Agent team coordination" |
+| **legal-agent** | 1-2 | "Legal interpretation", "Regulatory tracking", "Law analysis" |
 | **compliance-agent** | 4 | "Compliance monitoring", "Regulatory check", "OSHA-KR/SAPA validation" |
 | **risk-assessment-agent** | 4 | "Risk assessment", "Hazard identification", "Risk register update" |
+| **training-agent** | 4 | "Safety training", "Worker compliance tracking", "Curriculum generation" |
 | **emergency-agent** | 4 | "Emergency response", "Incident escalation", "Emergency protocol activation" |
 | **audit-agent** | 5-6 | "Audit preparation", "Evidence traceability", "Regulatory inspection readiness" |
 
