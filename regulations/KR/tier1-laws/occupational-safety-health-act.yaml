@@ -1,0 +1,16 @@
+# Metadata only — full text retrieved via external reference
+name: 산업안전보건법
+english_name: Occupational Safety and Health Act
+abbreviation: OSHA-KR
+enacted: "1990-01-13"
+last_amended: "2023-01-26"
+enforcement_agency: 고용노동부 (Ministry of Employment and Labor)
+key_articles:
+  - article: "제38조"
+    topic: 안전조치 (Safety Measures)
+  - article: "제39조"
+    topic: 보건조치 (Health Measures)
+  - article: "제63조"
+    topic: 도급인의 안전보건조치 (Contractor Safety)
+reference_url: "https://www.law.go.kr/법령/산업안전보건법"
+note: "Content retrieved via MCP only. Do not embed full statutory text."

@@ -1,0 +1,20 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Safety Finding",
+  "description": "Audit finding record for Safety OS evidence trail",
+  "version": "1.0.0",
+  "type": "object",
+  "required": ["id", "date", "type", "description", "legal_basis", "severity", "status"],
+  "properties": {
+    "id": { "type": "string", "pattern": "^FIND-[0-9]{4}-[0-9]{4}$" },
+    "date": { "type": "string", "format": "date" },
+    "type": { "type": "string", "enum": ["hazard", "non-conformance", "near-miss", "incident"] },
+    "description": { "type": "string" },
+    "legal_basis": { "type": "string", "description": "Applicable law article(s)" },
+    "severity": { "type": "string", "enum": ["critical", "major", "minor", "observation"] },
+    "location": { "type": "string" },
+    "responsible_party": { "type": "string" },
+    "status": { "type": "string", "enum": ["open", "in-progress", "closed", "verified"] },
+    "corrective_action_id": { "type": "string", "pattern": "^CA-[0-9]{4}-[0-9]{4}$" }
+  }
+}

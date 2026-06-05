@@ -1,0 +1,21 @@
+# Safety OS project settings
+{
+  "mcpServers": {
+    "codegraph": {
+      "command": "npx",
+      "args": [
+        "@colbymchenry/codegraph@0.9.7",
+        "serve"
+      ]
+    }
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "type": "command",
+        "command": "git config core.hooksPath .githooks",
+        "statusMessage": "Configuring git hooks..."
+      }
+    ]
+  }
+}

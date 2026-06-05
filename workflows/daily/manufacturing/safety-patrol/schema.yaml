@@ -1,0 +1,6 @@
+schema_version: "1.0"
+workflow_id: "safety-patrol"
+title: "안전순찰 (Safety Patrol)"
+status: "active"
+applicability: "mandatory"
+legal_basis: "산업안전보건법 제62조"

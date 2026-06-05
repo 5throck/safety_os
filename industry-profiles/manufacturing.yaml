@@ -1,0 +1,15 @@
+# Manufacturing Industry Profile — MVP
+name: manufacturing
+display_name: "제조업 (Manufacturing)"
+applicable_laws:
+  - 산업안전보건법 (Occupational Safety and Health Act)
+  - 중대재해처벌법 (Serious Accidents Punishment Act)
+workflows:
+  daily:
+    - risk-assessment
+    - permit-to-work
+    - equipment-inspection
+    - contractor-management
+    - safety-training
+    - safety-patrol
+status: draft

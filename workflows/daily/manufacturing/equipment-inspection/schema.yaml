@@ -1,0 +1,6 @@
+schema_version: "1.0"
+workflow_id: "equipment-inspection"
+title: "기계기구 안전검사 (Equipment Inspection)"
+status: "active"
+applicability: "mandatory"
+legal_basis: "산업안전보건법 제93조"

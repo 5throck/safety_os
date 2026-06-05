@@ -1,0 +1,58 @@
+{
+  "name": "co-safety",
+  "displayName": "Safety OS",
+  "description": "EHS (Environmental Health & Safety) AI Agent platform for South Korea regulatory compliance",
+  "type": "security",
+  "status": "beta",
+  "version": "0.1.0",
+  "inherits_common": "1.0.0",
+  "agent_overrides": {
+    "pm": {
+      "type": "additive",
+      "reason": "co-safety overrides PM with CSO (Chief Safety Officer) role — enforces legal_basis gate on all workflows, routes strategy to SGM and operations to SWM",
+      "since": "2026-06-04",
+      "reviewed_by": "architect",
+      "overrides": ["agent-roster", "governance-workflow", "dispatch-protocol"]
+    }
+  },
+  "skill_manifest": {
+    "variant_specific": [
+      {
+        "name": "risk-assessment",
+        "layer": "root",
+        "used_by_agents": ["risk-assessment-agent", "safety-workflow-manager"],
+        "legal_basis": "산업안전보건법 제36조",
+        "platform_parity": "not-required"
+      },
+      {
+        "name": "permit-to-work",
+        "layer": "root",
+        "used_by_agents": ["safety-workflow-manager", "risk-assessment-agent"],
+        "legal_basis": "산업안전보건법 제38조",
+        "platform_parity": "not-required"
+      },
+      {
+        "name": "emergency-response",
+        "layer": "root",
+        "used_by_agents": ["emergency-agent"],
+        "legal_basis": "산업안전보건법 제54조",
+        "platform_parity": "not-required"
+      },
+      {
+        "name": "compliance-gap",
+        "layer": "root",
+        "used_by_agents": ["compliance-agent"],
+        "legal_basis": "산업안전보건법 전반",
+        "platform_parity": "not-required"
+      }
+    ]
+  },
+  "lifecycle": {
+    "statusSince": "2026-06-04",
+    "lastTransition": "initial → beta on 2026-06-04",
+    "stablePromotedOn": null
+  },
+  "createdAt": "2026-06-04",
+  "phaseAComplete": false,
+  "promotionChecklist": "PROMOTION_CHECKLIST.md"
+}

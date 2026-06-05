@@ -1,0 +1,6 @@
+schema_version: "1.0"
+workflow_id: "contractor-management"
+title: "도급사업 안전보건관리 (Contractor Management)"
+status: "active"
+applicability: "mandatory"
+legal_basis: "산업안전보건법 제63조"

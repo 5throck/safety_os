@@ -1,0 +1,6 @@
+schema_version: "1.0"
+workflow_id: "safety-training"
+title: "안전보건교육 (Safety Training)"
+status: "active"
+applicability: "mandatory"
+legal_basis: "산업안전보건법 제29조"

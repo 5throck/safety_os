@@ -1,0 +1,19 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Corrective Action",
+  "description": "Corrective action record linked to a Safety Finding",
+  "version": "1.0.0",
+  "type": "object",
+  "required": ["id", "finding_id", "date_assigned", "description", "responsible_party", "due_date", "status"],
+  "properties": {
+    "id": { "type": "string", "pattern": "^CA-[0-9]{4}-[0-9]{4}$" },
+    "finding_id": { "type": "string", "pattern": "^FIND-[0-9]{4}-[0-9]{4}$" },
+    "date_assigned": { "type": "string", "format": "date" },
+    "description": { "type": "string" },
+    "responsible_party": { "type": "string" },
+    "due_date": { "type": "string", "format": "date" },
+    "completed_date": { "type": "string", "format": "date" },
+    "status": { "type": "string", "enum": ["assigned", "in-progress", "completed", "verified", "overdue"] },
+    "verification_note": { "type": "string" }
+  }
+}
