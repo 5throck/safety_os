@@ -80,6 +80,7 @@ All project scripts are written in TypeScript and executed via the Bun runtime.
 | `verify-template-integrity.ts` | L0 | 1.0.0 | active | — | — | common | — |
 | `lib/mcp-cache.ts` | L0 | 1.0.0 | active | — | — | common | — |
 | `start-mcp.ts` | L0 | 1.0.0 | active | — | — | common | — |
+| `generate-playbook.ts` | L0 | 1.0.0 | active | — | — | common | — |
 
 ---
 
