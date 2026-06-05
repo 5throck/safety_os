@@ -38,8 +38,10 @@ All project scripts are written in TypeScript and executed via the Bun runtime.
 | `lifecycle-sync-audit.ts` | L0 | 1.3.2 | active | — | — | common | — |
 | `verify-platform-lifecycle.ts` | L0 | 1.1.0 | active | — | — | common | — |
 | `verify-scripts.ts` | L0 | 1.1.0 | active | — | — | common | — |
+| `fetch-legalize.ts` | L0 | 1.0.0 | active | — | — | common | — |
 | `hooks/post-write-lifecycle-check.ts` | L0 | 1.0.0 | active | — | — | common | — |
-| `safety-audit.ts` | L0 | 2.0.1 | active | — | — | common | — |
+| `safety-audit.ts` | L0 | 2.0.0 | active | — | — | common | — |
+| `test-runner.ts` | L0 | 1.0.0 | active | — | — | common | — |
 | `lib/platform-context.ts` | L0 | 1.0.0 | active | — | — | common | — |
 | `lib/platform-dispatcher.ts` | L0 | 1.0.0 | active | — | — | common | workspace-only: cross-platform dispatch abstraction for PM auto-mode (Claude Code + Antigravity) |
 | `lib/encoding-utils.ts` | L0 | 1.0.0 | active | — | — | common | — |
@@ -78,8 +80,6 @@ All project scripts are written in TypeScript and executed via the Bun runtime.
 | `verify-template-integrity.ts` | L0 | 1.0.0 | active | — | — | common | — |
 | `lib/mcp-cache.ts` | L0 | 1.0.0 | active | — | — | common | — |
 | `start-mcp.ts` | L0 | 1.0.0 | active | — | — | common | — |
-| `fetch-legalize.ts` | L0 | 1.0.0 | active | — | — | common | — |
-| `test-runner.ts` | L0 | 1.0.0 | active | — | — | common | — |
 
 ---
 
