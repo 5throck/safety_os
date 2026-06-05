@@ -33,6 +33,8 @@
 | PSM Agent | [`agents/psm-agent.md`](agents/psm-agent.md) | Medium | PSM Specialist Agent; oversees 12 elements of OSHA-KR Article 44 |
 | Asset Integrity Agent | [`agents/asset-integrity-agent.md`](agents/asset-integrity-agent.md) | Medium | Asset integrity specialist; preventative maintenance and aging equipment management |
 | Contractor Safety Agent | [`agents/contractor-safety-agent.md`](agents/contractor-safety-agent.md) | Medium | Contractor safety management; onboarding and monitoring of external workers |
+| Occupational Health Agent | [`agents/occupational-health-agent.md`](agents/occupational-health-agent.md) | Medium | Occupational health specialist; worker health examinations and environment monitoring |
+| Chemical Safety Agent | [`agents/chemical-safety-agent.md`](agents/chemical-safety-agent.md) | Medium | MSDS and hazardous chemical control specialist; ensures compliance with OSHA-KR and CCA |
 
 ### Compliance & Risk
 
@@ -110,6 +112,8 @@ All specialist agents below are dispatched ONLY through PM:
 | **disaster-response-agent** | 4 | "Natural disasters", "Typhoon preparation", "Earthquake response" |
 | **incident-investigation-agent** | 5 | "Incident investigation", "Root cause analysis", "5-Why analysis" |
 | **audit-agent** | 5-6 | "Audit preparation", "Evidence traceability", "Regulatory inspection readiness" |
+| **occupational-health-agent** | 4 | "Health checkup", "Occupational disease", "Ergonomics" |
+| **chemical-safety-agent** | 4 | "MSDS", "Hazardous chemicals", "Chemical approval" |
 
 **IMPORTANT**: Do NOT invoke any specialist agent directly. All requests must go through PM.
 
