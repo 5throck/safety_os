@@ -40,6 +40,7 @@ All project scripts are written in TypeScript and executed via the Bun runtime.
 | `verify-scripts.ts` | L0 | 1.1.0 | active | — | — | common | — |
 | `hooks/post-write-lifecycle-check.ts` | L0 | 1.0.0 | active | — | — | common | — |
 | `safety-audit.ts` | L0 | 2.0.0 | active | — | — | common | — |
+| `test-runner.ts` | L0 | 1.0.0 | active | — | — | common | — |
 | `lib/platform-context.ts` | L0 | 1.0.0 | active | — | — | common | — |
 | `lib/platform-dispatcher.ts` | L0 | 1.0.0 | active | — | — | common | workspace-only: cross-platform dispatch abstraction for PM auto-mode (Claude Code + Antigravity) |
 | `lib/encoding-utils.ts` | L0 | 1.0.0 | active | — | — | common | — |
