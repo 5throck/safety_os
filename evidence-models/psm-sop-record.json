@@ -1,0 +1,47 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "title": "PSM SOP Management Record",
+  "version": "1.0.0",
+  "properties": {
+    "sopId": {
+      "type": "string"
+    },
+    "version": {
+      "type": "string"
+    },
+    "changeSummary": {
+      "type": "string"
+    },
+    "acknowledgments": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "workerId": {
+            "type": "string"
+          },
+          "signatureDate": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": ["workerId", "signatureDate"]
+      }
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "agentId": {
+      "type": "string"
+    },
+    "workflowId": {
+      "type": "string"
+    },
+    "legal_basis": {
+      "type": "string"
+    }
+  },
+  "required": ["sopId", "version", "acknowledgments", "timestamp", "agentId", "workflowId", "legal_basis"]
+}

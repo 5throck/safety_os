@@ -1,0 +1,78 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PSM MI Record",
+  "description": "Schema for equipment inspection records, measurements, pass/fail status, and maintenance history.",
+  "version": "1.0.0",
+  "type": "object",
+  "properties": {
+    "recordId": {
+      "type": "string"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "agentId": {
+      "type": "string"
+    },
+    "workflowId": {
+      "type": "string"
+    },
+    "legalBasis": {
+      "type": "string",
+      "enum": ["OSHA-KR Article 44"]
+    },
+    "equipmentId": {
+      "type": "string"
+    },
+    "inspectionDate": {
+      "type": "string",
+      "format": "date"
+    },
+    "inspectorName": {
+      "type": "string"
+    },
+    "measurements": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "parameter": {
+            "type": "string"
+          },
+          "value": {
+            "type": "number"
+          },
+          "unit": {
+            "type": "string"
+          }
+        },
+        "required": ["parameter", "value", "unit"]
+      }
+    },
+    "status": {
+      "type": "string",
+      "enum": ["Pass", "Fail", "Conditional Pass"]
+    },
+    "maintenanceHistory": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "maintenanceDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "description": {
+            "type": "string"
+          },
+          "performedBy": {
+            "type": "string"
+          }
+        },
+        "required": ["maintenanceDate", "description", "performedBy"]
+      }
+    }
+  },
+  "required": ["recordId", "timestamp", "agentId", "workflowId", "legalBasis", "equipmentId", "inspectionDate", "inspectorName", "status"]
+}

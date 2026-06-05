@@ -1,0 +1,47 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "title": "PSM Contractor Safety Record",
+  "version": "1.0.0",
+  "properties": {
+    "contractorId": {
+      "type": "string"
+    },
+    "evaluationScore": {
+      "type": "number"
+    },
+    "trainingVerification": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "workerId": {
+            "type": "string"
+          },
+          "trainingDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "verified": {
+            "type": "boolean"
+          }
+        },
+        "required": ["workerId", "trainingDate", "verified"]
+      }
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "agentId": {
+      "type": "string"
+    },
+    "workflowId": {
+      "type": "string"
+    },
+    "legal_basis": {
+      "type": "string"
+    }
+  },
+  "required": ["contractorId", "evaluationScore", "trainingVerification", "timestamp", "agentId", "workflowId", "legal_basis"]
+}
