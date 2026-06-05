@@ -102,12 +102,12 @@ function getAgentRegistry(): AgentRegistry {
 function parseFrontmatter(filePath: string): SkillFrontmatter | null {
   try {
     const content = readFileSync(filePath, 'utf-8');
-    const frontmatterMatch = content.match(/^---\n([\s\S]*?)\n---/);
+    const frontmatterMatch = content.match(/^---\r?\n([\s\S]*?)\r?\n---/);
 
     if (!frontmatterMatch) return null;
 
     const frontmatter: Record<string, unknown> = {};
-    const lines = frontmatterMatch[1].split('\n');
+    const lines = frontmatterMatch[1].split(/\r?\n/);
 
     for (const line of lines) {
       const colonIndex = line.indexOf(':');

@@ -6,15 +6,15 @@ status: active
 version: 1.0.0
 metadata:
   triggers:
-    - 위험성평가
+    - ?꾪뿕?깊룊媛
     - risk assessment
     - hazard identification
-    - 위험 분석
-    - 유해위험요인
+    - ?꾪뿕 遺꾩꽍
+    - ?좏빐?꾪뿕?붿씤
   agents:
     - risk-assessment-agent
   legal_basis:
-    - 산업안전보건법 제36조 (위험성평가 실시)
+    - ?곗뾽?덉쟾蹂닿굔踰???6議?(?꾪뿕?깊룊媛 ?ㅼ떆)
 scope: workspace
 ---
 
@@ -26,14 +26,14 @@ Invoke this skill when a user reports a new work task, equipment change, workpla
 
 ## Steps
 
-1. **Scope Definition** — Identify the workplace unit, work task, and affected personnel. Confirm the assessment period and responsible person.
-2. **Hazard Enumeration** — List all identified hazards (physical, chemical, biological, ergonomic, psychosocial) associated with the task or area.
-3. **Risk Scoring** — Score each hazard on two axes:
+1. **Scope Definition** ??Identify the workplace unit, work task, and affected personnel. Confirm the assessment period and responsible person.
+2. **Hazard Enumeration** ??List all identified hazards (physical, chemical, biological, ergonomic, psychosocial) associated with the task or area.
+3. **Risk Scoring** ??Score each hazard on two axes:
    - **Likelihood**: 1 (rare) to 5 (almost certain)
    - **Severity**: 1 (negligible) to 5 (catastrophic)
-   - **Risk Level** = Likelihood × Severity (1–25 scale)
-4. **Control Assignment** — For each hazard, assign one or more controls following the hierarchy: Elimination → Substitution → Engineering → Administrative → PPE. Record responsible person and target completion date.
-5. **Documentation** — Save the completed assessment record to `memory/findings/` with the `legal_basis` field populated. Obtain responsible person signature or digital acknowledgment.
+   - **Risk Level** = Likelihood 횞 Severity (1??5 scale)
+4. **Control Assignment** ??For each hazard, assign one or more controls following the hierarchy: Elimination ??Substitution ??Engineering ??Administrative ??PPE. Record responsible person and target completion date.
+5. **Documentation** ??Save the completed assessment record to `memory/findings/` with the `legal_basis` field populated. Obtain responsible person signature or digital acknowledgment.
 
 ## Output Format
 
@@ -43,7 +43,7 @@ Save findings to `memory/findings/risk-assessment-YYYY-MM-DD-<scope>.md` with th
 # Risk Assessment Record
 date: YYYY-MM-DD
 assessor: <name>
-legal_basis: 산업안전보건법 제36조
+legal_basis: ?곗뾽?덉쟾蹂닿굔踰???6議?
 status: draft | approved
 
 ## Hazards
@@ -58,7 +58,7 @@ Date: YYYY-MM-DD
 
 ## Legal Notes
 
-- 산업안전보건법 제36조 requires employers to conduct risk assessments and implement control measures for all identified hazards.
+- ?곗뾽?덉쟾蹂닿굔踰???6議?requires employers to conduct risk assessments and implement control measures for all identified hazards.
 - Assessments must be reviewed when work methods change, after incidents, or at a minimum annually.
 - Records must be retained for a minimum of 3 years per enforcement guidelines.
 - This skill provides workflow assistance only and does not constitute legal advice.

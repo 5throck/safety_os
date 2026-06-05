@@ -6,19 +6,19 @@ status: active
 version: 1.0.0
 metadata:
   triggers:
-    - 작업허가서
+    - ?묒뾽?덇???
     - permit to work
     - PTW
     - hot work permit
-    - 화기작업
-    - 밀폐공간 작업
+    - ?붽린?묒뾽
+    - 諛?먭났媛??묒뾽
     - confined space
   agents:
     - safety-workflow-manager
     - risk-assessment-agent
   legal_basis:
-    - 산업안전보건법 제38조 (안전조치)
-    - 산업안전보건법 제39조 (보건조치)
+    - ?곗뾽?덉쟾蹂닿굔踰???8議?(?덉쟾議곗튂)
+    - ?곗뾽?덉쟾蹂닿굔踰???9議?(蹂닿굔議곗튂)
 scope: workspace
 ---
 
@@ -30,11 +30,11 @@ Invoke this skill when a worker or supervisor requests authorization for non-rou
 
 ## Steps
 
-1. **Work Type Identification** — Classify the work type (hot work, confined space, electrical, height, chemical, general high-risk). Select the applicable PTW form template.
-2. **Risk Assessment** — Invoke the `risk-assessment` skill. The completed risk assessment must be attached to the PTW before issuance. Risk level must be acceptable (below site threshold) or controls must reduce residual risk to acceptable.
-3. **Control Measure Verification** — Confirm all required control measures are in place prior to issuance: isolation verified, PPE available, emergency equipment present, communication established.
-4. **Permit Issuance** — Issue the permit with: permit number, work description, work area, permitted personnel, valid time window (start/expiry), required controls, issuing authority signature.
-5. **Post-Work Sign-Off** — Upon completion, the performing authority signs off confirming work area is safe and restored. Permit is formally closed. Document any deviations or incidents.
+1. **Work Type Identification** ??Classify the work type (hot work, confined space, electrical, height, chemical, general high-risk). Select the applicable PTW form template.
+2. **Risk Assessment** ??Invoke the `risk-assessment` skill. The completed risk assessment must be attached to the PTW before issuance. Risk level must be acceptable (below site threshold) or controls must reduce residual risk to acceptable.
+3. **Control Measure Verification** ??Confirm all required control measures are in place prior to issuance: isolation verified, PPE available, emergency equipment present, communication established.
+4. **Permit Issuance** ??Issue the permit with: permit number, work description, work area, permitted personnel, valid time window (start/expiry), required controls, issuing authority signature.
+5. **Post-Work Sign-Off** ??Upon completion, the performing authority signs off confirming work area is safe and restored. Permit is formally closed. Document any deviations or incidents.
 
 ## Output Format
 
@@ -49,7 +49,7 @@ work_type: <hot_work | confined_space | electrical | height | chemical | general
 work_description: <description>
 work_area: <location>
 permitted_personnel: [<names>]
-legal_basis: 산업안전보건법 제38조, 제39조
+legal_basis: ?곗뾽?덉쟾蹂닿굔踰???8議? ??9議?
 risk_assessment_ref: memory/findings/risk-assessment-YYYY-MM-DD-<scope>.md
 status: issued | active | closed | cancelled
 
@@ -61,14 +61,14 @@ status: issued | active | closed | cancelled
 - [ ] <additional controls>
 
 ## Signatures
-Issuing Authority: <name> — <date>
-Performing Authority: <name> — <date>
-Close-Out Sign-Off: <name> — <date>
+Issuing Authority: <name> ??<date>
+Performing Authority: <name> ??<date>
+Close-Out Sign-Off: <name> ??<date>
 ```
 
 ## Legal Notes
 
-- 산업안전보건법 제38조 mandates that employers implement safety measures for work with risk of falls, collapse, fire, or explosion.
-- 산업안전보건법 제39조 mandates health protection measures for work involving hazardous substances or conditions.
+- ?곗뾽?덉쟾蹂닿굔踰???8議?mandates that employers implement safety measures for work with risk of falls, collapse, fire, or explosion.
+- ?곗뾽?덉쟾蹂닿굔踰???9議?mandates health protection measures for work involving hazardous substances or conditions.
 - PTW systems are considered a best-practice administrative control under these articles. Permits must not be back-dated or issued after work commences.
 - This skill provides workflow assistance only and does not constitute legal advice.
