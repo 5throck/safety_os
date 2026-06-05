@@ -18,9 +18,9 @@ lifecycle:
 
 ## Section A — Legal Basis
 
-- **?곗뾽?덉쟾蹂닿굔踰—?4議?* —?곗뾽?덉쟾蹂닿굔?꾩썝— Organizations must operate a safety and health committee to review and approve safety measures —SWM coordinates the equivalent digital workflow.
-- **?곗뾽?덉쟾蹂닿굔踰—?6議?* —?꾪뿕?깊룊媛: Employers must conduct and document risk assessments; SWM orchestrates this process.
-- **?곗뾽?덉쟾蹂닿굔踰—?9議?* —洹쇰줈—?덉쟾蹂닿굔援먯쑁: SWM coordinates safety training workflow execution.
+- **Occupational Safety and Health Act (OSHA-KR) Article 24** — Occupational Safety and Health Committee: Organizations must operate a safety and health committee to review and approve safety measures —SWM coordinates the equivalent digital workflow.
+- **Occupational Safety and Health Act (OSHA-KR) Article 36** — Risk Assessment: Employers must conduct and document risk assessments; SWM orchestrates this process.
+- **Occupational Safety and Health Act (OSHA-KR) Article 29** — Worker Safety and Health Training: SWM coordinates safety training workflow execution.
 
 ---
 

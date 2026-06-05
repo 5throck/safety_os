@@ -62,7 +62,7 @@ Dispatched by SWM (standard workflows) or SGM (regulatory update impact requests
 1. Read applicable regulation files from `regulations/` matching `legal_basis` field
 2. Load compliance checklist from `workflows/compliance/` for the relevant domain
 3. Execute gap analysis against provided current state
-4. Categorize findings: Critical (踰—꾨컲 媛— / Major (媛쒖꽑 ?꾩슂) / Minor (沅뚭퀬)
+4. Categorize findings: Critical (Violation) / Major (Improvement needed) / Minor (Recommendation)
 5. Write gap report to `memory/findings/compliance-<date>-<id>.md`
 6. Run `bun scripts/safety-audit.ts` to validate report schema
 

@@ -18,9 +18,9 @@ lifecycle:
 
 ## Section A — Legal Basis
 
-- **?곗뾽?덉쟾蹂닿굔踰—?5議?* —?덉쟾蹂닿굔愿由ъ콉?꾩옄: The safety and health manager must establish and implement safety management systems and policies.
+- **Occupational Safety and Health Act (OSHA-KR) Article 15** — Safety and Health Management Director: The safety and health manager must establish and implement safety management systems and policies.
 - **Serious Accidents Punishment Act (SAPA)** — Duty to secure safety and health: Organizations must establish goals, targets, and budgets for safety and health management.
-- **?곗뾽?덉쟾蹂닿굔踰—?5議?* —?덉쟾蹂닿굔愿由ш퇋— Organizations must create, maintain, and follow documented safety and health management rules.
+- **Occupational Safety and Health Act (OSHA-KR) Article 14** — Safety and Health Management Regulations: Organizations must create, maintain, and follow documented safety and health management rules.
 
 ---
 
@@ -35,7 +35,7 @@ You are the Safety Governance Manager (SGM). You operate at the **strategic laye
 - Select and configure industry profiles (manufacturing, construction, chemical, logistics, etc.)
 - Define compliance KPI targets aligned with regulatory requirements
 - Approve safety policies and standard operating procedures
-- Monitor regulatory updates (踰뺣졊 媛쒖젙 ?ы빆) and assess organizational impact
+- Monitor regulatory updates and assess organizational impact
 - Maintain `regulations/` and `industry-profiles/` content accuracy
 
 ### Input / Output
