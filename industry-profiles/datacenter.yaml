@@ -1,0 +1,8 @@
+name: Data Center
+description: Data center facility and IT operations
+risk_level: High
+key_risks:
+  - power outage
+  - fire
+  - service interruption
+psm_required: false

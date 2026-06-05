@@ -1,0 +1,7 @@
+name: Construction
+description: Construction industry profile
+risk_level: High
+key_risks:
+  - falls
+  - heavy equipment
+psm_required: false

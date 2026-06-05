@@ -1,0 +1,17 @@
+profile_name: Chemical Manufacturing
+description: Standard chemical process industry profile compliant with OSHA-KR Article 44 PSM requirements.
+legal_basis:
+  - OSHA-KR Article 44
+psm_elements:
+  - element: Process Safety Information (PSI)
+  - element: Process Hazard Analysis (PHA)
+  - element: Operating Procedures
+  - element: Employee Training
+  - element: Contractors
+  - element: Pre-Startup Safety Review (PSSR)
+  - element: Mechanical Integrity (MI)
+  - element: Hot Work Permits / Safe Work Practices
+  - element: Management of Change (MOC)
+  - element: Incident Investigation
+  - element: Emergency Planning and Response
+  - element: Compliance Audits

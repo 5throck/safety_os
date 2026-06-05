@@ -1,0 +1,13 @@
+profile_name: Semiconductor Manufacturing
+description: High-tech manufacturing profile focusing on cleanroom environments and special gas hazards.
+legal_basis:
+  - OSHA-KR Article 44
+psm_elements:
+  - element: Chemical & Gas Hazard Information
+  - element: Cleanroom Hazard Analysis
+  - element: Specialized Standard Operating Procedures
+  - element: Technical Training & Certification
+  - element: Cleanroom Contractor Management
+  - element: Facility & Tool Mechanical Integrity
+  - element: Cleanroom Work Permits
+  - element: Tool Installation & Hook-up MOC
