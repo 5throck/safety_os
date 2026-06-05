@@ -1,0 +1,4 @@
+name: "건설산업기본법"
+type: "Act"
+source_mcp: "mcp-kr-legislation"
+mcp_query_template: "건설산업기본법 제{article_number}조"

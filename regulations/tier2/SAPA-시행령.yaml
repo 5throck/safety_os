@@ -1,0 +1,4 @@
+name: "SAPA-시행령"
+type: "Presidential Decree"
+source_mcp: "mcp-kr-legislation"
+mcp_query_template: "중대재해처벌법 시행령 제{article_number}조"

@@ -1,0 +1,4 @@
+name: "산안법-시행령"
+type: "Presidential Decree"
+source_mcp: "mcp-kr-legislation"
+mcp_query_template: "산업안전보건법 시행령 제{article_number}조"

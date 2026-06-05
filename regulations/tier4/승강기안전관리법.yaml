@@ -1,0 +1,4 @@
+name: "승강기안전관리법"
+type: "Act"
+source_mcp: "mcp-kr-legislation"
+mcp_query_template: "승강기안전관리법 제{article_number}조"

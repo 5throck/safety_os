@@ -2,6 +2,7 @@
 name: 산업안전보건법
 english_name: Occupational Safety and Health Act
 abbreviation: OSHA-KR
+source_mcp: "mcp-kr-legislation"
 enacted: "1990-01-13"
 last_amended: "2023-01-26"
 enforcement_agency: 고용노동부 (Ministry of Employment and Labor)

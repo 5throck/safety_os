@@ -32,6 +32,20 @@
       "env": {
         "LAW_OC": "여기에_법제처_API_키_입력"
       }
+    },
+    "mcp-kr-legislation": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "mcp-kr-legislation"
+      ]
+    },
+    "k-skill": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "k-skill"
+      ]
     }
   },
   "env": {

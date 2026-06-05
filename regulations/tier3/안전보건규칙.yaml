@@ -1,0 +1,4 @@
+name: "안전보건규칙"
+type: "Ministerial Ordinance"
+source_mcp: "mcp-kr-legislation"
+mcp_query_template: "산업안전보건기준에 관한 규칙 제{article_number}조"
