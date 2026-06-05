@@ -22,6 +22,16 @@
         "@colbymchenry/codegraph@0.9.7",
         "serve"
       ]
+    },
+    "korean-law": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "korean-law-mcp@latest"
+      ],
+      "env": {
+        "LAW_OC": "여기에_법제처_API_키_입력"
+      }
     }
   },
   "env": {

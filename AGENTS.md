@@ -135,6 +135,7 @@ All specialist agents below are dispatched ONLY through PM:
 |-------|-------|-------------|
 | compliance-gap | compliance-agent | Trigger compliance gap analysis against applicable EHS regulations |
 | emergency-response | emergency-agent | Trigger emergency response protocol on incident, fire, spill, or injury report |
+| legalize-kr-sync | safety-workflow-manager | Fetches the legalize-kr repository into a local cache directory for accessing Korean law data |
 | permit-to-work | safety-workflow-manager | Trigger permit-to-work (PTW) issuance workflow for high-risk or non-routine work |
 | risk-assessment | risk-assessment-agent | Trigger risk assessment workflow for hazard identification and scoring |
 
