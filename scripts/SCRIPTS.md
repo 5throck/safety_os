@@ -79,6 +79,7 @@ All project scripts are written in TypeScript and executed via the Bun runtime.
 | `lib/mcp-cache.ts` | L0 | 1.0.0 | active | — | — | common | — |
 | `start-mcp.ts` | L0 | 1.0.0 | active | — | — | common | — |
 | `fetch-legalize.ts` | L0 | 1.0.0 | active | — | — | common | — |
+| `test-runner.ts` | L0 | 1.0.0 | active | — | — | common | — |
 
 ---
 
