@@ -6,6 +6,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+### Added (2026-06-06 — EHS Agents)
+- **[2026-06-06]**: `agents/occupational-health-agent.md` — Occupational health specialist agent
+- **[2026-06-06]**: `agents/chemical-safety-agent.md` — MSDS and hazardous chemical control agent
+- **[2026-06-06]**: `agents/docs-writer.md` — Documentation writer agent
+- **[2026-06-06]**: `AGENTS.md` updated with new agent rosters
+
+
 ### Added (2026-06-05 — MCP Server Configuration)
 - **[2026-06-05]**: MCP server configuration with 3 stub servers (k_skill, legalize_kr, mcp_kr_legislation)
 - **[2026-06-05]**: `vendor/*/index.ts` - MCP TypeScript SDK-based stub servers
