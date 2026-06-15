@@ -1,19 +1,26 @@
 #!/usr/bin/env bun
 /**
- * legalize_kr MCP Server - STUB
- *
- * This is a minimal stub server for MCP configuration.
- * Full implementation pending - see docs/superpowers/specs/2026-06-05-mcp-server-design.md
- *
- * This server analyzes legal structure from .cache/legalize-kr/ git repository.
+ * legalize_kr MCP Server v1.0.0
+ * Korean law structure analysis from .cache/legalize-kr/ git repository.
  */
 
 import { Server } from '@modelcontextprotocol/sdk/server/index.js';
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
 import { CallToolRequestSchema, ListToolsRequestSchema } from '@modelcontextprotocol/sdk/types.js';
+import { createLogger } from '../shared/logger.js';
+import { MCPValidationError } from '../shared/errors.js';
+import { ensureLegalizeKRRepo } from './git-sync.js';
+import { parseLawStructure } from './tools/parse.js';
+import { findReferences } from './tools/references.js';
+import { getLawMetadata } from './tools/metadata.js';
+import { compareVersions } from './tools/compare.js';
+
+const log = createLogger('legalize_kr');
+
+ensureLegalizeKRRepo().catch(err => log.error(`Startup sync failed: ${err}`));
 
 const server = new Server(
-  { name: 'legalize_kr', version: '0.1.0-stub' },
+  { name: 'legalize_kr', version: '1.0.0' },
   { capabilities: { tools: {} } }
 );
 
@@ -21,51 +28,64 @@ server.setRequestHandler(ListToolsRequestSchema, async () => ({
   tools: [
     {
       name: 'parse_law_structure',
-      description: 'Parse law structure (STUB - not implemented)',
-      inputSchema: {
-        type: 'object',
-        properties: {
-          lawId: { type: 'string', description: 'Law ID (e.g., 민법)' }
-        },
-        required: ['lawId']
-      }
+      description: '법령의 장→절→항 계층 구조를 분석합니다.',
+      inputSchema: { type: 'object', properties: { lawId: { type: 'string', description: '법령명 (e.g., 산업안전보건법)' } }, required: ['lawId'] },
     },
     {
       name: 'find_references',
-      description: 'Find references to this law (STUB - not implemented)',
+      description: '이 법령을 참조하는 다른 법령을 찾습니다.',
+      inputSchema: { type: 'object', properties: { lawId: { type: 'string' } }, required: ['lawId'] },
+    },
+    {
+      name: 'get_law_metadata',
+      description: '법령 파일의 메타데이터(제정일, 개정이력)를 반환합니다.',
+      inputSchema: { type: 'object', properties: { lawId: { type: 'string' } }, required: ['lawId'] },
+    },
+    {
+      name: 'compare_versions',
+      description: 'git diff를 활용하여 버전별 법령을 비교합니다.',
       inputSchema: {
         type: 'object',
-        properties: {
-          lawId: { type: 'string', description: 'Law ID to search for' }
-        },
-        required: ['lawId']
-      }
-    }
-  ]
+        properties: { lawId: { type: 'string' }, sinceCommit: { type: 'string' } },
+        required: ['lawId'],
+      },
+    },
+  ],
 }));
 
 server.setRequestHandler(CallToolRequestSchema, async (request) => {
-  const { name } = request.params;
+  const { name, arguments: args } = request.params;
+  log.info(`Tool called: ${name}`);
 
-  return {
-    content: [{
-      type: 'text',
-      text: `Tool "${name}" is a stub - full implementation pending. See docs/superpowers/specs/2026-06-05-mcp-server-design.md`
-    }]
-  };
+  try {
+    let result: unknown;
+    switch (name) {
+      case 'parse_law_structure':
+        if (!args?.lawId) throw new MCPValidationError('lawId is required');
+        result = await parseLawStructure(args.lawId as string);
+        break;
+      case 'find_references':
+        if (!args?.lawId) throw new MCPValidationError('lawId is required');
+        result = await findReferences(args.lawId as string);
+        break;
+      case 'get_law_metadata':
+        if (!args?.lawId) throw new MCPValidationError('lawId is required');
+        result = await getLawMetadata(args.lawId as string);
+        break;
+      case 'compare_versions':
+        if (!args?.lawId) throw new MCPValidationError('lawId is required');
+        result = await compareVersions(args.lawId as string, args.sinceCommit as string | undefined);
+        break;
+      default:
+        throw new MCPValidationError(`Unknown tool: ${name}`);
+    }
+    return { content: [{ type: 'text', text: JSON.stringify(result, null, 2) }] };
+  } catch (err) {
+    log.error(`Tool ${name} failed: ${err}`);
+    return { content: [{ type: 'text', text: `Error: ${err instanceof Error ? err.message : String(err)}` }], isError: true };
+  }
 });
 
-async function main() {
-  console.error('[legalize_kr MCP] Starting stub server...');
-  console.error('[legalize_kr MCP] This server is not yet fully implemented');
-
-  const transport = new StdioServerTransport();
-  await server.connect(transport);
-
-  console.error('[legalize_kr MCP] Stub server started - tools will return stub messages');
-}
-
-main().catch((error) => {
-  console.error('[legalize_kr MCP] Failed to start server:', error);
-  process.exit(1);
-});
+const transport = new StdioServerTransport();
+await server.connect(transport);
+log.info('legalize_kr MCP server started');

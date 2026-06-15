@@ -6,6 +6,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+### Added (2026-06-16 — MCP Server Implementation)
+- Implemented `vendor/k-skill/` MCP server v1.0.0 — OSHA/SAPA regulation search with 24h caching (`search_osha_regulations`, `get_sapa_requirements`, `list_industry_controls`, `check_compliance_gaps`, `invalidate_cache`)
+- Implemented `vendor/legalize-kr/` MCP server v1.0.0 — Korean law structure parsing from git repo (`parse_law_structure`, `find_references`, `get_law_metadata`, `compare_versions`)
+- Implemented `vendor/mcp-kr-legislation/` MCP server v1.0.0 — real-time legislation API via 국가법령정보센터 (`get_current_law`, `get_law_amendments`, `interpret_regulation`, `get_penalties`, `get_compliance_guide`)
+- Added `vendor/shared/` infrastructure — `types.ts`, `logger.ts`, `errors.ts`, `retry.ts`, `rate-limiter.ts`
+- Added `vendor/mcp-kr-legislation/xml-parser.ts` — XML parsing with Korean encoding fallback using `fast-xml-parser`
+- Installed `simple-git@3.36.0` and `fast-xml-parser@5.9.0` at workspace root
+
 ### Added (2026-06-06 — EHS Agents)
 - **[2026-06-06]**: `agents/occupational-health-agent.md` — Occupational health specialist agent
 - **[2026-06-06]**: `agents/chemical-safety-agent.md` — MSDS and hazardous chemical control agent
