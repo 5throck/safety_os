@@ -1,6 +1,0 @@
-name: "OSHA-KR"
-description: "Occupational Safety and Health Act (산업안전보건법)"
-country: "KR"
-type: "Act"
-source_mcp: "mcp-kr-legislation"
-mcp_query_template: "산업안전보건법 제{article_number}조"

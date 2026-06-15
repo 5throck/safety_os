@@ -1,36 +1,17 @@
 # Safety OS project settings
 {
   "mcpServers": {
-    "codegraph": {
-      "command": "npx",
-      "args": [
-        "@colbymchenry/codegraph@0.9.7",
-        "serve"
-      ]
+    "k_skill": {
+      "command": "bun",
+      "args": ["run", "--env-file", ".env", "./mcp/k-skill/index.ts"]
     },
-    "korean-law": {
-      "command": "npx",
-      "args": [
-        "-y",
-        "korean-law-mcp@latest"
-      ],
-      "env": {
-        "LAW_OC": "여기에_법제처_API_키_입력"
-      }
+    "legalize_kr": {
+      "command": "bun",
+      "args": ["run", "--env-file", ".env", "./mcp/legalize-kr/index.ts"]
     },
-    "mcp-kr-legislation": {
-      "command": "npx",
-      "args": [
-        "-y",
-        "mcp-kr-legislation"
-      ]
-    },
-    "k-skill": {
-      "command": "npx",
-      "args": [
-        "-y",
-        "k-skill"
-      ]
+    "mcp_kr_legislation": {
+      "command": "bun",
+      "args": ["run", "--env-file", ".env", "./mcp/kr-legislation/index.ts"]
     }
   },
   "hooks": {

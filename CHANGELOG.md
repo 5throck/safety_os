@@ -6,6 +6,42 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+### Fixed (2026-06-16 — MCP Server Connectivity)
+- Corrected `bun` arg order in `.mcp.json` and `.gemini/settings.json` — `bun --env-file .env run` → `bun run --env-file .env` (this bun version requires subcommand before flags; all 3 servers were silently failing to start)
+
+### Added (2026-06-16 — legalize_kr v1.1.0)
+- `mcp/legalize-kr/tools/admrule.ts` — `search_admrule` tool: keyword search over `.cache/admrule-kr/` (고용노동부 고시·예규·훈령)
+- `mcp/legalize-kr/tools/precedent.ts` — `search_precedent` tool: GitHub Search API over `legalize-kr/precedent-kr` (62K판례, GITHUB_TOKEN required)
+- `mcp/legalize-kr/git-sync.ts` — `ensureAdmruleKRRepo()` for shallow-cloning `admrule-kr` into `.cache/admrule-kr/`
+- `.cache/admrule-kr/` — shallow clone of `legalize-kr/admrule-kr` (21,675 files)
+
+### Changed (2026-06-16 — Config & Cleanup)
+- `.gemini/settings.json` mcpServers updated to local `bun run` servers (removed stale `korean-law`, `mcp-kr-legislation`, `k-skill` npx entries)
+- `.claude/settings.json` stale `mcpServers` block removed (authoritative config is `.mcp.json`)
+- `.claude/settings.local.json` pruned — removed stale `vendor/` permission entries and codegraph npx permission
+- `mcp/LICENSE_REVIEW.md` — moved from `vendor/LICENSE_REVIEW.md` (missed in directory rename)
+- `AGENTS.md` — added `## Regulatory Scope` section (Tier 1–4 law registry); removed `regulations/KR/` reference from Section A agent structure
+
+### Removed (2026-06-16 — Codegraph & Regulations)
+- Removed codegraph MCP servers (`codegraph_search`, `codegraph_mutate`) from `.mcp.json`
+- Removed codegraph entries from `.claude/settings.json` and `.gemini/settings.json`
+- Deleted `docs/blueprint/appendix/J-codegraph-integration.md`
+- Deleted `regulations/` folder (28 YAML files) — tier classification consolidated into `AGENTS.md ## Regulatory Scope`
+
+### Changed (2026-06-16 — MCP Directory Rename)
+- Renamed `vendor/` to `mcp/` for semantic clarity — servers are first-party MCP implementations, not third-party dependencies
+- Renamed `mcp/mcp-kr-legislation/` to `mcp/kr-legislation/` — removed redundant `mcp-` prefix
+- Updated `.mcp.json` server paths to reflect new directory structure
+- MCP server names (`k_skill`, `legalize_kr`, `mcp_kr_legislation`) remain unchanged
+
+### Added (2026-06-16 — MCP Server Implementation)
+- Implemented `vendor/k-skill/` MCP server v1.0.0 — OSHA/SAPA regulation search with 24h caching (`search_osha_regulations`, `get_sapa_requirements`, `list_industry_controls`, `check_compliance_gaps`, `invalidate_cache`)
+- Implemented `vendor/legalize-kr/` MCP server v1.0.0 — Korean law structure parsing from git repo (`parse_law_structure`, `find_references`, `get_law_metadata`, `compare_versions`)
+- Implemented `vendor/mcp-kr-legislation/` MCP server v1.0.0 — real-time legislation API via 국가법령정보센터 (`get_current_law`, `get_law_amendments`, `interpret_regulation`, `get_penalties`, `get_compliance_guide`)
+- Added `vendor/shared/` infrastructure — `types.ts`, `logger.ts`, `errors.ts`, `retry.ts`, `rate-limiter.ts`
+- Added `vendor/mcp-kr-legislation/xml-parser.ts` — XML parsing with Korean encoding fallback using `fast-xml-parser`
+- Installed `simple-git@3.36.0` and `fast-xml-parser@5.9.0` at workspace root
+
 ### Added (2026-06-06 — EHS Agents)
 - **[2026-06-06]**: `agents/occupational-health-agent.md` — Occupational health specialist agent
 - **[2026-06-06]**: `agents/chemical-safety-agent.md` — MSDS and hazardous chemical control agent

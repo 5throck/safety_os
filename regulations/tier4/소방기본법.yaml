@@ -1,4 +1,0 @@
-name: "소방기본법"
-type: "Act"
-source_mcp: "mcp-kr-legislation"
-mcp_query_template: "소방기본법 제{article_number}조"

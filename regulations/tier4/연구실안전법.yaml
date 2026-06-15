@@ -1,4 +1,0 @@
-name: "연구실안전법"
-type: "Act"
-source_mcp: "mcp-kr-legislation"
-mcp_query_template: "연구실 안전환경 조성에 관한 법률 제{article_number}조"

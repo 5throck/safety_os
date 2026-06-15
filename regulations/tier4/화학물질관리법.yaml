@@ -1,4 +1,0 @@
-name: "화학물질관리법"
-type: "Act"
-source_mcp: "mcp-kr-legislation"
-mcp_query_template: "화학물질관리법 제{article_number}조"

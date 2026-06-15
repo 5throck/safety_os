@@ -183,6 +183,58 @@ All agents, regardless of their role, must adhere to the following:
 
 ---
 
+## Regulatory Scope
+
+> Law text is retrieved live via MCP — this section defines **which regulations are in scope** and their authority tier.
+> Live queries: `mcp_kr_legislation` (real-time API), `legalize_kr` (git mirror), `k_skill` (OSHA/SAPA index).
+
+### Tier 1 — Core Statutes
+
+| Law | Abbreviation | Enforcement Agency |
+|-----|-------------|-------------------|
+| 산업안전보건법 (Occupational Safety and Health Act) | OSHA-KR | 고용노동부 |
+| 중대재해처벌법 (Serious Accidents Punishment Act) | SAPA | 고용노동부 |
+
+### Tier 2 — Presidential Decrees (시행령)
+
+| Decree | Parent Statute |
+|--------|---------------|
+| 산업안전보건법 시행령 | OSHA-KR |
+| 산업안전보건법 시행규칙 | OSHA-KR |
+| 중대재해처벌법 시행령 | SAPA |
+
+### Tier 3 — Ministerial Ordinances & Notices (시행규칙/고시)
+
+| Ordinance | Parent Statute |
+|-----------|---------------|
+| 산업안전보건기준에 관한 규칙 (안전보건규칙) | OSHA-KR |
+| 공정안전관리 고시 (PSM고시) | OSHA-KR 제44조 |
+
+### Tier 4 — Related Statutes
+
+| Law | Domain |
+|-----|--------|
+| 화학물질관리법 (CCA) | Chemical Safety |
+| 고압가스안전관리법 | High-Pressure Gas |
+| 위험물안전관리법 | Hazardous Materials |
+| 소방기본법 | Fire Safety |
+| 건설산업기본법 | Construction |
+| 근로기준법 | Labor Standards |
+| 연구실안전법 | Lab Safety |
+| 전기안전관리법 | Electrical Safety |
+| 대기환경보전법 | Air Quality |
+| 물환경보전법 | Water Quality |
+| 폐기물관리법 | Waste Management |
+| 토양환경보전법 | Soil Environment |
+| 소음진동관리법 | Noise & Vibration |
+| 자연환경보전법 | Nature Conservation |
+| 해양환경보전법 | Marine Environment |
+| 원자력안전법 | Nuclear Safety |
+| 승강기안전관리법 | Elevator Safety |
+| 건축법 | Building Code |
+
+---
+
 ## Safety OS Agent Governance
 
 ### Legal Basis Gate
@@ -199,7 +251,7 @@ All Safety OS agent files (`agents/safety-*.md`, `agents/compliance-agent.md`, e
 **Section A — Legal Basis**
 - List applicable Korean law articles
 - Note enforcement agency
-- Reference regulation metadata in `regulations/KR/`
+- Reference the tier from the [Regulatory Scope](#regulatory-scope) section above
 
 **Section B — Role & Responsibilities**
 - Agent purpose and scope
