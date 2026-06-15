@@ -10,7 +10,7 @@
 ### 1.1 Directory Structure
 ```
 Safety OS 프로젝트 (C:\git\Projects\safety-os\)
-├── vendor/                       # MCP 서버 전용 디렉토리
+├── mcp/                          # MCP 서버 전용 디렉토리 (퍼스트파티)
 │   ├── shared/                   # 공통 유틸리티
 │   │   ├── types.ts             # 공통 타입 정의
 │   │   ├── logger.ts            # 로깅 유틸리티
@@ -21,7 +21,7 @@ Safety OS 프로젝트 (C:\git\Projects\safety-os\)
 │   ├── legalize-kr/              # legalize_kr MCP 서버
 │   │   ├── index.ts             # 메인 서버 파일
 │   │   └── tools/               # MCP 도구 구현
-│   └── mcp-kr-legislation/       # mcp_mcp_kr_legislation MCP 서버
+│   └── kr-legislation/           # mcp_kr_legislation MCP 서버
 │       ├── index.ts             # 메인 서버 파일
 │       └── tools/               # MCP 도구 구현
 ├── scripts/lib/                   # 기존 캐시 라이브러리
@@ -65,7 +65,7 @@ mcp_mcp_kr_legislation MCP   → 국가법령정보센터 API             → 1-
 - MCP SDK: `@modelcontextprotocol/sdk` (공식 TypeScript SDK)
 - 캐시: `scripts/lib/mcp-cache.ts`의 `MCPCache` 클래스 재사용
 - HTTP: fetch API
-- 실행: `bun run ./vendor/k-skill/index.ts`
+- 실행: `bun run ./mcp/k-skill/index.ts`
 
 **MCP SDK Integration Template**:
 ```typescript
@@ -145,7 +145,7 @@ await server.connect(transport);
 - 언어: TypeScript
 - Git 작업: `simple-git` 패키지
 - 파싱: 정규표현식 + Markdown 파싱
-- 실행: `bun run ./vendor/legalize-kr/index.ts`
+- 실행: `bun run ./mcp/legalize-kr/index.ts`
 
 ### 3.5 Data Source
 - `.cache/legalize-kr/` (read-only git repository)
@@ -201,7 +201,7 @@ async function ensureLegalizeKRRepo(): Promise<void> {
 - 언어: TypeScript
 - 데이터 소스: 정부 OpenAPI (국가법령정보센터, 법률 정보 포털)
 - 캐싱: 실시간 업데이트용 별도 캐시 (단기 TTL: 1-6시간)
-- 실행: `bun run ./vendor/mcp-kr-legislation/index.ts`
+- 실행: `bun run ./mcp/kr-legislation/index.ts`
 
 ### 4.5 Data Flow
 - 국가법령정보센터 API → XML → JSON 파싱 → 캐싱 → 응답
@@ -244,7 +244,7 @@ function decodeKoreanText(text: string): string {
 
 ## 5. Shared Infrastructure
 
-### 5.1 Common Utilities (`vendor/shared/`)
+### 5.1 Common Utilities (`mcp/shared/`)
 
 #### `types.ts`
 ```typescript
@@ -351,17 +351,17 @@ class CircuitBreaker {
     },
     "k_skill": {
       "command": "bun",
-      "args": ["run", "./vendor/k-skill/index.ts"],
+      "args": ["run", "./mcp/k-skill/index.ts"],
       "env": {}
     },
     "legalize_kr": {
       "command": "bun",
-      "args": ["run", "./vendor/legalize-kr/index.ts"],
+      "args": ["run", "./mcp/legalize-kr/index.ts"],
       "env": {}
     },
     "mcp_kr_legislation": {
       "command": "bun",
-      "args": ["run", "./vendor/mcp-kr-legislation/index.ts"],
+      "args": ["run", "./mcp/kr-legislation/index.ts"],
       "env": {}
     }
   }
@@ -373,7 +373,7 @@ class CircuitBreaker {
 ## 7. Implementation Phases
 
 ### Phase 1: Shared Infrastructure
-- `vendor/shared/` 유틸리티 구현
+- `mcp/shared/` 유틸리티 구현
 - 공통 타입, 에러 핸들링, 로깅
 
 ### Phase 2: k_skill MCP
@@ -399,7 +399,7 @@ class CircuitBreaker {
 **Testing Framework**:
 ```bash
 # Unit tests
-bun test vendor/**/*.test.ts
+bun test mcp/**/*.test.ts
 
 # Integration tests (mock APIs)
 MOCK_API=true bun test integration/

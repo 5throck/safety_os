@@ -4,7 +4,7 @@
 
 **Goal:** Implement three MCP servers (k_skill, legalize_kr, mcp_kr_legislation) that provide Korean EHS law lookup, law structure parsing, and real-time legislation API access to Safety OS agents.
 
-**Architecture:** Each server lives under `vendor/<name>/` and communicates via MCP stdio transport. Shared utilities in `vendor/shared/` (types, logger, errors, rate limiter, retry). All servers reuse `scripts/lib/mcp-cache.ts` for TTL-based in-process caching — no Redis required.
+**Architecture:** Each server lives under `mcp/<name>/` and communicates via MCP stdio transport. Shared utilities in `mcp/shared/` (types, logger, errors, rate limiter, retry). All servers reuse `scripts/lib/mcp-cache.ts` for TTL-based in-process caching — no Redis required.
 
 **Tech Stack:** TypeScript, Bun, `@modelcontextprotocol/sdk`, `fast-xml-parser`, `simple-git`, native `fetch`
 
@@ -13,7 +13,7 @@
 ## File Map
 
 ```
-vendor/
+mcp/
   shared/
     types.ts          — MCPResponse, CacheEntry, RegulatoryArticle interfaces
     logger.ts         — Levelled stderr logger (DEBUG/INFO/WARN/ERROR)
@@ -55,13 +55,13 @@ scripts/lib/
 ## Task 1: Shared Infrastructure
 
 **Files:**
-- Create: `vendor/shared/types.ts`
-- Create: `vendor/shared/logger.ts`
-- Create: `vendor/shared/errors.ts`
-- Create: `vendor/shared/retry.ts`
-- Create: `vendor/shared/rate-limiter.ts`
+- Create: `mcp/shared/types.ts`
+- Create: `mcp/shared/logger.ts`
+- Create: `mcp/shared/errors.ts`
+- Create: `mcp/shared/retry.ts`
+- Create: `mcp/shared/rate-limiter.ts`
 
-- [ ] **Step 1.1: Create `vendor/shared/types.ts`**
+- [ ] **Step 1.1: Create `mcp/shared/types.ts`**
 
 ```typescript
 export interface MCPResponse<T = unknown> {
@@ -87,7 +87,7 @@ export interface RegulatoryArticle {
 }
 ```
 
-- [ ] **Step 1.2: Create `vendor/shared/logger.ts`**
+- [ ] **Step 1.2: Create `mcp/shared/logger.ts`**
 
 ```typescript
 type LogLevel = 'DEBUG' | 'INFO' | 'WARN' | 'ERROR';
@@ -111,7 +111,7 @@ export function createLogger(serverName: string) {
 }
 ```
 
-- [ ] **Step 1.3: Create `vendor/shared/errors.ts`**
+- [ ] **Step 1.3: Create `mcp/shared/errors.ts`**
 
 ```typescript
 export class MCPConfigError extends Error {
@@ -128,7 +128,7 @@ export class MCPValidationError extends Error {
 }
 ```
 
-- [ ] **Step 1.4: Create `vendor/shared/retry.ts`**
+- [ ] **Step 1.4: Create `mcp/shared/retry.ts`**
 
 ```typescript
 import { MCPNetworkError } from './errors.js';
@@ -173,7 +173,7 @@ export class CircuitBreaker {
 }
 ```
 
-- [ ] **Step 1.5: Create `vendor/shared/rate-limiter.ts`**
+- [ ] **Step 1.5: Create `mcp/shared/rate-limiter.ts`**
 
 ```typescript
 export class RateLimiter {
@@ -208,7 +208,7 @@ export class RateLimiter {
 
 ```bash
 cd /c/git/ai_workspace/Projects/safety-os
-bun typecheck vendor/shared/*.ts 2>&1 || bun run --hot vendor/shared/types.ts
+bun typecheck mcp/shared/*.ts 2>&1 || bun run --hot mcp/shared/types.ts
 ```
 
 Expected: no TypeScript errors
@@ -216,7 +216,7 @@ Expected: no TypeScript errors
 - [ ] **Step 1.7: Commit**
 
 ```bash
-git add vendor/shared/
+git add mcp/shared/
 git commit -m "feat(mcp): add shared infrastructure (types, logger, errors, retry, rate-limiter)"
 ```
 
@@ -225,12 +225,12 @@ git commit -m "feat(mcp): add shared infrastructure (types, logger, errors, retr
 ## Task 2: k_skill MCP Server
 
 **Files:**
-- Modify: `vendor/k-skill/index.ts` (replace stub)
-- Create: `vendor/k-skill/tools/search-osha.ts`
-- Create: `vendor/k-skill/tools/sapa.ts`
-- Create: `vendor/k-skill/tools/industry.ts`
-- Create: `vendor/k-skill/tools/gaps.ts`
-- Create: `vendor/k-skill/tools/cache-admin.ts`
+- Modify: `mcp/k-skill/index.ts` (replace stub)
+- Create: `mcp/k-skill/tools/search-osha.ts`
+- Create: `mcp/k-skill/tools/sapa.ts`
+- Create: `mcp/k-skill/tools/industry.ts`
+- Create: `mcp/k-skill/tools/gaps.ts`
+- Create: `mcp/k-skill/tools/cache-admin.ts`
 
 Data source: 국가법령정보센터 OpenAPI — no API key required for public endpoints.
 Base URL: `https://www.law.go.kr/DRF/lawSearch.do?OC=<OC>&target=law&type=JSON`
@@ -238,7 +238,7 @@ Base URL: `https://www.law.go.kr/DRF/lawSearch.do?OC=<OC>&target=law&type=JSON`
 > **Note:** If the public API is unavailable or rate-limited during testing, the cache layer
 > will serve stale data. Tests use `MOCK_API=true` to bypass network calls.
 
-- [ ] **Step 2.1: Create `vendor/k-skill/tools/search-osha.ts`**
+- [ ] **Step 2.1: Create `mcp/k-skill/tools/search-osha.ts`**
 
 ```typescript
 import { MCPCache } from '../../../scripts/lib/mcp-cache.js';
@@ -295,7 +295,7 @@ function mockOshaResults(keyword: string): RegulatoryArticle[] {
 }
 ```
 
-- [ ] **Step 2.2: Create `vendor/k-skill/tools/sapa.ts`**
+- [ ] **Step 2.2: Create `mcp/k-skill/tools/sapa.ts`**
 
 ```typescript
 import { MCPCache } from '../../../scripts/lib/mcp-cache.js';
@@ -350,7 +350,7 @@ function mockSapaData(industry?: string) {
 }
 ```
 
-- [ ] **Step 2.3: Create `vendor/k-skill/tools/industry.ts`**
+- [ ] **Step 2.3: Create `mcp/k-skill/tools/industry.ts`**
 
 ```typescript
 import { MCPCache } from '../../../scripts/lib/mcp-cache.js';
@@ -378,7 +378,7 @@ export async function listIndustryControls(industry: string): Promise<object> {
 }
 ```
 
-- [ ] **Step 2.4: Create `vendor/k-skill/tools/gaps.ts`**
+- [ ] **Step 2.4: Create `mcp/k-skill/tools/gaps.ts`**
 
 ```typescript
 import { MCPCache } from '../../../scripts/lib/mcp-cache.js';
@@ -400,7 +400,7 @@ export async function checkComplianceGaps(industry: string, currentControls: str
 }
 ```
 
-- [ ] **Step 2.5: Create `vendor/k-skill/tools/cache-admin.ts`**
+- [ ] **Step 2.5: Create `mcp/k-skill/tools/cache-admin.ts`**
 
 ```typescript
 import { MCPCache } from '../../../scripts/lib/mcp-cache.js';
@@ -420,7 +420,7 @@ export async function invalidateCache(pattern?: string): Promise<object> {
 }
 ```
 
-- [ ] **Step 2.6: Replace stub `vendor/k-skill/index.ts`**
+- [ ] **Step 2.6: Replace stub `mcp/k-skill/index.ts`**
 
 ```typescript
 #!/usr/bin/env bun
@@ -527,7 +527,7 @@ log.info('k_skill MCP server started');
 - [ ] **Step 2.7: Smoke-test k_skill server starts without error**
 
 ```bash
-MOCK_API=true timeout 3 bun run vendor/k-skill/index.ts 2>&1 | head -5
+MOCK_API=true timeout 3 bun run mcp/k-skill/index.ts 2>&1 | head -5
 ```
 
 Expected output includes: `[INFO][k_skill] k_skill MCP server started`
@@ -535,7 +535,7 @@ Expected output includes: `[INFO][k_skill] k_skill MCP server started`
 - [ ] **Step 2.8: Commit**
 
 ```bash
-git add vendor/k-skill/
+git add mcp/k-skill/
 git commit -m "feat(mcp): implement k_skill server - OSHA/SAPA regulation search"
 ```
 
@@ -544,12 +544,12 @@ git commit -m "feat(mcp): implement k_skill server - OSHA/SAPA regulation search
 ## Task 3: legalize_kr MCP Server
 
 **Files:**
-- Create: `vendor/legalize-kr/git-sync.ts`
-- Create: `vendor/legalize-kr/tools/parse.ts`
-- Create: `vendor/legalize-kr/tools/references.ts`
-- Create: `vendor/legalize-kr/tools/metadata.ts`
-- Create: `vendor/legalize-kr/tools/compare.ts`
-- Modify: `vendor/legalize-kr/index.ts` (replace stub)
+- Create: `mcp/legalize-kr/git-sync.ts`
+- Create: `mcp/legalize-kr/tools/parse.ts`
+- Create: `mcp/legalize-kr/tools/references.ts`
+- Create: `mcp/legalize-kr/tools/metadata.ts`
+- Create: `mcp/legalize-kr/tools/compare.ts`
+- Modify: `mcp/legalize-kr/index.ts` (replace stub)
 
 Data source: `.cache/legalize-kr/` git repo (cloned from GitHub on first run; daily sync).
 Repo URL: `https://github.com/legalize-kr/legalize-kr.git`
@@ -557,7 +557,7 @@ Repo URL: `https://github.com/legalize-kr/legalize-kr.git`
 > **Offline/CI note:** If git clone fails (no network), server starts in degraded mode
 > and returns an empty result with a warning. Tests set `SKIP_GIT_SYNC=true`.
 
-- [ ] **Step 3.1: Create `vendor/legalize-kr/git-sync.ts`**
+- [ ] **Step 3.1: Create `mcp/legalize-kr/git-sync.ts`**
 
 ```typescript
 import { existsSync } from 'fs';
@@ -596,7 +596,7 @@ export async function ensureLegalizeKRRepo(): Promise<boolean> {
 export function getRepoDir(): string { return REPO_DIR; }
 ```
 
-- [ ] **Step 3.2: Create `vendor/legalize-kr/tools/parse.ts`**
+- [ ] **Step 3.2: Create `mcp/legalize-kr/tools/parse.ts`**
 
 ```typescript
 import { readdirSync, readFileSync, existsSync } from 'fs';
@@ -662,7 +662,7 @@ function parseLawMarkdown(md: string): LawNode[] {
 }
 ```
 
-- [ ] **Step 3.3: Create `vendor/legalize-kr/tools/references.ts`**
+- [ ] **Step 3.3: Create `mcp/legalize-kr/tools/references.ts`**
 
 ```typescript
 import { readdirSync, readFileSync, existsSync } from 'fs';
@@ -692,7 +692,7 @@ export async function findReferences(lawId: string): Promise<object[]> {
 }
 ```
 
-- [ ] **Step 3.4: Create `vendor/legalize-kr/tools/metadata.ts`**
+- [ ] **Step 3.4: Create `mcp/legalize-kr/tools/metadata.ts`**
 
 ```typescript
 import { existsSync, statSync, readFileSync } from 'fs';
@@ -723,7 +723,7 @@ export async function getLawMetadata(lawId: string): Promise<object> {
 }
 ```
 
-- [ ] **Step 3.5: Create `vendor/legalize-kr/tools/compare.ts`**
+- [ ] **Step 3.5: Create `mcp/legalize-kr/tools/compare.ts`**
 
 ```typescript
 import simpleGit from 'simple-git';
@@ -744,7 +744,7 @@ export async function compareVersions(lawId: string, sinceCommit?: string): Prom
 }
 ```
 
-- [ ] **Step 3.6: Replace stub `vendor/legalize-kr/index.ts`**
+- [ ] **Step 3.6: Replace stub `mcp/legalize-kr/index.ts`**
 
 ```typescript
 #!/usr/bin/env bun
@@ -844,7 +844,7 @@ log.info('legalize_kr MCP server started');
 - [ ] **Step 3.7: Smoke-test legalize_kr server starts**
 
 ```bash
-SKIP_GIT_SYNC=true timeout 3 bun run vendor/legalize-kr/index.ts 2>&1 | head -5
+SKIP_GIT_SYNC=true timeout 3 bun run mcp/legalize-kr/index.ts 2>&1 | head -5
 ```
 
 Expected: `[WARN][legalize_kr] SKIP_GIT_SYNC=true` then `[INFO][legalize_kr] legalize_kr MCP server started`
@@ -852,7 +852,7 @@ Expected: `[WARN][legalize_kr] SKIP_GIT_SYNC=true` then `[INFO][legalize_kr] leg
 - [ ] **Step 3.8: Commit**
 
 ```bash
-git add vendor/legalize-kr/
+git add mcp/legalize-kr/
 git commit -m "feat(mcp): implement legalize_kr server - law structure parsing via git repo"
 ```
 
@@ -861,19 +861,19 @@ git commit -m "feat(mcp): implement legalize_kr server - law structure parsing v
 ## Task 4: mcp_kr_legislation MCP Server
 
 **Files:**
-- Create: `vendor/mcp-kr-legislation/xml-parser.ts`
-- Create: `vendor/mcp-kr-legislation/tools/current-law.ts`
-- Create: `vendor/mcp-kr-legislation/tools/amendments.ts`
-- Create: `vendor/mcp-kr-legislation/tools/interpret.ts`
-- Create: `vendor/mcp-kr-legislation/tools/penalties.ts`
-- Create: `vendor/mcp-kr-legislation/tools/guide.ts`
-- Modify: `vendor/mcp-kr-legislation/index.ts` (replace stub)
+- Create: `mcp/kr-legislation/xml-parser.ts`
+- Create: `mcp/kr-legislation/tools/current-law.ts`
+- Create: `mcp/kr-legislation/tools/amendments.ts`
+- Create: `mcp/kr-legislation/tools/interpret.ts`
+- Create: `mcp/kr-legislation/tools/penalties.ts`
+- Create: `mcp/kr-legislation/tools/guide.ts`
+- Modify: `mcp/kr-legislation/index.ts` (replace stub)
 
 Data source: 국가법령정보센터 Open API (XML)
 Base URL: `https://www.law.go.kr/DRF/`
 OC (API key): Set via env var `LAW_API_OC` (defaults to `test` for read-only public access).
 
-- [ ] **Step 4.1: Create `vendor/mcp-kr-legislation/xml-parser.ts`**
+- [ ] **Step 4.1: Create `mcp/kr-legislation/xml-parser.ts`**
 
 ```typescript
 import { XMLParser } from 'fast-xml-parser';
@@ -917,7 +917,7 @@ bun add fast-xml-parser
 
 Expected: package added to package.json
 
-- [ ] **Step 4.3: Create `vendor/mcp-kr-legislation/tools/current-law.ts`**
+- [ ] **Step 4.3: Create `mcp/kr-legislation/tools/current-law.ts`**
 
 ```typescript
 import { MCPCache } from '../../../scripts/lib/mcp-cache.js';
@@ -964,7 +964,7 @@ function mockCurrentLaw(lawType?: string) {
 }
 ```
 
-- [ ] **Step 4.4: Create `vendor/mcp-kr-legislation/tools/amendments.ts`**
+- [ ] **Step 4.4: Create `mcp/kr-legislation/tools/amendments.ts`**
 
 ```typescript
 import { MCPCache } from '../../../scripts/lib/mcp-cache.js';
@@ -1010,7 +1010,7 @@ function mockAmendments(lawId: string) {
 
 - [ ] **Step 4.5: Create remaining tool stubs (interpret, penalties, guide)**
 
-`vendor/mcp-kr-legislation/tools/interpret.ts`:
+`mcp/kr-legislation/tools/interpret.ts`:
 ```typescript
 export async function interpretRegulation(articleId: string): Promise<object> {
   // Interpretation comes from cached commentary data or static knowledge base
@@ -1023,7 +1023,7 @@ export async function interpretRegulation(articleId: string): Promise<object> {
 }
 ```
 
-`vendor/mcp-kr-legislation/tools/penalties.ts`:
+`mcp/kr-legislation/tools/penalties.ts`:
 ```typescript
 export async function getPenalties(articleId: string): Promise<object> {
   const penaltyMap: Record<string, object> = {
@@ -1034,7 +1034,7 @@ export async function getPenalties(articleId: string): Promise<object> {
 }
 ```
 
-`vendor/mcp-kr-legislation/tools/guide.ts`:
+`mcp/kr-legislation/tools/guide.ts`:
 ```typescript
 export async function getComplianceGuide(topic: string): Promise<object> {
   return {
@@ -1051,7 +1051,7 @@ export async function getComplianceGuide(topic: string): Promise<object> {
 }
 ```
 
-- [ ] **Step 4.6: Replace stub `vendor/mcp-kr-legislation/index.ts`**
+- [ ] **Step 4.6: Replace stub `mcp/kr-legislation/index.ts`**
 
 ```typescript
 #!/usr/bin/env bun
@@ -1124,7 +1124,7 @@ log.info('mcp_kr_legislation MCP server started');
 - [ ] **Step 4.7: Smoke-test mcp_kr_legislation server starts**
 
 ```bash
-MOCK_API=true timeout 3 bun run vendor/mcp-kr-legislation/index.ts 2>&1 | head -5
+MOCK_API=true timeout 3 bun run mcp/kr-legislation/index.ts 2>&1 | head -5
 ```
 
 Expected: `[INFO][mcp_kr_legislation] mcp_kr_legislation MCP server started`
@@ -1132,7 +1132,7 @@ Expected: `[INFO][mcp_kr_legislation] mcp_kr_legislation MCP server started`
 - [ ] **Step 4.8: Commit**
 
 ```bash
-git add vendor/mcp-kr-legislation/
+git add mcp/kr-legislation/
 git commit -m "feat(mcp): implement mcp_kr_legislation server - real-time Korean legislation API"
 ```
 
@@ -1143,9 +1143,9 @@ git commit -m "feat(mcp): implement mcp_kr_legislation server - real-time Korean
 - [ ] **Step 5.1: Run all three servers simultaneously to verify no conflicts**
 
 ```bash
-MOCK_API=true SKIP_GIT_SYNC=true timeout 5 bun run vendor/k-skill/index.ts &
-MOCK_API=true SKIP_GIT_SYNC=true timeout 5 bun run vendor/legalize-kr/index.ts &
-MOCK_API=true SKIP_GIT_SYNC=true timeout 5 bun run vendor/mcp-kr-legislation/index.ts &
+MOCK_API=true SKIP_GIT_SYNC=true timeout 5 bun run mcp/k-skill/index.ts &
+MOCK_API=true SKIP_GIT_SYNC=true timeout 5 bun run mcp/legalize-kr/index.ts &
+MOCK_API=true SKIP_GIT_SYNC=true timeout 5 bun run mcp/kr-legislation/index.ts &
 wait
 ```
 
