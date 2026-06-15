@@ -7,19 +7,26 @@ const log = createLogger('legalize_kr');
 
 export async function findReferences(lawId: string): Promise<object[]> {
   const repoDir = getRepoDir();
-  if (!existsSync(repoDir)) return [];
+  const krDir = join(repoDir, 'kr');
+  if (!existsSync(krDir)) {
+    log.warn('kr/ directory not found in repo');
+    return [];
+  }
 
-  const refs: object[] = [];
-  const files = readdirSync(repoDir).filter(f => f.endsWith('.md'));
   const pattern = new RegExp(lawId.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g');
+  const refs: object[] = [];
 
-  for (const file of files) {
-    if (file.includes(lawId)) continue;
-    const content = readFileSync(join(repoDir, file), 'utf-8');
+  for (const lawName of readdirSync(krDir)) {
+    if (lawName === lawId) continue;
+    const lawFile = join(krDir, lawName, '법률.md');
+    if (!existsSync(lawFile)) continue;
+
+    const content = readFileSync(lawFile, 'utf-8');
     const matches = content.match(pattern);
     if (matches) {
-      refs.push({ file, referenceCount: matches.length, lawName: file.replace('.md', '') });
+      refs.push({ lawName, referenceCount: matches.length });
     }
   }
-  return refs;
+
+  return refs.sort((a: any, b: any) => b.referenceCount - a.referenceCount);
 }

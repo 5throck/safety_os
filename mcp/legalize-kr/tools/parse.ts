@@ -1,4 +1,4 @@
-import { readdirSync, readFileSync, existsSync } from 'fs';
+import { readFileSync, existsSync } from 'fs';
 import { join } from 'path';
 import { createLogger } from '../../shared/logger.js';
 import { getRepoDir } from '../git-sync.js';
@@ -15,46 +15,53 @@ interface LawNode {
 
 export async function parseLawStructure(lawId: string): Promise<LawNode[]> {
   const repoDir = getRepoDir();
-  if (!existsSync(repoDir)) {
-    log.warn('Repository not available — returning empty structure');
+  const lawFile = join(repoDir, 'kr', lawId, '법률.md');
+
+  if (!existsSync(lawFile)) {
+    log.warn(`Law file not found: ${lawFile}`);
     return [];
   }
 
-  const files = readdirSync(repoDir).filter(f => f.includes(lawId) && f.endsWith('.md'));
-  if (files.length === 0) {
-    log.warn(`Law not found: ${lawId}`);
-    return [];
-  }
-
-  const content = readFileSync(join(repoDir, files[0]), 'utf-8');
+  const content = readFileSync(lawFile, 'utf-8');
   return parseLawMarkdown(content);
 }
 
 function parseLawMarkdown(md: string): LawNode[] {
   const nodes: LawNode[] = [];
-  let current: LawNode | null = null;
+  let currentChapter: LawNode | null = null;
+  let currentSection: LawNode | null = null;
+  let currentArticle: LawNode | null = null;
 
   for (const line of md.split('\n')) {
+    // ## 제N장 제목
     const chapterMatch = line.match(/^## (제\d+장)\s+(.+)/);
-    const articleMatch = line.match(/^### (제\d+조)\s*(?:\((.+)\))?/);
-    const contentLine = line.trim();
+    // ### 제N절 제목
+    const sectionMatch = line.match(/^### (제\d+절)\s+(.+)/);
+    // ##### 제N조 (제목)
+    const articleMatch = line.match(/^##### (제\d+조(?:의\d+)?)\s*(?:\((.+?)\))?/);
 
     if (chapterMatch) {
-      current = { type: 'chapter', number: chapterMatch[1], title: chapterMatch[2], children: [] };
-      nodes.push(current);
+      currentSection = null;
+      currentArticle = null;
+      currentChapter = { type: 'chapter', number: chapterMatch[1], title: chapterMatch[2].trim(), children: [] };
+      nodes.push(currentChapter);
+    } else if (sectionMatch) {
+      currentArticle = null;
+      currentSection = { type: 'section', number: sectionMatch[1], title: sectionMatch[2].trim(), children: [] };
+      (currentChapter?.children ?? nodes).push(currentSection);
     } else if (articleMatch) {
-      const article: LawNode = {
+      currentArticle = {
         type: 'article',
         number: articleMatch[1],
-        title: articleMatch[2] ?? '',
+        title: articleMatch[2]?.trim() ?? '',
         content: '',
       };
-      if (current?.children) current.children.push(article);
-      else nodes.push(article);
-    } else if (contentLine && current) {
-      const lastChild = current.children?.at(-1);
-      if (lastChild?.content !== undefined) lastChild.content += ' ' + contentLine;
+      const parent = currentSection ?? currentChapter;
+      (parent?.children ?? nodes).push(currentArticle);
+    } else if (currentArticle && line.trim() && !line.startsWith('#')) {
+      currentArticle.content = ((currentArticle.content ?? '') + ' ' + line.trim()).trim();
     }
   }
+
   return nodes;
 }

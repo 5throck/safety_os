@@ -30,6 +30,12 @@ export async function getCurrentLaw(lawType?: string): Promise<object[]> {
     effectiveDate: item.시행일자,
   }));
 
+  // OC=test는 IP 등록 없이 차단됨 — 빈 결과 대신 mock fallback 제공
+  if (laws.length === 0) {
+    log.warn('API returned empty result (OC key may not be registered). Falling back to mock data.');
+    return mockCurrentLaw(lawType);
+  }
+
   await cache.set(key, laws, 21_600);
   return laws;
 }

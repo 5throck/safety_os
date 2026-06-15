@@ -15,39 +15,6 @@
       "Bash(rm -rf *)"
     ]
   },
-  "mcpServers": {
-    "codegraph": {
-      "command": "npx",
-      "args": [
-        "@colbymchenry/codegraph@0.9.7",
-        "serve"
-      ]
-    },
-    "korean-law": {
-      "command": "npx",
-      "args": [
-        "-y",
-        "korean-law-mcp@latest"
-      ],
-      "env": {
-        "LAW_OC": "여기에_법제처_API_키_입력"
-      }
-    },
-    "mcp-kr-legislation": {
-      "command": "npx",
-      "args": [
-        "-y",
-        "mcp-kr-legislation"
-      ]
-    },
-    "k-skill": {
-      "command": "npx",
-      "args": [
-        "-y",
-        "k-skill"
-      ]
-    }
-  },
   "env": {
     "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
   },

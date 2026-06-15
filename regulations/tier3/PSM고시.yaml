@@ -1,4 +1,0 @@
-name: "PSM고시"
-type: "Public Notice"
-source_mcp: "mcp-kr-legislation"
-mcp_query_template: "공정안전보고서의 제출·심사·확인 및 이행상태평가 등에 관한 고시 제{article_number}조"

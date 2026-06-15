@@ -6,6 +6,28 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+### Fixed (2026-06-16 — MCP Server Connectivity)
+- Corrected `bun` arg order in `.mcp.json` and `.gemini/settings.json` — `bun --env-file .env run` → `bun run --env-file .env` (this bun version requires subcommand before flags; all 3 servers were silently failing to start)
+
+### Added (2026-06-16 — legalize_kr v1.1.0)
+- `mcp/legalize-kr/tools/admrule.ts` — `search_admrule` tool: keyword search over `.cache/admrule-kr/` (고용노동부 고시·예규·훈령)
+- `mcp/legalize-kr/tools/precedent.ts` — `search_precedent` tool: GitHub Search API over `legalize-kr/precedent-kr` (62K판례, GITHUB_TOKEN required)
+- `mcp/legalize-kr/git-sync.ts` — `ensureAdmruleKRRepo()` for shallow-cloning `admrule-kr` into `.cache/admrule-kr/`
+- `.cache/admrule-kr/` — shallow clone of `legalize-kr/admrule-kr` (21,675 files)
+
+### Changed (2026-06-16 — Config & Cleanup)
+- `.gemini/settings.json` mcpServers updated to local `bun run` servers (removed stale `korean-law`, `mcp-kr-legislation`, `k-skill` npx entries)
+- `.claude/settings.json` stale `mcpServers` block removed (authoritative config is `.mcp.json`)
+- `.claude/settings.local.json` pruned — removed stale `vendor/` permission entries and codegraph npx permission
+- `mcp/LICENSE_REVIEW.md` — moved from `vendor/LICENSE_REVIEW.md` (missed in directory rename)
+- `AGENTS.md` — added `## Regulatory Scope` section (Tier 1–4 law registry); removed `regulations/KR/` reference from Section A agent structure
+
+### Removed (2026-06-16 — Codegraph & Regulations)
+- Removed codegraph MCP servers (`codegraph_search`, `codegraph_mutate`) from `.mcp.json`
+- Removed codegraph entries from `.claude/settings.json` and `.gemini/settings.json`
+- Deleted `docs/blueprint/appendix/J-codegraph-integration.md`
+- Deleted `regulations/` folder (28 YAML files) — tier classification consolidated into `AGENTS.md ## Regulatory Scope`
+
 ### Changed (2026-06-16 — MCP Directory Rename)
 - Renamed `vendor/` to `mcp/` for semantic clarity — servers are first-party MCP implementations, not third-party dependencies
 - Renamed `mcp/mcp-kr-legislation/` to `mcp/kr-legislation/` — removed redundant `mcp-` prefix

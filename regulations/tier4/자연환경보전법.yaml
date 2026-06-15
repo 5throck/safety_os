@@ -1,4 +1,0 @@
-name: "자연환경보전법"
-type: "Act"
-source_mcp: "mcp-kr-legislation"
-mcp_query_template: "자연환경보전법 제{article_number}조"
