@@ -144,7 +144,7 @@ Must pass with 0 errors. The audit auto-recognizes new domains via recursive wal
 | `gdp` | 2026-06-17 | active (v1) | pharma-distribution |
 | `glp` | 2026-06-17 | active (v1) | pharma-laboratory |
 | `gcp` | 2026-06-17 | active (v1) | clinical-research |
-| `gvp` | planned v3 | pending | pharmacovigilance |
+| `gvp` | 2026-06-17 | active (v1) | pharmacovigilance |
 
 ## 6. Migration Notes (for Existing Domains)
 
