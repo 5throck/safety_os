@@ -140,8 +140,9 @@ Must pass with 0 errors. The audit auto-recognizes new domains via recursive wal
 |--------|-------|--------|------------------|
 | `psm` | pre-2026-06-17 | active | chemical-processing |
 | `gmp` | 2026-06-17 | active (v1) | pharma-general |
-| `gdp` | planned v2 | pending | pharma-distribution |
-| `glp` | planned v2 | pending | pharma-laboratory |
+| `msds` | 2026-06-17 | active (v1) | chemical-handling |
+| `gdp` | 2026-06-17 | active (v1) | pharma-distribution |
+| `glp` | 2026-06-17 | active (v1) | pharma-laboratory |
 | `gcp` | planned v3 | pending | clinical-research |
 | `gvp` | planned v3 | pending | pharmacovigilance |
 

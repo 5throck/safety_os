@@ -6,6 +6,56 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+### Added (2026-06-17 — GLP Domain v1)
+
+Good Laboratory Practice (GLP) domain implementation as fifth domain. Covers non-clinical laboratory studies for pharmaceutical safety testing (MFDS) and chemical hazard assessment (ME/K-REACH). Implements OECD GLP principles for Mutual Acceptance of Data (MAD).
+
+**Third new domain addition** via `docs/_shared/domain-onboarding-guide.md` SOP — pattern fully validated across three consecutive use cases.
+
+**Agent** (1):
+- `agents/domains/glp/glp-agent.md` (new) — supports both MFDS and ME GLP contexts
+
+**Workflows** (8) under `workflows/domains/glp/`:
+- `test-article-management/` (OECD Sec.7), `study-protocol/` (Sec.8), `study-conduct/` (Sec.9), `data-management/` (Sec.9+10), `personnel-qualification/` (Sec.2), `equipment-calibration/` (Sec.5), `qau-inspection/` (Sec.3)
+- `study-inspection-reference/` (reference — dispatches to compliance-agent for regulatory inspections)
+
+**Evidence Models** (7) under `evidence-models/domains/glp/`:
+- All include `glp_certification_authority` (MFDS / ME / both / OECD_MAD_only), `oecd_mad_applicable`, `study_director_id`, `msds_record_ref` fields
+- `glp-data-record.json` includes ALCOA+ 9-principle compliance check object
+
+**Skills** (2) under `skills/domains/glp/`:
+- `glp-data-integrity-checker/` — ALCOA+ validation
+- `glp-study-protocol-validator/` — OECD Section 8.3 content verification
+
+**Regulations** (3):
+- `regulations/KR/MFDS-GLP.yaml` — 의약품 비임상시험 (MFDS)
+- `regulations/KR/ME-KREACH-GLP.yaml` — K-REACH 위해성평가 (ME)
+- `regulations/international/OECD-GLP.yaml` — OECD C(97)186/Final (MAD)
+
+**Industry Profile**:
+- `industry-profiles/pharma-laboratory.yaml`
+
+**Scope Document**:
+- `docs/domains/glp/scope.md`
+
+**Korea-Specific — Dual Authority Tracking**:
+- MFDS GLP (의약품 비임상시험, 3-year renewal)
+- ME GLP (K-REACH 위해성평가, 3-year renewal)
+- OECD MAD (Korea accession 2005, eliminates duplicate testing)
+
+**Cross-Domain Interface**:
+- GLP `test-article` ↔ MSDS `msds-record` (`msds_record_ref`)
+- GLP final report → GMP IND application support
+- GLP `study-inspection-reference` → `compliance-agent` (3rd reference workflow pattern)
+
+**Audit Script**:
+- `scripts/safety-audit.ts` v2.4.0 → v2.5.0:
+  - GLP workflow validation (≥3 legal_basis core, ≥2 reference)
+  - GLP evidence model validation (4 required fields)
+  - Report now shows GMP + MSDS + GDP + GLP counts
+
+**Verification**: 163 files checked, 0 errors (47 workflows: 10 GMP, 7 MSDS, 8 GDP, 8 GLP, 14 PSM/EHS).
+
 ### Added (2026-06-17 — GDP Domain v1)
 
 Good Distribution Practice (GDP) domain implementation as fourth domain. Covers pharmaceutical supply chain from manufacturer handoff through customer delivery. KGDP + PIC/S + EU GDP + DTS alignment.

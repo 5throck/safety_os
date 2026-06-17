@@ -1,0 +1,26 @@
+source_mcp: mcp-kr-legislation
+jurisdiction: KR
+regulator: ME (환경부 / Ministry of Environment)
+framework: ME-KREACH-GLP
+title_ko: 화학물질 위해성평가 시험기관 관리기준
+title_en: Standards for Management of Chemical Hazard Assessment Test Facilities
+primary_law:
+  name_ko: 화학물질등록 및 평가 등에 관한 법률 (K-REACH)
+  name_en: Act on the Registration and Evaluation of Chemicals (K-REACH)
+delegated_legislation:
+  - name_ko: 화학물질 위해성평가 시험기관 관리기준 (환경부 고시)
+    name_en: Standards for Management of Chemical Hazard Assessment Test Facilities (ME Notice)
+    scope: K-REACH 위해성평가용 시험의 GLP 준수 의무
+key_obligations:
+  - K-REACH 위해성평가 시험은 GLP 적합 기관에서 수행 의무
+  - 환경부 GLP 적합성 확인 (별도 인증 체계)
+  - 해외 OECD MAD 인정 기관 데이터 일부 인정
+me_glp_inspection:
+  authority: ME (환경부) / 국립환경과학원 (NIER)
+  validity_years: 3
+  scope: 화학물질 위해성평가 시험 (수질/토양/생태독성 등)
+applicable_to:
+  - K-REACH 위해성평가 대상 화학물질 시험
+  - 기존 화학물질 위해성평가
+  - 신규 화학물질 위해성평가
+last_updated: "2026-06-17"
