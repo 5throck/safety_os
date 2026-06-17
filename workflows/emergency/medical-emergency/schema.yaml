@@ -1,0 +1,13 @@
+schema_version: "1.0"
+workflow_id: medical-emergency
+title: "의료 응급 대응 (Medical Emergency Response)"
+status: active
+applicability: mandatory
+
+legal_basis:
+  - 응급의료에 관한 법률
+  - 산업안전보건법 Article 13 (구급설비)
+  - 중대재해처벌법 Article 7
+industry_profile: all
+agent: emergency-agent
+evidence_model: emergency-medical-record.json

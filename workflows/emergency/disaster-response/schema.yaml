@@ -1,0 +1,13 @@
+schema_version: "1.0"
+workflow_id: disaster-response
+title: "자연재해 대응 (Disaster Response)"
+status: active
+applicability: mandatory
+
+legal_basis:
+  - 재난 및 안전관리 기본법
+  - 산업안전보건법 Article 5 (안전확보 의무)
+  - 중대재해처벌법 Article 7
+industry_profile: all
+agent: emergency-agent
+evidence_model: emergency-disaster-record.json
