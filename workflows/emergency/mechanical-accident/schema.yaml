@@ -1,0 +1,13 @@
+schema_version: "1.0"
+workflow_id: mechanical-accident
+title: "기계 사고 대응 (Mechanical Accident Response)"
+status: active
+applicability: mandatory
+
+legal_basis:
+  - 산업안전보건법 Article 32 (기계위해 방지)
+  - 중대재해처벌법 Article 7
+  - 산업안전보건법 Article 98
+industry_profile: all
+agent: emergency-agent
+evidence_model: emergency-mechanical-record.json
