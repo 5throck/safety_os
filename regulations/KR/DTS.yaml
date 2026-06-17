@@ -1,0 +1,42 @@
+source_mcp: mcp-kr-legislation
+jurisdiction: KR
+regulator: MFDS (Ministry of Food and Drug Safety / 식품의약품안전처)
+framework: DTS
+title_ko: 의약품 추적관리 (Drug Tracking System)
+title_en: Drug Tracking System (DTS)
+primary_law:
+  name_ko: 약사법
+  name_en: Pharmaceutical Affairs Act
+  articles:
+    - article: "43의2"
+      topic_ko: 의약품 유통이력 추적 의무
+      topic_en: Mandatory pharmaceutical distribution history tracking
+delegated_legislation:
+  - name_ko: 의약품 추적관리에 관한 규정 (MFDS 고시)
+    name_en: Regulations on Drug Tracking Management (MFDS Notice)
+    scope: DTS 대상 품목, 바코드/RFID 규격, 데이터 전송
+mandated_items:
+  - category: 전문의약품 (Ethical drugs)
+    mandate_date: "2015-02-04"
+  - category: 항생제 (Antibiotics)
+    mandate_date: "2015-02-04"
+  - category: 부작용 모니터링 의약품 (Adverse event monitoring drugs)
+    mandate_date: "2019-01-01"
+  - category: 마약류 (Narcotics)
+    mandate_date: "2022-01-01"
+  - category: 17개 지정 품목군 (17 designated categories)
+    mandate_date: "2022-06-01"
+tracking_technologies:
+  - GS1 DataMatrix 2D barcode
+  - RFID (Radio Frequency Identification)
+data_submission:
+  authority: MFDS DTS Center
+  frequency: real_time (유통 단계별)
+  method: API / 웹 포털
+key_data_points:
+  - 표준코드 (Standard code - GTIN)
+  - 제조번호/Batch number
+  - 유통단계 (Distribution stage)
+  - 거래일자 (Transaction date)
+  - 사업자등록번호 (Business registration number)
+last_updated: "2026-06-17"

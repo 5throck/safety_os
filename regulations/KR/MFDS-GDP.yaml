@@ -1,0 +1,47 @@
+source_mcp: mcp-kr-legislation
+jurisdiction: KR
+regulator: MFDS (Ministry of Food and Drug Safety / 식품의약품안전처)
+framework: KGDP
+title_ko: 의약품 유통관리 기준 (Korean GDP)
+title_en: Standards for Pharmaceutical Distribution (Korean GDP)
+primary_law:
+  name_ko: 약사법
+  name_en: Pharmaceutical Affairs Act
+  articles:
+    - article: "43의2"
+      topic_ko: 의약품 유통관리 의무화
+      topic_en: Mandatory pharmaceutical distribution management
+    - article: "43의3"
+      topic_ko: 의약품 회수 의무
+      topic_en: Pharmaceutical recall duty
+delegated_legislation:
+  - name_ko: 의약품 유통관리 기준 (MFDS 고시)
+    name_en: Standards for Pharmaceutical Distribution (MFDS Notice)
+    scope: GDP 세부 기준 — 온도, 보관, 운송, 추적, 자체점검
+international_alignment:
+  - framework: PIC/S GDP
+    reference: PE 009 GDP Annex
+    alignment_level: harmonized
+  - framework: EU GDP
+    reference: 2013/C 343/01
+    alignment_level: inspired_by
+gdp_certification:
+  mandatory_since: "2020-01-01"
+  renewal_cycle_years: 3
+  authority: MFDS
+  scope: 의약품 도매업체 (wholesale distributors)
+key_themes:
+  - goods_receipt_and_acceptance
+  - storage_and_warehousing
+  - temperature_control_cold_chain
+  - transportation_and_shipping
+  - traceability_dts
+  - returned_goods
+  - self_inspection
+  - recalls
+temperature_zones:
+  cold_chain_2_8C: "냉장 (Refrigerated 2-8°C)"
+  frozen_below_minus_15C: "냉동 (Frozen ≤ -15°C)"
+  controlled_room_15_25C: "실온 (Controlled Room Temp 15-25°C)"
+  ambient_30C_max: "상온 (Ambient ≤ 30°C)"
+last_updated: "2026-06-17"
