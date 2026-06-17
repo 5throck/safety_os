@@ -6,6 +6,53 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+### Added (2026-06-17 — GMP Module v1)
+Complete Good Manufacturing Practice (GMP) module implementation benchmarked to PSM module architecture. KP-GMP base + PIC/S alignment + ICH Q7/Q9/Q10 reflection. v1 scope: `pharma-general` only (sterile/API/biologics deferred to v2).
+
+**Agent** (1):
+- `agents/gmp-agent.md` — GMP specialist with multi-source legal basis (약사법 Article 34 + 의약품등기준규정 + ICH Q7/Q9/Q10 + PIC/S PE 009)
+
+**Workflows** (10) under `workflows/gmp/`:
+- `change-control/` (변경관리, Article 18) — 90% pattern reuse from `psm-moc`
+- `deviation-capa/` (이상관리 및 시정예방조치, Article 19)
+- `equipment-qualification/` (설비 적격성평가, Article 16) — pattern reuse from PSM MI
+- `batch-mfg/` (제조 및 포장기록, Article 12)
+- `supplier-qualification/` (공급자 자격부여, Article 12) — pattern reuse from PSM Contractor Mgmt
+- `stability/` (안정성 시험, Article 20 + ICH Q1A/Q1E)
+- `self-inspection/` (자체점검, Article 15 + PIC/S Chapter 9) — default annual + risk-based adjustment
+- `cleaning-validation/` (세정 밸리데이션, Article 17)
+- `csv-validation/` (컴퓨터 시스템 적합성평가, Article 17 + 21 CFR Part 11 + GAMP 5)
+- `pqr/` (제품품질평가, Article 12 + ICH Q7/Q10) — pattern reuse from PSM PSSR
+
+**Evidence Models** (11) under `evidence-models/`:
+- `gmp-change-control-record.json`, `gmp-deviation-record.json`, `gmp-capa-record.json`, `gmp-equipment-qualification-record.json`, `gmp-batch-record.json`, `gmp-supplier-record.json`, `gmp-stability-record.json`, `gmp-self-inspection-record.json`, `gmp-cleaning-validation-record.json`, `gmp-csv-record.json`, `gmp-pqr-record.json`
+- All include ALCOA+ audit_trail, e_signature (v1 schema-only), qrm_assessment (ICH Q9 ref), nomenclature (multilingual)
+- `evidence-models/base/gmp-common.schema.json` — common definitions
+
+**Skills** (3) under `skills/`:
+- `gmp-change-control/SKILL.md` — psm-moc pattern with quality impact extension
+- `gmp-deviation-capa/SKILL.md` — deviation + CAPA lifecycle
+- `gmp-qrm/SKILL.md` — ICH Q9 methodology matrix (FMEA, HACCP, FTA, cQRM-HAZOP, PHA). Cross-cutting skill referenced by all GMP workflows.
+
+**Regulations** (1):
+- `regulations/KR/MFDS-GMP.yaml` + `regulations/KR/MFDS-GMP.md` — KP-GMP reference with PIC/S + ICH mapping. Restores regulations/ directory (intentional for GMP module).
+
+**Industry Profile** (1):
+- `industry-profiles/pharma-general.yaml` — pharma general manufacturing profile (v1 scope)
+
+**Scope Document**:
+- `docs/gmp/scope.md` — GMP v1 scope, architecture, KPIs, compliance gates
+
+**Agent Update**:
+- `agents/risk-assessment-agent.md` — Section B scope clarification: EHS risks only (gmp-qrm handles quality risks, per meeting 2026-06-17 Q3 resolution)
+
+### Changed (2026-06-17 — Audit Script GMP Extension)
+- `scripts/safety-audit.ts` v2.0.1 → v2.1.0:
+  - Added GMP workflow validation: multi-source `legal_basis` (array, ≥2 entries) check for `workflows/gmp/**/schema.yaml`
+  - Added GMP evidence model validation: required common fields (`e_signature`, `qrm_assessment`, `nomenclature`, `audit_trail`) and `legal_basis.minItems ≥ 2` for `evidence-models/gmp-*.json`
+  - Added role separation check: verify `risk-assessment-agent.md` references `gmp-qrm` and `product quality`; verify `gmp-qrm/SKILL.md` references `risk-assessment-agent`
+  - Report now shows GMP-specific counts: `(${gmpSchemaFiles.length} GMP)` and `(${gmpEvidenceFiles.length} GMP)`
+
 ### Fixed (2026-06-16 — MCP Server Connectivity)
 - Corrected `bun` arg order in `.mcp.json` and `.gemini/settings.json` — `bun --env-file .env run` → `bun run --env-file .env` (this bun version requires subcommand before flags; all 3 servers were silently failing to start)
 

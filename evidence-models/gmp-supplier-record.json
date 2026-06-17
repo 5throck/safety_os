@@ -1,0 +1,82 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "gmp-supplier-record.json",
+  "title": "GMP Supplier Qualification Record",
+  "description": "Evidence model for GMP Supplier Qualification (공급자 자격부여) records. v1 per KP-GMP 의약품등기준규정 Article 12 + PIC/S PE 009 Chapter 5.",
+  "version": "1.0.0",
+  "type": "object",
+  "required": ["record_id", "supplier_id", "qualification_status", "legal_basis", "e_signature", "qrm_assessment", "nomenclature", "audit_trail"],
+  "properties": {
+    "record_id": {
+      "type": "string",
+      "pattern": "^GMP-SUP-[0-9]{4}-[0-9]{4}$"
+    },
+    "supplier_id": { "type": "string" },
+    "supplier_name": { "type": "string" },
+    "supplier_type": {
+      "type": "string",
+      "enum": ["api_manufacturer", "excipient_supplier", "packaging_manufacturer", "contract_lab", "contract_manufacturer"]
+    },
+    "risk_class": {
+      "type": "string",
+      "enum": ["low", "medium", "high"]
+    },
+    "qualification_status": {
+      "type": "string",
+      "enum": ["provisional", "qualified", "disqualified", "suspended"]
+    },
+    "certificates": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "type": { "type": "string" },
+          "issuer": { "type": "string" },
+          "issue_date": { "type": "string", "format": "date" },
+          "expiry_date": { "type": "string", "format": "date" }
+        }
+      }
+    },
+    "audit_history": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "audit_type": { "type": "string", "enum": ["desk", "on_site", "for_cause"] },
+          "audit_date": { "type": "string", "format": "date-time" },
+          "audit_findings": { "type": "string" },
+          "next_audit_due": { "type": "string", "format": "date-time" }
+        }
+      }
+    },
+    "materials_supplied": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "material_code": { "type": "string" },
+          "material_name": { "type": "string" },
+          "specification_ref": { "type": "string" }
+        }
+      }
+    },
+    "performance_metrics": {
+      "type": "object",
+      "properties": {
+        "incoming_inspections": { "type": "integer" },
+        "oos_incidents": { "type": "integer" },
+        "deviation_count": { "type": "integer" },
+        "on_time_delivery_pct": { "type": "number" }
+      }
+    },
+    "legal_basis": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 2
+    },
+    "e_signature": { "$ref": "base/gmp-common.schema.json#/definitions/e_signature" },
+    "qrm_assessment": { "$ref": "base/gmp-common.schema.json#/definitions/qrm_assessment" },
+    "nomenclature": { "$ref": "base/gmp-common.schema.json#/definitions/nomenclature" },
+    "audit_trail": { "$ref": "base/gmp-common.schema.json#/definitions/audit_trail" }
+  }
+}

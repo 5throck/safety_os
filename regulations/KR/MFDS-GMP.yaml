@@ -1,0 +1,64 @@
+source_mcp: mcp-kr-legislation
+jurisdiction: KR
+regulator: MFDS (Ministry of Food and Drug Safety / 식품의약품안전처)
+framework: KP-GMP
+title_ko: 의약품 등의 기준 및 규정
+title_en: Standards and Specifications for Pharmaceuticals, etc.
+primary_law:
+  name_ko: 약사법
+  name_en: Pharmaceutical Affairs Act
+  article: "34"
+  summary_ko: GMP 제조업 관리 의무화
+  summary_en: Mandatory GMP for pharmaceutical manufacturing
+delegated_legislation:
+  - name_ko: 의약품 등의 기준 및 규정
+    name_en: Standards and Specifications for Pharmaceuticals, etc.
+    mfds_notice: 식약처 고시 (latest revision)
+    scope: 제조 품질관리 기준 (GMP)
+international_alignment:
+  - framework: PIC/S GMP
+    reference: PE 009 Annexes
+    alignment_level: harmonized
+  - framework: ICH Q7
+    reference: Active Pharmaceutical Ingredients
+    alignment_level: adopted
+  - framework: ICH Q9
+    reference: Quality Risk Management
+    alignment_level: adopted
+  - framework: ICH Q10
+    reference: Pharmaceutical Quality System
+    alignment_level: adopted
+key_articles:
+  - article: "12"
+    topic_ko: 제조관리기준
+    topic_en: Manufacturing Control Standards
+  - article: "15"
+    topic_ko: 자체점검
+    topic_en: Self-Inspection
+  - article: "16"
+    topic_ko: 적격성평가
+    topic_en: Qualification
+  - article: "17"
+    topic_ko: 밸리데이션
+    topic_en: Validation
+  - article: "18"
+    topic_ko: 변경관리
+    topic_en: Change Control
+  - article: "19"
+    topic_ko: 이상관리 및 시정조치
+    topic_en: Deviation Management and CAPA
+  - article: "20"
+    topic_ko: 안정성 시험
+    topic_en: Stability Testing
+applicable_to:
+  - pharmaceutical_manufacturing
+  - biological_products
+  - api_manufacturing
+  - medical_devices (selected provisions)
+gmp_pillars:
+  - quality_system (ICH Q10)
+  - personnel_hygiene
+  - premises_equipment
+  - documentation_records
+  - self_inspection
+last_updated: 2026-06-17
