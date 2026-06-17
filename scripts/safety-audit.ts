@@ -10,8 +10,10 @@
  *   (workflows/domains/gmp/, agents/_shared/, skills/domains/gmp/qrm/).
  * v2.3.0 (2026-06-17): Added MSDS module validation — multi-source legal_basis
  *   (≥3 stricter than GMP), ghs_version field, reference workflow exception.
+ * v2.4.0 (2026-06-17): Added GDP module validation — gdp_certification_status,
+ *   temperature_condition, batch_disposition_approved_ref fields.
  *
- * @version 2.3.0
+ * @version 2.4.0
  */
 
 import * as fs from 'node:fs';
@@ -307,12 +309,67 @@ for (const file of msdsEvidenceFiles) {
     }
 }
 
+// ── GDP-specific validation: workflows ───────────────────────────────────────
+// v2.4.0: GDP workflows require multi-source legal_basis (≥3 core, ≥2 reference)
+const gdpWorkflowDir = path.join(workflowDir, 'domains', 'gdp');
+const gdpSchemaFiles = walkDirExact(gdpWorkflowDir, 'schema.yaml');
+
+for (const file of gdpSchemaFiles) {
+    totalChecked++;
+    const content = fs.readFileSync(file, 'utf-8');
+    const rel = relPath(file);
+    try {
+        const doc = yaml.load(content) as any;
+        if (!doc) continue;
+        const isReference = doc.workflow_type === 'reference';
+        const requiredMin = isReference ? 2 : 3;
+        if (!Array.isArray(doc.legal_basis) || doc.legal_basis.length < requiredMin) {
+            errors.push(`${rel}: GDP ${isReference ? 'reference' : 'core'} workflow requires multi-source legal_basis (≥${requiredMin} entries)`);
+        }
+        if (isReference && !doc.target_agent) {
+            errors.push(`${rel}: GDP reference workflow requires target_agent field`);
+        }
+    } catch (e: any) {
+        errors.push(`${rel}: YAML parsing error - ${e.message}`);
+    }
+}
+
+// ── GDP-specific validation: evidence models ────────────────────────────────
+// v2.4.0: All gdp-*.json must include gdp_certification_status, temperature_condition, batch_disposition_approved_ref
+const gdpEvidenceFiles = evidenceFiles.filter(f => {
+    return path.basename(f).startsWith('gdp-') &&
+           path.dirname(f).includes(path.join('domains', 'gdp'));
+});
+
+const REQUIRED_GDP_FIELDS = ['gdp_certification_status', 'temperature_condition', 'batch_disposition_approved_ref'];
+
+for (const file of gdpEvidenceFiles) {
+    totalChecked++;
+    const content = fs.readFileSync(file, 'utf-8');
+    const rel = relPath(file);
+    try {
+        const doc = JSON.parse(content);
+        const props = doc.properties || {};
+        for (const field of REQUIRED_GDP_FIELDS) {
+            if (!props[field]) {
+                errors.push(`${rel}: missing GDP required field '${field}'`);
+            }
+        }
+        const legalBasis = props.legal_basis;
+        if (legalBasis && (!legalBasis.minItems || legalBasis.minItems < 3)) {
+            errors.push(`${rel}: GDP legal_basis must have minItems ≥3`);
+        }
+    } catch (e: any) {
+        errors.push(`${rel}: JSON parsing error - ${e.message}`);
+    }
+}
+
 // ── report ────────────────────────────────────────────────────────────────────
 
 console.log(`Files checked : ${totalChecked}`);
-console.log(`  workflows/        : ${schemaFiles.length} schema.yaml file(s) (${gmpSchemaFiles.length} GMP, ${msdsSchemaFiles.length} MSDS)`);
+console.log(`  workflows/        : ${schemaFiles.length} schema.yaml file(s) (${gmpSchemaFiles.length} GMP, ${msdsSchemaFiles.length} MSDS, ${gdpSchemaFiles.length} GDP)`);
 console.log(`  regulations/      : ${regFiles.length} .yaml file(s)`);
-console.log(`  evidence-models/  : ${evidenceFiles.length} .json file(s) (${gmpEvidenceFiles.length} GMP, ${msdsEvidenceFiles.length} MSDS)\n`);
+console.log(`  evidence-models/  : ${evidenceFiles.length} .json file(s) (${gmpEvidenceFiles.length} GMP, ${msdsEvidenceFiles.length} MSDS, ${gdpEvidenceFiles.length} GDP)\n`);
 
 if (errors.length === 0) {
     console.log(`${GREEN}✅ ${totalChecked} files checked, 0 errors${RESET}`);

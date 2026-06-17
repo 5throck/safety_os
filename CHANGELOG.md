@@ -6,6 +6,51 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+### Added (2026-06-17 — GDP Domain v1)
+
+Good Distribution Practice (GDP) domain implementation as fourth domain. Covers pharmaceutical supply chain from manufacturer handoff through customer delivery. KGDP + PIC/S + EU GDP + DTS alignment.
+
+**Second new domain addition** via `docs/_shared/domain-onboarding-guide.md` SOP — pattern fully validated.
+
+**Agent** (1):
+- `agents/domains/gdp/gdp-agent.md` (new)
+
+**Workflows** (8) under `workflows/domains/gdp/`:
+- `goods-receipt/`, `storage-management/`, `temperature-monitoring/`, `transportation/`, `traceability-dts/`, `returned-goods/`, `gdp-self-inspection/` (7 core)
+- `product-recall-reference/` (reference workflow — dispatches to emergency-agent)
+
+**Evidence Models** (7) under `evidence-models/domains/gdp/`:
+- All include `gdp_certification_status`, `temperature_condition`, `batch_disposition_approved_ref` fields
+- `gdp-temperature-monitoring-record.json` includes time-series data and excursion analysis
+- `gdp-dts-tracking-record.json` for Korean DTS (Drug Tracking System) compliance
+
+**Skills** (2) under `skills/domains/gdp/`:
+- `temperature-excursion-analyzer/` — cold chain excursion impact assessment
+- `dts-verification/` — barcode/RFID DTS scan verification
+
+**Regulations** (2):
+- `regulations/KR/MFDS-GDP.yaml` — KGDP framework + PIC/S alignment
+- `regulations/KR/DTS.yaml` — Korean Drug Tracking System
+
+**Industry Profile**:
+- `industry-profiles/pharma-distribution.yaml`
+
+**Scope Document**:
+- `docs/domains/gdp/scope.md`
+
+**Cross-Domain Interface**:
+- GMP `batch-record` → GDP `goods-receipt` (via `batch_disposition_approved_ref`)
+- GDP `product-recall-reference` → `emergency-agent` (data + dispatch)
+- GDP → GMP `deviation-capa` (when `deviation_source: manufacturing`)
+
+**Audit Script**:
+- `scripts/safety-audit.ts` v2.3.0 → v2.4.0:
+  - GDP workflow validation (≥3 legal_basis core, ≥2 reference)
+  - GDP evidence model validation (`gdp_certification_status`, `temperature_condition`, `batch_disposition_approved_ref`)
+  - Report shows GMP + MSDS + GDP counts
+
+**Verification**: 130 files checked, 0 errors (39 workflows: 10 GMP, 7 MSDS, 8 GDP, 14 PSM/EHS).
+
 ### Added (2026-06-17 — MSDS Domain v1)
 
 Complete MSDS (Material Safety Data Sheet) / Chemical Safety domain implementation as the third domain (after PSM, GMP). Migrates and extends existing `chemical-safety-agent` into a full domain structure. OSHA-KR Articles 110-114 + K-REACH + GHS Rev 9 baseline.
