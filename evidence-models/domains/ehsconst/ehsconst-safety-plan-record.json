@@ -1,0 +1,64 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "ehsconst-safety-plan-record.json",
+  "title": "Construction Safety Management Plan Record",
+  "description": "안전보건관리계획서 per 산업안전보건법 Article 103.",
+  "version": "1.0.0",
+  "type": "object",
+  "required": ["record_id", "sapa_article_12_compliance", "project_id", "contractor_tier", "safety_officer_in_charge", "legal_basis", "e_signature", "nomenclature", "audit_trail"],
+  "properties": {
+    "record_id": { "type": "string", "pattern": "^EHSC-PLAN-[0-9]{4}-[0-9]{4}$" },
+    "sapa_article_12_compliance": {
+      "type": "boolean",
+      "description": "중대재해처벌법 Article 12 (건설업 특례) 준수"
+    },
+    "project_id": {
+      "type": "string",
+      "description": "건설공사 번호 (Construction project number)"
+    },
+    "contractor_tier": {
+      "type": "string",
+      "enum": ["ordering_party", "prime_contractor", "first_subcontractor", "second_subcontractor_below"],
+      "description": "발주처/원도급/1차 하도급/2차 이하"
+    },
+    "safety_officer_in_charge": {
+      "type": "string",
+      "description": "안전관리자 ID"
+    },
+    "plan_version": { "type": "string" },
+    "project_name": { "type": "string" },
+    "project_cost_krw": { "type": "number" },
+    "safety_budget_rate_pct": { "type": "number", "description": "법정 의무 비율 1.5-5.0%" },
+    "plan_submission_date": { "type": "string", "format": "date-time" },
+    "moel_approval_date": { "type": ["string", "null"], "format": "date-time" },
+    "plan_status": { "type": "string", "enum": ["draft", "submitted", "approved", "rejected", "amended"] },
+    "amendments": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "amendment_id": { "type": "string" },
+          "date": { "type": "string", "format": "date-time" },
+          "rationale": { "type": "string" }
+        }
+      }
+    },
+    "safety_organization": {
+      "type": "object",
+      "properties": {
+        "safety_manager_count": { "type": "integer" },
+        "safety_supervisor_count": { "type": "integer" },
+        "subcontractor_safety_officers": { "type": "integer" }
+      }
+    },
+
+    "legal_basis": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 3
+    },
+    "e_signature": { "$ref": "../../_shared/base/common.schema.json#/definitions/e_signature" },
+    "nomenclature": { "$ref": "../../_shared/base/common.schema.json#/definitions/nomenclature" },
+    "audit_trail": { "$ref": "../../_shared/base/common.schema.json#/definitions/audit_trail" }
+  }
+}

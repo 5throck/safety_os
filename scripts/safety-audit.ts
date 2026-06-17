@@ -18,8 +18,10 @@
  *   ich_e6_compliance, protocol_ref, site_id fields.
  * v2.7.0 (2026-06-17): Added GVP module validation — ich_e2_compliance,
  *   pbrer_cycle_ref, product_id, rmp_version_ref fields.
+ * v2.8.0 (2026-06-18): Added ehsconst (Construction Safety) module validation —
+ *   sapa_article_12_compliance, project_id, contractor_tier, safety_officer_in_charge.
  *
- * @version 2.7.0
+ * @version 2.8.0
  */
 
 import * as fs from 'node:fs';
@@ -539,10 +541,66 @@ for (const file of gvpEvidenceFiles) {
     }
 }
 
+// ── ehsconst-specific validation: workflows ─────────────────────────────────
+// v2.8.0: Construction Safety workflows require multi-source legal_basis (≥3 core, ≥2 reference)
+const ehsconstWorkflowDir = path.join(workflowDir, 'domains', 'ehsconst');
+const ehsconstSchemaFiles = walkDirExact(ehsconstWorkflowDir, 'schema.yaml');
+
+for (const file of ehsconstSchemaFiles) {
+    totalChecked++;
+    const content = fs.readFileSync(file, 'utf-8');
+    const rel = relPath(file);
+    try {
+        const doc = yaml.load(content) as any;
+        if (!doc) continue;
+        const isReference = doc.workflow_type === 'reference';
+        const requiredMin = isReference ? 2 : 3;
+        if (!Array.isArray(doc.legal_basis) || doc.legal_basis.length < requiredMin) {
+            errors.push(`${rel}: ehsconst ${isReference ? 'reference' : 'core'} workflow requires multi-source legal_basis (≥${requiredMin} entries)`);
+        }
+        if (isReference && !doc.target_agent) {
+            errors.push(`${rel}: ehsconst reference workflow requires target_agent field`);
+        }
+    } catch (e: any) {
+        errors.push(`${rel}: YAML parsing error - ${e.message}`);
+    }
+}
+
+// ── ehsconst-specific validation: evidence models ───────────────────────────
+// v2.8.0: All ehsconst-*.json must include sapa_article_12_compliance, project_id,
+// contractor_tier, safety_officer_in_charge
+const ehsconstEvidenceFiles = evidenceFiles.filter(f => {
+    return path.basename(f).startsWith('ehsconst-') &&
+           path.dirname(f).includes(path.join('domains', 'ehsconst'));
+});
+
+const REQUIRED_EHSCONST_FIELDS = ['sapa_article_12_compliance', 'project_id', 'contractor_tier', 'safety_officer_in_charge'];
+
+for (const file of ehsconstEvidenceFiles) {
+    totalChecked++;
+    const content = fs.readFileSync(file, 'utf-8');
+    const rel = relPath(file);
+    try {
+        const doc = JSON.parse(content);
+        const props = doc.properties || {};
+        for (const field of REQUIRED_EHSCONST_FIELDS) {
+            if (!props[field]) {
+                errors.push(`${rel}: missing ehsconst required field '${field}'`);
+            }
+        }
+        const legalBasis = props.legal_basis;
+        if (legalBasis && (!legalBasis.minItems || legalBasis.minItems < 3)) {
+            errors.push(`${rel}: ehsconst legal_basis must have minItems ≥3`);
+        }
+    } catch (e: any) {
+        errors.push(`${rel}: JSON parsing error - ${e.message}`);
+    }
+}
+
 console.log(`Files checked : ${totalChecked}`);
-console.log(`  workflows/        : ${schemaFiles.length} schema.yaml file(s) (${gmpSchemaFiles.length} GMP, ${msdsSchemaFiles.length} MSDS, ${gdpSchemaFiles.length} GDP, ${glpSchemaFiles.length} GLP, ${gcpSchemaFiles.length} GCP, ${gvpSchemaFiles.length} GVP)`);
+console.log(`  workflows/        : ${schemaFiles.length} schema.yaml file(s) (${gmpSchemaFiles.length} GMP, ${msdsSchemaFiles.length} MSDS, ${gdpSchemaFiles.length} GDP, ${glpSchemaFiles.length} GLP, ${gcpSchemaFiles.length} GCP, ${gvpSchemaFiles.length} GVP, ${ehsconstSchemaFiles.length} ehsconst)`);
 console.log(`  regulations/      : ${regFiles.length} .yaml file(s)`);
-console.log(`  evidence-models/  : ${evidenceFiles.length} .json file(s) (${gmpEvidenceFiles.length} GMP, ${msdsEvidenceFiles.length} MSDS, ${gdpEvidenceFiles.length} GDP, ${glpEvidenceFiles.length} GLP, ${gcpEvidenceFiles.length} GCP, ${gvpEvidenceFiles.length} GVP)\n`);
+console.log(`  evidence-models/  : ${evidenceFiles.length} .json file(s) (${gmpEvidenceFiles.length} GMP, ${msdsEvidenceFiles.length} MSDS, ${gdpEvidenceFiles.length} GDP, ${glpEvidenceFiles.length} GLP, ${gcpEvidenceFiles.length} GCP, ${gvpEvidenceFiles.length} GVP, ${ehsconstEvidenceFiles.length} ehsconst)\n`);
 
 if (errors.length === 0) {
     console.log(`${GREEN}✅ ${totalChecked} files checked, 0 errors${RESET}`);
