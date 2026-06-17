@@ -1,0 +1,70 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "gmp-cleaning-validation-record.json",
+  "title": "GMP Cleaning Validation Record",
+  "description": "Evidence model for GMP Cleaning Validation (세정 밸리데이션) records. v1 per KP-GMP 의약품등기준규정 Article 17 + PIC/S cleaning validation guidance.",
+  "version": "1.0.0",
+  "type": "object",
+  "required": ["record_id", "equipment_id", "protocol_ref", "results_status", "legal_basis", "e_signature", "qrm_assessment", "nomenclature", "audit_trail"],
+  "properties": {
+    "record_id": {
+      "type": "string",
+      "pattern": "^GMP-CV-[0-9]{4}-[0-9]{4}$"
+    },
+    "equipment_id": { "type": "string" },
+    "equipment_name": { "type": "string" },
+    "worst_case_product": { "type": "string" },
+    "cleaning_sop_ref": { "type": "string" },
+    "protocol_ref": { "type": "string" },
+    "residue_limits": {
+      "type": "object",
+      "properties": {
+        "active_ingredient_limit": { "type": "string", "description": "PDE or 1/1000 dose or 10 ppm" },
+        "detergent_limit": { "type": "string" },
+        "bioburden_limit": { "type": "string" },
+        "endotoxin_limit": { "type": "string" }
+      }
+    },
+    "analytical_methods": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "method_id": { "type": "string" },
+          "target_analyte": { "type": "string" },
+          "detection_limit": { "type": "string" },
+          "validated": { "type": "boolean" }
+        }
+      }
+    },
+    "sampling": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "location": { "type": "string" },
+          "type": { "type": "string", "enum": ["swab", "rinse"] },
+          "result": { "type": "string" },
+          "result_status": { "type": "string", "enum": ["pass", "fail"] }
+        }
+      }
+    },
+    "runs_completed": { "type": "integer", "minimum": 0 },
+    "runs_required": { "type": "integer", "default": 3 },
+    "results_status": {
+      "type": "string",
+      "enum": ["pending", "in_progress", "passed", "failed"]
+    },
+    "conclusion": { "type": "string" },
+    "periodic_verification_due": { "type": "string", "format": "date-time" },
+    "legal_basis": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 2
+    },
+    "e_signature": { "$ref": "../../_shared/base/gmp-common.schema.json#/definitions/e_signature" },
+    "qrm_assessment": { "$ref": "../../_shared/base/gmp-common.schema.json#/definitions/qrm_assessment" },
+    "nomenclature": { "$ref": "../../_shared/base/gmp-common.schema.json#/definitions/nomenclature" },
+    "audit_trail": { "$ref": "../../_shared/base/gmp-common.schema.json#/definitions/audit_trail" }
+  }
+}

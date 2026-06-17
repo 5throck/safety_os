@@ -6,8 +6,10 @@
  *
  * v2.1.0 (2026-06-17): Added GMP module validation — multi-source legal_basis,
  *   e_signature, qrm_assessment, nomenclature, and role separation checks.
+ * v2.2.0 (2026-06-17): Updated paths for domain-based folder structure
+ *   (workflows/domains/gmp/, agents/_shared/, skills/domains/gmp/qrm/).
  *
- * @version 2.1.0
+ * @version 2.2.0
  */
 
 import * as fs from 'node:fs';
@@ -162,7 +164,8 @@ for (const file of evidenceFiles) {
 // ── GMP-specific validation: workflows ───────────────────────────────────────
 // GMP workflows require multi-source legal_basis (array with ≥2 entries) per
 // meeting decision 2026-06-17 (Q3/Q4 follow-up).
-const gmpWorkflowDir = path.join(workflowDir, 'gmp');
+// v2.2.0: Path updated for domain-based folder structure.
+const gmpWorkflowDir = path.join(workflowDir, 'domains', 'gmp');
 const gmpSchemaFiles = walkDirExact(gmpWorkflowDir, 'schema.yaml');
 
 for (const file of gmpSchemaFiles) {
@@ -222,21 +225,24 @@ for (const file of gmpEvidenceFiles) {
 // ── Role separation check (risk-assessment-agent vs gmp-qrm) ─────────────────
 // Per meeting 2026-06-17 Q3 resolution: explicit role separation between EHS
 // (risk-assessment-agent) and quality (gmp-qrm skill) risk domains.
-const riskAgentPath = path.join(ROOT, 'agents', 'risk-assessment-agent.md');
+// v2.2.0: Paths updated for domain-based folder structure.
+const riskAgentPath = path.join(ROOT, 'agents', '_shared', 'risk-assessment-agent.md');
 if (fs.existsSync(riskAgentPath)) {
     totalChecked++;
     const content = fs.readFileSync(riskAgentPath, 'utf-8');
-    if (!content.includes('gmp-qrm') || !content.toLowerCase().includes('product quality')) {
-        errors.push('agents/risk-assessment-agent.md: missing gmp-qrm scope separation reference (required per meeting 2026-06-17)');
+    // Accept either legacy `gmp-qrm` or new `gmp/qrm` path reference
+    const hasQrmRef = content.includes('gmp-qrm') || content.includes('gmp/qrm');
+    if (!hasQrmRef || !content.toLowerCase().includes('product quality')) {
+        errors.push('agents/_shared/risk-assessment-agent.md: missing gmp-qrm/gmp-qrm scope separation reference (required per meeting 2026-06-17)');
     }
 }
 
-const qrmSkillPath = path.join(ROOT, 'skills', 'gmp-qrm', 'SKILL.md');
+const qrmSkillPath = path.join(ROOT, 'skills', 'domains', 'gmp', 'qrm', 'SKILL.md');
 if (fs.existsSync(qrmSkillPath)) {
     totalChecked++;
     const content = fs.readFileSync(qrmSkillPath, 'utf-8');
     if (!content.includes('risk-assessment-agent')) {
-        errors.push('skills/gmp-qrm/SKILL.md: missing risk-assessment-agent scope separation reference');
+        errors.push('skills/domains/gmp/qrm/SKILL.md: missing risk-assessment-agent scope separation reference');
     }
 }
 

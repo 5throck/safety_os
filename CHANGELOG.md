@@ -6,6 +6,57 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+### Changed (2026-06-17 — Domain-Based Folder Structure)
+
+Reorganized top-level directories into domain-scalable pattern (`_meta/` + `_shared/` + `domains/<name>/`) per meeting `memory/meeting-2026-06-17-folder-structure-redesign.md`. Anticipates future domain additions (GDP, GLP, GCP, GVP, EHS verticals).
+
+**evidence-models/** restructure (M-1):
+- New: `_shared/base/` (corrective-action, finding, gmp-common schemas)
+- New: `domains/psm/` (7 PSM records moved)
+- New: `domains/gmp/` (11 GMP records moved)
+- Updated: all GMP evidence models `$ref` paths from `base/` to `../../_shared/base/`
+- Removed: legacy `base/` directory
+
+**workflows/** restructure (M-2):
+- New: `_shared/{_template, data-seeding.yaml}`
+- New: `domains/psm/` — **PSM flat .md → hierarchical** (7 workflows converted to `schema.yaml + README.md` pattern, now audit-coupled)
+- New: `domains/gmp/` (10 GMP workflows moved from `workflows/gmp/`)
+- Maintained: `daily/`, `emergency/`, `compliance/` (domain-agnostic)
+
+**docs/ restructure** (M-3):
+- New: `_meta/{architecture, blueprint, superpowers, VERSION_MANIFEST, v4.0-playbook, co-safety.context}`
+- New: `_shared/{procedures, reports, domain-onboarding-guide}`
+- New: `domains/gmp/scope.md`
+
+**skills/ restructure** (M-3):
+- New: `_meta/{README, SKILLS.md}`
+- New: `_shared/` (15 cross-domain skills)
+- New: `domains/gmp/{change-control, deviation-capa, qrm}`
+- New: `domains/psm/moc`
+
+**agents/ restructure** (M-3):
+- New: `_core/` (pm, safety-governance-manager, safety-workflow-manager)
+- New: `_shared/` (14 cross-domain agents: audit, compliance, docs-writer, legal, chemical-safety, contractor-safety, disaster-response, emergency, incident-investigation, occupational-health, reporting, risk-assessment, training, asset-integrity)
+- New: `domains/psm/psm-agent.md`
+- New: `domains/gmp/gmp-agent.md`
+
+**Audit Script** (M-4):
+- `scripts/safety-audit.ts` v2.1.0 → v2.2.0:
+  - Updated GMP workflow path: `workflows/gmp/` → `workflows/domains/gmp/`
+  - Updated role separation paths for new `agents/_shared/` and `skills/domains/gmp/qrm/`
+  - Accept both legacy (`gmp-qrm`) and new (`gmp/qrm`) path patterns
+
+**Agent/Skill References Updated**:
+- `agents/domains/gmp/gmp-agent.md`: workflow/skill/evidence paths
+- `agents/domains/psm/psm-agent.md`: workflow/skill/evidence paths
+- `agents/_shared/risk-assessment-agent.md`: gmp-qrm skill path
+- `skills/domains/gmp/{change-control, deviation-capa}/SKILL.md`: gmp-qrm and psm-moc references
+
+**New Documentation**:
+- `docs/_shared/domain-onboarding-guide.md`: SOP for adding new domains (GDP, GLP, GCP, GVP, EHS verticals)
+
+**Verification**: 70 files checked, 0 errors (24 workflows with 10 GMP, 22 evidence-models with 11 GMP).
+
 ### Added (2026-06-17 — GMP Module v1)
 Complete Good Manufacturing Practice (GMP) module implementation benchmarked to PSM module architecture. KP-GMP base + PIC/S alignment + ICH Q7/Q9/Q10 reflection. v1 scope: `pharma-general` only (sterile/API/biologics deferred to v2).
 
