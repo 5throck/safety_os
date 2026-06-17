@@ -52,9 +52,9 @@
       "items": { "type": "string" },
       "minItems": 2
     },
-    "e_signature": { "$ref": "../../_shared/base/gmp-common.schema.json#/definitions/e_signature" },
-    "qrm_assessment": { "$ref": "../../_shared/base/gmp-common.schema.json#/definitions/qrm_assessment" },
-    "nomenclature": { "$ref": "../../_shared/base/gmp-common.schema.json#/definitions/nomenclature" },
-    "audit_trail": { "$ref": "../../_shared/base/gmp-common.schema.json#/definitions/audit_trail" }
+    "e_signature": { "$ref": "../../_shared/base/common.schema.json#/definitions/e_signature" },
+    "qrm_assessment": { "$ref": "../../_shared/base/common.schema.json#/definitions/qrm_assessment" },
+    "nomenclature": { "$ref": "../../_shared/base/common.schema.json#/definitions/nomenclature" },
+    "audit_trail": { "$ref": "../../_shared/base/common.schema.json#/definitions/audit_trail" }
   }
 }

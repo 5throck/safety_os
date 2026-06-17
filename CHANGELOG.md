@@ -6,6 +6,69 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+### Added (2026-06-17 — MSDS Domain v1)
+
+Complete MSDS (Material Safety Data Sheet) / Chemical Safety domain implementation as the third domain (after PSM, GMP). Migrates and extends existing `chemical-safety-agent` into a full domain structure. OSHA-KR Articles 110-114 + K-REACH + GHS Rev 9 baseline.
+
+**First new domain addition** following `docs/_shared/domain-onboarding-guide.md` SOP — validates the 11-step procedure.
+
+**Agent** (1):
+- `agents/domains/msds/msds-agent.md` (migrated from `_shared/chemical-safety-agent.md` + expanded)
+- `agents/_shared/occupational-health-agent.md` updated Section B (MSDS data dependency)
+
+**Workflows** (7) under `workflows/domains/msds/`:
+- `msds-intake/` (OSHA-KR Art 110) — receive + parse MSDS
+- `ghs-classification/` (OSHA-KR Art 243) — GHS Rev 9 classification
+- `chemical-approval/` (OSHA-KR Art 113 + TCCL) — new chemical approval
+- `chemical-inventory/` (K-REACH Art 10) — monthly inventory
+- `kreach-registration/` (K-REACH Art 11) — ME registration
+- `hazard-labeling/` (OSHA-KR Art 114) — GHS labels
+- `chemical-spill-reference/` (reference workflow) — provides Section 6 data + dispatches to emergency-agent
+
+**Evidence Models** (6) under `evidence-models/domains/msds/`:
+- `msds-record.json` — GHS 16 sections full schema (international compatible)
+- `ghs-classification-record.json`, `chemical-approval-record.json`, `chemical-inventory-record.json`, `kreach-registration-record.json`, `hazard-label-record.json`
+- All include `ghs_version: "rev9"` field with migration tracking
+
+**Skills** (3) under `skills/domains/msds/`:
+- `msds-parser/SKILL.md` — Hybrid: Mode 1 rule-based (top 5 Korean suppliers) + Mode 2 ML fallback
+- `msds-parser/rules/lotte_chemical.yaml` — first supplier rule (template for others)
+- `ghs-classifier/SKILL.md` — GHS Rev 9 ruleset (17 physical + 11 health + 2 environmental hazards)
+- `chemical-risk-assessment/SKILL.md` — scenario-based risk characterization
+
+**Regulations** (2):
+- `regulations/KR/OSHA-KR-MSDS.yaml` — OSHA-KR Articles 110-114 + 243 + GHS Rev 9 alignment
+- `regulations/KR/K-REACH.yaml` — K-REACH Articles 10-14 + thresholds
+
+**Industry Profile** (1):
+- `industry-profiles/chemical-handling.yaml` — general chemical handling profile
+
+**Scope Document**:
+- `docs/domains/msds/scope.md` — v1 scope, regulatory framework, cross-domain references, role separation matrix
+
+**Pattern Documentation** (1):
+- `docs/_shared/reference-workflow-pattern.md` — reference workflow SOP for future domain additions
+
+**Audit Script**:
+- `scripts/safety-audit.ts` v2.2.0 → v2.3.0:
+  - Added MSDS workflow validation (multi-source legal_basis ≥3 for core, ≥2 for reference)
+  - Added MSDS evidence model validation (`ghs_version` field required)
+  - Added reference workflow exception handling
+  - Report now shows MSDS-specific counts alongside GMP
+
+**Renamed**:
+- `evidence-models/_shared/base/gmp-common.schema.json` → `common.schema.json` (multi-domain shared)
+- Updated all GMP evidence models' $ref paths to use `common.schema.json`
+
+**Removed**:
+- `agents/_shared/chemical-safety-agent.md` (migrated to `agents/domains/msds/msds-agent.md`)
+
+### Verification
+- 98 files checked, 0 errors
+- 31 workflows (10 GMP, 7 MSDS, others PSM/EHS)
+- 28 evidence-models (11 GMP, 6 MSDS, others PSM/shared)
+- Domain Onboarding SOP validated (11-step procedure)
+
 ### Changed (2026-06-17 — Domain-Based Folder Structure)
 
 Reorganized top-level directories into domain-scalable pattern (`_meta/` + `_shared/` + `domains/<name>/`) per meeting `memory/meeting-2026-06-17-folder-structure-redesign.md`. Anticipates future domain additions (GDP, GLP, GCP, GVP, EHS verticals).

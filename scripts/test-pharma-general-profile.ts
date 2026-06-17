@@ -178,8 +178,8 @@ for (const skill of expectedSkills) {
 record('T-08', `All ${expectedSkills.length} GMP skills exist`, allSkillsExist);
 
 // ── T-09: GMP common schema definitions ──────────────────────────────────────
-console.log(`\n${CYAN}[T-09] GMP common schema${RESET}`);
-const commonSchemaPath = path.join(ROOT, 'evidence-models', '_shared', 'base', 'gmp-common.schema.json');
+console.log(`\n${CYAN}[T-09] Common schema (multi-domain)${RESET}`);
+const commonSchemaPath = path.join(ROOT, 'evidence-models', '_shared', 'base', 'common.schema.json');
 try {
     const commonSchema = JSON.parse(fs.readFileSync(commonSchemaPath, 'utf-8'));
     const requiredDefs = ['e_signature', 'qrm_assessment', 'nomenclature', 'audit_trail'];

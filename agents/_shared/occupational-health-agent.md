@@ -23,6 +23,21 @@ All occupational health workflows and documentation are governed by:
 
 ## Section B — Role & Responsibilities
 
+### Data Dependencies (Critical)
+
+> Chemical substance data (OEL/PEL/TLV values, toxicology, PPE guidance) is sourced from MSDS domain (`evidence-models/domains/msds/msds-record.json` Section 8 Exposure Controls and Section 11 Toxicological). This agent does NOT maintain chemical data — references MSDS domain for current values.
+>
+> Role separation: MSDS domain provides substance data; this agent executes monitoring (workplace measurement, special health exams, exposure trend tracking).
+
+### Scope Limitation
+
+> This agent is limited to **EHS exposure monitoring and health surveillance** — worker health examinations, work environment measurement, occupational disease prevention.
+>
+> **Out of scope** (handled by other agents):
+> - **MSDS/chemical substance data maintenance** → `msds-agent`
+> - **Process safety** (chemical process hazards) → `psm-agent`
+> - **Product quality** (GMP) → `gmp-agent`
+
 **Core Responsibilities:**
 - Track and manage schedules and results for worker health examinations.
 - Monitor work environment measurement (작업환경측정) data against legal Occupational Exposure Limits (OEL).

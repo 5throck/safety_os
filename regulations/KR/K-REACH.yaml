@@ -1,0 +1,59 @@
+source_mcp: mcp-kr-legislation
+jurisdiction: KR
+regulator: ME (Ministry of Environment / 환경부)
+framework: K-REACH
+title_ko: 화학물질등록 및 평가 등에 관한 법률
+title_en: Act on the Registration and Evaluation of Chemicals (K-REACH / ARECS)
+primary_law:
+  name_ko: 화학물질등록 및 평가 등에 관한 법률
+  name_en: Act on the Registration and Evaluation of Chemicals
+  articles:
+    - article: "10"
+      topic_ko: 기존 화학물질 연간 1톤 이상 제조·수입 신고
+      topic_en: Annual ≥1 ton existing chemical reporting
+    - article: "11"
+      topic_ko: 신규 화학물질 제조·수입 전 등록
+      topic_en: Pre-manufacture/import new chemical registration
+    - article: "12"
+      topic_ko: 위해성 평가 대상 물질 지정
+      topic_en: Hazardous assessment target designation
+    - article: "13"
+      topic_ko: 영업비밀 보호
+      topic_en: Trade secret protection (CBI)
+    - article: "14"
+      topic_ko: 위해우려화학물질 지정 및 관리
+      topic_en: Hazardous Concern Substance designation and management
+related_laws:
+  - name_ko: 유해화학물질 관리법 (TCCL)
+    name_en: Toxic Chemicals Control Law (legacy, partially integrated)
+    status: partially_superseded
+  - name_ko: 화학물질의 등록 및 평가 등에 관한 법률 시행규칙
+    name_en: K-REACH Enforcement Rule
+registration_thresholds:
+  existing_chemicals:
+    annual_tonnage_required: 1.0
+    unit: ton
+    deadline: "annually by March 31"
+  new_chemicals:
+    pre_registration_required: true
+    lead_time_days: 90
+key_obligations:
+  - chemical_inventory_annual_reporting
+  - new_chemical_pre_registration
+  - risk_assessment_cooperation
+  - trade_secret_proper_handling
+  - hazardous_concern_substance_designation_compliance
+applicable_to:
+  - chemical_manufacturers
+  - chemical_importers
+  - chemical_distributors_above_threshold
+international_alignment:
+  - framework: EU REACH
+    reference: Regulation EC 1907/2006
+    alignment_level: inspired_by
+enforcement_agency: ME (Ministry of Environment) / Korea Environmental Industry & Technology Institute (KEITI)
+recent_amendments:
+  - year: "2024"
+    summary: 연간 신고 물질 확대, 위해성 평가 강화
+    impact: 등록 대상 물질 증가
+last_updated: "2026-06-17"

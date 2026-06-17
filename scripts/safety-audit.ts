@@ -8,8 +8,10 @@
  *   e_signature, qrm_assessment, nomenclature, and role separation checks.
  * v2.2.0 (2026-06-17): Updated paths for domain-based folder structure
  *   (workflows/domains/gmp/, agents/_shared/, skills/domains/gmp/qrm/).
+ * v2.3.0 (2026-06-17): Added MSDS module validation — multi-source legal_basis
+ *   (≥3 stricter than GMP), ghs_version field, reference workflow exception.
  *
- * @version 2.2.0
+ * @version 2.3.0
  */
 
 import * as fs from 'node:fs';
@@ -246,12 +248,71 @@ if (fs.existsSync(qrmSkillPath)) {
     }
 }
 
+// ── MSDS-specific validation: workflows ──────────────────────────────────────
+// v2.3.0: MSDS workflows require multi-source legal_basis (≥3 entries, stricter
+// than GMP's ≥2) per meeting 2026-06-17. Reference workflows are exempt.
+const msdsWorkflowDir = path.join(workflowDir, 'domains', 'msds');
+const msdsSchemaFiles = walkDirExact(msdsWorkflowDir, 'schema.yaml');
+
+for (const file of msdsSchemaFiles) {
+    totalChecked++;
+    const content = fs.readFileSync(file, 'utf-8');
+    const rel = relPath(file);
+    try {
+        const doc = yaml.load(content) as any;
+        if (!doc) continue;
+        const isReference = doc.workflow_type === 'reference';
+        // Reference workflows: legal_basis min 2 (inherited from target_agent context)
+        // Core workflows: legal_basis min 3 (OSHA-KR + 환경부법 + GHS)
+        const requiredMin = isReference ? 2 : 3;
+        if (!Array.isArray(doc.legal_basis) || doc.legal_basis.length < requiredMin) {
+            errors.push(`${rel}: MSDS ${isReference ? 'reference' : 'core'} workflow requires multi-source legal_basis (≥${requiredMin} entries per meeting 2026-06-17)`);
+        }
+        // Reference workflow must have target_agent
+        if (isReference && !doc.target_agent) {
+            errors.push(`${rel}: reference workflow requires target_agent field`);
+        }
+    } catch (e: any) {
+        errors.push(`${rel}: YAML parsing error - ${e.message}`);
+    }
+}
+
+// ── MSDS-specific validation: evidence models ────────────────────────────────
+// All msds-*.json must include ghs_version field per meeting 2026-06-17 Q3.
+const msdsEvidenceFiles = evidenceFiles.filter(f => {
+    const name = path.basename(f);
+    return name.startsWith('msds-') || name.startsWith('ghs-') ||
+           name.startsWith('chemical-') || name.startsWith('kreach-') ||
+           name.startsWith('hazard-label-');
+}).filter(f => path.dirname(f).includes(path.join('domains', 'msds')));
+
+for (const file of msdsEvidenceFiles) {
+    totalChecked++;
+    const content = fs.readFileSync(file, 'utf-8');
+    const rel = relPath(file);
+    try {
+        const doc = JSON.parse(content);
+        const props = doc.properties || {};
+        // ghs_version field required
+        if (!props.ghs_version) {
+            errors.push(`${rel}: missing ghs_version property (required per meeting 2026-06-17 Q3)`);
+        }
+        // legal_basis min 2 (MSDS domain standard)
+        const legalBasis = props.legal_basis;
+        if (legalBasis && (!legalBasis.minItems || legalBasis.minItems < 2)) {
+            errors.push(`${rel}: legal_basis must have minItems ≥2`);
+        }
+    } catch (e: any) {
+        errors.push(`${rel}: JSON parsing error - ${e.message}`);
+    }
+}
+
 // ── report ────────────────────────────────────────────────────────────────────
 
 console.log(`Files checked : ${totalChecked}`);
-console.log(`  workflows/        : ${schemaFiles.length} schema.yaml file(s) (${gmpSchemaFiles.length} GMP)`);
+console.log(`  workflows/        : ${schemaFiles.length} schema.yaml file(s) (${gmpSchemaFiles.length} GMP, ${msdsSchemaFiles.length} MSDS)`);
 console.log(`  regulations/      : ${regFiles.length} .yaml file(s)`);
-console.log(`  evidence-models/  : ${evidenceFiles.length} .json file(s) (${gmpEvidenceFiles.length} GMP)\n`);
+console.log(`  evidence-models/  : ${evidenceFiles.length} .json file(s) (${gmpEvidenceFiles.length} GMP, ${msdsEvidenceFiles.length} MSDS)\n`);
 
 if (errors.length === 0) {
     console.log(`${GREEN}✅ ${totalChecked} files checked, 0 errors${RESET}`);
