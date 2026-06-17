@@ -1,0 +1,56 @@
+source_mcp: mcp-kr-legislation
+jurisdiction: KR
+regulator: MFDS (식품의약품안전처)
+framework: KGCP
+title_ko: 의약품 임상시험 관리기준
+title_en: Standards for Clinical Trials of Pharmaceuticals (KGCP)
+primary_law:
+  name_ko: 약사법
+  name_en: Pharmaceutical Affairs Act
+  articles:
+    - article: "69"
+      topic_ko: 임상시험 실시 승인 (CTA)
+      topic_en: Clinical Trial Application approval
+    - article: "73의2"
+      topic_ko: 중대한 이상반응 보고
+      topic_en: Serious Adverse Event reporting
+delegated_legislation:
+  - name_ko: 의약품 임상시험 관리기준 (MFDS 고시)
+    name_en: Standards for Clinical Trials of Pharmaceuticals (MFDS Notice)
+    scope: KGCP — clinical trial conduct, IRB, informed consent, monitoring, safety reporting
+key_themes:
+  - clinical_trial_protocol
+  - institutional_review_board (IRB / 생명윤리심의위원회)
+  - informed_consent
+  - sponsor_responsibility
+  - investigator_responsibility
+  - monitor_visits
+  - safety_reporting (SAE/SUSAR)
+  - source_data_verification
+  - clinical_study_report (CSR)
+institutional_review_board:
+  korean_name: 생명윤리심의위원회 (IRB)
+  authority: 식약처 인증 IRB (MFDS-certified IRB)
+  review_types:
+    - 심의 (full_review)
+    - 신속심의 (expedited_review)
+    - 면제 (exempt)
+safety_reporting_timeline:
+  SUSAR_fatal: "즉시 (within 7 days)"
+  SUSAR_other: "8일 이내"
+  SAE_annual: "연 1회 (PSUR)"
+international_alignment:
+  - framework: ICH E6 (R3)
+    reference: ICH Harmonised Guideline E6(R3)
+    alignment_level: full
+  - framework: Declaration of Helsinki
+    reference: 2013 revision
+    alignment_level: foundational
+  - framework: WHO GCP
+    reference: WHO Technical Report Series
+    alignment_level: harmonized
+mfds_cta_process:
+  - IND/CTA submission (MFDS e-CTD)
+  - 30-day review (default)
+  - Approval or clinical hold
+last_updated: "2026-06-17"

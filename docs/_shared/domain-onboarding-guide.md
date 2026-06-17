@@ -143,7 +143,7 @@ Must pass with 0 errors. The audit auto-recognizes new domains via recursive wal
 | `msds` | 2026-06-17 | active (v1) | chemical-handling |
 | `gdp` | 2026-06-17 | active (v1) | pharma-distribution |
 | `glp` | 2026-06-17 | active (v1) | pharma-laboratory |
-| `gcp` | planned v3 | pending | clinical-research |
+| `gcp` | 2026-06-17 | active (v1) | clinical-research |
 | `gvp` | planned v3 | pending | pharmacovigilance |
 
 ## 6. Migration Notes (for Existing Domains)

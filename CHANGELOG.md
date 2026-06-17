@@ -6,6 +6,57 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+### Added (2026-06-17 — GCP Domain v1)
+
+Good Clinical Practice (GCP) domain implementation as sixth domain. Covers clinical trial management — protocol design, IRB review, informed consent, monitoring visits, SAE/SUSAR reporting, source data verification per KGCP + ICH E6(R3) + Helsinki Declaration.
+
+**Fourth new domain addition** via `docs/_shared/domain-onboarding-guide.md` SOP — pattern fully validated across four consecutive use cases.
+
+**Agent** (1):
+- `agents/domains/gcp/gcp-agent.md` (new) — IRB, ICF, monitoring, SAE specialist
+
+**Workflows** (8) under `workflows/domains/gcp/`:
+- 7 core: `protocol-management/` (ICH Sec.3), `irb-review/` (Sec.4), `informed-consent/` (Sec.5), `participant-enrollment/` (Sec.7), `monitoring-visits/` (Sec.8), `sae-reporting/` (E2A), `source-data-verification/` (Sec.9)
+- `sae-reporting-reference/` (reference — dispatches to emergency-agent for severe safety signals)
+
+**Evidence Models** (7) under `evidence-models/domains/gcp/`:
+- All include `irb_approval_ref`, `ich_e6_compliance`, `protocol_ref`, `site_id` common fields
+- `gcp-sae-record.json` includes causality assessment (ImPACT), reporting timelines
+- `gcp-source-data-record.json` includes ALCOA+ compliance object
+
+**Skills** (2) under `skills/domains/gcp/`:
+- `protocol-deviation-analyzer/` — ICH E6(R3) classification, trend detection, CAPA
+- `sae-causality-assessor/` — ImPACT/WHO-UMC/Naranjo algorithms
+
+**Regulations** (2):
+- `regulations/KR/MFDS-GCP.yaml` — 의약품 임상시험 관리기준 + 약사법 Art 69/73의2
+- `regulations/international/ICH-E6.yaml` — ICH E6(R3) (2025) + Helsinki Declaration
+
+**Industry Profile**:
+- `industry-profiles/clinical-research.yaml`
+
+**Scope Document**:
+- `docs/domains/gcp/scope.md`
+
+**Cross-Domain Interface**:
+- GLP final report → GCP (clinical trial foundation)
+- GMP IMP → GCP (investigational medicinal product)
+- GCP SAE data → GVP (post-market pharmacovigilance, v3)
+- GCP `sae-reporting-reference` → `emergency-agent` (4th reference pattern)
+
+**Safety Reporting Timelines** (Korean KGCP + ICH E2A):
+- SUSAR fatal: 7 days to MFDS
+- SUSAR other serious: 15 days total
+- SAE annual: PSUR
+
+**Audit Script**:
+- `scripts/safety-audit.ts` v2.5.0 → v2.6.0:
+  - GCP workflow validation (≥3 legal_basis core, ≥2 reference)
+  - GCP evidence model validation (4 required fields)
+  - Report now shows GMP + MSDS + GDP + GLP + GCP counts
+
+**Verification**: 195 files checked, 0 errors (55 workflows: 10 GMP, 7 MSDS, 8 GDP, 8 GLP, 8 GCP, 14 PSM/EHS).
+
 ### Added (2026-06-17 — GLP Domain v1)
 
 Good Laboratory Practice (GLP) domain implementation as fifth domain. Covers non-clinical laboratory studies for pharmaceutical safety testing (MFDS) and chemical hazard assessment (ME/K-REACH). Implements OECD GLP principles for Mutual Acceptance of Data (MAD).
