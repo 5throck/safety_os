@@ -16,8 +16,10 @@
  *   oecd_mad_applicable, study_director_id, msds_record_ref fields.
  * v2.6.0 (2026-06-17): Added GCP module validation — irb_approval_ref,
  *   ich_e6_compliance, protocol_ref, site_id fields.
+ * v2.7.0 (2026-06-17): Added GVP module validation — ich_e2_compliance,
+ *   pbrer_cycle_ref, product_id, rmp_version_ref fields.
  *
- * @version 2.6.0
+ * @version 2.7.0
  */
 
 import * as fs from 'node:fs';
@@ -482,10 +484,65 @@ for (const file of gcpEvidenceFiles) {
     }
 }
 
+// ── GVP-specific validation: workflows ───────────────────────────────────────
+// v2.7.0: GVP workflows require multi-source legal_basis (≥3 core, ≥2 reference)
+const gvpWorkflowDir = path.join(workflowDir, 'domains', 'gvp');
+const gvpSchemaFiles = walkDirExact(gvpWorkflowDir, 'schema.yaml');
+
+for (const file of gvpSchemaFiles) {
+    totalChecked++;
+    const content = fs.readFileSync(file, 'utf-8');
+    const rel = relPath(file);
+    try {
+        const doc = yaml.load(content) as any;
+        if (!doc) continue;
+        const isReference = doc.workflow_type === 'reference';
+        const requiredMin = isReference ? 2 : 3;
+        if (!Array.isArray(doc.legal_basis) || doc.legal_basis.length < requiredMin) {
+            errors.push(`${rel}: GVP ${isReference ? 'reference' : 'core'} workflow requires multi-source legal_basis (≥${requiredMin} entries)`);
+        }
+        if (isReference && !doc.target_agent) {
+            errors.push(`${rel}: GVP reference workflow requires target_agent field`);
+        }
+    } catch (e: any) {
+        errors.push(`${rel}: YAML parsing error - ${e.message}`);
+    }
+}
+
+// ── GVP-specific validation: evidence models ────────────────────────────────
+// v2.7.0: All gvp-*.json must include ich_e2_compliance, pbrer_cycle_ref, product_id, rmp_version_ref
+const gvpEvidenceFiles = evidenceFiles.filter(f => {
+    return path.basename(f).startsWith('gvp-') &&
+           path.dirname(f).includes(path.join('domains', 'gvp'));
+});
+
+const REQUIRED_GVP_FIELDS = ['ich_e2_compliance', 'pbrer_cycle_ref', 'product_id', 'rmp_version_ref'];
+
+for (const file of gvpEvidenceFiles) {
+    totalChecked++;
+    const content = fs.readFileSync(file, 'utf-8');
+    const rel = relPath(file);
+    try {
+        const doc = JSON.parse(content);
+        const props = doc.properties || {};
+        for (const field of REQUIRED_GVP_FIELDS) {
+            if (!props[field]) {
+                errors.push(`${rel}: missing GVP required field '${field}'`);
+            }
+        }
+        const legalBasis = props.legal_basis;
+        if (legalBasis && (!legalBasis.minItems || legalBasis.minItems < 3)) {
+            errors.push(`${rel}: GVP legal_basis must have minItems ≥3`);
+        }
+    } catch (e: any) {
+        errors.push(`${rel}: JSON parsing error - ${e.message}`);
+    }
+}
+
 console.log(`Files checked : ${totalChecked}`);
-console.log(`  workflows/        : ${schemaFiles.length} schema.yaml file(s) (${gmpSchemaFiles.length} GMP, ${msdsSchemaFiles.length} MSDS, ${gdpSchemaFiles.length} GDP, ${glpSchemaFiles.length} GLP, ${gcpSchemaFiles.length} GCP)`);
+console.log(`  workflows/        : ${schemaFiles.length} schema.yaml file(s) (${gmpSchemaFiles.length} GMP, ${msdsSchemaFiles.length} MSDS, ${gdpSchemaFiles.length} GDP, ${glpSchemaFiles.length} GLP, ${gcpSchemaFiles.length} GCP, ${gvpSchemaFiles.length} GVP)`);
 console.log(`  regulations/      : ${regFiles.length} .yaml file(s)`);
-console.log(`  evidence-models/  : ${evidenceFiles.length} .json file(s) (${gmpEvidenceFiles.length} GMP, ${msdsEvidenceFiles.length} MSDS, ${gdpEvidenceFiles.length} GDP, ${glpEvidenceFiles.length} GLP, ${gcpEvidenceFiles.length} GCP)\n`);
+console.log(`  evidence-models/  : ${evidenceFiles.length} .json file(s) (${gmpEvidenceFiles.length} GMP, ${msdsEvidenceFiles.length} MSDS, ${gdpEvidenceFiles.length} GDP, ${glpEvidenceFiles.length} GLP, ${gcpEvidenceFiles.length} GCP, ${gvpEvidenceFiles.length} GVP)\n`);
 
 if (errors.length === 0) {
     console.log(`${GREEN}✅ ${totalChecked} files checked, 0 errors${RESET}`);

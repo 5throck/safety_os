@@ -6,6 +6,60 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+### Added (2026-06-17 — GVP Domain v1) — Final GxP Domain
+
+Good Pharmacovigilance Practice (GVP) domain implementation as **seventh and final GxP domain**. Completes pharmaceutical lifecycle coverage (GLP → GCP → GMP → GDP → GVP). Post-market drug safety surveillance per KGVP + ICH E2 series + EU GVP + WHO-UMC.
+
+**Fifth new domain addition** via `docs/_shared/domain-onboarding-guide.md` SOP — pattern fully validated across five consecutive use cases. **All GxP domains now active**.
+
+**Agent** (1):
+- `agents/domains/gvp/gvp-agent.md` (new) — Drug Safety Officer support
+
+**Workflows** (8) under `workflows/domains/gvp/`:
+- 7 core: `icsr-intake/` (E2B R3), `signal-detection/` (E2E + Module 9), `pbrer-generation/` (E2C R2), `risk-management-plan/` (E2E + Module 5), `pms-study-management/` (Korean-specific), `benefit-risk-assessment/` (Module 12), `labeling-update/` (Module 15)
+- `urgent-safety-action-reference/` (reference — dispatches to emergency-agent for recall/restriction/suspension)
+
+**Evidence Models** (7) under `evidence-models/domains/gvp/`:
+- All include `ich_e2_compliance`, `pbrer_cycle_ref`, `product_id`, `rmp_version_ref` common fields
+- `gvp-icsr-record.json` with WHO-UMC causality + MedDRA coding
+- `gvp-signal-record.json` with statistical methods (PRR/ROR/BCPNN/EBGM)
+- `gvp-br-record.json` with PrOACT/BRAT/MCDA framework scoring
+
+**Skills** (2) under `skills/domains/gvp/`:
+- `signal-detector/` — Disproportionality analysis (PRR, ROR, BCPNN, EBGM)
+- `benefit-risk-assessor/` — Multi-framework scoring (PrOACT-URL, BRAT, MCDA)
+
+**Regulations** (2):
+- `regulations/KR/MFDS-GVP.yaml` — 약사법 Art 73의2/73의3 + KGVP
+- `regulations/international/ICH-E2.yaml` — ICH E2 series (A through F)
+
+**Industry Profile**:
+- `industry-profiles/pharmacovigilance.yaml`
+
+**Scope Document**:
+- `docs/domains/gvp/scope.md`
+
+**Korean-Specific**:
+- PMS (Post-Marketing Surveillance) mandatory 6-8 years for new drugs
+- Drug re-evaluation 5-7 year cycle
+- KIDS (의약품안전사용센터) voluntary reporting integration
+- 15-day expedited ICSR reporting to MFDS
+
+**Cross-Domain Interface** (all 6 GxP + safety domains connected):
+- GCP SAE data → GVP (trial context)
+- GMP quality defects → GVP safety signals
+- GDP cold chain excursions → GVP product safety
+- MSDS occupational exposure → GVP signals
+- GVP `urgent-safety-action-reference` → `emergency-agent` (5th reference pattern, final)
+
+**Audit Script**:
+- `scripts/safety-audit.ts` v2.6.0 → v2.7.0:
+  - GVP workflow validation (≥3 legal_basis core, ≥2 reference)
+  - GVP evidence model validation (4 required fields)
+  - Report now shows all 6 domains (GMP + MSDS + GDP + GLP + GCP + GVP)
+
+**Verification**: 227 files checked, 0 errors (63 workflows: 10 GMP, 7 MSDS, 8 GDP, 8 GLP, 8 GCP, 8 GVP, 14 PSM/EHS).
+
 ### Added (2026-06-17 — GCP Domain v1)
 
 Good Clinical Practice (GCP) domain implementation as sixth domain. Covers clinical trial management — protocol design, IRB review, informed consent, monitoring visits, SAE/SUSAR reporting, source data verification per KGCP + ICH E6(R3) + Helsinki Declaration.
