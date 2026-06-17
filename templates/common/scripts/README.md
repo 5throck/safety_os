@@ -37,7 +37,7 @@ All scripts in this workspace follow a Hybrid Scripting Architecture divided int
   L1-only = generated project only; must exist in templates/common/scripts/ but not in scripts/
 -->
 <!-- pair: <script-name> (.sh declares its .ps1 pair; enables horizontal sync check) or ??-->
-<!-- Check A (lifecycle-sync-audit.ts): verifies @version header == registry version (formal consistency only). Semantic content alignment ??whether file content actually reflects version history ??is NOT verified by tooling. Use git log to confirm content for Type-2 fixes. -->
+<!-- Check A (lifecycle-sync-audit.ts): verifies @version header == registry version (formal consistency only). Semantic content alignment —whether file content actually reflects version history —is NOT verified by tooling. Use git log to confirm content for Type-2 fixes. -->
 
 | script | source | version | status | removal-date | security-advisory | layer | pair |
 |--------|--------|---------|--------|--------------|-------------------|-------|------|
@@ -201,8 +201,8 @@ All scripts in this workspace follow a Hybrid Scripting Architecture divided int
 
 | Layer | Location | Owner | Update Policy |
 |-------|----------|-------|---------------|
-| **L0 ??Workspace SSOT** | `scripts/` (workspace root) | workspace maintainer | Versioned via this file |
-| **L1 ??Template snapshot** | `templates/common/scripts/` | publish: `bun run publish-to-template` | Explicit publish from L0 via consolidated tool |
+| **L0 —Workspace SSOT** | `scripts/` (workspace root) | workspace maintainer | Versioned via this file |
+| **L1 —Template snapshot** | `templates/common/scripts/` | publish: `bun run publish-to-template` | Explicit publish from L0 via consolidated tool |
 
 **Propagation rule**: L0 is the development SSOT. Publish L0?묹1 explicitly with `bun run publish-to-template`, which is now a consolidated tool that also handles L1->L2 propagation. L2 projects snapshot L1 at creation time and receive subsequent updates via propagation. No automatic back-propagation from L2.
 
@@ -230,7 +230,7 @@ All scripts in this workspace follow a Hybrid Scripting Architecture divided int
 
 ## Guide
 
-### Everyday Development Scripts (Tier 2 ??`bun run <script>`)
+### Everyday Development Scripts (Tier 2 —`bun run <script>`)
 
 #### `audit.ts`
 **Purpose**: Documentation audit gate. Checks CHANGELOG.md, CONSTITUTION.md, AGENTS.md,
@@ -239,7 +239,7 @@ agent frontmatter, skill health, and template lifecycle validation.
 **Runs automatically**: pre-commit hook, pre-push hook, `bun run dev-sync`
 
 #### `dev-sync.ts`
-**Purpose**: Full sync pipeline ??session log ??MEMORY.md index ??CHANGELOG auto-add ??audit gate ??sensitive file check ??branch creation ??commit ??push ??PR.
+**Purpose**: Full sync pipeline —session log —MEMORY.md index —CHANGELOG auto-add —audit gate —sensitive file check —branch creation —commit —push —PR.
 **Usage**: `bun run dev-sync "feat: description"`
 **Claude Code / Gemini**: `/sync "feat: description"`
 
@@ -286,7 +286,7 @@ agent frontmatter, skill health, and template lifecycle validation.
 **Usage**: `bun scripts/agent-verify.ts`
 
 #### `agent-lifecycle-audit.ts`
-**Purpose**: Full agent lifecycle audit ??frontmatter validation, AGENTS.md consistency,
+**Purpose**: Full agent lifecycle audit —frontmatter validation, AGENTS.md consistency,
 deprecated agent references, missing fields.
 **Usage**: `bun scripts/agent-lifecycle-audit.ts`
 **Runs automatically**: pre-commit hook when `agents/*.md` files are staged.
@@ -300,7 +300,7 @@ deprecated agent references, missing fields.
 ### Skill Lifecycle Scripts (Bun / TypeScript)
 
 #### `skill-lifecycle-audit.ts`
-**Purpose**: Full skill lifecycle audit ??owner validation, orphaned skills, deprecated
+**Purpose**: Full skill lifecycle audit —owner validation, orphaned skills, deprecated
 skills still being modified, dependency graph, circular dependencies.
 **Usage**: `bun scripts/skill-lifecycle-audit.ts`
 **Runs automatically**: pre-commit hook when `skills/**` files are staged.

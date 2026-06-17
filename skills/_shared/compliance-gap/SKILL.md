@@ -6,19 +6,19 @@ status: active
 version: 1.0.0
 metadata:
   triggers:
-    - 踰뺢퇋 以??
+    - 컴플라이언스 갭
     - compliance gap
-    - 洹쒖젙 ?먭?
-    - 踰뺢퇋 蹂寃?
+    - 준법 감시
+    - 법률 검토
     - regulatory compliance
-    - 而댄뵆?쇱씠?몄뒪
-    - 踰뺤쟻 ?붽굔
+    - 규제 준수
+    - 법적 요건
     - legal requirement review
   agents:
     - compliance-agent
   legal_basis:
-    - ?곗뾽?덉쟾蹂닿굔踰??꾨컲 (Occupational Safety and Health Act ??all articles)
-    - 以묐??ы빐泥섎쾶踰??꾨컲 (Serious Accidents Punishment Act ??all articles)
+    - 산업안전보건법 (Occupational Safety and Health Act — all articles)
+    - 중대재해처벌법 (Serious Accidents Punishment Act — all articles)
 scope: workspace
 ---
 
@@ -30,25 +30,25 @@ Invoke this skill when: a new regulation is enacted or amended, a periodic compl
 
 ## Steps
 
-1. **Regulation Identification** ??Identify all applicable regulations based on the industry sector, workplace type, number of employees, and work activities. Key frameworks:
-   - ?곗뾽?덉쟾蹂닿굔踰?(OSHA-KR) and subordinate regulations
-   - 以묐??ы빐泥섎쾶踰?(SAPA) ??applies to workplaces with 5+ employees
-   - ?뷀븰臾쇱쭏愿由щ쾿 (Chemical Substances Control Act) ??if applicable
-   - 怨좎븬媛???덉쟾愿由щ쾿 ??if applicable
+1. **Regulation Identification** — Identify all applicable regulations based on the industry sector, workplace type, number of employees, and work activities. Key frameworks:
+   - 산업안전보건법 (OSHA-KR) and subordinate regulations
+   - 중대재해처벌법 (SAPA) — applies to workplaces with 5+ employees
+   - 화학물질관리법 (Chemical Substances Control Act) — if applicable
+   - 유해화학물질관리법 — if applicable
    - Other sector-specific regulations as identified
 
-2. **Current State Assessment** ??For each applicable regulation, document the current compliance state: systems in place, records available, responsible persons assigned, training completed.
+2. **Current State Assessment** — For each applicable regulation, document the current compliance state: systems in place, records available, responsible persons assigned, training completed.
 
-3. **Gap Identification** ??Compare current state against regulatory requirements. For each gap, record:
+3. **Gap Identification** — Compare current state against regulatory requirements. For each gap, record:
    - Regulation article and requirement
    - Current state (what exists)
    - Required state (what the law mandates)
    - Gap description
    - Risk level (Critical / Major / Minor)
 
-4. **Corrective Action Recommendation** ??For each identified gap, recommend a corrective action with estimated effort, responsible party, and target completion date. Prioritize Critical gaps (those with potential criminal liability under 以묐??ы빐泥섎쾶踰? first.
+4. **Corrective Action Recommendation** — For each identified gap, recommend a corrective action with estimated effort, responsible party, and target completion date. Prioritize Critical gaps (those with potential criminal liability under 중대재해처벌법) first.
 
-5. **Gap Report** ??Produce a structured gap report and save to `memory/findings/`. Present findings to the CSO for review and approval of the corrective action plan.
+5. **Gap Report** — Produce a structured gap report and save to `memory/findings/`. Present findings to the CSO for review and approval of the corrective action plan.
 
 ## Output Format
 
@@ -58,7 +58,7 @@ Save gap report to `memory/findings/compliance-gap-YYYY-MM-DD-<scope>.md`:
 # Compliance Gap Report
 date: YYYY-MM-DD
 assessor: <name>
-legal_basis: ?곗뾽?덉쟾蹂닿굔踰??꾨컲
+legal_basis: 산업안전보건법
 status: draft | under_review | approved
 
 ## Regulatory Framework
@@ -67,7 +67,7 @@ status: draft | under_review | approved
 ## Gap Summary
 | # | Article | Requirement | Current State | Gap | Risk Level |
 |---|---------|-------------|---------------|-----|------------|
-| 1 | ??9議? | Training records for all workers | Partial records only | Missing records for 15 workers | Major |
+| 1 | 제9조 | Training records for all workers | Partial records only | Missing records for 15 workers | Major |
 
 ## Corrective Action Plan
 | # | Gap Ref | Action | Owner | Due | Priority |
@@ -81,6 +81,6 @@ Date: YYYY-MM-DD
 
 ## Legal Notes
 
-- ?곗뾽?덉쟾蹂닿굔踰?imposes duties on employers across all aspects of occupational safety and health. Violations can result in fines up to 50 million KRW or imprisonment.
-- 以묐??ы빐泥섎쾶踰?applies criminal penalties (up to 1 year imprisonment or 1 billion KRW fine for the business) when serious accidents result from failure to meet safety management obligations.
+- 산업안전보건법 imposes duties on employers across all aspects of occupational safety and health. Violations can result in fines up to 50 million KRW or imprisonment.
+- 중대재해처벌법 applies criminal penalties (up to 1 year imprisonment or 1 billion KRW fine for the business) when serious accidents result from failure to meet safety management obligations.
 - **Disclaimer**: This skill provides workflow assistance to support compliance management. It does not constitute legal advice. Consult a qualified legal professional for specific legal interpretations or enforcement matters.
