@@ -1,0 +1,35 @@
+source_mcp: mcp-kr-legislation
+jurisdiction: KR
+regulator: MOEL (고용노동부)
+framework: SAPA-Construction
+title_ko: 중대재해처벌법 건설업 특례
+title_en: Serious Accidents Punishment Act — Construction Provisions
+primary_law:
+  name_ko: 중대재해처벌법
+  name_en: SAPA
+  articles:
+    - article: "3"
+      topic_ko: 경영책임자 처벌 (건설업 포함)
+      topic_en: Management responsibility
+    - article: "7"
+      topic_ko: 사업주 의무 (안전보건관리체계)
+      topic_en: Employer obligations
+    - article: "12"
+      topic_ko: 건설공사 특례 (발주처/원사업주 책임 강화)
+      topic_en: Construction project special provisions
+    - article: "13"
+      topic_ko: 하도급업체 안전보건 의무
+      topic_en: Subcontractor safety/health obligations
+serious_accident_threshold:
+  fatality: "사망 1명 이상"
+  serious_injury: "6개월 이상 치료를 요하는 부상 1명 이상"
+  multiple_injury: "동일 사고로 3명 이상 부상"
+  occupational_disease: "업무상 질병 1년 이상 요양"
+construction_specific_obligations:
+  ordering_party: 발주처 (안전관리체계 구축, 원도급자 선정 기준)
+  prime_contractor: 원도급자 (하도급자 관리, 안전관리비 집행)
+  subcontractor: 하도급자 (자체 안전관리)
+penalties:
+  business_entity: "벌금 최대 1억 원"
+  management: "징역 최대 1년 또는 벌금 최대 1억 원"
+last_updated: "2026-06-18"
