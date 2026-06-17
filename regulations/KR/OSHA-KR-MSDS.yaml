@@ -1,0 +1,60 @@
+source_mcp: mcp-kr-legislation
+jurisdiction: KR
+regulator: MOEL (Ministry of Employment and Labor / 고용노동부)
+framework: OSHA-KR-MSDS
+title_ko: 산업안전보건법 MSDS (Material Safety Data Sheet) 조항
+title_en: Occupational Safety and Health Act — MSDS Provisions
+primary_law:
+  name_ko: 산업안전보건법
+  name_en: Occupational Safety and Health Act (OSHA-KR)
+  articles:
+    - article: "110"
+      topic_ko: MSDS 작성·비치 의무
+      topic_en: MSDS preparation and posting duty
+    - article: "111"
+      topic_ko: MSDS 제출 대상 물질
+      topic_en: Substances subject to MSDS submission
+    - article: "112"
+      topic_ko: MSDS 양식 및 기재사항
+      topic_en: MSDS format and required content (GHS 16 sections)
+    - article: "113"
+      topic_ko: 유해물질·허가물질·취급금지물질 관리
+      topic_en: Prohibited, permission-required, and harmful substances
+    - article: "114"
+      topic_ko: 경고표지 부착 의무
+      topic_en: Warning label attachment duty
+    - article: "243"
+      topic_ko: GHS (Globally Harmonized System) 분류 의무화
+      topic_en: Mandatory GHS classification
+international_alignment:
+  - framework: GHS
+    reference: UN GHS Rev 9 (2021)
+    alignment_level: mandatory
+    kr_mandation_date: "2023-01-01"
+delegated_legislation:
+  - name_ko: 산업안전보건법 시행규칙 제175조~제187조
+    name_en: OSHA-KR Enforcement Rule Articles 175-187
+    scope: MSDS 세부 절차
+key_themes:
+  - msds_preparation
+  - ghs_classification
+  - chemical_labeling
+  - worker_right_to_know
+  - prohibited_substances_control
+applicable_to:
+  - all_workplaces_handling_chemicals
+  - chemical_manufacturers
+  - chemical_importers
+  - chemical_distributors
+ghs_version_current: "rev9"
+ghs_version_kr_mandation_date: "2023-01-01"
+ghs_version_transition_plan:
+  rev10:
+    un_issued: "2025-07-01"
+    kr_mandation_estimated: "2027-01-01"
+    migration_window: "2026-2027"
+recent_amendments:
+  - year: "2024"
+    summary: MSDS 사전 승인제 의무화, 온라인 제출 시스템 고도화
+    impact: 모든 사업장 연간 1회 이상 MSDS 갱신 확인 의무
+last_updated: "2026-06-17"
