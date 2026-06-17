@@ -1,0 +1,36 @@
+source_mcp: mcp-kr-legislation
+jurisdiction: KR
+regulator: MFDS (식품의약품안전처)
+framework: MFDS-GLP
+title_ko: 비임상시험 관리기준 (의약품)
+title_en: Non-Clinical Study Management Standards (Pharmaceuticals)
+primary_law:
+  name_ko: 약사법
+  name_en: Pharmaceutical Affairs Act
+delegated_legislation:
+  - name_ko: 비임상시험 관리기준 (MFDS 고시)
+    name_en: Non-Clinical Study Management Standards (MFDS Notice)
+    scope: 의약품 제조/수입 허가용 비임상시험 (독성시험) 관리
+key_articles:
+  - topic: 시험기관 인증 (GLP 인증제)
+    scope: MFDS 장관이 지정한 GLP 적합 시험기관
+  - topic: Study Director 책임
+    scope: 시험의 최종 책임자
+  - topic: QAU (Quality Assurance Unit)
+    scope: 독립 품질보증 부서
+  - topic: Raw data 보존
+    scope: 최소 10년 (의약품의 경우 제품 허가 취소 후 5년까지)
+applicable_to:
+  - 의약품 제조/수입 허가용 비임상 안전성 시험
+  - 독성시험 기관 (급성/아급성/만성/발암성/재생독성 등)
+  - 안전성 약리시험
+international_alignment:
+  - framework: OECD GLP
+    reference: OECD C(97)186/Final
+    alignment_level: full (MAD — Mutual Acceptance of Data)
+mfds_glp_certification:
+  authority: MFDS
+  validity_years: 3
+  renewal_required: true
+  scope: 의약품 비임상시험 수행 기관
+last_updated: "2026-06-17"
