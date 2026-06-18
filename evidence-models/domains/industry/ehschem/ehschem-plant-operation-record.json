@@ -1,0 +1,34 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "ehschem-plant-operation-record.json",
+  "title": "Chemical Plant Operation Record",
+  "description": "화학공장 일상 운영 안전 기록.",
+  "version": "1.0.0",
+  "type": "object",
+  "required": ["record_id", "plant_category", "psm_applicable", "chemical_category", "legal_basis", "e_signature", "nomenclature", "audit_trail"],
+  "properties": {
+    "record_id": { "type": "string", "pattern": "^CHEM-OPS-[0-9]{4}-[0-9]{4}$" },
+    "plant_category": {
+      "type": "string",
+      "enum": ["refining", "petrochemical", "specialty_chemicals"]
+    },
+    "psm_applicable": { "type": "boolean", "default": true },
+    "environmental_permit_id": { "type": ["string", "null"] },
+    "chemical_category": {
+      "type": "string",
+      "enum": ["hydrocarbon", "polymer", "specialty_intermediate", "other"]
+    },
+    "facility_id": { "type": "string" },
+    "shift_id": { "type": "string" },
+    "production_unit": { "type": "string" },
+    "operating_conditions_normal": { "type": "boolean" },
+    "abnormal_events_count": { "type": "integer" },
+    "safety_officer_on_duty": { "type": "string" },
+    "daily_safety_meeting_held": { "type": "boolean" },
+
+    "legal_basis": { "type": "array", "items": { "type": "string" }, "minItems": 3 },
+    "e_signature": { "$ref": "../../../_shared/base/common.schema.json#/definitions/e_signature" },
+    "nomenclature": { "$ref": "../../../_shared/base/common.schema.json#/definitions/nomenclature" },
+    "audit_trail": { "$ref": "../../../_shared/base/common.schema.json#/definitions/audit_trail" }
+  }
+}

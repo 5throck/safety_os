@@ -1,0 +1,23 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "psm-compliance-audit-record.json",
+  "title": "PSM Compliance Audit Record",
+  "description": "3년 주기 PSM 규정 준수 감사 per OSHA PSM Element 13.",
+  "version": "1.0.0",
+  "type": "object",
+  "required": ["record_id", "legal_basis", "version"],
+  "properties": {
+    "record_id": { "type": "string", "pattern": "^PSM-AUD-[0-9]{4}-[0-9]{4}$" },
+    "audit_cycle": { "type": "integer", "description": "3-year cycle" },
+    "audit_start_date": { "type": "string", "format": "date" },
+    "audit_end_date": { "type": "string", "format": "date" },
+    "auditor_team": { "type": "array", "items": { "type": "string" } },
+    "findings_count": { "type": "integer" },
+    "critical_findings": { "type": "integer" },
+    "corrective_actions": { "type": "array", "items": { "type": "string" } },
+    "next_audit_due": { "type": "string", "format": "date" },
+
+    "legal_basis": { "type": "array", "items": { "type": "string" }, "minItems": 2 },
+    "version": { "type": "string", "default": "1.0.0" }
+  }
+}

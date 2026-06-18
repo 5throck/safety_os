@@ -180,7 +180,7 @@ for (const file of evidenceFiles) {
 // GMP workflows require multi-source legal_basis (array with ≥2 entries) per
 // meeting decision 2026-06-17 (Q3/Q4 follow-up).
 // v2.2.0: Path updated for domain-based folder structure.
-const gmpWorkflowDir = path.join(workflowDir, 'domains', 'gmp');
+const gmpWorkflowDir = path.join(workflowDir, 'domains', 'functional', 'gmp');
 const gmpSchemaFiles = walkDirExact(gmpWorkflowDir, 'schema.yaml');
 
 for (const file of gmpSchemaFiles) {
@@ -252,7 +252,7 @@ if (fs.existsSync(riskAgentPath)) {
     }
 }
 
-const qrmSkillPath = path.join(ROOT, 'skills', 'domains', 'gmp', 'qrm', 'SKILL.md');
+const qrmSkillPath = path.join(ROOT, 'skills', 'domains', 'functional', 'gmp', 'qrm', 'SKILL.md');
 if (fs.existsSync(qrmSkillPath)) {
     totalChecked++;
     const content = fs.readFileSync(qrmSkillPath, 'utf-8');
@@ -264,7 +264,7 @@ if (fs.existsSync(qrmSkillPath)) {
 // ── MSDS-specific validation: workflows ──────────────────────────────────────
 // v2.3.0: MSDS workflows require multi-source legal_basis (≥3 entries, stricter
 // than GMP's ≥2) per meeting 2026-06-17. Reference workflows are exempt.
-const msdsWorkflowDir = path.join(workflowDir, 'domains', 'msds');
+const msdsWorkflowDir = path.join(workflowDir, 'domains', 'functional', 'msds');
 const msdsSchemaFiles = walkDirExact(msdsWorkflowDir, 'schema.yaml');
 
 for (const file of msdsSchemaFiles) {
@@ -297,7 +297,7 @@ const msdsEvidenceFiles = evidenceFiles.filter(f => {
     return name.startsWith('msds-') || name.startsWith('ghs-') ||
            name.startsWith('chemical-') || name.startsWith('kreach-') ||
            name.startsWith('hazard-label-');
-}).filter(f => path.dirname(f).includes(path.join('domains', 'msds')));
+}).filter(f => path.dirname(f).includes(path.join('domains', 'functional', 'msds')));
 
 for (const file of msdsEvidenceFiles) {
     totalChecked++;
@@ -322,7 +322,7 @@ for (const file of msdsEvidenceFiles) {
 
 // ── GDP-specific validation: workflows ───────────────────────────────────────
 // v2.4.0: GDP workflows require multi-source legal_basis (≥3 core, ≥2 reference)
-const gdpWorkflowDir = path.join(workflowDir, 'domains', 'gdp');
+const gdpWorkflowDir = path.join(workflowDir, 'domains', 'functional', 'gdp');
 const gdpSchemaFiles = walkDirExact(gdpWorkflowDir, 'schema.yaml');
 
 for (const file of gdpSchemaFiles) {
@@ -349,7 +349,7 @@ for (const file of gdpSchemaFiles) {
 // v2.4.0: All gdp-*.json must include gdp_certification_status, temperature_condition, batch_disposition_approved_ref
 const gdpEvidenceFiles = evidenceFiles.filter(f => {
     return path.basename(f).startsWith('gdp-') &&
-           path.dirname(f).includes(path.join('domains', 'gdp'));
+           path.dirname(f).includes(path.join('domains', 'functional', 'gdp'));
 });
 
 const REQUIRED_GDP_FIELDS = ['gdp_certification_status', 'temperature_condition', 'batch_disposition_approved_ref'];
@@ -379,7 +379,7 @@ for (const file of gdpEvidenceFiles) {
 
 // ── GLP-specific validation: workflows ───────────────────────────────────────
 // v2.5.0: GLP workflows require multi-source legal_basis (≥3 core, ≥2 reference)
-const glpWorkflowDir = path.join(workflowDir, 'domains', 'glp');
+const glpWorkflowDir = path.join(workflowDir, 'domains', 'functional', 'glp');
 const glpSchemaFiles = walkDirExact(glpWorkflowDir, 'schema.yaml');
 
 for (const file of glpSchemaFiles) {
@@ -407,7 +407,7 @@ for (const file of glpSchemaFiles) {
 // study_director_id, msds_record_ref
 const glpEvidenceFiles = evidenceFiles.filter(f => {
     return path.basename(f).startsWith('glp-') &&
-           path.dirname(f).includes(path.join('domains', 'glp'));
+           path.dirname(f).includes(path.join('domains', 'functional', 'glp'));
 });
 
 const REQUIRED_GLP_FIELDS = ['glp_certification_authority', 'oecd_mad_applicable', 'study_director_id', 'msds_record_ref'];
@@ -435,7 +435,7 @@ for (const file of glpEvidenceFiles) {
 
 // ── GCP-specific validation: workflows ───────────────────────────────────────
 // v2.6.0: GCP workflows require multi-source legal_basis (≥3 core, ≥2 reference)
-const gcpWorkflowDir = path.join(workflowDir, 'domains', 'gcp');
+const gcpWorkflowDir = path.join(workflowDir, 'domains', 'functional', 'gcp');
 const gcpSchemaFiles = walkDirExact(gcpWorkflowDir, 'schema.yaml');
 
 for (const file of gcpSchemaFiles) {
@@ -463,7 +463,7 @@ for (const file of gcpSchemaFiles) {
 // protocol_ref, site_id
 const gcpEvidenceFiles = evidenceFiles.filter(f => {
     return path.basename(f).startsWith('gcp-') &&
-           path.dirname(f).includes(path.join('domains', 'gcp'));
+           path.dirname(f).includes(path.join('domains', 'functional', 'gcp'));
 });
 
 const REQUIRED_GCP_FIELDS = ['irb_approval_ref', 'ich_e6_compliance', 'protocol_ref', 'site_id'];
@@ -491,7 +491,7 @@ for (const file of gcpEvidenceFiles) {
 
 // ── GVP-specific validation: workflows ───────────────────────────────────────
 // v2.7.0: GVP workflows require multi-source legal_basis (≥3 core, ≥2 reference)
-const gvpWorkflowDir = path.join(workflowDir, 'domains', 'gvp');
+const gvpWorkflowDir = path.join(workflowDir, 'domains', 'functional', 'gvp');
 const gvpSchemaFiles = walkDirExact(gvpWorkflowDir, 'schema.yaml');
 
 for (const file of gvpSchemaFiles) {
@@ -518,7 +518,7 @@ for (const file of gvpSchemaFiles) {
 // v2.7.0: All gvp-*.json must include ich_e2_compliance, pbrer_cycle_ref, product_id, rmp_version_ref
 const gvpEvidenceFiles = evidenceFiles.filter(f => {
     return path.basename(f).startsWith('gvp-') &&
-           path.dirname(f).includes(path.join('domains', 'gvp'));
+           path.dirname(f).includes(path.join('domains', 'functional', 'gvp'));
 });
 
 const REQUIRED_GVP_FIELDS = ['ich_e2_compliance', 'pbrer_cycle_ref', 'product_id', 'rmp_version_ref'];
@@ -546,7 +546,7 @@ for (const file of gvpEvidenceFiles) {
 
 // ── ehsconst-specific validation: workflows ─────────────────────────────────
 // v2.8.0: Construction Safety workflows require multi-source legal_basis (≥3 core, ≥2 reference)
-const ehsconstWorkflowDir = path.join(workflowDir, 'domains', 'ehsconst');
+const ehsconstWorkflowDir = path.join(workflowDir, 'domains', 'industry', 'ehsconst');
 const ehsconstSchemaFiles = walkDirExact(ehsconstWorkflowDir, 'schema.yaml');
 
 for (const file of ehsconstSchemaFiles) {
@@ -574,7 +574,7 @@ for (const file of ehsconstSchemaFiles) {
 // contractor_tier, safety_officer_in_charge
 const ehsconstEvidenceFiles = evidenceFiles.filter(f => {
     return path.basename(f).startsWith('ehsconst-') &&
-           path.dirname(f).includes(path.join('domains', 'ehsconst'));
+           path.dirname(f).includes(path.join('domains', 'industry', 'ehsconst'));
 });
 
 const REQUIRED_EHSCONST_FIELDS = ['sapa_article_12_compliance', 'project_id', 'contractor_tier', 'safety_officer_in_charge'];
@@ -629,7 +629,7 @@ function validateDomainWorkflow(domainName: string, requiredMin: number = 3): st
 
 function validateDomainEvidence(domainName: string, requiredFields: string[], minLegalBasis: number = 3): { files: string[], errs: string[] } {
     const domainEvidence = evidenceFiles.filter(f => {
-        return path.dirname(f).includes(path.join('domains', domainName));
+        return path.dirname(f).includes(path.join('domains', 'functional', domainName)) || path.dirname(f).includes(path.join('domains', 'industry', domainName));
     });
     const errs: string[] = [];
     for (const file of domainEvidence) {
@@ -656,14 +656,14 @@ function validateDomainEvidence(domainName: string, requiredFields: string[], mi
 }
 
 // gasterm validation
-const gastermSchemaFiles = walkDirExact(path.join(workflowDir, 'domains', 'gasterm'), 'schema.yaml');
+const gastermSchemaFiles = walkDirExact(path.join(workflowDir, 'domains', 'industry', 'gasterm'), 'schema.yaml');
 const gastermWorkflowErrs = validateDomainWorkflow('gasterm');
 errors.push(...gastermWorkflowErrs);
 const gastermEvidenceResult = validateDomainEvidence('gasterm', ['facility_type', 'kgs_inspection_status', 'psm_applicable', 'gas_type']);
 errors.push(...gastermEvidenceResult.errs);
 
 // powergen validation
-const powergenSchemaFiles = walkDirExact(path.join(workflowDir, 'domains', 'powergen'), 'schema.yaml');
+const powergenSchemaFiles = walkDirExact(path.join(workflowDir, 'domains', 'industry', 'powergen'), 'schema.yaml');
 const powergenWorkflowErrs = validateDomainWorkflow('powergen');
 errors.push(...powergenWorkflowErrs);
 const powergenEvidenceResult = validateDomainEvidence('powergen', ['plant_type', 'kesa_inspection_status', 'voltage_class']);

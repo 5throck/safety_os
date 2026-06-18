@@ -1,0 +1,63 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "hazard-label-record.json",
+  "title": "Hazard Label Record",
+  "description": "Evidence model for GHS hazard label generation and application records per OSHA-KR Article 114 + UN GHS Rev 9.",
+  "version": "1.0.0",
+  "type": "object",
+  "required": ["record_id", "substance_id", "label_version", "label_elements", "legal_basis", "e_signature", "nomenclature", "audit_trail"],
+  "properties": {
+    "record_id": { "type": "string", "pattern": "^MSDS-LBL-[0-9]{4}-[0-9]{4}$" },
+    "substance_id": { "type": "string" },
+    "substance_name": { "type": "string" },
+    "cas_number": { "type": "string" },
+    "label_version": { "type": "string", "description": "Label format version" },
+    "label_elements": {
+      "type": "object",
+      "properties": {
+        "product_identifier": { "type": "string" },
+        "signal_word": { "type": "string", "enum": ["Danger", "Warning", "None"] },
+        "pictograms": { "type": "array", "items": { "type": "string", "enum": ["GHS01", "GHS02", "GHS03", "GHS04", "GHS05", "GHS06", "GHS07", "GHS08", "GHS09"] } },
+        "hazard_statements_ko": { "type": "array", "items": { "type": "string" } },
+        "hazard_statements_en": { "type": "array", "items": { "type": "string" } },
+        "precautionary_statements_ko": { "type": "array", "items": { "type": "string" } },
+        "precautionary_statements_en": { "type": "array", "items": { "type": "string" } },
+        "supplier_info": {
+          "type": "object",
+          "properties": {
+            "name": { "type": "string" },
+            "address": { "type": "string" },
+            "emergency_phone": { "type": "string" }
+          }
+        }
+      }
+    },
+    "label_format": { "type": "string", "enum": ["container_small", "container_medium", "container_large", "bulk_storage_tank", "area_sign"] },
+    "file_ref": { "type": "string", "description": "PDF/file reference for printed label" },
+    "application_records": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "container_id": { "type": "string" },
+          "application_date": { "type": "string", "format": "date-time" },
+          "applied_by": { "type": "string" },
+          "verification_status": { "type": "string", "enum": ["applied", "verified", "failed_verification"] }
+        }
+      }
+    },
+    "ghs_classification_ref": { "type": "string", "pattern": "^MSDS-GHS-[0-9]{4}-[0-9]{4}$" },
+    "ghs_version": {
+      "type": "string",
+      "enum": ["rev8", "rev9", "rev10"]
+    },
+    "legal_basis": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 2
+    },
+    "e_signature": { "$ref": "../../../_shared/base/common.schema.json#/definitions/e_signature" },
+    "nomenclature": { "$ref": "../../../_shared/base/common.schema.json#/definitions/nomenclature" },
+    "audit_trail": { "$ref": "../../../_shared/base/common.schema.json#/definitions/audit_trail" }
+  }
+}

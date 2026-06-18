@@ -72,7 +72,7 @@ console.log(`       Profile references ${workflows.length} MSDS workflows`);
 let allWorkflowsExist = true, allSchemasValid = true, allReadmesExist = true, allEvidenceModelsExist = true;
 
 for (const wf of workflows) {
-    const wfDir = path.join(ROOT, 'workflows', 'domains', 'msds', wf);
+    const wfDir = path.join(ROOT, 'workflows', 'domains', 'functional', 'msds', wf);
     const schemaPath = path.join(wfDir, 'schema.yaml');
     const readmePath = path.join(wfDir, 'README.md');
 
@@ -101,7 +101,7 @@ for (const wf of workflows) {
     if (evidenceModelName) {
         const models = evidenceModelName.split(',').map((s: string) => s.trim());
         for (const modelName of models) {
-            const modelPath = path.join(ROOT, 'evidence-models', 'domains', 'msds', modelName);
+            const modelPath = path.join(ROOT, 'evidence-models', 'domains', 'functional', 'msds', modelName);
             if (!fs.existsSync(modelPath)) {
                 record('T-05', `Evidence model '${modelName}' resolves`, false);
                 allEvidenceModelsExist = false;
@@ -116,7 +116,7 @@ if (allEvidenceModelsExist) record('T-05', `All evidence model references resolv
 
 // T-06: MSDS agent
 console.log(`\n${CYAN}[T-06] MSDS agent existence${RESET}`);
-const agentPath = path.join(ROOT, 'agents', 'domains', 'msds', 'msds-agent.md');
+const agentPath = path.join(ROOT, 'agents', 'domains', 'functional', 'msds', 'msds-agent.md');
 if (fs.existsSync(agentPath)) {
     record('T-06', 'MSDS agent exists at agents/domains/msds/msds-agent.md', true);
 } else {
@@ -158,7 +158,7 @@ console.log(`\n${CYAN}[T-09] MSDS skills existence${RESET}`);
 const expectedSkills = ['msds-parser', 'ghs-classifier', 'chemical-risk-assessment'];
 let allSkillsExist = true;
 for (const skill of expectedSkills) {
-    const skillPath = path.join(ROOT, 'skills', 'domains', 'msds', skill, 'SKILL.md');
+    const skillPath = path.join(ROOT, 'skills', 'domains', 'functional', 'msds', skill, 'SKILL.md');
     if (fs.existsSync(skillPath)) {
         console.log(`  ${GREEN}✓${RESET} skill '${skill}' exists`);
     } else {
@@ -187,7 +187,7 @@ try {
 // T-11: Sample MSDS record (16 sections + ghs_version)
 console.log(`\n${CYAN}[T-11] Sample MSDS record validation${RESET}`);
 try {
-    const sampleModelPath = path.join(ROOT, 'evidence-models', 'domains', 'msds', 'msds-record.json');
+    const sampleModelPath = path.join(ROOT, 'evidence-models', 'domains', 'functional', 'msds', 'msds-record.json');
     const sampleModel = JSON.parse(fs.readFileSync(sampleModelPath, 'utf-8'));
     const props = Object.keys(sampleModel.properties || {});
 
@@ -209,7 +209,7 @@ try {
 // T-12: Reference workflow pattern
 console.log(`\n${CYAN}[T-12] Reference workflow pattern${RESET}`);
 try {
-    const refSchemaPath = path.join(ROOT, 'workflows', 'domains', 'msds', 'chemical-spill-reference', 'schema.yaml');
+    const refSchemaPath = path.join(ROOT, 'workflows', 'domains', 'functional', 'msds', 'chemical-spill-reference', 'schema.yaml');
     const refSchema = yaml.load(fs.readFileSync(refSchemaPath, 'utf-8')) as any;
     const hasType = refSchema.workflow_type === 'reference';
     const hasTarget = refSchema.target_agent === 'emergency-agent';

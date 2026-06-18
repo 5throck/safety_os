@@ -1,0 +1,58 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "chemical-approval-record.json",
+  "title": "Chemical Approval Record",
+  "description": "Evidence model for new chemical introduction approval records per OSHA-KR Article 113 + TCCL.",
+  "version": "1.0.0",
+  "type": "object",
+  "required": ["record_id", "substance_id", "decision", "legal_basis", "e_signature", "nomenclature", "audit_trail"],
+  "properties": {
+    "record_id": { "type": "string", "pattern": "^MSDS-APR-[0-9]{4}-[0-9]{4}$" },
+    "substance_id": { "type": "string" },
+    "substance_name": { "type": "string" },
+    "cas_number": { "type": "string" },
+    "intended_use": { "type": "string" },
+    "expected_annual_quantity_ton": { "type": "number" },
+    "storage_location": { "type": "string" },
+    "regulatory_status": {
+      "type": "object",
+      "properties": {
+        "prohibited_substance": { "type": "boolean", "description": "취급금지물질 under OSHA-KR Article 113" },
+        "permission_required": { "type": "boolean", "description": "허가대상물질" },
+        "harmful_substance": { "type": "boolean", "description": "유해물질" },
+        "tccl_toxic": { "type": "boolean", "description": "유해화학물질 (TCCL)" },
+        "kreach_threshold_trigger": { "type": "boolean" }
+      }
+    },
+    "risk_assessment_ref": { "type": "string" },
+    "decision": {
+      "type": "string",
+      "enum": ["approved", "approved_with_conditions", "rejected", "escalated"]
+    },
+    "conditions": { "type": "array", "items": { "type": "string" } },
+    "approval_chain": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "role": { "type": "string" },
+          "approver_id": { "type": "string" },
+          "approval_date": { "type": "string", "format": "date-time" },
+          "decision": { "type": "string", "enum": ["approved", "rejected", "escalated"] }
+        }
+      }
+    },
+    "ghs_version": {
+      "type": "string",
+      "enum": ["rev8", "rev9", "rev10"]
+    },
+    "legal_basis": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 3
+    },
+    "e_signature": { "$ref": "../../../_shared/base/common.schema.json#/definitions/e_signature" },
+    "nomenclature": { "$ref": "../../../_shared/base/common.schema.json#/definitions/nomenclature" },
+    "audit_trail": { "$ref": "../../../_shared/base/common.schema.json#/definitions/audit_trail" }
+  }
+}

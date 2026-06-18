@@ -1,0 +1,13 @@
+source_mcp: mcp-kr-legislation
+jurisdiction: KR
+regulator: ME (환경부) / 지자체
+framework: Environmental-Discharge
+title_ko: 대기·수질 환경보전법 (배출 기준)
+title_en: Environmental Conservation Act (Discharge Standards)
+scope:
+  air: 대기오염물질 (SOx, NOx, PM, VOC)
+  water: 수질오염물질 (BOD, COD, 중금속, 유기화합물)
+  noise_vibration: 소음·진동
+permit_required: true
+self_monitoring: 월 1회 (배출 시설별)
+last_updated: "2026-06-18"

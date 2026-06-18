@@ -1,0 +1,22 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "psm-eap-record.json",
+  "title": "PSM Emergency Action Plan Record",
+  "description": "비상조치계획 (EAP) per OSHA PSM Element 12.",
+  "version": "1.0.0",
+  "type": "object",
+  "required": ["record_id", "legal_basis", "version"],
+  "properties": {
+    "record_id": { "type": "string", "pattern": "^PSM-EAP-[0-9]{4}-[0-9]{4}$" },
+    "plan_version": { "type": "string" },
+    "last_revision_date": { "type": "string", "format": "date" },
+    "annual_drill_completed": { "type": "boolean" },
+    "evacuation_routes_defined": { "type": "boolean" },
+    "emergency_contacts": { "type": "array", "items": { "type": "string" } },
+    "local_fire_dept_coordinated": { "type": "boolean" },
+    "employee_training_completed": { "type": "boolean" },
+
+    "legal_basis": { "type": "array", "items": { "type": "string" }, "minItems": 2 },
+    "version": { "type": "string", "default": "1.0.0" }
+  }
+}

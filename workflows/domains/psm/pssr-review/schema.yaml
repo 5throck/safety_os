@@ -1,9 +1,0 @@
-schema_version: "1.0"
-workflow_id: pssr-review
-title: "Pre-Startup Safety Review (PSSR)"
-status: active
-applicability: mandatory
-legal_basis: OSHA-KR Article 44
-industry_profile: chemical-processing
-agent: psm-agent
-evidence_model: psm-pssr-record.json
