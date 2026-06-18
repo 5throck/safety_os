@@ -1,0 +1,32 @@
+source_mcp: mcp-kr-legislation
+jurisdiction: KR
+regulator: MOTIE (산업통상자원부) / KPXC (한국전력거래소) / KEPCO (한국전력)
+framework: Electric-Utility-Act
+title_ko: 전기사업법
+title_en: Electric Utility Act
+primary_law:
+  name_ko: 전기사업법
+  articles:
+    - article: "46"
+      topic_ko: 발전설비 설치 허가
+    - article: "47"
+      topic_ko: 발전설비 안전관리
+    - article: "65"
+      topic_ko: 전기설비 안전
+facility_types:
+  thermal:
+    - coal_thermal (석탄화력)
+    - LNG_thermal (LNG화력, 가스복합)
+    - oil_thermal (오일화력)
+  renewable:
+    - wind (풍력 — 육상/해상)
+    - solar_PV (태양광)
+    - hydro (수력)
+    - geothermal (지열)
+    - biomass (바이오매스)
+    - fuel_cell (연료전)
+utility_companies:
+  thermal: 한국남부/중부/동서/서부발전
+  renewable: 한국에너지공단, 민간
+  nuclear: 한국수력원자력 (KHNP) — 본 도메인 제외
+last_updated: "2026-06-18"

@@ -1,0 +1,25 @@
+source_mcp: mcp-kr-legislation
+jurisdiction: KR
+regulator: MOTIE (산업통상자원부) / KGS (한국가스안전공사)
+framework: High-Pressure-Gas-Safety
+title_ko: 고압가스 안전관리법
+title_en: High-Pressure Gas Safety Control Act
+primary_law:
+  name_ko: 고압가스 안전관리법
+  articles:
+    - article: "14"
+      topic_ko: 고압가스 저장탱크 안전
+    - article: "17"
+      topic_ko: 고압가스 취급 기준
+    - article: "28"
+      topic_ko: 안전관리자 선임
+kgs_inspection:
+  storage_tank: 연 1회
+  gas_detector: 월 1회
+  safety_relief_valve: 연 1회
+applicable_facilities:
+  - LNG_터미널 (인천/평택/삼척/통영)
+  - LPG_충전소 (전국 1200+)
+  - 도시가스_저장시설
+  - 석유화학_고압가스_시설
+last_updated: "2026-06-18"

@@ -1,0 +1,19 @@
+source_mcp: mcp-kr-legislation
+jurisdiction: KR
+regulator: MOTIE / KGS
+framework: LPG-Safety-Business
+title_ko: 액화석유가스의 안전관리 및 사업법
+title_en: LPG Safety Management and Business Act
+primary_law:
+  name_ko: 액화석유가스의 안전관리 및 사업법
+  articles:
+    - article: "29"
+      topic_ko: LPG 충전업 안전관리
+    - article: "30"
+      topic_ko: LPG 저장기준
+    - article: "37"
+      topic_ko: 안전관리자 선임 (LPG)
+charging_stations:
+  count_korea: 1200+
+  regulatory_distance: 15-50m (학교/병원 등)
+last_updated: "2026-06-18"

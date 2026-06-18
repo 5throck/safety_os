@@ -1,0 +1,21 @@
+source_mcp: mcp-kr-legislation
+jurisdiction: KR
+regulator: MOTIE
+framework: Hydrogen-Economy-Act
+title_ko: 수소경제 육성 및 수소안전관리에 관한 법률
+title_en: Hydrogen Economy Act
+year_enacted: "2021"
+primary_law:
+  name_ko: 수소경제 육성 및 수소안전관리에 관한 법률
+  articles:
+    - article: "32"
+      topic_ko: 수소충전소 안전관리
+    - article: "33"
+      topic_ko: 수소 저장기준
+hydrogen_specifics:
+  explosive_range: "4-75% (매우 넓음)"
+  detonation_range: "18.3-59%"
+  embrittlement: "금속 취성 발생 가능"
+  flame_invisible: "육안으로 화염 안 보임 — UV/IR 검출기 필수"
+charging_station_distance: "15-30m (학교/병원 등)"
+last_updated: "2026-06-18"
