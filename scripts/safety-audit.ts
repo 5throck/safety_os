@@ -669,10 +669,24 @@ errors.push(...powergenWorkflowErrs);
 const powergenEvidenceResult = validateDomainEvidence('powergen', ['plant_type', 'kesa_inspection_status', 'voltage_class']);
 errors.push(...powergenEvidenceResult.errs);
 
+// ehschem validation
+const ehschemSchemaFiles = walkDirExact(path.join(workflowDir, 'domains', 'industry', 'ehschem'), 'schema.yaml');
+const ehschemWorkflowErrs = validateDomainWorkflow('ehschem');
+errors.push(...ehschemWorkflowErrs);
+const ehschemEvidenceResult = validateDomainEvidence('ehschem', ['plant_category', 'psm_applicable', 'chemical_category']);
+errors.push(...ehschemEvidenceResult.errs);
+
+// meddevice validation
+const meddeviceSchemaFiles = walkDirExact(path.join(workflowDir, 'domains', 'industry', 'meddevice'), 'schema.yaml');
+const meddeviceWorkflowErrs = validateDomainWorkflow('meddevice');
+errors.push(...meddeviceWorkflowErrs);
+const meddeviceEvidenceResult = validateDomainEvidence('meddevice', ['device_class', 'kgmp_certification_status', 'iso_13485_compliance']);
+errors.push(...meddeviceEvidenceResult.errs);
+
 console.log(`Files checked : ${totalChecked}`);
-console.log(`  workflows/        : ${schemaFiles.length} schema.yaml file(s) (${gmpSchemaFiles.length} GMP, ${msdsSchemaFiles.length} MSDS, ${gdpSchemaFiles.length} GDP, ${glpSchemaFiles.length} GLP, ${gcpSchemaFiles.length} GCP, ${gvpSchemaFiles.length} GVP, ${ehsconstSchemaFiles.length} ehsconst, ${gastermSchemaFiles.length} gasterm, ${powergenSchemaFiles.length} powergen)`);
+console.log(`  workflows/        : ${schemaFiles.length} schema.yaml file(s) (${gmpSchemaFiles.length} GMP, ${msdsSchemaFiles.length} MSDS, ${gdpSchemaFiles.length} GDP, ${glpSchemaFiles.length} GLP, ${gcpSchemaFiles.length} GCP, ${gvpSchemaFiles.length} GVP, ${ehsconstSchemaFiles.length} ehsconst, ${gastermSchemaFiles.length} gasterm, ${powergenSchemaFiles.length} powergen, ${ehschemSchemaFiles.length} ehschem, ${meddeviceSchemaFiles.length} meddevice)`);
 console.log(`  regulations/      : ${regFiles.length} .yaml file(s)`);
-console.log(`  evidence-models/  : ${evidenceFiles.length} .json file(s) (${gmpEvidenceFiles.length} GMP, ${msdsEvidenceFiles.length} MSDS, ${gdpEvidenceFiles.length} GDP, ${glpEvidenceFiles.length} GLP, ${gcpEvidenceFiles.length} GCP, ${gvpEvidenceFiles.length} GVP, ${ehsconstEvidenceFiles.length} ehsconst, ${gastermEvidenceResult.files.length} gasterm, ${powergenEvidenceResult.files.length} powergen)\n`);
+console.log(`  evidence-models/  : ${evidenceFiles.length} .json file(s) (${gmpEvidenceFiles.length} GMP, ${msdsEvidenceFiles.length} MSDS, ${gdpEvidenceFiles.length} GDP, ${glpEvidenceFiles.length} GLP, ${gcpEvidenceFiles.length} GCP, ${gvpEvidenceFiles.length} GVP, ${ehsconstEvidenceFiles.length} ehsconst, ${gastermEvidenceResult.files.length} gasterm, ${powergenEvidenceResult.files.length} powergen, ${ehschemEvidenceResult.files.length} ehschem, ${meddeviceEvidenceResult.files.length} meddevice)\n`);
 
 if (errors.length === 0) {
     console.log(`${GREEN}✅ ${totalChecked} files checked, 0 errors${RESET}`);
