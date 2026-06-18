@@ -146,6 +146,8 @@ Must pass with 0 errors. The audit auto-recognizes new domains via recursive wal
 | `gcp` | 2026-06-17 | active (v1) | clinical-research |
 | `gvp` | 2026-06-17 | active (v1) | pharmacovigilance |
 | `ehsconst` | 2026-06-18 | active (v1) | construction |
+| `gasterm` | 2026-06-18 | active (v1) | gas-facility |
+| `powergen` | 2026-06-18 | active (v1) | power-generation |
 
 ## 6. Migration Notes (for Existing Domains)
 

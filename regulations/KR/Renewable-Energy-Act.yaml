@@ -1,0 +1,33 @@
+source_mcp: mcp-kr-legislation
+jurisdiction: KR
+regulator: MOTIE / KEA (한국에너지공단)
+framework: Renewable-Energy-Act
+title_ko: 신에너지 및 재생에너지 개발·이용·보급 촉진법
+title_en: New and Renewable Energy Act
+primary_law:
+  name_ko: 신에너지 및 재생에너지 개발·이용·보급 촉진법
+  articles:
+    - article: "12"
+      topic_ko: 신재생에너지 시설 안전
+renewable_categories:
+  - solar_PV (태양광)
+  - wind (풍력)
+  - hydro (수력)
+  - geothermal (지열)
+  - bio (바이오)
+  - fuel_cell (연료전)
+  - ESS (에너지저장장치 — 리튬이온 화재 위험)
+special_safety_concerns:
+  wind:
+    - 추락 (고소 작업, 80-120m)
+    - 블레이드 파손
+    - 화재 (고소 화재 구조 어려움)
+  solar_PV:
+    - 감전 (DC 고압)
+    - 화재 (결함 모듈)
+    - 폭풍 피해
+  ESS:
+    - 리튬이온 화재 (Thermal Runaway)
+    - 가스 폭발
+    - 재발화 (물 소화 시 화학반응)
+last_updated: "2026-06-18"
