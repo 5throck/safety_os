@@ -1,127 +1,88 @@
 # Safety OS — AI 기반 EHS/GxP 플랫폼
 
-> Claude Code Harness Engineering 기반 대한민국 EHS/GxP 규정 준수 자동화
+> 2-Tier 기능×산업 매트릭스 아키텍처 기반 대한민국 EHS/GxP 규정 준수 자동화
 
-## 개요
+## 활성 도메인 (11개)
 
-Safety OS는 대한민국 EHS(환경·보건·안전) 및 GxP(Good Practice) 분야를 위한 AI 에이전트 기반 규정 준수 시스템입니다. 의약품 라이프사이클 전체(GLP → GCP → GMP → GDP → GVP)와 산업별 EHS 수직(PSM, MSDS, 건설안전)을 독립 도메인으로 구조화하여 워크플로우, 증거 모델, 스킬, 규제를 통합 관리합니다.
+### 기능 레이어 (Tier 1) — 방법론 및 데이터 서비스
 
-## 활성 도메인 (8개)
+| 도메인 | 적용 영역 |
+|--------|-----------|
+| `psm` | 공정안전관리 (11 워크플로우, OSHA 14요소) |
+| `msds` | 화학물질 안전 / GHS Rev 9 (7 워크플로우) |
+| `gmp` | 의약품 제조 품질 (10 워크플로우) |
+| `gdp` | 의약품 유통 (8 워크플로우) |
+| `glp` | 비임상시험 / OECD GLP (8 워크플로우) |
+| `gcp` | 임상시험 관리 / ICH E6(R3) (8 워크플로우) |
+| `gvp` | 시판 후 약물감시 / ICH E2 (8 워크플로우) |
 
-| 도메인 | 적용 영역 | 상태 |
-|--------|-----------|------|
-| `psm` | 공정안전관리 (화학공장) | active |
-| `gmp` | 의약품 제조 품질 | active (v1) |
-| `msds` | 화학물질 안전 / GHS | active (v1) |
-| `gdp` | 의약품 유통 | active (v1) |
-| `glp` | 비임상시험 | active (v1) |
-| `gcp` | 임상시험 관리 | active (v1) |
-| `gvp` | 시판 후 약물감시 | active (v1) |
-| `ehsconst` | 건설안전 | active (v1) |
+### 산업 레이어 (Tier 2) — 산업별 운영
 
-## 의약품 라이프사이클 통합
+| 도메인 | 적용 산업 |
+|--------|-----------|
+| `ehsconst` | 건설안전 / SAPA 제12조 (9 워크플로우) |
+| `ehschem` | 화학공장 / 정유·석유화학·정밀화학 (8 워크플로우) |
+| `gasterm` | 가스터미널 / LNG·LPG·수소 (8 워크플로우) |
+| `powergen` | 발전설비 / 화력·신재생, 원자력 제외 (8 워크플로우) |
 
-```
-비임상(GLP) → 임상(GCP) → 허가 → 제조(GMP) → 유통(GDP) → 시판후(GVP)
-     ↑                                                         ↓
-     └──────── 재평가 (5-7년) ←────────────────────────────────┘
-     
-+ 화학안전(MSDS), 공정안전(PSM), 건설안전(ehsconst)이 모든 단계 참조
-+ emergency-agent가 6개 reference workflow로 긴급 회수/제한/중지 실행
-```
+### 공통 서비스 (Tier 3)
 
-## 한국 규제 커버리지
+| 서비스 | 영역 |
+|--------|------|
+| `emergency/` | 9개 비상 대응 시나리오 (화재, 재해, 의료, 화학, 폭발, 구조, 감전, 기계) |
+| `daily/` | 14개 일일 EHS 워크플로우 (위험성평가, 작업허가서 등) |
 
-| 법령 | 적용 도메인 | 핵심 |
-|------|-------------|------|
-| 약사법 | GMP, GDP, GCP, GVP | 제34조(GMP), 제43의2(GDP), 제69(CTA), 제73의2(SAE) |
-| 산업안전보건법 (OSHA-KR) | PSM, MSDS, 건설안전 | 제15조(안전관리자), 제36조(위험성평가), 제44조(PSM), 제98-103조(건설) |
-| 중대재해처벌법 (SAPA) | 모든 산업 | 제3조(경영책임), 제7조(사업주 의무), 제12조(건설업 특례) |
-| K-REACH | MSDS, GLP | 위해성평가 시험 GLP 의무 |
-| GHS Rev 9 | MSDS | UN 표준, 한국 2023년 의무화 |
-| ICH E6(R3) | GCP | 임상시험 관리 국제 표준 |
-| ICH E2 series | GVP | 안전성 보고 국제 정렬 |
-| OECD GLP | GLP | MAD (데이터 상호인정) |
-| PIC/S GDP | GDP | 유통 국제 정렬 |
-| 건설기술진흥법 | 건설안전 | 제24조 독립 안전감리 |
-
-## 아키텍처
+## 2-Tier 매트릭스 아키텍처
 
 ```
-PM (최고안전보건책임자, CSO)
-├── SGM (안전거버넌스매니저) — 전략
-│     KPI 설정, 정책 승인, 법규 모니터링
-├── SWM (안전워크플로우매니저) — 실행
-│   ├── _core/: pm, sgm, swm
-│   ├── _shared/: 컴플라이언스, 위험성평가, 비상대응, 감사 등
-│   └── domains/<도메인>/: gmp, msds, gdp, glp, gcp, gvp, ehsconst, psm
-└── emergency workflows (9): fire-response, disaster-response,
-    medical-emergency, chemical-release, explosion-gas-response,
-    confined-space-rescue, high-angle-rescue, electrical-emergency,
-    mechanical-accident
+                 제약      화학      가스/에너지   발전      건설
+PSM (기능)        -        ✓(ehschem)  ✓(gasterm)  ✓(powergen)  -
+MSDS (기능)       ✓        ✓           ✓           ✓           ✓
+GxP (기능)        ✓(전체)  -           -           -           -
+Emergency (공통)  ✓        ✓           ✓           ✓           ✓
+──────────────────────────────────────────────────────────────────
+ehsconst (산업)                                           ✓
+ehschem (산업)             ✓
+gasterm (산업)                         ✓
+powergen (산업)                                    ✓
 ```
 
-## 디렉토리 구조 (도메인 패턴)
+산업 도메인은 **매트릭스 코디네이터** — 공정안전(PSM), 화학데이터(MSDS) 등 기능 서비스에 dispatch.
+
+## 폴더 구조
 
 ```
-<top-level>/
-├── _meta/              # 메타 (도메인 무관)
-├── _shared/            # 다중 도메인 공통 자산
-└── domains/<도메인>/   # 도메인 특화
-```
+agents/domains/
+├── functional/     ← PSM, MSDS, GxP (기능 서비스)
+├── industry/       ← ehsconst, ehschem, gasterm, powergen (산업 운영)
+└── _core/, _shared/ ← 코어 에이전트, 공통 서비스
 
-각 도메인은 동일한 패턴을 따릅니다:
-- `agents/domains/<도메인>/<도메인>-agent.md`
-- `workflows/domains/<도메인>/<workflow>/{schema.yaml, README.md}`
-- `evidence-models/domains/<도메인>/<도메인>-*-record.json`
-- `skills/domains/<도메인>/<skill>/SKILL.md`
-- `docs/domains/<도메인>/scope.md`
+workflows/
+├── domains/functional/   ← 기능 워크플로우
+├── domains/industry/     ← 산업 워크플로우
+├── emergency/            ← 9개 비상 대응
+└── daily/                ← 14개 일일 EHS
+```
 
 ## 빠른 시작
 
 ```bash
-# 의존성 설치
 bun install
-
-# 감사 실행 (280+ 파일 검증)
-bun scripts/safety-audit.ts
-
-# 프로파일 필드 테스트
-bun scripts/test-pharma-general-profile.ts        # GMP
-bun scripts/test-chemical-handling-profile.ts     # MSDS
+bun scripts/safety-audit.ts                         # 356+ 파일 검증, 0 errors
+bun scripts/test-pharma-general-profile.ts          # GMP 필드 테스트
+bun scripts/test-chemical-handling-profile.ts       # MSDS 필드 테스트
+bun scripts/test-cross-domain-integration.ts        # 도메인 간 통합 시나리오 테스트
 ```
 
-## 검증 현황
+## 주요 문서
 
-- **280+ 파일** (workflows, evidence-models, regulations) — multi-source legal_basis, ALCOA+ audit trail, 공통 필드
-- **80개 워크플로우** — 8개 도메인 + 9개 emergency + 14개 daily EHS
-- **6개 reference workflows** — emergency-agent, compliance-agent에 dispatch
-- **Domain Onboarding SOP** (`docs/_shared/domain-onboarding-guide.md`) — 5개 연속 도메인 추가로 검증 완료
+- `docs/_shared/domain-classification-guide.md` — 3-tier dispatch 가이드 + 매트릭스
+- `docs/_shared/domain-onboarding-guide.md` — 신규 도메인 11단계 SOP
+- `docs/_shared/reference-workflow-pattern.md` — reference workflow 패턴 (8개 적용)
 
-## 주요 산출물
+## 한국 규제 커버리지
 
-- **`docs/_shared/domain-onboarding-guide.md`** — 신규 도메인 추가 11단계 SOP
-- **`docs/_shared/reference-workflow-pattern.md`** — reference workflow 패턴 가이드
-- **`scripts/safety-audit.ts`** v2.8.0 — 다중 도메인 검증 로직
-- **감사 통과**: 모든 PR에서 0 errors 유지
-
-## Cross-Domain 통합
-
-| 인터페이스 | 데이터 흐름 |
-|-----------|-------------|
-| GMP batch → GDP goods-receipt | `batch_disposition_approved_ref` |
-| MSDS Section 6 → emergency chemical-release | `msds_record_ref` |
-| GCP SAE → GVP signal | 안전성 데이터 후속 |
-| GDP cold chain → GVP signal | 온도 이탈 안전 영향 |
-| 6개 reference workflows → emergency-agent | recall, spill, SAE, urgent action 등 |
-
-## 프로젝트 상태
-
-**2026-06-18 기준** — 의약품 라이프사이클 5개 GxP + PSM + MSDS + 건설안전 = 8개 도메인 v1 활성.
-
-**v2 roadmap**: 전자 서명 암호화, ML signal detection, IoT 센서 통합, Real-World Evidence.
-
-**신규 도메인 예정**: 에너지/가스 안전, 의료기기, 화장품, 식품/HACCP.
+약사법, 산업안전보건법 (OSHA-KR), 중대재해처벌법 (SAPA), K-REACH, GHS Rev 9, ICH E6(R3)/E2 series, OECD GLP (MAD), PIC/S GDP, 건설기술진흥법, 고압가스법, 전기사업법, 화학물질관리법, 대기/수질환경보전법.
 
 ## 면책 조항
 

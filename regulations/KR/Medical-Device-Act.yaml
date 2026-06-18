@@ -1,0 +1,38 @@
+source_mcp: mcp-kr-legislation
+jurisdiction: KR
+regulator: MFDS (식품의약품안전처)
+framework: KGMP-MD
+title_ko: 의료기기법 + 의료기기 제조 및 품질관리 기준 (KGMP-MD)
+title_en: Medical Device Act + KGMP-MD
+primary_law:
+  name_ko: 의료기기법
+  articles:
+    - article: "12"
+      topic_ko: 의료기기 제조업 허가
+    - article: "16"
+      topic_ko: 의료기기 품질관리 (KGMP-MD)
+    - article: "20"
+      topic_ko: 의료기기 위해사항 보고
+    - article: "23"
+      topic_ko: 의료기기 표시·광고
+delegated_legislation:
+  - name_ko: 의료기기 제조 및 품질관리 기준 (MFDS 고시)
+    name_en: KGMP-MD
+international_alignment:
+  - framework: ISO 13485
+    alignment_level: full
+  - framework: ISO 14971
+    alignment_level: mandatory
+  - framework: MDR (EU) 2017/745
+    alignment_level: export_required
+  - framework: FDA QSR (21 CFR 820)
+    alignment_level: export_required
+device_classifications:
+  class_1: "낮은 위해도 (품목제조보고)"
+  class_2: "중간 위해도 (품목허가)"
+  class_3: "높은 위해도 (품목허가 + 임상시험)"
+  class_4: "매우 높은 위해도 (심사 + 임상시험)"
+kgmp_certification:
+  validity_years: 3
+  authority: MFDS
+last_updated: "2026-06-18"

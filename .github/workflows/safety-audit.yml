@@ -1,0 +1,36 @@
+name: Safety OS Audit
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        run: bun install
+
+      - name: Run safety-audit
+        run: bun scripts/safety-audit.ts
+
+      - name: Run pharma-general profile test
+        run: bun scripts/test-pharma-general-profile.ts
+
+      - name: Run chemical-handling profile test
+        run: bun scripts/test-chemical-handling-profile.ts
+
+      - name: Run cross-domain integration test
+        run: bun scripts/test-cross-domain-integration.ts
+
+      - name: Run FMEA scoring test
+        run: bun skills/domains/functional/gmp/qrm/fmea-scoring.ts
