@@ -1,0 +1,26 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "meddevice-risk-record.json",
+  "title": "Medical Device Risk Management Record",
+  "description": "ISO 14971 risk management.",
+  "version": "1.0.0",
+  "type": "object",
+  "required": ["record_id", "device_class", "kgmp_certification_status", "iso_13485_compliance", "legal_basis", "e_signature", "nomenclature", "audit_trail"],
+  "properties": {
+    "record_id": { "type": "string", "pattern": "^MDDEV-RM-[0-9]{4}-[0-9]{4}$" },
+    "device_class": { "type": "string", "enum": ["class_1", "class_2", "class_3", "class_4"] },
+    "kgmp_certification_status": { "type": "string", "enum": ["certified", "pending", "expired"] },
+    "iso_13485_compliance": { "type": "boolean" },
+    "iso_14971_risk_management": { "type": "boolean" },
+    "device_id": { "type": "string" },
+    "risk_management_plan_ref": { "type": "string" },
+    "hazards_identified": { "type": "array", "items": { "type": "object", "properties": { "hazard_id": { "type": "string" }, "hazard_description": { "type": "string" }, "risk_estimation_before": { "type": "string" }, "risk_control_measure": { "type": "string" }, "risk_estimation_after": { "type": "string" }, "residual_risk_acceptable": { "type": "boolean" } } } },
+    "overall_residual_risk_evaluation": { "type": "string", "enum": ["acceptable", "acceptable_with_justification", "not_acceptable"] },
+    "risk_management_report_completed": { "type": "boolean" },
+
+    "legal_basis": { "type": "array", "items": { "type": "string" }, "minItems": 3 },
+    "e_signature": { "$ref": "../../../_shared/base/common.schema.json#/definitions/e_signature" },
+    "nomenclature": { "$ref": "../../../_shared/base/common.schema.json#/definitions/nomenclature" },
+    "audit_trail": { "$ref": "../../../_shared/base/common.schema.json#/definitions/audit_trail" }
+  }
+}
