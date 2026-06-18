@@ -150,6 +150,7 @@ Must pass with 0 errors. The audit auto-recognizes new domains via recursive wal
 | `ehsconst` | industry | 2026-06-18 | active (v1) | construction |
 | `gasterm` | industry | 2026-06-18 | active (v1) | gas-facility |
 | `powergen` | industry | 2026-06-18 | active (v1) | power-generation |
+| `ehschem` | industry | 2026-06-18 | active (v1) | chemical-plant (정유/석유화학/정밀화학) |
 | `ehschem` (planned) | industry | planned | pending (v1) | chemical-plant (정유/석유화학/정밀화학) |
 
 ## 6. Migration Notes (for Existing Domains)

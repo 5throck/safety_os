@@ -1,0 +1,15 @@
+source_mcp: mcp-kr-legislation
+jurisdiction: KR
+regulator: ME (환경부)
+framework: CCA
+title_ko: 화학물질관리법 (CCA)
+title_en: Chemical Substances Control Act
+key_articles:
+  - article: "20"
+    topic_ko: 유해화학물질 취급기준
+  - article: "23"
+    topic_ko: 사고대비물질 관리
+accident_preparedness_substances:
+  description: "대규모 사고 유발 가능 화학물질 (43종 지정)"
+  management: "취급시설 등록, 영향평가, 비상조치계획"
+last_updated: "2026-06-18"

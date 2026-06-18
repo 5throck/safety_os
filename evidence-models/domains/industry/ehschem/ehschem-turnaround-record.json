@@ -1,0 +1,37 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "ehschem-turnaround-record.json",
+  "title": "Chemical Plant Turnaround Record",
+  "description": "정기보수 (TAR) 가동중지 계획 기록.",
+  "version": "1.0.0",
+  "type": "object",
+  "required": ["record_id", "plant_category", "psm_applicable", "chemical_category", "legal_basis", "e_signature", "nomenclature", "audit_trail"],
+  "properties": {
+    "record_id": { "type": "string", "pattern": "^CHEM-TAR-[0-9]{4}-[0-9]{4}$" },
+    "plant_category": {
+      "type": "string",
+      "enum": ["refining", "petrochemical", "specialty_chemicals"]
+    },
+    "psm_applicable": { "type": "boolean", "default": true },
+    "environmental_permit_id": { "type": ["string", "null"] },
+    "chemical_category": {
+      "type": "string",
+      "enum": ["hydrocarbon", "polymer", "specialty_intermediate", "other"]
+    },
+    "facility_id": { "type": "string" },
+    "turnaround_id": { "type": "string" },
+    "planned_start_date": { "type": "string", "format": "date" },
+    "planned_end_date": { "type": "string", "format": "date" },
+    "duration_days": { "type": "integer" },
+    "contractors_involved": { "type": "integer" },
+    "permit_to_work_count": { "type": "integer" },
+    "psm_pssr_required": { "type": "boolean", "default": true },
+    "pre_tar_risk_assessment": { "type": "boolean" },
+    "post_tar_pssr_completed": { "type": "boolean" },
+
+    "legal_basis": { "type": "array", "items": { "type": "string" }, "minItems": 3 },
+    "e_signature": { "$ref": "../../../_shared/base/common.schema.json#/definitions/e_signature" },
+    "nomenclature": { "$ref": "../../../_shared/base/common.schema.json#/definitions/nomenclature" },
+    "audit_trail": { "$ref": "../../../_shared/base/common.schema.json#/definitions/audit_trail" }
+  }
+}

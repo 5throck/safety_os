@@ -80,7 +80,7 @@ try {
     let allEvidenceModelsExist = true;
 
     for (const wf of workflows) {
-        const wfDir = path.join(ROOT, 'workflows', 'domains', 'gmp', wf);
+        const wfDir = path.join(ROOT, 'workflows', 'domains', 'functional', 'gmp', wf);
         const schemaPath = path.join(wfDir, 'schema.yaml');
         const readmePath = path.join(wfDir, 'README.md');
 
@@ -117,7 +117,7 @@ try {
             // Could be a single name or comma-separated list
             const models = evidenceModelName.split(',').map((s: string) => s.trim());
             for (const modelName of models) {
-                const modelPath = path.join(ROOT, 'evidence-models', 'domains', 'gmp', modelName);
+                const modelPath = path.join(ROOT, 'evidence-models', 'domains', 'functional', 'gmp', modelName);
                 if (!fs.existsSync(modelPath)) {
                     record('T-05', `Evidence model '${modelName}' for workflow '${wf}' exists`, false);
                     allEvidenceModelsExist = false;
@@ -136,7 +136,7 @@ try {
 
 // ── T-06: GMP agent exists ───────────────────────────────────────────────────
 console.log(`\n${CYAN}[T-06] GMP agent existence${RESET}`);
-const agentPath = path.join(ROOT, 'agents', 'domains', 'gmp', 'gmp-agent.md');
+const agentPath = path.join(ROOT, 'agents', 'domains', 'functional', 'gmp', 'gmp-agent.md');
 if (fs.existsSync(agentPath)) {
     record('T-06', 'GMP agent exists at agents/domains/gmp/gmp-agent.md', true);
 } else {
@@ -167,7 +167,7 @@ console.log(`\n${CYAN}[T-08] GMP skills existence${RESET}`);
 const expectedSkills = ['change-control', 'deviation-capa', 'qrm'];
 let allSkillsExist = true;
 for (const skill of expectedSkills) {
-    const skillPath = path.join(ROOT, 'skills', 'domains', 'gmp', skill, 'SKILL.md');
+    const skillPath = path.join(ROOT, 'skills', 'domains', 'functional', 'gmp', skill, 'SKILL.md');
     if (fs.existsSync(skillPath)) {
         console.log(`  ${GREEN}✓${RESET} skill '${skill}' exists`);
     } else {
@@ -198,7 +198,7 @@ try {
 console.log(`\n${CYAN}[T-10] Sample evidence record schema validation${RESET}`);
 try {
     // Pick change-control evidence model and validate its schema structure
-    const sampleModelPath = path.join(ROOT, 'evidence-models', 'domains', 'gmp', 'gmp-change-control-record.json');
+    const sampleModelPath = path.join(ROOT, 'evidence-models', 'domains', 'functional', 'gmp', 'gmp-change-control-record.json');
     const sampleModel = JSON.parse(fs.readFileSync(sampleModelPath, 'utf-8'));
 
     const requiredProps = ['record_id', 'change_id', 'title', 'status', 'legal_basis',

@@ -1,0 +1,43 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "gdp-goods-receipt-record.json",
+  "title": "GDP Goods Receipt Record",
+  "description": "Evidence for pharmaceutical goods receipt from GMP manufacturers per KGDP.",
+  "version": "1.0.0",
+  "type": "object",
+  "required": ["record_id", "legal_basis", "gdp_certification_status", "temperature_condition", "e_signature", "nomenclature", "audit_trail"],
+  "properties": {
+    "record_id": { "type": "string", "pattern": "^GDP-GR-[0-9]{4}-[0-9]{4}$" },
+    "gdp_certification_status": {
+      "type": "string",
+      "enum": ["certified", "pending", "suspended", "expired"],
+      "description": "KGDP certification status at time of record"
+    },
+    "temperature_condition": {
+      "type": "string",
+      "enum": ["cold_chain_2_8C", "frozen_below_minus_15C", "controlled_room_15_25C", "ambient_30C_max", "not_applicable"]
+    },
+    "batch_disposition_approved_ref": {
+      "type": ["string", "null"],
+      "description": "GMP batch-record ID (for goods receipt from manufacturing)"
+    },
+    "supplier_id": { "type": "string" },
+    "batch_id": { "type": "string" },
+    "product_code": { "type": "string" },
+    "quantity_received": { "type": "number" },
+    "receipt_date": { "type": "string", "format": "date-time" },
+    "vehicle_temp_logger_verified": { "type": "boolean" },
+    "dts_scan_completed": { "type": "boolean" },
+    "inspection_result": { "type": "string", "enum": ["accepted", "rejected", "quarantined"] },
+    "rejection_reason": { "type": ["string", "null"] },
+
+    "legal_basis": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 3
+    },
+    "e_signature": { "$ref": "../../../_shared/base/common.schema.json#/definitions/e_signature" },
+    "nomenclature": { "$ref": "../../../_shared/base/common.schema.json#/definitions/nomenclature" },
+    "audit_trail": { "$ref": "../../../_shared/base/common.schema.json#/definitions/audit_trail" }
+  }
+}
