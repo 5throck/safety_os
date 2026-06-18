@@ -1,0 +1,27 @@
+source_mcp: mcp-kr-legislation
+jurisdiction: KR
+regulator: KESCO (한국전기안전공사)
+framework: Electrical-Safety-Act
+title_ko: 전기안전관리법
+title_en: Electrical Safety Management Act
+primary_law:
+  name_ko: 전기안전관리법
+  articles:
+    - article: "16"
+      topic_ko: 전기설비 안전점검
+    - article: "29"
+      topic_ko: 전기안전관리자 선임
+voltage_classification:
+  low: "400V 이하"
+  medium: "400V ~ 22kV"
+  high: "22kV ~ 154kV"
+  extra_high: "154kV 이상 (345kV/765kV 송전)"
+inspection_cycles:
+  regular_self: 월 1회
+  kesco_periodic: 연 1회 (특수 2년)
+key_hazards:
+  - 감전 (electric shock)
+  - 아크 플래시 (arc flash)
+  - 활선 작업 사고
+  - 정전 영향
+last_updated: "2026-06-18"

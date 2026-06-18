@@ -20,8 +20,11 @@
  *   pbrer_cycle_ref, product_id, rmp_version_ref fields.
  * v2.8.0 (2026-06-18): Added ehsconst (Construction Safety) module validation —
  *   sapa_article_12_compliance, project_id, contractor_tier, safety_officer_in_charge.
+ * v2.9.0 (2026-06-18): Added gasterm (Gas Terminal) + powergen (Power Generation)
+ *   module validation. gasterm: facility_type, kgs_inspection_status, psm_applicable,
+ *   gas_type. powergen: plant_type, kesa_inspection_status, voltage_class.
  *
- * @version 2.8.0
+ * @version 2.9.0
  */
 
 import * as fs from 'node:fs';
@@ -597,10 +600,79 @@ for (const file of ehsconstEvidenceFiles) {
     }
 }
 
+// ── gasterm + powergen validation (v2.9.0) ───────────────────────────────────
+function validateDomainWorkflow(domainName: string, requiredMin: number = 3): string[] {
+    const domainDir = path.join(workflowDir, 'domains', domainName);
+    const schemaFiles = walkDirExact(domainDir, 'schema.yaml');
+    const errs: string[] = [];
+    for (const file of schemaFiles) {
+        totalChecked++;
+        const content = fs.readFileSync(file, 'utf-8');
+        const rel = relPath(file);
+        try {
+            const doc = yaml.load(content) as any;
+            if (!doc) continue;
+            const isReference = doc.workflow_type === 'reference';
+            const reqMin = isReference ? 2 : requiredMin;
+            if (!Array.isArray(doc.legal_basis) || doc.legal_basis.length < reqMin) {
+                errs.push(`${rel}: ${domainName} workflow requires multi-source legal_basis (≥${reqMin})`);
+            }
+            if (isReference && !doc.target_agent) {
+                errs.push(`${rel}: ${domainName} reference workflow requires target_agent`);
+            }
+        } catch (e: any) {
+            errs.push(`${rel}: YAML parsing error - ${e.message}`);
+        }
+    }
+    return errs;
+}
+
+function validateDomainEvidence(domainName: string, requiredFields: string[], minLegalBasis: number = 3): { files: string[], errs: string[] } {
+    const domainEvidence = evidenceFiles.filter(f => {
+        return path.dirname(f).includes(path.join('domains', domainName));
+    });
+    const errs: string[] = [];
+    for (const file of domainEvidence) {
+        totalChecked++;
+        const content = fs.readFileSync(file, 'utf-8');
+        const rel = relPath(file);
+        try {
+            const doc = JSON.parse(content);
+            const props = doc.properties || {};
+            for (const field of requiredFields) {
+                if (!props[field]) {
+                    errs.push(`${rel}: missing ${domainName} required field '${field}'`);
+                }
+            }
+            const legalBasis = props.legal_basis;
+            if (legalBasis && (!legalBasis.minItems || legalBasis.minItems < minLegalBasis)) {
+                errs.push(`${rel}: ${domainName} legal_basis must have minItems ≥${minLegalBasis}`);
+            }
+        } catch (e: any) {
+            errs.push(`${rel}: JSON parsing error - ${e.message}`);
+        }
+    }
+    return { files: domainEvidence, errs };
+}
+
+// gasterm validation
+const gastermSchemaFiles = walkDirExact(path.join(workflowDir, 'domains', 'gasterm'), 'schema.yaml');
+const gastermWorkflowErrs = validateDomainWorkflow('gasterm');
+errors.push(...gastermWorkflowErrs);
+const gastermEvidenceResult = validateDomainEvidence('gasterm', ['facility_type', 'kgs_inspection_status', 'psm_applicable', 'gas_type']);
+errors.push(...gastermEvidenceResult.errs);
+
+// powergen validation
+const powergenSchemaFiles = walkDirExact(path.join(workflowDir, 'domains', 'powergen'), 'schema.yaml');
+const powergenWorkflowErrs = validateDomainWorkflow('powergen');
+errors.push(...powergenWorkflowErrs);
+const powergenEvidenceResult = validateDomainEvidence('powergen', ['plant_type', 'kesa_inspection_status', 'voltage_class']);
+errors.push(...powergenEvidenceResult.errs);
+
 console.log(`Files checked : ${totalChecked}`);
-console.log(`  workflows/        : ${schemaFiles.length} schema.yaml file(s) (${gmpSchemaFiles.length} GMP, ${msdsSchemaFiles.length} MSDS, ${gdpSchemaFiles.length} GDP, ${glpSchemaFiles.length} GLP, ${gcpSchemaFiles.length} GCP, ${gvpSchemaFiles.length} GVP, ${ehsconstSchemaFiles.length} ehsconst)`);
+console.log(`  workflows/        : ${schemaFiles.length} schema.yaml file(s) (${gmpSchemaFiles.length} GMP, ${msdsSchemaFiles.length} MSDS, ${gdpSchemaFiles.length} GDP, ${glpSchemaFiles.length} GLP, ${gcpSchemaFiles.length} GCP, ${gvpSchemaFiles.length} GVP, ${ehsconstSchemaFiles.length} ehsconst, ${gastermSchemaFiles.length} gasterm, ${powergenSchemaFiles.length} powergen)`);
 console.log(`  regulations/      : ${regFiles.length} .yaml file(s)`);
-console.log(`  evidence-models/  : ${evidenceFiles.length} .json file(s) (${gmpEvidenceFiles.length} GMP, ${msdsEvidenceFiles.length} MSDS, ${gdpEvidenceFiles.length} GDP, ${glpEvidenceFiles.length} GLP, ${gcpEvidenceFiles.length} GCP, ${gvpEvidenceFiles.length} GVP, ${ehsconstEvidenceFiles.length} ehsconst)\n`);
+console.log(`  evidence-models/  : ${evidenceFiles.length} .json file(s) (${gmpEvidenceFiles.length} GMP, ${msdsEvidenceFiles.length} MSDS, ${gdpEvidenceFiles.length} GDP, ${glpEvidenceFiles.length} GLP, ${gcpEvidenceFiles.length} GCP, ${gvpEvidenceFiles.length} GVP, ${ehsconstEvidenceFiles.length} ehsconst, ${gastermEvidenceResult.files.length} gasterm, ${powergenEvidenceResult.files.length} powergen)\n`);
 
 if (errors.length === 0) {
     console.log(`${GREEN}✅ ${totalChecked} files checked, 0 errors${RESET}`);
