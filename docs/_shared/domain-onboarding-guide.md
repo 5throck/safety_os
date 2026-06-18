@@ -136,18 +136,21 @@ Must pass with 0 errors. The audit auto-recognizes new domains via recursive wal
 
 ## 5. Active Domains Registry
 
-| Domain | Added | Status | Industry Profile |
-|--------|-------|--------|------------------|
-| `psm` | pre-2026-06-17 | active | chemical-processing |
-| `gmp` | 2026-06-17 | active (v1) | pharma-general |
-| `msds` | 2026-06-17 | active (v1) | chemical-handling |
-| `gdp` | 2026-06-17 | active (v1) | pharma-distribution |
-| `glp` | 2026-06-17 | active (v1) | pharma-laboratory |
-| `gcp` | 2026-06-17 | active (v1) | clinical-research |
-| `gvp` | 2026-06-17 | active (v1) | pharmacovigilance |
-| `ehsconst` | 2026-06-18 | active (v1) | construction |
-| `gasterm` | 2026-06-18 | active (v1) | gas-facility |
-| `powergen` | 2026-06-18 | active (v1) | power-generation |
+> **Tier** classification: `functional` (산업 무관, 방법론/데이터 중심), `industry` (특정 산업 운영 중심), `cross-cutting` (공통 서비스). See `docs/_shared/domain-classification-guide.md`.
+
+| Domain | Tier | Added | Status | Industry Profile |
+|--------|------|-------|--------|------------------|
+| `psm` | functional | pre-2026-06-17 | active | chemical-processing (LNG/LPG/발전 등 covered process 적용) |
+| `msds` | functional | 2026-06-17 | active (v1) | chemical-handling |
+| `gmp` | functional (pharma) | 2026-06-17 | active (v1) | pharma-general |
+| `gdp` | functional (pharma) | 2026-06-17 | active (v1) | pharma-distribution |
+| `glp` | functional (pharma) | 2026-06-17 | active (v1) | pharma-laboratory |
+| `gcp` | functional (pharma) | 2026-06-17 | active (v1) | clinical-research |
+| `gvp` | functional (pharma) | 2026-06-17 | active (v1) | pharmacovigilance |
+| `ehsconst` | industry | 2026-06-18 | active (v1) | construction |
+| `gasterm` | industry | 2026-06-18 | active (v1) | gas-facility |
+| `powergen` | industry | 2026-06-18 | active (v1) | power-generation |
+| `ehschem` (planned) | industry | planned | pending (v1) | chemical-plant (정유/석유화학/정밀화학) |
 
 ## 6. Migration Notes (for Existing Domains)
 
