@@ -1,0 +1,43 @@
+source_mcp: mcp-kr-legislation
+jurisdiction: KR
+regulator: MOEL (고용노동부)
+framework: OSHA-KR-Construction
+title_ko: 산업안전보건법 건설공사 조항
+title_en: Occupational Safety and Health Act — Construction Provisions
+primary_law:
+  name_ko: 산업안전보건법
+  name_en: OSHA-KR
+  articles:
+    - article: "15"
+      topic_ko: 안전관리자 선임 (건설공사)
+      topic_en: Safety manager appointment
+    - article: "17"
+      topic_ko: 산업안전보건관리비 (건설공사 원가의 1.5~5%)
+      topic_en: Safety management budget (1.5-5% of project cost)
+    - article: "98"
+      topic_ko: 건설공사 안전조치 (가설, 굴착, 거푸집)
+      topic_en: Construction safety measures
+    - article: "99"
+      topic_ko: 추락 방지 조치
+      topic_en: Fall prevention
+    - article: "100"
+      topic_ko: 붕괴 위험 방지
+      topic_en: Collapse prevention
+    - article: "101"
+      topic_ko: 전기 위해 방지
+      topic_en: Electrical hazard prevention
+    - article: "102"
+      topic_ko: 기타 건설 위해 방지
+      topic_en: Other construction hazard prevention
+    - article: "103"
+      topic_ko: 안전보건관리계획
+      topic_en: Safety and Health Management Plan
+safety_budget_rates:
+  general_construction: "1.5%"
+  high_risk_construction: "5.0%"
+  scope: "안전장비, 안전교육, 안전점검, 건강진단, 안전관리자 인건비 등"
+construction_safety_plan_required:
+  threshold: "공사금액 50억원 이상 또는 사고발생 위험이 큰 공사"
+  authority: "MOEL 승인"
+  submission_timing: "착공 전"
+last_updated: "2026-06-18"

@@ -1,0 +1,23 @@
+source_mcp: mcp-kr-legislation
+jurisdiction: KR
+regulator: MOLIT (국토교통부)
+framework: Construction-Technology-Act
+title_ko: 건설기술진흥법
+title_en: Construction Technology Promotion Act
+primary_law:
+  name_ko: 건설기술진흥법
+  name_en: Construction Technology Promotion Act
+  articles:
+    - article: "24"
+      topic_ko: 건설공사 안전관리
+      topic_en: Construction safety management
+    - article: "25"
+      topic_ko: 건설공사 품질관리
+      topic_en: Construction quality management
+safety_supervision:
+  name_ko: 안전감리
+  independence: "건설사업관리기술인 (감리)의 독립성 보장"
+  scope: "안전관리계획서 적합성, 시공 중 안전조치, 안전점검 회의 참석"
+  conflict_prevention: "안전관리자와 안전감리의 역할 분리"
+major_threshold: "공사금액 100억 원 이상 또는 사고 위험이 큰 공사"
+last_updated: "2026-06-18"
