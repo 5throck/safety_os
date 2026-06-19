@@ -266,7 +266,7 @@ bun scripts/test-cross-domain-integration.ts      # All domains
 bun scripts/test-domain-scenarios.ts              # 5 real-world scenarios
 
 # Skill execution (rule-based)
-bun skills/domains/functional/gmp/qrm/fmea-scoring.ts        # FMEA risk scoring
+bun skills/domains/industry/gmp/qrm/fmea-scoring.ts        # FMEA risk scoring
 bun skills/domains/functional/msds/ghs-classifier/ghs-classifier.ts  # GHS classification
 bun skills/domains/industry/ehsconst/fall-hazard-assessor/fall-hazard-assessor.ts  # Fall hazard
 
