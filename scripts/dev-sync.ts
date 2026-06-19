@@ -287,6 +287,9 @@ if (!pushRetry.success || pushProc?.exitCode !== 0) {
 }
 
 // 7. Generate PR body and open PR
+// Always specify --base master to avoid wrong-base issue when repo default
+// branch is set to a PR branch instead of master.
+const prBase = 'master';
 let prBody = "";
 try {
     const { stdout } = await $`bun run scripts/gen-pr-body.ts "${msg}"`.quiet().nothrow();
@@ -295,20 +298,20 @@ try {
 
 if (prBody) {
     await withRetry(
-        () => $`gh pr create --title ${msg} --body ${prBody}`.nothrow(),
+        () => $`gh pr create --base ${prBase} --title ${msg} --body ${prBody}`.nothrow(),
         { ...DEFAULT_CONFIG, maxRetries: 3, initialDelay: 1000 },
         'gh pr create'
     );
 } else if (fs.existsSync(path.join('.github', 'pull_request_template.md'))) {
     const prTpl = fs.readFileSync(path.join('.github', 'pull_request_template.md'), 'utf-8');
     await withRetry(
-        () => $`gh pr create --title ${msg} --body ${prTpl}`.nothrow(),
+        () => $`gh pr create --base ${prBase} --title ${msg} --body ${prTpl}`.nothrow(),
         { ...DEFAULT_CONFIG, maxRetries: 3, initialDelay: 1000 },
         'gh pr create'
     );
 } else {
     await withRetry(
-        () => $`gh pr create --fill`.nothrow(),
+        () => $`gh pr create --base ${prBase} --fill`.nothrow(),
         { ...DEFAULT_CONFIG, maxRetries: 3, initialDelay: 1000 },
         'gh pr create'
     );
