@@ -75,6 +75,14 @@ export const DOMAINS: DomainConfig[] = [
         min_workflow_legal_basis: 2,
         description: 'Process Safety Management',
     },
+    {
+        name: 'training',
+        tier: 'functional',
+        required_evidence_fields: ['training_type', 'trainee_id', 'completion_date'],
+        min_legal_basis: 2,
+        min_workflow_legal_basis: 3,
+        description: 'Safety Training Management (OSHA-KR Art 13, 29, 31, 32, 114 + SAPA)',
+    },
 
     // ── Industry domains ──────────────────────────────────────────────
     {

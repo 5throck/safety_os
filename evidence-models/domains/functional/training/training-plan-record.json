@@ -1,0 +1,31 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "training-plan-record.json",
+  "title": "Training Plan Record",
+  "description": "Annual/quarterly training plan per OSHA-KR.",
+  "version": "1.0.0",
+  "type": "object",
+  "required": ["record_id", "plan_year", "plan_type", "target_headcount", "legal_basis"],
+  "properties": {
+    "record_id": { "type": "string", "pattern": "^TRAIN-PLAN-[0-9]{4}-[0-9]{4}$" },
+    "plan_year": { "type": "integer" },
+    "plan_type": { "type": "string", "enum": ["annual", "quarterly", "monthly", "project_based"] },
+    "target_headcount": { "type": "integer" },
+    "planned_sessions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "session_id": { "type": "string" },
+          "training_type": { "type": "string" },
+          "scheduled_month": { "type": "string" },
+          "target_count": { "type": "integer" },
+          "instructor_id": { "type": "string" }
+        }
+      }
+    },
+    "budget_krw": { "type": ["number", "null"] },
+    "approved_by": { "type": "string" },
+    "legal_basis": { "type": "array", "items": { "type": "string" }, "minItems": 2 }
+  }
+}

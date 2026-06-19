@@ -1,0 +1,30 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "training-compliance-record.json",
+  "title": "Training Compliance Record",
+  "description": "Training compliance tracking (completion rate, overdue, gaps).",
+  "version": "1.0.0",
+  "type": "object",
+  "required": ["record_id", "period", "compliance_rate_pct", "total_workers", "trained_workers", "legal_basis"],
+  "properties": {
+    "record_id": { "type": "string", "pattern": "^TRAIN-COMP-[0-9]{4}-[0-9]{4}$" },
+    "period": { "type": "string", "description": "YYYY-MM or YYYY-Qn" },
+    "compliance_rate_pct": { "type": "number", "minimum": 0, "maximum": 100 },
+    "total_workers": { "type": "integer" },
+    "trained_workers": { "type": "integer" },
+    "overdue_workers": { "type": "integer" },
+    "by_training_type": {
+      "type": "object",
+      "properties": {
+        "regular": { "type": "object", "properties": { "required": { "type": "integer" }, "completed": { "type": "integer" }, "overdue": { "type": "integer" } } },
+        "special": { "type": "object", "properties": { "required": { "type": "integer" }, "completed": { "type": "integer" }, "overdue": { "type": "integer" } } },
+        "supervisor": { "type": "object", "properties": { "required": { "type": "integer" }, "completed": { "type": "integer" }, "overdue": { "type": "integer" } } },
+        "new_hire": { "type": "object", "properties": { "required": { "type": "integer" }, "completed": { "type": "integer" }, "overdue": { "type": "integer" } } },
+        "msds": { "type": "object", "properties": { "required": { "type": "integer" }, "completed": { "type": "integer" }, "overdue": { "type": "integer" } } }
+      }
+    },
+    "overdue_worker_list": { "type": "array", "items": { "type": "object", "properties": { "worker_id": { "type": "string" }, "training_type": { "type": "string" }, "days_overdue": { "type": "integer" } } } },
+    "sapa_risk_flagged": { "type": "boolean", "description": "중대재해처벌법 위반 위험 (미이수자 존재)" },
+    "legal_basis": { "type": "array", "items": { "type": "string" }, "minItems": 2 }
+  }
+}

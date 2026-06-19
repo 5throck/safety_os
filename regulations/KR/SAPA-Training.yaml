@@ -1,0 +1,14 @@
+source_mcp: mcp-kr-legislation
+jurisdiction: KR
+regulator: MOEL
+framework: SAPA-Training
+title_ko: 중대재해처벌법 안전교육 의무
+title_en: SAPA Training Obligation
+primary_law:
+  name_ko: 중대재해처벌법
+  articles:
+    - article: "7"
+      topic_ko: 사업주 안전보건교육 의무
+    - article: "12"
+      topic_ko: 건설업 특례 (협력업체 교육)
+last_updated: "2026-06-19"

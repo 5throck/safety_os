@@ -1,0 +1,20 @@
+source_mcp: mcp-kr-legislation
+jurisdiction: KR
+regulator: MOEL / KOSHA
+framework: OSHA-KR-Training
+title_ko: 산업안전보건법 교육 관련 조항
+title_en: OSHA-KR Training Provisions
+primary_law:
+  name_ko: 산업안전보건법
+  articles:
+    - article: "13"
+      topic_ko: 응급조치 교육
+    - article: "29"
+      topic_ko: 안전보건교육 (정규/신규/직무전환)
+    - article: "31"
+      topic_ko: 특별안전보건교육 (위험작업)
+    - article: "32"
+      topic_ko: 관리감독자 교육
+    - article: "114"
+      topic_ko: MSDS 교육 (화학물질 취급자)
+last_updated: "2026-06-19"

@@ -3,7 +3,7 @@
 > AI-driven Korean EHS/GxP compliance orchestration platform with 2-Tier functional × industry matrix architecture.
 > 한국어 가이드는 [README_ko.md](README_ko.md)를 참조하세요.
 
-## Active Domains (12)
+## Active Domains (13)
 
 ### Functional Layer (Tier 1) — methodology & data services
 
