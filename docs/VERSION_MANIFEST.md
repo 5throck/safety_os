@@ -1,6 +1,6 @@
 # VERSION_MANIFEST.md
 
-**Generated**: 2026-06-18T22:06:18.471Z
+**Generated**: 2026-06-19T11:11:15.145Z
 **Manifest Version**: 1.0
 **Location**: docs/VERSION_MANIFEST.md
 
@@ -10,7 +10,7 @@
 
 - **Agents**: 0
 - **Skills**: 8
-- **Scripts**: 55
+- **Scripts**: 57
 - **Commands**: 6
 
 ---
@@ -57,6 +57,7 @@
 | dispatch-parallel.ts | N/A | scripts/dispatch-parallel.ts | N/A |
 | dispatch-serial.ts | N/A | scripts/dispatch-serial.ts | N/A |
 | dispatch.ts | N/A | scripts/dispatch.ts | N/A |
+| domain-config.ts | N/A | scripts/domain-config.ts | N/A |
 | encoding-utils.ts | N/A | scripts/lib/encoding-utils.ts | fs, path |
 | error-handling.ts | N/A | scripts/lib/error-handling.ts | N/A |
 | fetch-legalize.ts | N/A | scripts/fetch-legalize.ts | child_process, fs, path |
@@ -65,6 +66,7 @@
 | generate-scripts-readme.ts | N/A | scripts/generate-scripts-readme.ts | N/A |
 | generate-version-manifest.ts | 1.0.1 | scripts/generate-version-manifest.ts | bun |
 | mcp-cache.ts | N/A | scripts/lib/mcp-cache.ts | N/A |
+| new-domain.ts | N/A | scripts/new-domain.ts | N/A |
 | pipeline-state.ts | N/A | scripts/lib/pipeline-state.ts | fs, path |
 | plan-parser.ts | N/A | scripts/lib/plan-parser.ts | fs, js-yaml |
 | platform-context.ts | N/A | scripts/lib/platform-context.ts | bun, os |
