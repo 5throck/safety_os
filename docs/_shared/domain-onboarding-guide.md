@@ -152,6 +152,7 @@ Must pass with 0 errors. The audit auto-recognizes new domains via recursive wal
 | `powergen` | industry | 2026-06-18 | active (v1) | power-generation |
 | `ehschem` | industry | 2026-06-18 | active (v1) | chemical-plant (정유/석유화학/정밀화학) |
 | `meddevice` | industry | 2026-06-18 | active (v1) | medical-device |
+| `training` | functional | 2026-06-19 | active (v1) | training-management |
 
 ## 6. Migration Notes (for Existing Domains)
 
