@@ -26,7 +26,11 @@
             "type": "boolean"
           }
         },
-        "required": ["workerId", "trainingDate", "verified"]
+        "required": [
+          "workerId",
+          "trainingDate",
+          "verified"
+        ]
       }
     },
     "timestamp": {
@@ -40,8 +44,21 @@
       "type": "string"
     },
     "legal_basis": {
-      "type": "string"
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 2,
+      "description": "Multi-source legal basis"
     }
   },
-  "required": ["contractorId", "evaluationScore", "trainingVerification", "timestamp", "agentId", "workflowId", "legal_basis"]
+  "required": [
+    "contractorId",
+    "evaluationScore",
+    "trainingVerification",
+    "timestamp",
+    "agentId",
+    "workflowId",
+    "legal_basis"
+  ]
 }

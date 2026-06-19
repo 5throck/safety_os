@@ -26,8 +26,12 @@
       "description": "ID of the workflow execution"
     },
     "legal_basis": {
-      "type": "string",
-      "description": "Legal basis for this record"
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 2,
+      "description": "Multi-source legal basis"
     },
     "facility_or_equipment_id": {
       "type": "string",
@@ -50,13 +54,21 @@
           },
           "status": {
             "type": "string",
-            "enum": ["pass", "fail", "n/a"]
+            "enum": [
+              "pass",
+              "fail",
+              "n/a"
+            ]
           },
           "comments": {
             "type": "string"
           }
         },
-        "required": ["item_id", "description", "status"]
+        "required": [
+          "item_id",
+          "description",
+          "status"
+        ]
       }
     },
     "startup_approval": {
@@ -76,7 +88,11 @@
           "type": "string"
         }
       },
-      "required": ["approved", "approved_by", "approval_date"]
+      "required": [
+        "approved",
+        "approved_by",
+        "approval_date"
+      ]
     }
   },
   "required": [

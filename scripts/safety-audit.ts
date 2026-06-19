@@ -686,6 +686,30 @@ errors.push(...meddeviceWorkflowErrs);
 const meddeviceEvidenceResult = validateDomainEvidence('meddevice', ['device_class', 'kgmp_certification_status', 'iso_13485_compliance']);
 errors.push(...meddeviceEvidenceResult.errs);
 
+// ── Config-driven domain validation (v3.2.0) ────────────────────────────────
+// Uses domain-config.ts to validate domains not already covered by hard-coded
+// blocks above. This ensures new domains get automatic validation without
+// requiring manual code additions.
+import { DOMAINS } from './domain-config.ts';
+
+const validatedDomains = new Set(['gmp', 'msds', 'gdp', 'glp', 'gcp', 'gvp', 'ehsconst', 'gasterm', 'powergen', 'ehschem', 'meddevice']);
+const domainCounts: Record<string, { workflows: number; evidence: number }> = {};
+
+for (const domain of DOMAINS) {
+    if (validatedDomains.has(domain.name)) {
+        // Already validated by hard-coded block above — skip to avoid duplicate checks
+        continue;
+    }
+    const wfErrs = validateDomainWorkflow(domain.name);
+    errors.push(...wfErrs);
+    const evResult = validateDomainEvidence(domain.name, domain.required_evidence_fields, domain.min_legal_basis);
+    errors.push(...evResult.errs);
+    domainCounts[domain.name] = { workflows: wfErrs.length === 0 ? -1 : -1, evidence: evResult.files.length };
+    // Count workflows for this domain
+    const wfDir = path.join(workflowDir, 'domains', domain.tier, domain.name);
+    domainCounts[domain.name].workflows = walkDirExact(wfDir, 'schema.yaml').length;
+}
+
 // ── Cross-domain reference integrity (v3.1.0) ──────────────────────────────
 // Validates that cross-domain reference fields in evidence models point to
 // domains that actually exist in the 2-Tier folder structure.
@@ -772,9 +796,9 @@ if (fs.existsSync(psmWfDir)) {
 }
 
 console.log(`Files checked : ${totalChecked}`);
-console.log(`  workflows/        : ${schemaFiles.length} schema.yaml file(s) (${gmpSchemaFiles.length} GMP, ${msdsSchemaFiles.length} MSDS, ${gdpSchemaFiles.length} GDP, ${glpSchemaFiles.length} GLP, ${gcpSchemaFiles.length} GCP, ${gvpSchemaFiles.length} GVP, ${ehsconstSchemaFiles.length} ehsconst, ${gastermSchemaFiles.length} gasterm, ${powergenSchemaFiles.length} powergen, ${ehschemSchemaFiles.length} ehschem, ${meddeviceSchemaFiles.length} meddevice)`);
+console.log(`  workflows/        : ${schemaFiles.length} schema.yaml file(s) (${gmpSchemaFiles.length} GMP, ${msdsSchemaFiles.length} MSDS, ${gdpSchemaFiles.length} GDP, ${glpSchemaFiles.length} GLP, ${gcpSchemaFiles.length} GCP, ${gvpSchemaFiles.length} GVP, ${ehsconstSchemaFiles.length} ehsconst, ${gastermSchemaFiles.length} gasterm, ${powergenSchemaFiles.length} powergen, ${ehschemSchemaFiles.length} ehschem, ${meddeviceSchemaFiles.length} meddevice${Object.entries(domainCounts).map(([k,v]) => `, ${v.workflows} ${k}`).join('')})`);
 console.log(`  regulations/      : ${regFiles.length} .yaml file(s)`);
-console.log(`  evidence-models/  : ${evidenceFiles.length} .json file(s) (${gmpEvidenceFiles.length} GMP, ${msdsEvidenceFiles.length} MSDS, ${gdpEvidenceFiles.length} GDP, ${glpEvidenceFiles.length} GLP, ${gcpEvidenceFiles.length} GCP, ${gvpEvidenceFiles.length} GVP, ${ehsconstEvidenceFiles.length} ehsconst, ${gastermEvidenceResult.files.length} gasterm, ${powergenEvidenceResult.files.length} powergen, ${ehschemEvidenceResult.files.length} ehschem, ${meddeviceEvidenceResult.files.length} meddevice)\n`);
+console.log(`  evidence-models/  : ${evidenceFiles.length} .json file(s) (${gmpEvidenceFiles.length} GMP, ${msdsEvidenceFiles.length} MSDS, ${gdpEvidenceFiles.length} GDP, ${glpEvidenceFiles.length} GLP, ${gcpEvidenceFiles.length} GCP, ${gvpEvidenceFiles.length} GVP, ${ehsconstEvidenceFiles.length} ehsconst, ${gastermEvidenceResult.files.length} gasterm, ${powergenEvidenceResult.files.length} powergen, ${ehschemEvidenceResult.files.length} ehschem, ${meddeviceEvidenceResult.files.length} meddevice${Object.entries(domainCounts).map(([k,v]) => `, ${v.evidence} ${k}`).join('')})\n`);
 
 if (errors.length === 0) {
     console.log(`${GREEN}✅ ${totalChecked} files checked, 0 errors${RESET}`);

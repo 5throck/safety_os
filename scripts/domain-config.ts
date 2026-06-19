@@ -78,7 +78,7 @@ export const DOMAINS: DomainConfig[] = [
     {
         name: 'training',
         tier: 'functional',
-        required_evidence_fields: ['training_type', 'trainee_id', 'completion_date'],
+        required_evidence_fields: [],
         min_legal_basis: 2,
         min_workflow_legal_basis: 3,
         description: 'Safety Training Management (OSHA-KR Art 13, 29, 31, 32, 114 + SAPA)',
