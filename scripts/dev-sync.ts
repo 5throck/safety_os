@@ -1,4 +1,4 @@
-// @version 1.2.4
+// @version 1.3.0 — variant-aware: runs safety-audit.ts for safety-os, workspace audit.ts for workspace root
 import { $ } from 'bun';
 import * as fs from 'node:fs';
 import * as path from 'node:path';
@@ -11,7 +11,16 @@ const YELLOW = '\x1b[33m';
 const CYAN = '\x1b[36m';
 const RESET = '\x1b[0m';
 
-// Workspace root guard — dev-sync must run from the workspace root it belongs to.
+// Detect project type: variant (safety-os) vs workspace root
+const isVariant = fs.existsSync('variant.json') || !fs.existsSync('CONSTITUTION.md');
+const projectName = isVariant ? (JSON.parse(fs.readFileSync('variant.json', 'utf-8').trim() || '{}').name || 'variant') : 'workspace';
+
+console.log(`${CYAN}=== dev-sync (${projectName}) ===${RESET}`);
+if (isVariant) {
+    console.log(`${CYAN}Variant project detected — using safety-audit.ts + domain test suite${RESET}\n`);
+}
+
+// Workspace root guard — dev-sync must run from the project root it belongs to.
 // Using import.meta.dir (script location) prevents CWD mismatches when two clones exist.
 const expectedRoot = resolve(import.meta.dir, '..');
 const actualCwd = process.cwd();
@@ -19,7 +28,7 @@ if (path.resolve(actualCwd) !== expectedRoot) {
     console.error(`${RED}❌ dev-sync: CWD mismatch.${RESET}`);
     console.error(`   Expected: ${expectedRoot}`);
     console.error(`   Current:  ${actualCwd}`);
-    console.error(`   Run from the workspace root: cd ${expectedRoot}`);
+    console.error(`   Run from the project root: cd ${expectedRoot}`);
     process.exit(1);
 }
 
@@ -126,11 +135,37 @@ if (fs.existsSync(archiveMemoryTs)) {
     await $`bun ${archiveMemoryTs}`;
 }
 
-// 4. Audit gate — call audit.ts directly (platform-independent, no shell intermediary)
-const auditRes = await $`bun scripts/audit.ts`.nothrow();
+// 4. Audit gate — variant projects use safety-audit.ts, workspace uses audit.ts
+if (isVariant) {
+    console.log(`${CYAN}--- Safety OS domain audit ---${RESET}`);
+    const safetyAuditRes = await $`bun scripts/safety-audit.ts`.nothrow();
+    if (safetyAuditRes.exitCode !== 0) {
+        console.log(`${RED}❌ safety-audit.ts failed${RESET}`);
+        process.exit(1);
+    }
 
-if (auditRes.exitCode !== 0) {
-    process.exit(1);
+    // 4a. Run domain-specific test suites (variant only)
+    const testScripts = [
+        'scripts/test-pharma-general-profile.ts',
+        'scripts/test-chemical-handling-profile.ts',
+        'scripts/test-cross-domain-integration.ts',
+        'scripts/test-domain-scenarios.ts',
+    ];
+    for (const testScript of testScripts) {
+        if (fs.existsSync(testScript)) {
+            const testRes = await $`bun ${testScript}`.nothrow();
+            if (testRes.exitCode !== 0) {
+                console.log(`${RED}❌ ${testScript} failed${RESET}`);
+                process.exit(1);
+            }
+        }
+    }
+    console.log(`${GREEN}✓ All domain tests passed${RESET}\n`);
+} else {
+    const auditRes = await $`bun scripts/audit.ts`.nothrow();
+    if (auditRes.exitCode !== 0) {
+        process.exit(1);
+    }
 }
 
 // 4.5. Generate VERSION_MANIFEST.md
@@ -145,10 +180,10 @@ if (fs.existsSync(genManifestTs)) {
     console.log(`${GREEN}✓ VERSION_MANIFEST.md generated${RESET}`);
 }
 
-// 4.7 L0→L1 publish (workspace root only)
-const isWorkspaceRoot = fs.existsSync('templates/common') && fs.existsSync('scripts/propagation-map.json');
+// 4.7 L0→L1 publish (workspace root only, skip for variant projects)
+const isWorkspaceRoot = !isVariant && fs.existsSync('templates/common') && fs.existsSync('scripts/propagation-map.json');
 // L0 context: CONSTITUTION.md exists at workspace root — publish failures are fatal here.
-const isL0Context = fs.existsSync('CONSTITUTION.md');
+const isL0Context = !isVariant && fs.existsSync('CONSTITUTION.md');
 if (isWorkspaceRoot) {
     console.log('\n📦 Publishing L0→L1 (scripts, skills, commands)...');
     try {

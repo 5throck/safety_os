@@ -23,8 +23,11 @@
  * v2.9.0 (2026-06-18): Added gasterm (Gas Terminal) + powergen (Power Generation)
  *   module validation. gasterm: facility_type, kgs_inspection_status, psm_applicable,
  *   gas_type. powergen: plant_type, kesa_inspection_status, voltage_class.
+ * v3.0.0 (2026-06-18): Added ehschem + meddevice validation, generic domain helpers.
+ * v3.1.0 (2026-06-19): Added cross-domain reference integrity validation —
+ *   validates cross-domain reference fields, uses_functional_services, applicable_industries.
  *
- * @version 2.9.0
+ * @version 3.1.0
  */
 
 import * as fs from 'node:fs';
@@ -682,6 +685,91 @@ const meddeviceWorkflowErrs = validateDomainWorkflow('meddevice');
 errors.push(...meddeviceWorkflowErrs);
 const meddeviceEvidenceResult = validateDomainEvidence('meddevice', ['device_class', 'kgmp_certification_status', 'iso_13485_compliance']);
 errors.push(...meddeviceEvidenceResult.errs);
+
+// ── Cross-domain reference integrity (v3.1.0) ──────────────────────────────
+// Validates that cross-domain reference fields in evidence models point to
+// domains that actually exist in the 2-Tier folder structure.
+console.log(`${CYAN}--- Cross-domain reference integrity ---${RESET}`);
+
+// Define known cross-domain reference fields and their target domains
+const CROSS_DOMAIN_REFS: Array<{ field: string; fromDomain: string; fromTier: string; toDomain: string; toTier: string }> = [
+    { field: 'batch_disposition_approved_ref', fromDomain: 'gdp', fromTier: 'functional', toDomain: 'gmp', toTier: 'functional' },
+    { field: 'msds_record_ref', fromDomain: 'glp', fromTier: 'functional', toDomain: 'msds', toTier: 'functional' },
+    { field: 'msds_record_ref', fromDomain: 'gasterm', fromTier: 'industry', toDomain: 'msds', toTier: 'functional' },
+    { field: 'msds_record_ref', fromDomain: 'ehschem', fromTier: 'industry', toDomain: 'msds', toTier: 'functional' },
+    { field: 'psm_psi_ref', fromDomain: 'ehschem', fromTier: 'industry', toDomain: 'psm', toTier: 'functional' },
+    { field: 'psm_applicable', fromDomain: 'gasterm', fromTier: 'industry', toDomain: 'psm', toTier: 'functional' },
+];
+
+for (const ref of CROSS_DOMAIN_REFS) {
+    totalChecked++;
+    // Verify source domain exists
+    const sourceDir = path.join(ROOT, 'evidence-models', 'domains', ref.fromTier, ref.fromDomain);
+    if (!fs.existsSync(sourceDir)) {
+        errors.push(`cross-ref: source domain ${ref.fromTier}/${ref.fromDomain} missing for field '${ref.field}'`);
+        continue;
+    }
+    // Verify target domain exists
+    const targetDir = path.join(ROOT, 'evidence-models', 'domains', ref.toTier, ref.toDomain);
+    if (!fs.existsSync(targetDir)) {
+        errors.push(`cross-ref: target domain ${ref.toTier}/${ref.toDomain} missing for field '${ref.field}' (from ${ref.fromTier}/${ref.fromDomain})`);
+    }
+}
+
+// Validate uses_functional_services in industry workflow schemas
+const industryWorkflowDir = path.join(workflowDir, 'domains', 'industry');
+if (fs.existsSync(industryWorkflowDir)) {
+    for (const indDomain of fs.readdirSync(industryWorkflowDir, { withFileTypes: true })) {
+        if (!indDomain.isDirectory()) continue;
+        const indDir = path.join(industryWorkflowDir, indDomain.name);
+        for (const wfDir of fs.readdirSync(indDir, { withFileTypes: true })) {
+            if (!wfDir.isDirectory()) continue;
+            const schemaPath = path.join(indDir, wfDir.name, 'schema.yaml');
+            if (!fs.existsSync(schemaPath)) continue;
+            totalChecked++;
+            try {
+                const doc = yaml.load(fs.readFileSync(schemaPath, 'utf-8')) as any;
+                if (doc?.uses_functional_services) {
+                    const services = Array.isArray(doc.uses_functional_services) ? doc.uses_functional_services : [];
+                    for (const svc of services) {
+                        // Check format: "functional/psm" or "emergency"
+                        if (svc.includes('/')) {
+                            const [tier, domain] = svc.split('/');
+                            const svcDir = path.join(workflowDir, 'domains', tier, domain);
+                            if (!fs.existsSync(svcDir)) {
+                                errors.push(`${indDomain.name}/${wfDir.name}/schema.yaml: uses_functional_services references non-existent '${svc}'`);
+                            }
+                        }
+                    }
+                }
+            } catch { /* skip */ }
+        }
+    }
+}
+
+// Validate applicable_industries in PSM workflow schemas
+const psmWfDir = path.join(workflowDir, 'domains', 'functional', 'psm');
+if (fs.existsSync(psmWfDir)) {
+    for (const wfDir of fs.readdirSync(psmWfDir, { withFileTypes: true })) {
+        if (!wfDir.isDirectory()) continue;
+        const schemaPath = path.join(psmWfDir, wfDir.name, 'schema.yaml');
+        if (!fs.existsSync(schemaPath)) continue;
+        totalChecked++;
+        try {
+            const doc = yaml.load(fs.readFileSync(schemaPath, 'utf-8')) as any;
+            if (doc?.applicable_industries) {
+                const industries = Array.isArray(doc.applicable_industries) ? doc.applicable_industries : [];
+                for (const ind of industries) {
+                    // Check if a corresponding industry domain exists
+                    const knownIndustries = ['chemical', 'gas_terminal', 'power_generation', 'construction', 'medical_device'];
+                    if (!knownIndustries.includes(ind)) {
+                        errors.push(`psm/${wfDir.name}/schema.yaml: applicable_industries references unknown industry '${ind}'`);
+                    }
+                }
+            }
+        } catch { /* skip */ }
+    }
+}
 
 console.log(`Files checked : ${totalChecked}`);
 console.log(`  workflows/        : ${schemaFiles.length} schema.yaml file(s) (${gmpSchemaFiles.length} GMP, ${msdsSchemaFiles.length} MSDS, ${gdpSchemaFiles.length} GDP, ${glpSchemaFiles.length} GLP, ${gcpSchemaFiles.length} GCP, ${gvpSchemaFiles.length} GVP, ${ehsconstSchemaFiles.length} ehsconst, ${gastermSchemaFiles.length} gasterm, ${powergenSchemaFiles.length} powergen, ${ehschemSchemaFiles.length} ehschem, ${meddeviceSchemaFiles.length} meddevice)`);
