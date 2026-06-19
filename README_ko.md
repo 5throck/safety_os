@@ -24,6 +24,7 @@
 | `ehschem` | 화학공장 / 정유·석유화학·정밀화학 (8 워크플로우) |
 | `gasterm` | 가스터미널 / LNG·LPG·수소 (8 워크플로우) |
 | `powergen` | 발전설비 / 화력·신재생, 원자력 제외 (8 워크플로우) |
+| `meddevice` | 의료기기 / KGMP-MD·ISO 13485·ISO 14971 (8 워크플로우) |
 
 ### 공통 서비스 (Tier 3)
 
@@ -35,16 +36,17 @@
 ## 2-Tier 매트릭스 아키텍처
 
 ```
-                 제약      화학      가스/에너지   발전      건설
-PSM (기능)        -        ✓(ehschem)  ✓(gasterm)  ✓(powergen)  -
-MSDS (기능)       ✓        ✓           ✓           ✓           ✓
-GxP (기능)        ✓(전체)  -           -           -           -
-Emergency (공통)  ✓        ✓           ✓           ✓           ✓
-──────────────────────────────────────────────────────────────────
-ehsconst (산업)                                           ✓
+                 제약      화학      가스/에너지   발전      건설      의료기기
+PSM (기능)        -        ✓(ehschem)  ✓(gasterm)  ✓(powergen)  -          -
+MSDS (기능)       ✓        ✓           ✓           ✓           ✓          ✓
+GxP (기능)        ✓(전체)  -           -           -           -          -
+Emergency (공통)  ✓        ✓           ✓           ✓           ✓          ✓
+──────────────────────────────────────────────────────────────────────────────
+ehsconst (산업)                                               ✓
 ehschem (산업)             ✓
 gasterm (산업)                         ✓
 powergen (산업)                                    ✓
+meddevice (산업)                                                          ✓
 ```
 
 산업 도메인은 **매트릭스 코디네이터** — 공정안전(PSM), 화학데이터(MSDS) 등 기능 서비스에 dispatch.
@@ -68,17 +70,58 @@ workflows/
 
 ```bash
 bun install
-bun scripts/safety-audit.ts                         # 356+ 파일 검증, 0 errors
-bun scripts/test-pharma-general-profile.ts          # GMP 필드 테스트
-bun scripts/test-chemical-handling-profile.ts       # MSDS 필드 테스트
-bun scripts/test-cross-domain-integration.ts        # 도메인 간 통합 시나리오 테스트
+bun scripts/safety-audit.ts                         # 443+ 파일 검증, 0 errors
+bun scripts/test-domain-scenarios.ts                # 5개 실전 시나리오 (56 검증)
+bun scripts/test-cross-domain-integration.ts        # 도메인 간 통합 무결성 (8 검증)
 ```
 
-## 주요 문서
+### Rule-Based 스킬 (실행 가능)
 
-- `docs/_shared/domain-classification-guide.md` — 3-tier dispatch 가이드 + 매트릭스
-- `docs/_shared/domain-onboarding-guide.md` — 신규 도메인 11단계 SOP
-- `docs/_shared/reference-workflow-pattern.md` — reference workflow 패턴 (8개 적용)
+```bash
+bun skills/domains/functional/gmp/qrm/fmea-scoring.ts                        # FMEA 위해 평가
+bun skills/domains/functional/msds/ghs-classifier/ghs-classifier.ts          # GHS 위해 분류
+bun skills/domains/industry/ehsconst/fall-hazard-assessor/fall-hazard-assessor.ts  # 추락 위해 평가
+```
+
+### 동기화 (commit + push + PR)
+
+```bash
+bun scripts/dev-sync.ts "커밋 메시지"
+```
+
+---
+
+## 📚 주요 문서 (Document Guide)
+
+> **처음 오신 분?** 여기서 시작하세요: [사용자 시나리오](docs/_shared/user-scenarios_ko.md) · [User Scenarios (EN)](docs/_shared/user-scenarios.md)
+
+### 시작하기
+| 문서 | 용도 | 언어 |
+|------|------|------|
+| [사용자 시나리오](docs/_shared/user-scenarios_ko.md) | 5개 실전 워크스루 (신규 화학물질, SAE 보고, 건설, 냉장유통, 정기보수) | KO |
+| [User Scenarios](docs/_shared/user-scenarios.md) | 5 real-world walkthroughs | EN |
+| [사용자 가이드](docs/_shared/user-guide.md) | 도메인 선택 + dispatch 패턴 | EN |
+
+### 아키텍처 및 설계
+| 문서 | 용도 |
+|------|------|
+| [아키텍처 개요](docs/_meta/architecture-overview.md) | 12-도메인 시스템 아키텍처 |
+| [도메인 분류 가이드](docs/_shared/domain-classification-guide.md) | 3-tier 분류 (기능/산업/공통) + 매트릭스 dispatch |
+| [도메인 추가 가이드](docs/_shared/domain-onboarding-guide.md) | 신규 도메인 11단계 SOP + Active Domains Registry |
+| [Reference 워크플로우 패턴](docs/_shared/reference-workflow-pattern.md) | Reference 워크플로우 설계 패턴 (10개 적용) |
+
+### 통합
+| 문서 | 용도 |
+|------|------|
+| [MCP 통합 가이드](docs/_shared/mcp-integration-guide.md) | 한국 법령 MCP 서버 연결 |
+
+### 도메인 Scope 문서
+| 도메인 | Scope |
+|--------|-------|
+| [GMP](docs/domains/functional/gmp/scope.md) · [GDP](docs/domains/functional/gdp/scope.md) · [GLP](docs/domains/functional/glp/scope.md) | 의약품 라이프사이클 |
+| [GCP](docs/domains/functional/gcp/scope.md) · [GVP](docs/domains/functional/gvp/scope.md) · [MSDS](docs/domains/functional/msds/scope.md) | 임상·시판후·화학 |
+| [ehsconst](docs/domains/industry/ehsconst/scope.md) · [ehschem](docs/domains/industry/ehschem/scope.md) | 건설·화학공장 |
+| [gasterm](docs/domains/industry/gasterm/scope.md) · [powergen](docs/domains/industry/powergen/scope.md) · [meddevice](docs/domains/industry/meddevice/scope.md) | 가스·발전·의료기기 |
 
 ## 한국 규제 커버리지
 
