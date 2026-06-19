@@ -56,19 +56,19 @@
 | Domain (Tier) | Pharma | Chemical | Gas/Energy | Power | Construction | MedDevice |
 |---------------|:------:|:--------:|:----------:|:-----:|:------------:|:---------:|
 | **Functional Services** | | | | | | |
-| `psm` (Process Safety) | — | ✓ | ✓ | ✓ | — | — |
+| `psm` (Process Safety) | | ✓ | ✓ | ✓ | | |
 | `msds` (Chemical Data) | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
-| `gmp/gdp/glp/gcp/gvp` (GxP) | ✓ | — | — | — | — | — |
+| `gmp/gdp/glp/gcp/gvp` (GxP) | ✓ | | | | | |
 | `training` (Safety Education) | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `emergency` (Cross-Cutting) | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | **Industry Coordinators** | | | | | | |
-| `ehsconst` (Construction) | — | — | — | — | **●** | — |
-| `ehschem` (Chemical Plant) | — | **●** | — | — | — | — |
-| `gasterm` (Gas Terminal) | — | — | **●** | — | — | — |
-| `powergen` (Power Gen) | — | — | — | **●** | — | — |
-| `meddevice` (Medical Device) | — | — | — | — | — | **●** |
+| `ehsconst` (Construction) | | | | | **●** | |
+| `ehschem` (Chemical Plant) | | **●** | | | | |
+| `gasterm` (Gas Terminal) | | | **●** | | | |
+| `powergen` (Power Gen) | | | | **●** | | |
+| `meddevice` (Medical Device) | | | | | | **●** |
 
-> `✓` = functional service applies to this industry · `●` = industry domain owns this column · `—` = not applicable
+> `✓` = functional service applies to this industry · `●` = industry domain owns this column · (blank) = not applicable
 >
 > **Industry domains = matrix coordinators.** They dispatch to functional services (PSM, MSDS, Training) for cross-cutting concerns. [Learn more →](docs/_shared/domain-classification-guide.md)
 
