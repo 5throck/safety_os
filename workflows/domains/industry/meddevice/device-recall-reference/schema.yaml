@@ -4,7 +4,7 @@ title: "의료기기 회수 긴급 참조 (Device Recall Reference)"
 status: active
 applicability: mandatory
 workflow_type: reference
-uses_functional_services: [functional/msds, functional/glp, emergency]
+uses_functional_services: [functional/msds, industry/glp, emergency]
 target_agent: emergency-agent
 data_provided: [device_identification, affected_batches, hazard_classification]
 handoff_protocol:

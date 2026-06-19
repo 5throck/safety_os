@@ -4,7 +4,7 @@ title: "의료기기 표시 (Device Labeling)"
 status: active
 applicability: mandatory
 workflow_type: core
-uses_functional_services: [functional/msds, functional/glp, emergency]
+uses_functional_services: [functional/msds, industry/glp, emergency]
 
 legal_basis: [의료기기법 Article 23, KGMP-MD, ISO 13485 Section 7.4]
 industry_profile: medical-device

@@ -25,17 +25,17 @@
 |--------|----------|-----------|
 | `psm` | Process Safety Management (OSHA 14 elements) | 11 |
 | `msds` | Chemical Substance Safety / GHS Rev 9 | 7 |
-| `gmp` | Pharmaceutical Manufacturing Quality | 10 |
-| `gdp` | Pharmaceutical Distribution / GDP | 8 |
-| `glp` | Non-Clinical Laboratory Studies / OECD | 8 |
-| `gcp` | Clinical Trial Management / ICH E6(R3) | 8 |
-| `gvp` | Post-Market Pharmacovigilance / ICH E2 | 8 |
 | `training` | Safety Training Management (OSHA-KR Art 13/29/31/32/114) | 8 |
 
 ### Industry Layer (Tier 2) — industry-specific operations
 
 | Domain | Coverage | Workflows |
 |--------|----------|-----------|
+| `gmp` | Pharmaceutical Manufacturing Quality | 10 |
+| `gdp` | Pharmaceutical Distribution / GDP | 8 |
+| `glp` | Non-Clinical Laboratory Studies / OECD | 8 |
+| `gcp` | Clinical Trial Management / ICH E6(R3) | 8 |
+| `gvp` | Post-Market Pharmacovigilance / ICH E2 | 8 |
 | `ehsconst` | Construction Safety / SAPA Article 12 | 9 |
 | `ehschem` | Chemical Plant / Refining·Petrochemical·Specialty | 8 |
 | `gasterm` | Gas Terminal / LNG·LPG·Hydrogen | 8 |
@@ -58,10 +58,10 @@
 | **Functional Services** | | | | | | |
 | `psm` (Process Safety) | | ✓ | ✓ | ✓ | | |
 | `msds` (Chemical Data) | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
-| `gmp/gdp/glp/gcp/gvp` (GxP) | ✓ | | | | | |
 | `training` (Safety Education) | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `emergency` (Cross-Cutting) | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | **Industry Coordinators** | | | | | | |
+| `gmp/gdp/glp/gcp/gvp` (GxP Pharma) | **●** | | | | | |
 | `ehsconst` (Construction) | | | | | **●** | |
 | `ehschem` (Chemical Plant) | | **●** | | | | |
 | `gasterm` (Gas Terminal) | | | **●** | | | |

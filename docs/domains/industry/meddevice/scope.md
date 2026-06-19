@@ -8,4 +8,4 @@
 
 ## Device Classifications: Class 1 (낮음) → Class 4 (매우 높음)
 
-## Matrix: uses functional/msds, functional/glp, emergency as services.
+## Matrix: uses functional/msds, industry/glp, emergency as services.

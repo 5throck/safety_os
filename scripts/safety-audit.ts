@@ -183,7 +183,7 @@ for (const file of evidenceFiles) {
 // GMP workflows require multi-source legal_basis (array with ≥2 entries) per
 // meeting decision 2026-06-17 (Q3/Q4 follow-up).
 // v2.2.0: Path updated for domain-based folder structure.
-const gmpWorkflowDir = path.join(workflowDir, 'domains', 'functional', 'gmp');
+const gmpWorkflowDir = path.join(workflowDir, 'domains', 'industry', 'gmp');
 const gmpSchemaFiles = walkDirExact(gmpWorkflowDir, 'schema.yaml');
 
 for (const file of gmpSchemaFiles) {
@@ -255,7 +255,7 @@ if (fs.existsSync(riskAgentPath)) {
     }
 }
 
-const qrmSkillPath = path.join(ROOT, 'skills', 'domains', 'functional', 'gmp', 'qrm', 'SKILL.md');
+const qrmSkillPath = path.join(ROOT, 'skills', 'domains', 'industry', 'gmp', 'qrm', 'SKILL.md');
 if (fs.existsSync(qrmSkillPath)) {
     totalChecked++;
     const content = fs.readFileSync(qrmSkillPath, 'utf-8');
@@ -325,7 +325,7 @@ for (const file of msdsEvidenceFiles) {
 
 // ── GDP-specific validation: workflows ───────────────────────────────────────
 // v2.4.0: GDP workflows require multi-source legal_basis (≥3 core, ≥2 reference)
-const gdpWorkflowDir = path.join(workflowDir, 'domains', 'functional', 'gdp');
+const gdpWorkflowDir = path.join(workflowDir, 'domains', 'industry', 'gdp');
 const gdpSchemaFiles = walkDirExact(gdpWorkflowDir, 'schema.yaml');
 
 for (const file of gdpSchemaFiles) {
@@ -352,7 +352,7 @@ for (const file of gdpSchemaFiles) {
 // v2.4.0: All gdp-*.json must include gdp_certification_status, temperature_condition, batch_disposition_approved_ref
 const gdpEvidenceFiles = evidenceFiles.filter(f => {
     return path.basename(f).startsWith('gdp-') &&
-           path.dirname(f).includes(path.join('domains', 'functional', 'gdp'));
+           path.dirname(f).includes(path.join('domains', 'industry', 'gdp'));
 });
 
 const REQUIRED_GDP_FIELDS = ['gdp_certification_status', 'temperature_condition', 'batch_disposition_approved_ref'];
@@ -382,7 +382,7 @@ for (const file of gdpEvidenceFiles) {
 
 // ── GLP-specific validation: workflows ───────────────────────────────────────
 // v2.5.0: GLP workflows require multi-source legal_basis (≥3 core, ≥2 reference)
-const glpWorkflowDir = path.join(workflowDir, 'domains', 'functional', 'glp');
+const glpWorkflowDir = path.join(workflowDir, 'domains', 'industry', 'glp');
 const glpSchemaFiles = walkDirExact(glpWorkflowDir, 'schema.yaml');
 
 for (const file of glpSchemaFiles) {
@@ -410,7 +410,7 @@ for (const file of glpSchemaFiles) {
 // study_director_id, msds_record_ref
 const glpEvidenceFiles = evidenceFiles.filter(f => {
     return path.basename(f).startsWith('glp-') &&
-           path.dirname(f).includes(path.join('domains', 'functional', 'glp'));
+           path.dirname(f).includes(path.join('domains', 'industry', 'glp'));
 });
 
 const REQUIRED_GLP_FIELDS = ['glp_certification_authority', 'oecd_mad_applicable', 'study_director_id', 'msds_record_ref'];
@@ -438,7 +438,7 @@ for (const file of glpEvidenceFiles) {
 
 // ── GCP-specific validation: workflows ───────────────────────────────────────
 // v2.6.0: GCP workflows require multi-source legal_basis (≥3 core, ≥2 reference)
-const gcpWorkflowDir = path.join(workflowDir, 'domains', 'functional', 'gcp');
+const gcpWorkflowDir = path.join(workflowDir, 'domains', 'industry', 'gcp');
 const gcpSchemaFiles = walkDirExact(gcpWorkflowDir, 'schema.yaml');
 
 for (const file of gcpSchemaFiles) {
@@ -466,7 +466,7 @@ for (const file of gcpSchemaFiles) {
 // protocol_ref, site_id
 const gcpEvidenceFiles = evidenceFiles.filter(f => {
     return path.basename(f).startsWith('gcp-') &&
-           path.dirname(f).includes(path.join('domains', 'functional', 'gcp'));
+           path.dirname(f).includes(path.join('domains', 'industry', 'gcp'));
 });
 
 const REQUIRED_GCP_FIELDS = ['irb_approval_ref', 'ich_e6_compliance', 'protocol_ref', 'site_id'];
@@ -494,7 +494,7 @@ for (const file of gcpEvidenceFiles) {
 
 // ── GVP-specific validation: workflows ───────────────────────────────────────
 // v2.7.0: GVP workflows require multi-source legal_basis (≥3 core, ≥2 reference)
-const gvpWorkflowDir = path.join(workflowDir, 'domains', 'functional', 'gvp');
+const gvpWorkflowDir = path.join(workflowDir, 'domains', 'industry', 'gvp');
 const gvpSchemaFiles = walkDirExact(gvpWorkflowDir, 'schema.yaml');
 
 for (const file of gvpSchemaFiles) {
@@ -521,7 +521,7 @@ for (const file of gvpSchemaFiles) {
 // v2.7.0: All gvp-*.json must include ich_e2_compliance, pbrer_cycle_ref, product_id, rmp_version_ref
 const gvpEvidenceFiles = evidenceFiles.filter(f => {
     return path.basename(f).startsWith('gvp-') &&
-           path.dirname(f).includes(path.join('domains', 'functional', 'gvp'));
+           path.dirname(f).includes(path.join('domains', 'industry', 'gvp'));
 });
 
 const REQUIRED_GVP_FIELDS = ['ich_e2_compliance', 'pbrer_cycle_ref', 'product_id', 'rmp_version_ref'];
@@ -717,8 +717,8 @@ console.log(`${CYAN}--- Cross-domain reference integrity ---${RESET}`);
 
 // Define known cross-domain reference fields and their target domains
 const CROSS_DOMAIN_REFS: Array<{ field: string; fromDomain: string; fromTier: string; toDomain: string; toTier: string }> = [
-    { field: 'batch_disposition_approved_ref', fromDomain: 'gdp', fromTier: 'functional', toDomain: 'gmp', toTier: 'functional' },
-    { field: 'msds_record_ref', fromDomain: 'glp', fromTier: 'functional', toDomain: 'msds', toTier: 'functional' },
+    { field: 'batch_disposition_approved_ref', fromDomain: 'gdp', fromTier: 'industry', toDomain: 'gmp', toTier: 'industry' },
+    { field: 'msds_record_ref', fromDomain: 'glp', fromTier: 'industry', toDomain: 'msds', toTier: 'functional' },
     { field: 'msds_record_ref', fromDomain: 'gasterm', fromTier: 'industry', toDomain: 'msds', toTier: 'functional' },
     { field: 'msds_record_ref', fromDomain: 'ehschem', fromTier: 'industry', toDomain: 'msds', toTier: 'functional' },
     { field: 'psm_psi_ref', fromDomain: 'ehschem', fromTier: 'industry', toDomain: 'psm', toTier: 'functional' },
