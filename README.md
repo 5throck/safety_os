@@ -53,22 +53,24 @@
 
 ## 2-Tier Matrix Architecture
 
-```
-                 Pharma    Chemical    Gas/Energy    Power    Construction    MedDevice
-PSM (func)         -         ✓           ✓           ✓          -               -
-MSDS (func)        ✓         ✓           ✓           ✓          ✓               ✓
-GxP (func)         ✓(all)    -           -           -          -               -
-Training (func)    ✓         ✓           ✓           ✓          ✓               ✓
-Emergency (cc)     ✓         ✓           ✓           ✓          ✓               ✓
-──────────────────────────────────────────────────────────────────────────────────────────
-ehsconst (ind)                                              ✓
-ehschem (ind)               ✓
-gasterm (ind)                           ✓
-powergen (ind)                                      ✓
-meddevice (ind)                                                                 ✓
-```
+| Domain (Tier) | Pharma | Chemical | Gas/Energy | Power | Construction | MedDevice |
+|---------------|:------:|:--------:|:----------:|:-----:|:------------:|:---------:|
+| **Functional Services** | | | | | | |
+| `psm` (Process Safety) | — | ✓ | ✓ | ✓ | — | — |
+| `msds` (Chemical Data) | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `gmp/gdp/glp/gcp/gvp` (GxP) | ✓ | — | — | — | — | — |
+| `training` (Safety Education) | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `emergency` (Cross-Cutting) | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| **Industry Coordinators** | | | | | | |
+| `ehsconst` (Construction) | — | — | — | — | **●** | — |
+| `ehschem` (Chemical Plant) | — | **●** | — | — | — | — |
+| `gasterm` (Gas Terminal) | — | — | **●** | — | — | — |
+| `powergen` (Power Gen) | — | — | — | **●** | — | — |
+| `meddevice` (Medical Device) | — | — | — | — | — | **●** |
 
-**Industry domains = matrix coordinators.** They dispatch to functional services (PSM, MSDS, Training) for cross-cutting concerns. [Learn more →](docs/_shared/domain-classification-guide.md)
+> `✓` = functional service applies to this industry · `●` = industry domain owns this column · `—` = not applicable
+>
+> **Industry domains = matrix coordinators.** They dispatch to functional services (PSM, MSDS, Training) for cross-cutting concerns. [Learn more →](docs/_shared/domain-classification-guide.md)
 
 ---
 
