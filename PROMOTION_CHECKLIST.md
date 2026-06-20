@@ -36,10 +36,10 @@ Each agent file in `agents/` must contain Sections A, B, and C:
 
 | Skill Directory | SKILL.md | Status |
 |----------------|----------|--------|
-| `skills/risk-assessment/` | ✅ | ✅ Done |
-| `skills/permit-to-work/` | ✅ | ✅ Done |
-| `skills/emergency-response/` | ✅ | ✅ Done |
-| `skills/compliance-gap/` | ✅ | ✅ Done |
+| `skills/daily/risk-assessment/` | ✅ | ✅ Done |
+| `skills/daily/permit-to-work/` | ✅ | ✅ Done |
+| `skills/emergency/emergency-response/` | ✅ | ✅ Done |
+| `skills/daily/compliance-gap/` | ✅ | ✅ Done |
 
 ## Workflow Checklist (Condition 3) — ✅ Complete
 

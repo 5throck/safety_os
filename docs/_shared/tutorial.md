@@ -1,141 +1,141 @@
-# Safety OS 입문 튜토리얼
+# Safety OS Getting Started Tutorial
 
-> **대상**: Safety OS를 처음 사용하는 EHS 관리자, 안전보건관리자, 준법 담당자
-> **소요 시간**: 약 15분 (읽기 + 실습)
-> **필요 사전 지식**: 없음. 한국 EHS/GxP 업무 경험만 있으면 됩니다.
-
----
-
-## 1. Safety OS란 무엇인가?
-
-Safety OS는 **한국 EHS(환경·안전·보건) 및 GxP 규정 준수를 위한 AI 에이전트 팀**입니다. 혼자서 산업안전보건법(OSHA-KR), 중대재해처벌법(SAPA), 약사법, 화학물질관리법 등 수십 가지 법령을 추적하고 문서화하는 대신, Safety OS의 AI 에이전트들이 여러분의 상황을 분석하고, 적용 가능한 법령 조항을 식별하며, 적절한 업무 절차(워크플로)를 실행합니다.
-
-Safety OS의 작동 방식은 간단합니다. 여러분이 현재 상황을 설명하면, PM 에이전트(CSO, 최고안전책임자 역할)가 요청을 분류하고, 담당 전문 에이전트를 파견합니다. 전문 에이전트는 규정에 따른 워크플로를 실행하고 **증거 기록(evidence record)**을 JSON 형식으로 생성합니다. 이 증거 기록은 감사 추적(audit trail)의 기초 문서가 됩니다. 여러분이 법령을 암기하거나 양식을 수작업으로 채울 필요가 없습니다.
+> **Audience**: First-time users of Safety OS — EHS managers, safety and health officers, and compliance officers.
+> **Time required**: Approximately 15 minutes (reading + hands-on practice).
+> **Prerequisites**: None. Familiarity with Korean EHS/GxP work is sufficient.
 
 ---
 
-## 2. 시작 전 알아야 할 에이전트 팀 구성
+## 1. What is Safety OS?
 
-Safety OS는 계층 구조로 이루어진 에이전트 팀입니다. 사용자는 항상 **PM 에이전트(CSO)**에게 요청을 보냅니다. 직접 전문 에이전트를 호출하는 것은 지원되지 않습니다.
+Safety OS is **an AI agent team for Korean EHS (Environment, Health, and Safety) and GxP regulatory compliance**. Instead of single-handedly tracking and documenting dozens of regulations — the Occupational Safety and Health Act (OSHA-KR), the Serious Accidents Punishment Act (SAPA), the Pharmaceutical Affairs Act, the Chemical Substances Control Act, and more — Safety OS's AI agents analyze your situation, identify the applicable legal provisions, and execute the appropriate work procedure (workflow).
 
-### 에이전트 역할 요약
-
-| 에이전트 | 역할 | 무엇을 생산하는가 |
-|----------|------|-------------------|
-| **PM (CSO)** | 조정자. 모든 요청의 창구. 법적 근거 확인 후 전문 에이전트 파견 | 실행 계획 테이블, 감사 로그 |
-| **psm-agent** | 공정안전관리(PSM) 전문가. PHA, MOC, PSSR, PSI, MI, SOP 실행 | `psm-moc-record.json`, `psm-pssr-record.json` |
-| **msds-agent** | 화학물질 데이터 및 GHS 분류 전문가 | `msds-record.json`, `ghs-classification-record.json` |
-| **training-agent** | 안전교육 관리 (산안법 제29조/제31조/제32조) | `training-record.json` |
-| **ehschem-agent** | 화학공장 운영 코디네이터. psm·msds·emergency 파견 | `ehschem-plant-safety-record.json` |
-| **ehsconst-agent** | 건설현장 운영 코디네이터. 추락 위험, 작업허가서, TBM 관리 | `ehsconst-inspection-record.json` |
-| **gasterm-agent** | 가스터미널·충전소 코디네이터 | `gasterm-operation-record.json` |
-| **powergen-agent** | 발전설비 코디네이터 | `powergen-operation-record.json` |
-| **gmp/gdp/glp/gcp/gvp-agent** | 제약 GxP 단계별 전문 에이전트 | 단계별 GxP 기록 |
-| **meddevice-agent** | 의료기기 코디네이터 (ISO 13485, ISO 14971) | `meddevice-record.json` |
-| **emergency-agent** | 비상 대응 (모든 도메인에서 파견 가능) | `emergency-response-record.json` |
-
-### 핵심 원칙
-
-```
-사용자 → PM (CSO) → 산업 도메인 에이전트 (코디네이터)
-                         └→ 기능 도메인 에이전트 (서비스 제공자)
-                         └→ emergency-agent (비상 발생 시)
-```
+How Safety OS works is straightforward. You describe your current situation, and the PM agent (acting as CSO, Chief Safety Officer) classifies the request and dispatches the responsible specialist agent. The specialist agent executes the regulation-driven workflow and generates an **evidence record** in JSON format. This evidence record becomes the foundational document of your audit trail. You do not need to memorize regulations or fill out forms by hand.
 
 ---
 
-## 3. 첫 번째 과제: 5분 빠른 시작
+## 2. The Agent Team You Need to Know Before You Start
 
-### 상황 설정
+Safety OS is an agent team organized in a hierarchy. You always send requests to the **PM agent (CSO)**. Calling specialist agents directly is not supported.
 
-> "저는 화학공장의 EHS 관리자입니다. 커버드 공정 구역에 새로운 펌프를 설치하고 있습니다. 변경관리(Management of Change, MOC)를 안전하게 처리해야 합니다."
+### Agent Role Summary
 
-이 상황은 **산업안전보건법 제44조** (공정안전 보고서 제출 대상 사업장)에 따라 PSM 변경관리 워크플로가 필요합니다. 아래 단계를 따라 Safety OS와 대화해 보세요.
+| Agent | Role | What it produces |
+|-------|------|------------------|
+| **PM (CSO)** | Coordinator. Single point of contact for all requests. Verifies legal basis, then dispatches specialist agents | Execution plan table, audit log |
+| **psm-agent** | Process Safety Management (PSM) specialist. Executes PHA, MOC, PSSR, PSI, MI, SOP | `psm-moc-record.json`, `psm-pssr-record.json` |
+| **msds-agent** | Chemical substance data and GHS classification specialist | `msds-record.json`, `ghs-classification-record.json` |
+| **training-agent** | Safety training management (OSHA-KR Article 29/31/32) | `training-record.json` |
+| **ehschem-agent** | Chemical plant operations coordinator. Dispatches psm, msds, emergency | `ehschem-plant-safety-record.json` |
+| **ehsconst-agent** | Construction site operations coordinator. Manages fall hazards, work permits, TBM | `ehsconst-inspection-record.json` |
+| **gasterm-agent** | Gas terminal and filling station coordinator | `gasterm-operation-record.json` |
+| **powergen-agent** | Power generation facility coordinator | `powergen-operation-record.json` |
+| **gmp/gdp/glp/gcp/gvp-agent** | Pharmaceutical GxP stage-specific specialist agents | Stage-specific GxP records |
+| **meddevice-agent** | Medical device coordinator (ISO 13485, ISO 14971) | `meddevice-record.json` |
+| **emergency-agent** | Emergency response (dispatchable from all domains) | `emergency-response-record.json` |
 
----
+### Core Principle
 
-### 단계 1 — PM 에이전트에게 상황 설명
-
-**여러분이 입력하는 내용:**
 ```
-커버드 공정 구역에 새 펌프를 설치하려고 합니다.
-PSM MOC 절차를 시작해 주세요. 대상 공정: 황산 이송 라인 (산업안전보건법 제44조 적용 사업장).
-```
-
-**PM (CSO) 응답 예시:**
-```
-[PM — CSO] 요청을 수신했습니다.
-
-법적 근거 확인:
-- 산업안전보건법 제44조 (공정안전보고서 제출 의무)
-- OSHA-KR 시행규칙 별표 13 (PSM 요소: 변경관리)
-- 중대재해처벌법 제4조 (안전보건관리체계 의무)
-
-분류: Tier 2 화학공장 (ehschem) + Tier 1 PSM 서비스 파견 필요
-
-실행 계획:
-1. ehschem-agent (코디네이터) → 공장 컨텍스트 설정
-2. psm-agent (서비스) → MOC 워크플로 실행
-3. 증거 기록 생성 → psm-moc-record.json
-
-ehschem-agent를 파견합니다...
+User → PM (CSO) → Industry-domain agent (coordinator)
+                       └→ Functional-domain agent (service provider)
+                       └→ emergency-agent (when an emergency occurs)
 ```
 
 ---
 
-### 단계 2 — 산업 코디네이터가 컨텍스트를 설정
+## 3. Your First Task: 5-Minute Quick Start
 
-**ehschem-agent 응답 예시:**
+### Situation Setup
+
+> "I am the EHS manager at a chemical plant. We are installing a new pump in a covered process area. I need to handle Management of Change (MOC) safely."
+
+This situation requires a PSM Management of Change workflow under **OSHA-KR Article 44** (workplaces required to submit a Process Safety Report). Follow the steps below to converse with Safety OS.
+
+---
+
+### Step 1 — Describe the Situation to the PM Agent
+
+**What you enter:**
 ```
-[ehschem-agent] 화학공장 컨텍스트 확인.
+I am going to install a new pump in a covered process area.
+Please start the PSM MOC procedure. Target process: sulfuric acid transfer line (workplace subject to OSHA-KR Article 44).
+```
 
-공장 유형: 정밀화학 / 커버드 공정 포함
-PSM 의무: 예 (psm_applicable: true)
-대상 공정: 황산 이송 라인
-변경 유형: 신규 장비 설치 (펌프)
+**Example PM (CSO) response:**
+```
+[PM — CSO] Request received.
 
-psm-agent에 MOC 워크플로를 파견합니다.
+Legal basis verification:
+- OSHA-KR Article 44 (obligation to submit a Process Safety Report)
+- OSHA-KR Enforcement Rule Annex 13 (PSM elements: Management of Change)
+- SAPA Article 4 (obligation to maintain a safety and health management system)
+
+Classification: Tier 2 chemical plant (ehschem) + Tier 1 PSM service dispatch required
+
+Execution plan:
+1. ehschem-agent (coordinator) → set plant context
+2. psm-agent (service) → execute MOC workflow
+3. evidence record generation → psm-moc-record.json
+
+Dispatching ehschem-agent...
 ```
 
 ---
 
-### 단계 3 — PSM 에이전트가 MOC를 실행
+### Step 2 — The Industry Coordinator Sets the Context
 
-**psm-agent 응답 예시:**
+**Example ehschem-agent response:**
 ```
-[psm-agent] MOC 워크플로를 시작합니다.
+[ehschem-agent] Chemical plant context confirmed.
 
-변경 정보 수집:
-  변경 번호: MOC-2026-047
-  변경 유형: 장비 교체/신규 설치
-  영향 공정: 황산 이송 라인 (P&ID Rev. 12 기준)
-  예상 위험: 황산 누출, 전기 아크, 밀폐공간 인접
+Plant type: Fine chemicals / includes covered process
+PSM obligation: Yes (psm_applicable: true)
+Target process: Sulfuric acid transfer line
+Change type: New equipment installation (pump)
 
-위험성 평가:
-  PHA 방법: HAZOP (What-If 병행)
-  식별된 위험:
-    - 펌프 씰 파손 → 황산 누출 (심각도: 높음, 빈도: 낮음)
-    - 배관 연결 불량 → 압력 이상 (심각도: 중간, 빈도: 낮음)
-
-안전 조치:
-  - 이중 씰 펌프 사양 지정 필수
-  - 설치 전 PSI (공정안전 정보) 업데이트
-  - PSSR (사전 안전 검토) 실시 후 가동 승인
-  - 관련 SOP 개정 및 근로자 교육
-
-증거 기록 생성 중...
+Dispatching the MOC workflow to psm-agent.
 ```
 
 ---
 
-### 단계 4 — 생성된 증거 기록 확인
+### Step 3 — The PSM Agent Executes MOC
 
-**여러분이 입력하는 내용:**
+**Example psm-agent response:**
 ```
-증거 기록을 보여주세요.
+[psm-agent] Starting the MOC workflow.
+
+Collecting change information:
+  Change number: MOC-2026-047
+  Change type: Equipment replacement / new installation
+  Affected process: Sulfuric acid transfer line (per P&ID Rev. 12)
+  Expected hazards: Sulfuric acid leak, electrical arc, confined-space proximity
+
+Hazard assessment:
+  PHA method: HAZOP (with What-If in parallel)
+  Identified hazards:
+    - Pump seal failure → sulfuric acid leak (severity: HIGH, frequency: LOW)
+    - Poor piping connection → pressure anomaly (severity: MEDIUM, frequency: LOW)
+
+Safety measures:
+  - Dual-seal pump specification required
+  - Update PSI (Process Safety Information) before installation
+  - Conduct PSSR (Pre-Startup Safety Review) before startup approval
+  - Revise relevant SOPs and train workers
+
+Generating evidence record...
 ```
 
-**psm-agent가 생성하는 psm-moc-record.json 예시:**
+---
+
+### Step 4 — Review the Generated Evidence Record
+
+**What you enter:**
+```
+Show me the evidence record.
+```
+
+**Example psm-moc-record.json generated by psm-agent:**
 ```json
 {
   "record_id": "PSM-MOC-2026-047",
@@ -149,13 +149,13 @@ psm-agent에 MOC 워크플로를 파견합니다.
   "change_info": {
     "moc_number": "MOC-2026-047",
     "change_type": "equipment_installation",
-    "description": "황산 이송 라인 신규 펌프 설치 (P&ID 개정)",
-    "initiator": "EHS 관리자",
+    "description": "Sulfuric acid transfer line new pump installation (P&ID revision)",
+    "initiator": "EHS Manager",
     "initiated_date": "2026-06-20",
     "target_completion": "2026-07-15"
   },
   "process_info": {
-    "process_name": "황산 이송 공정",
+    "process_name": "Sulfuric acid transfer process",
     "pid_reference": "P&ID-H2SO4-REV12",
     "covered_process": true,
     "psm_applicable": true
@@ -164,20 +164,20 @@ psm-agent에 MOC 워크플로를 파견합니다.
     "method": "HAZOP",
     "scenarios": [
       {
-        "deviation": "펌프 씰 파손",
-        "consequence": "황산 누출",
+        "deviation": "Pump seal failure",
+        "consequence": "Sulfuric acid leak",
         "severity": "HIGH",
         "frequency": "LOW",
         "risk_level": "MEDIUM",
-        "safeguard": "이중 씰 펌프 사양 + 누출 감지기"
+        "safeguard": "Dual-seal pump specification + leak detector"
       }
     ]
   },
   "required_actions": [
-    { "action": "PSI 업데이트 (P&ID 개정)", "responsible": "공정 엔지니어", "due": "2026-07-01" },
-    { "action": "PSSR 실시", "responsible": "PSM 팀장", "due": "2026-07-14" },
-    { "action": "관련 SOP 개정", "responsible": "안전관리자", "due": "2026-07-10" },
-    { "action": "근로자 교육 실시 (변경 내용)", "responsible": "교육 담당자", "due": "2026-07-14" }
+    { "action": "Update PSI (P&ID revision)", "responsible": "Process Engineer", "due": "2026-07-01" },
+    { "action": "Conduct PSSR", "responsible": "PSM Team Lead", "due": "2026-07-14" },
+    { "action": "Revise relevant SOPs", "responsible": "Safety Manager", "due": "2026-07-10" },
+    { "action": "Conduct worker training (change content)", "responsible": "Training Officer", "due": "2026-07-14" }
   ],
   "approvals": {
     "initiator_sign": { "status": "pending", "e_signature": null },
@@ -192,181 +192,181 @@ psm-agent에 MOC 워크플로를 파견합니다.
 }
 ```
 
-이 JSON 파일 하나가 MOC의 전 과정을 추적하는 감사 증거 기록입니다.
+This single JSON file is the audit evidence record that tracks the entire MOC process.
 
 ---
 
-## 4. 내 상황에 맞는 도메인 선택하기
+## 4. Choosing the Right Domain for Your Situation
 
-요청하기 전에 어떤 에이전트에게 가야 할지 아래 의사결정 흐름도를 참고하세요. (항상 PM이 최종 조정합니다만, 사전 이해가 있으면 빠른 대화가 가능합니다.)
+Before making a request, refer to the decision flowchart below to determine which agent to approach. (The PM always performs final coordination, but prior understanding enables a faster conversation.)
 
 ```
-[나는 어디에서 일하는가?]
+[Where do I work?]
         |
-        |-- 제약/바이오 산업 ---→ [어떤 단계인가?]
-        |                              |-- 제조 품질 ---→ gmp-agent
-        |                              |-- 유통 관리 ---→ gdp-agent
-        |                              |-- 비임상 시험 ---→ glp-agent
-        |                              |-- 임상 시험 ---→ gcp-agent
-        |                              └-- 시판 후 감시 ---→ gvp-agent
+        |-- Pharmaceutical / biotech industry ---→ [Which stage?]
+        |                              |-- Manufacturing quality ---→ gmp-agent
+        |                              |-- Distribution management ---→ gdp-agent
+        |                              |-- Non-clinical trials ---→ glp-agent
+        |                              |-- Clinical trials ---→ gcp-agent
+        |                              └-- Post-market surveillance ---→ gvp-agent
         |
-        |-- 화학공장 (정유·석유화학·정밀화학)
-        |           └→ ehschem-agent (코디네이터)
-        |               ├── PSM 의무 공정 포함 시 → psm-agent 협업
-        |               └── 신규 화학물질 취급 시 → msds-agent 협업
+        |-- Chemical plant (refining, petrochemical, fine chemicals)
+        |           └→ ehschem-agent (coordinator)
+        |               ├── If a PSM-covered process is involved → psm-agent collaboration
+        |               └── If a new chemical substance is handled → msds-agent collaboration
         |
-        |-- 건설현장
-        |           └→ ehsconst-agent (코디네이터)
-        |               └── 중대재해 발생 시 → emergency-agent 즉시 파견
+        |-- Construction site
+        |           └→ ehsconst-agent (coordinator)
+        |               └── If a serious accident occurs → emergency-agent immediate dispatch
         |
-        |-- 가스터미널·LNG·LPG·수소 충전소
-        |           └→ gasterm-agent (코디네이터)
-        |               └── 대규모 시설(PSM 의무) 시 → psm-agent 협업
+        |-- Gas terminal / LNG / LPG / hydrogen filling station
+        |           └→ gasterm-agent (coordinator)
+        |               └── If a large-scale facility (PSM-covered) → psm-agent collaboration
         |
-        |-- 발전소 (LNG 화력·신재생 등, 원자력 제외)
-        |           └→ powergen-agent (코디네이터)
+        |-- Power plant (LNG thermal, renewables, etc.; excluding nuclear)
+        |           └→ powergen-agent (coordinator)
         |
-        |-- 의료기기 제조·수입
-        |           └→ meddevice-agent (코디네이터)
+        |-- Medical device manufacturing / import
+        |           └→ meddevice-agent (coordinator)
         |
-        |-- 화학물질 데이터만 필요 (어느 산업이든)
-        |           └→ msds-agent (기능 도메인, 직접 가능)
+        |-- Only chemical substance data needed (any industry)
+        |           └→ msds-agent (functional domain, direct access possible)
         |
-        |-- 안전교육 관리 (어느 산업이든)
-        |           └→ training-agent (기능 도메인, 직접 가능)
+        |-- Safety training management (any industry)
+        |           └→ training-agent (functional domain, direct access possible)
         |
-        └-- 비상 상황 발생!
-                    └→ PM에게 즉시 알리면 emergency-agent 자동 파견
+        └-- An emergency has occurred!
+                    └→ Notify PM immediately → emergency-agent auto-dispatched
 ```
 
-### 빠른 참조 표
+### Quick Reference Table
 
-| 내 상황 | 말해야 할 것 | PM이 파견하는 에이전트 |
-|---------|--------------|------------------------|
-| 화학공장 PSM MOC | "커버드 공정 변경관리 필요" | ehschem → psm |
-| 화학물질 신규 도입 | "신규 화학물질 MSDS 접수" | ehschem → msds |
-| 건설현장 TBM | "오늘 TBM 진행" | ehsconst |
-| 추락 위험 작업 | "고소 작업 허가서 발행" | ehsconst |
-| 임상시험 부작용 보고 | "중증 이상반응(SAE) 발생" | gcp → emergency |
-| 의약품 콜드체인 이탈 | "온도 이탈 확인 필요" | gdp |
-| LNG 터미널 일상 점검 | "가스 저장탱크 정기 점검" | gasterm (→ psm if 대규모) |
-| 발전소 정기 안전 점검 | "발전설비 정기 안전 점검" | powergen |
-| 안전교육 계획 수립 | "연간 안전교육 일정 수립" | training |
+| My situation | What to say | Agent PM dispatches |
+|--------------|-------------|---------------------|
+| Chemical plant PSM MOC | "Management of Change required for covered process" | ehschem → psm |
+| New chemical introduction | "New chemical substance MSDS intake" | ehschem → msds |
+| Construction site TBM | "Conduct today's TBM" | ehsconst |
+| Fall-hazard work | "Issue a high-work permit" | ehsconst |
+| Clinical trial adverse event reporting | "Serious Adverse Event (SAE) occurred" | gcp → emergency |
+| Pharmaceutical cold-chain excursion | "Temperature excursion needs verification" | gdp |
+| LNG terminal routine inspection | "Periodic gas storage tank inspection" | gasterm (→ psm if large-scale) |
+| Power plant periodic safety inspection | "Periodic safety inspection of power generation facility" | powergen |
+| Safety training plan development | "Establish annual safety training schedule" | training |
 
 ---
 
-## 5. 증거 기록 읽는 법
+## 5. How to Read an Evidence Record
 
-앞서 생성된 `psm-moc-record.json`을 예시로, 각 섹션이 감사에서 어떤 역할을 하는지 설명합니다.
+Using the `psm-moc-record.json` generated above, this section explains the role of each part during an audit.
 
-### 핵심 필드 해설
+### Key Field Guide
 
-| 필드 | 역할 | 감사 시 확인 사항 |
-|------|------|-------------------|
-| `record_id` | 고유 식별자. 다른 기록과 교차 참조 시 사용 | 번호가 연속적으로 관리되는지 |
-| `schema_version` | 증거 모델 버전. 법령 개정 이력 추적 | 해당 시점의 법령 요건을 충족하는 버전인지 |
-| `legal_basis` | 적용 법령 조항. **최소 3개 이상** 필수 | 감사관이 가장 먼저 확인하는 항목 |
-| `change_info` | 변경 내용, 개시자, 날짜 | ALCOA+ 귀속성(Attributable)·동시성(Contemporaneous) 증거 |
-| `hazard_assessment` | HAZOP/PHA 결과. 위험 시나리오별 심각도·빈도·안전조치 | 위험성 평가가 실질적으로 이루어졌는지 |
-| `required_actions` | 후속 조치 목록. 담당자·마감일 포함 | 조치 이행 여부 추적 |
-| `approvals.e_signature` | 전자서명. v1: 스키마만, v2: PKI/HSM | 승인 권한자가 서명했는지 |
-| `audit_trail` | 생성 시각, 생성자, ALCOA 상태 | 기록이 위·변조되지 않았는지 |
+| Field | Role | What to check during an audit |
+|-------|------|-------------------------------|
+| `record_id` | Unique identifier. Used for cross-referencing with other records | Whether numbers are managed sequentially |
+| `schema_version` | Evidence model version. Tracks regulatory revision history | Whether the version satisfies the legal requirements in effect at that time |
+| `legal_basis` | Applicable legal provisions. **A minimum of 3 is mandatory** | The first item an auditor checks |
+| `change_info` | Change content, initiator, dates | ALCOA+ Attributable / Contemporaneous evidence |
+| `hazard_assessment` | HAZOP/PHA results. Severity, frequency, and safeguards per risk scenario | Whether risk assessment was substantively performed |
+| `required_actions` | Follow-up action list. Includes responsible party and due date | Tracking of action implementation |
+| `approvals.e_signature` | Electronic signature. v1: schema only, v2: PKI/HSM | Whether an authorized approver signed |
+| `audit_trail` | Creation timestamp, creator, ALCOA status | Whether the record was tampered with |
 
-### ALCOA+ 원칙이란?
+### What are the ALCOA+ principles?
 
-Safety OS의 모든 증거 기록은 **ALCOA+** 데이터 무결성 원칙을 따릅니다.
+All evidence records in Safety OS follow the **ALCOA+** data integrity principles.
 
-| 원칙 | 영어 | 의미 |
-|------|------|------|
-| **A** | Attributable | 누가 했는지 특정 가능 |
-| **L** | Legible | 읽을 수 있고 영구 보존 가능 |
-| **C** | Contemporaneous | 행위 시점에 기록 |
-| **O** | Original | 최초 기록 (사본 아님) |
-| **A** | Accurate | 오류 없음 |
-| **+C** | Complete | 완전한 기록 |
-| **+C** | Consistent | 타 기록과 일관성 |
-| **+E** | Enduring | 규정 보존 기간 준수 |
-| **+A** | Available | 필요 시 즉시 접근 가능 |
-
----
-
-## 6. 흔히 하는 실수 5가지
-
-### 실수 1 — PM을 건너뛰고 전문 에이전트를 직접 호출하려는 경우
-
-Safety OS의 모든 요청은 **PM (CSO)을 통해야 합니다**. psm-agent, msds-agent 등을 직접 호출하는 것은 지원되지 않습니다. 이유는 간단합니다 — PM이 법적 근거(`legal_basis`)를 확인하고 다중 도메인 조정이 필요한지 판단한 후에야 올바른 에이전트가 파견되기 때문입니다. PM을 건너뛰면 법적 근거 없는 증거 기록이 생성될 수 있습니다.
-
-**올바른 방법:**
-```
-✗ psm-agent에게 "MOC 시작해줘"
-✓ PM에게 "커버드 공정에 새 펌프를 설치합니다. PSM MOC 절차 시작해 주세요."
-```
-
-### 실수 2 — PSM 교육과 일반 안전교육을 혼동하는 경우
-
-PSM에는 **12대 요소**가 있으며, 그 중 **요소 4가 교육 훈련**입니다. 이것은 PSM 워크플로 내의 교육 기록으로, `training` 도메인과는 다릅니다.
-
-| 구분 | 어디에서 처리하는가 | 근거 법령 |
-|------|---------------------|-----------|
-| PSM 교육 훈련 (요소 4) | psm-agent 내부 | 산업안전보건법 시행규칙 별표 13 |
-| 일반 안전보건 교육 | training-agent | 산업안전보건법 제29조/제31조/제32조 |
-| 신규 화학물질 교육 통보 | msds-agent → occupational-health | 산업안전보건법 제114조 |
-
-### 실수 3 — 증거 기록을 공식 신고서로 오해하는 경우
-
-Safety OS가 생성하는 JSON 증거 기록은 **워크플로 실행 기록**입니다. 이것은 공정안전보고서(PSR), 화학물질 영향조사서, MFDS 보고서 등 **공식 행정 서류를 대체하지 않습니다.**
-
-증거 기록의 용도:
-- 내부 감사 추적 (audit trail)
-- 규정 준수 문서화 근거 자료
-- 업무 절차 이행 증명
-
-공식 서류 제출은 담당자가 별도로 해야 합니다. Safety OS는 그 준비를 돕는 도구입니다.
-
-### 실수 4 — PSM 의무 대상 여부를 모르고 일반 안전 점검으로만 처리하는 경우
-
-커버드 공정(covered process)이 있는 사업장은 산업안전보건법 제44조에 따라 PSM 의무 대상입니다. 화학공장뿐 아니라 **대규모 LNG 터미널, LPG 기지, 대규모 LNG 화력발전소**도 PSM 의무 대상일 수 있습니다. 사업장이 어느 산업 도메인에 속하든, PSM 의무 여부를 PM에게 먼저 확인하세요.
-
-```
-PM에게: "저희 시설이 PSM 의무 대상인지 확인해 주세요.
-         LNG 터미널 운영 중이며, 저장 용량은 __톤입니다."
-```
-
-### 실수 5 — 비상 상황에서 정상 워크플로를 시도하는 경우
-
-화재, 화학물질 누출, 폭발, 중대재해 발생 시에는 **일반 워크플로를 시작하지 마세요.** 즉시 PM에게 비상 상황임을 알리면 `emergency-agent`가 바로 파견됩니다.
-
-```
-✗ "화학물질 누출 MSDS 확인해 주세요" (일반 워크플로)
-✓ "긴급 상황: 황산 누출 발생. 즉시 대응 필요." → emergency-agent 즉시 파견
-```
+| Principle | English | Meaning |
+|-----------|---------|---------|
+| **A** | Attributable | Identifiable as to who performed the action |
+| **L** | Legible | Readable and permanently preservable |
+| **C** | Contemporaneous | Recorded at the time of the action |
+| **O** | Original | The first record (not a copy) |
+| **A** | Accurate | Free of errors |
+| **+C** | Complete | A complete record |
+| **+C** | Consistent | Consistent with other records |
+| **+E** | Enduring | Complies with the regulatory retention period |
+| **+A** | Available | Immediately accessible when needed |
 
 ---
 
-## 7. 다음 단계
+## 6. Five Common Mistakes
 
-튜토리얼을 완료하셨습니다. 이제 아래 자료로 심화 학습을 이어가세요.
+### Mistake 1 — Trying to call a specialist agent directly, skipping the PM
 
-### 추가 문서
+All requests in Safety OS **must go through the PM (CSO)**. Calling psm-agent, msds-agent, and others directly is not supported. The reason is simple — the correct agent is dispatched only after the PM verifies the legal basis (`legal_basis`) and determines whether multi-domain coordination is needed. Skipping the PM may produce evidence records without legal basis.
 
-| 문서 | 내용 | 링크 |
-|------|------|------|
-| **사용자 시나리오 가이드** | 5가지 실전 시나리오 (신규 화학물질 도입, SAE 보고, 건설현장 일일 안전, 의약품 콜드체인, 화학공장 정비보수) 상세 단계별 설명 | [user-scenarios.md](user-scenarios.md) |
-| **도메인 분류 가이드** | 3-Tier 도메인 구조, 다중 도메인 dispatch 규칙, PSM 적용 시나리오 | [domain-classification-guide.md](domain-classification-guide.md) |
-| **사용자 가이드** | 도메인 선택 기준, ALCOA+ 증거 기록 구조, 참조 워크플로 목록 | [user-guide.md](user-guide.md) |
+**Correct approach:**
+```
+✗ "psm-agent, start MOC"
+✓ "I am installing a new pump in a covered process. Please start the PSM MOC procedure."
+```
 
-### 실습 권장 순서
+### Mistake 2 — Confusing PSM training with general safety training
 
-1. **이 튜토리얼의 빠른 시작 (§3)** → PM에게 MOC 요청해 보기
-2. **[user-scenarios.md](user-scenarios.md) 시나리오 1** → 신규 화학물질 도입 (MSDS + PSM 협업)
-3. **[user-scenarios.md](user-scenarios.md) 시나리오 3** → 건설현장 일일 안전 (ehsconst 일상 워크플로)
-4. 본인 업무와 가장 가까운 시나리오로 연습
+PSM has **12 elements**, of which **Element 4 is Training**. This is a training record within the PSM workflow and is distinct from the `training` domain.
 
-### 법적 고지사항
+| Category | Where it is handled | Legal basis |
+|----------|---------------------|-------------|
+| PSM Training (Element 4) | Inside psm-agent | OSHA-KR Enforcement Rule Annex 13 |
+| General safety and health training | training-agent | OSHA-KR Article 29/31/32 |
+| New chemical substance training notification | msds-agent → occupational-health | OSHA-KR Article 114 |
 
-> **규제 해석은 사용자의 책임입니다. 이 시스템은 워크플로 자동화 보조 도구이며, 법적 자문을 제공하지 않습니다.**
+### Mistake 3 — Mistaking an evidence record for an official report
+
+The JSON evidence record generated by Safety OS is a **workflow execution record**. It does **not replace official administrative documents** such as the Process Safety Report (PSR), Chemical Impact Assessment, or MFDS reports.
+
+Uses of the evidence record:
+- Internal audit trail
+- Compliance documentation supporting material
+- Proof of work-procedure implementation
+
+Official document submission must be done separately by the responsible person. Safety OS is a tool that helps you prepare for it.
+
+### Mistake 4 — Handling a PSM-covered facility as a general safety inspection without knowing it is subject to PSM
+
+Workplaces with a covered process are subject to PSM under OSHA-KR Article 44. This applies not only to chemical plants but also potentially to **large-scale LNG terminals, LPG bases, and large-scale LNG thermal power plants**. Regardless of which industry domain your facility falls under, confirm with the PM whether you are subject to PSM first.
+
+```
+To PM: "Please confirm whether our facility is subject to PSM.
+        We operate an LNG terminal with a storage capacity of __ tons."
+```
+
+### Mistake 5 — Attempting a normal workflow during an emergency
+
+In the event of fire, chemical leak, explosion, or serious accident, **do not start a regular workflow.** Immediately notify the PM that it is an emergency, and the `emergency-agent` will be dispatched right away.
+
+```
+✗ "Please check the MSDS for a chemical leak" (regular workflow)
+✓ "Emergency: sulfuric acid leak occurred. Immediate response required." → emergency-agent immediate dispatch
+```
+
+---
+
+## 7. Next Steps
+
+You have completed the tutorial. Continue your in-depth learning with the materials below.
+
+### Additional Documentation
+
+| Document | Content | Link |
+|----------|---------|------|
+| **User Scenarios Guide** | Detailed step-by-step explanations of 5 real-world scenarios (new chemical introduction, SAE reporting, construction site daily safety, pharmaceutical cold-chain, chemical plant maintenance) | [user-scenarios.md](user-scenarios.md) |
+| **Domain Classification Guide** | 3-Tier domain structure, multi-domain dispatch rules, PSM application scenarios | [domain-classification-guide.md](domain-classification-guide.md) |
+| **User Guide** | Domain selection criteria, ALCOA+ evidence record structure, reference workflow list | [user-guide.md](user-guide.md) |
+
+### Recommended Practice Order
+
+1. **Quick Start in this tutorial (§3)** → Try requesting an MOC from the PM
+2. **[user-scenarios.md](user-scenarios.md) Scenario 1** → New chemical introduction (MSDS + PSM collaboration)
+3. **[user-scenarios.md](user-scenarios.md) Scenario 3** → Construction site daily safety (ehsconst routine workflow)
+4. Practice with the scenario closest to your own work
+
+### Legal Disclaimer
+
+> **Regulatory interpretation is your responsibility. This system is a workflow automation assistance tool and does not provide legal advice.**
 >
-> Safety OS가 참조하는 산업안전보건법, 중대재해처벌법, 약사법, 화학물질관리법 등의 조항은 워크플로 문서화 목적으로만 사용됩니다. 모든 규제 참조의 정확성과 적용 가능성은 자격을 갖춘 법률 전문가 또는 EHS 전문가에 의해 운영 사용 전에 반드시 검증되어야 합니다. 이 시스템의 AI 에이전트는 법적 의견을 제공하지 않습니다.
+> The OSHA-KR, SAPA, Pharmaceutical Affairs Act, and Chemical Substances Control Act provisions referenced by Safety OS are used solely for workflow documentation purposes. The accuracy and applicability of all regulatory references must be verified by a qualified legal or EHS professional before operational use. The AI agents in this system do not provide legal opinions.
 
 ---
 
