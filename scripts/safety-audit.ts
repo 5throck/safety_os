@@ -26,13 +26,18 @@
  * v3.0.0 (2026-06-18): Added ehschem + meddevice validation, generic domain helpers.
  * v3.1.0 (2026-06-19): Added cross-domain reference integrity validation —
  *   validates cross-domain reference fields, uses_functional_services, applicable_industries.
+ * v4.0.0 (2026-06-20): Full generalization — removed all hardcoded per-domain blocks,
+ *   replaced with config-driven loop over DOMAINS from domain-config.ts.
+ *   CROSS_DOMAIN_REFS and KNOWN_INDUSTRIES imported from domain-config.ts.
+ *   validateDomainWorkflow now accepts tier parameter.
  *
- * @version 3.1.0
+ * @version 4.0.0
  */
 
 import * as fs from 'node:fs';
 import * as path from 'node:path';
 import * as yaml from 'js-yaml';
+import { DOMAINS, CROSS_DOMAIN_REFS, KNOWN_INDUSTRIES } from './domain-config.ts';
 
 // Color helpers
 const GREEN = '\x1b[32m';
@@ -167,72 +172,10 @@ for (const file of evidenceFiles) {
             // Strip # pointer if any
             const filePathPart = ref.split('#')[0];
             if (!filePathPart) continue; // internal ref
-            
+
             const resolvedPath = path.resolve(path.dirname(file), filePathPart);
             if (!fs.existsSync(resolvedPath)) {
                 errors.push(`${rel}: missing linked schema file -> ${filePathPart}`);
-            }
-        }
-    } catch (e: any) {
-        errors.push(`${rel}: JSON parsing error - ${e.message}`);
-    }
-}
-
-
-// ── GMP-specific validation: workflows ───────────────────────────────────────
-// GMP workflows require multi-source legal_basis (array with ≥2 entries) per
-// meeting decision 2026-06-17 (Q3/Q4 follow-up).
-// v2.2.0: Path updated for domain-based folder structure.
-const gmpWorkflowDir = path.join(workflowDir, 'domains', 'industry', 'gmp');
-const gmpSchemaFiles = walkDirExact(gmpWorkflowDir, 'schema.yaml');
-
-for (const file of gmpSchemaFiles) {
-    totalChecked++;
-    const content = fs.readFileSync(file, 'utf-8');
-    const rel = relPath(file);
-    try {
-        const doc = yaml.load(content) as any;
-        if (!doc) continue;
-        if (!Array.isArray(doc.legal_basis) || doc.legal_basis.length < 2) {
-            errors.push(`${rel}: GMP workflow requires multi-source legal_basis (array, ≥2 entries per meeting 2026-06-17)`);
-        }
-    } catch (e: any) {
-        errors.push(`${rel}: YAML parsing error - ${e.message}`);
-    }
-}
-
-// ── GMP-specific validation: evidence models ─────────────────────────────────
-// All gmp-*.json (excluding gmp-common.schema.json) must include common fields
-// per meeting 2026-06-17 decisions (Q1 e-signature, Q3 qrm_assessment, Q4 nomenclature).
-const gmpEvidenceFiles = evidenceFiles.filter(f => {
-    const name = path.basename(f);
-    return name.startsWith('gmp-') && name !== 'gmp-common.schema.json';
-});
-
-const REQUIRED_GMP_COMMON_FIELDS = ['e_signature', 'qrm_assessment', 'nomenclature', 'audit_trail'];
-
-for (const file of gmpEvidenceFiles) {
-    totalChecked++;
-    const content = fs.readFileSync(file, 'utf-8');
-    const rel = relPath(file);
-    try {
-        const doc = JSON.parse(content);
-        const props = doc.properties || {};
-        for (const field of REQUIRED_GMP_COMMON_FIELDS) {
-            if (!props[field]) {
-                errors.push(`${rel}: missing GMP common field '${field}'`);
-            }
-        }
-        const legalBasis = props.legal_basis;
-        if (!legalBasis) {
-            errors.push(`${rel}: missing legal_basis property`);
-        } else if (!legalBasis.minItems || legalBasis.minItems < 2) {
-            errors.push(`${rel}: legal_basis must have minItems ≥2 (multi-source required)`);
-        }
-        const required = doc.required || [];
-        for (const field of [...REQUIRED_GMP_COMMON_FIELDS, 'legal_basis']) {
-            if (!required.includes(field)) {
-                errors.push(`${rel}: '${field}' must be in required array`);
             }
         }
     } catch (e: any) {
@@ -264,348 +207,10 @@ if (fs.existsSync(qrmSkillPath)) {
     }
 }
 
-// ── MSDS-specific validation: workflows ──────────────────────────────────────
-// v2.3.0: MSDS workflows require multi-source legal_basis (≥3 entries, stricter
-// than GMP's ≥2) per meeting 2026-06-17. Reference workflows are exempt.
-const msdsWorkflowDir = path.join(workflowDir, 'domains', 'functional', 'msds');
-const msdsSchemaFiles = walkDirExact(msdsWorkflowDir, 'schema.yaml');
+// ── Domain-specific helper functions ─────────────────────────────────────────
 
-for (const file of msdsSchemaFiles) {
-    totalChecked++;
-    const content = fs.readFileSync(file, 'utf-8');
-    const rel = relPath(file);
-    try {
-        const doc = yaml.load(content) as any;
-        if (!doc) continue;
-        const isReference = doc.workflow_type === 'reference';
-        // Reference workflows: legal_basis min 2 (inherited from target_agent context)
-        // Core workflows: legal_basis min 3 (OSHA-KR + 환경부법 + GHS)
-        const requiredMin = isReference ? 2 : 3;
-        if (!Array.isArray(doc.legal_basis) || doc.legal_basis.length < requiredMin) {
-            errors.push(`${rel}: MSDS ${isReference ? 'reference' : 'core'} workflow requires multi-source legal_basis (≥${requiredMin} entries per meeting 2026-06-17)`);
-        }
-        // Reference workflow must have target_agent
-        if (isReference && !doc.target_agent) {
-            errors.push(`${rel}: reference workflow requires target_agent field`);
-        }
-    } catch (e: any) {
-        errors.push(`${rel}: YAML parsing error - ${e.message}`);
-    }
-}
-
-// ── MSDS-specific validation: evidence models ────────────────────────────────
-// All msds-*.json must include ghs_version field per meeting 2026-06-17 Q3.
-const msdsEvidenceFiles = evidenceFiles.filter(f => {
-    const name = path.basename(f);
-    return name.startsWith('msds-') || name.startsWith('ghs-') ||
-           name.startsWith('chemical-') || name.startsWith('kreach-') ||
-           name.startsWith('hazard-label-');
-}).filter(f => path.dirname(f).includes(path.join('domains', 'functional', 'msds')));
-
-for (const file of msdsEvidenceFiles) {
-    totalChecked++;
-    const content = fs.readFileSync(file, 'utf-8');
-    const rel = relPath(file);
-    try {
-        const doc = JSON.parse(content);
-        const props = doc.properties || {};
-        // ghs_version field required
-        if (!props.ghs_version) {
-            errors.push(`${rel}: missing ghs_version property (required per meeting 2026-06-17 Q3)`);
-        }
-        // legal_basis min 2 (MSDS domain standard)
-        const legalBasis = props.legal_basis;
-        if (legalBasis && (!legalBasis.minItems || legalBasis.minItems < 2)) {
-            errors.push(`${rel}: legal_basis must have minItems ≥2`);
-        }
-    } catch (e: any) {
-        errors.push(`${rel}: JSON parsing error - ${e.message}`);
-    }
-}
-
-// ── GDP-specific validation: workflows ───────────────────────────────────────
-// v2.4.0: GDP workflows require multi-source legal_basis (≥3 core, ≥2 reference)
-const gdpWorkflowDir = path.join(workflowDir, 'domains', 'industry', 'gdp');
-const gdpSchemaFiles = walkDirExact(gdpWorkflowDir, 'schema.yaml');
-
-for (const file of gdpSchemaFiles) {
-    totalChecked++;
-    const content = fs.readFileSync(file, 'utf-8');
-    const rel = relPath(file);
-    try {
-        const doc = yaml.load(content) as any;
-        if (!doc) continue;
-        const isReference = doc.workflow_type === 'reference';
-        const requiredMin = isReference ? 2 : 3;
-        if (!Array.isArray(doc.legal_basis) || doc.legal_basis.length < requiredMin) {
-            errors.push(`${rel}: GDP ${isReference ? 'reference' : 'core'} workflow requires multi-source legal_basis (≥${requiredMin} entries)`);
-        }
-        if (isReference && !doc.target_agent) {
-            errors.push(`${rel}: GDP reference workflow requires target_agent field`);
-        }
-    } catch (e: any) {
-        errors.push(`${rel}: YAML parsing error - ${e.message}`);
-    }
-}
-
-// ── GDP-specific validation: evidence models ────────────────────────────────
-// v2.4.0: All gdp-*.json must include gdp_certification_status, temperature_condition, batch_disposition_approved_ref
-const gdpEvidenceFiles = evidenceFiles.filter(f => {
-    return path.basename(f).startsWith('gdp-') &&
-           path.dirname(f).includes(path.join('domains', 'industry', 'gdp'));
-});
-
-const REQUIRED_GDP_FIELDS = ['gdp_certification_status', 'temperature_condition', 'batch_disposition_approved_ref'];
-
-for (const file of gdpEvidenceFiles) {
-    totalChecked++;
-    const content = fs.readFileSync(file, 'utf-8');
-    const rel = relPath(file);
-    try {
-        const doc = JSON.parse(content);
-        const props = doc.properties || {};
-        for (const field of REQUIRED_GDP_FIELDS) {
-            if (!props[field]) {
-                errors.push(`${rel}: missing GDP required field '${field}'`);
-            }
-        }
-        const legalBasis = props.legal_basis;
-        if (legalBasis && (!legalBasis.minItems || legalBasis.minItems < 3)) {
-            errors.push(`${rel}: GDP legal_basis must have minItems ≥3`);
-        }
-    } catch (e: any) {
-        errors.push(`${rel}: JSON parsing error - ${e.message}`);
-    }
-}
-
-// ── report ────────────────────────────────────────────────────────────────────
-
-// ── GLP-specific validation: workflows ───────────────────────────────────────
-// v2.5.0: GLP workflows require multi-source legal_basis (≥3 core, ≥2 reference)
-const glpWorkflowDir = path.join(workflowDir, 'domains', 'industry', 'glp');
-const glpSchemaFiles = walkDirExact(glpWorkflowDir, 'schema.yaml');
-
-for (const file of glpSchemaFiles) {
-    totalChecked++;
-    const content = fs.readFileSync(file, 'utf-8');
-    const rel = relPath(file);
-    try {
-        const doc = yaml.load(content) as any;
-        if (!doc) continue;
-        const isReference = doc.workflow_type === 'reference';
-        const requiredMin = isReference ? 2 : 3;
-        if (!Array.isArray(doc.legal_basis) || doc.legal_basis.length < requiredMin) {
-            errors.push(`${rel}: GLP ${isReference ? 'reference' : 'core'} workflow requires multi-source legal_basis (≥${requiredMin} entries)`);
-        }
-        if (isReference && !doc.target_agent) {
-            errors.push(`${rel}: GLP reference workflow requires target_agent field`);
-        }
-    } catch (e: any) {
-        errors.push(`${rel}: YAML parsing error - ${e.message}`);
-    }
-}
-
-// ── GLP-specific validation: evidence models ────────────────────────────────
-// v2.5.0: All glp-*.json must include glp_certification_authority, oecd_mad_applicable,
-// study_director_id, msds_record_ref
-const glpEvidenceFiles = evidenceFiles.filter(f => {
-    return path.basename(f).startsWith('glp-') &&
-           path.dirname(f).includes(path.join('domains', 'industry', 'glp'));
-});
-
-const REQUIRED_GLP_FIELDS = ['glp_certification_authority', 'oecd_mad_applicable', 'study_director_id', 'msds_record_ref'];
-
-for (const file of glpEvidenceFiles) {
-    totalChecked++;
-    const content = fs.readFileSync(file, 'utf-8');
-    const rel = relPath(file);
-    try {
-        const doc = JSON.parse(content);
-        const props = doc.properties || {};
-        for (const field of REQUIRED_GLP_FIELDS) {
-            if (!props[field]) {
-                errors.push(`${rel}: missing GLP required field '${field}'`);
-            }
-        }
-        const legalBasis = props.legal_basis;
-        if (legalBasis && (!legalBasis.minItems || legalBasis.minItems < 3)) {
-            errors.push(`${rel}: GLP legal_basis must have minItems ≥3`);
-        }
-    } catch (e: any) {
-        errors.push(`${rel}: JSON parsing error - ${e.message}`);
-    }
-}
-
-// ── GCP-specific validation: workflows ───────────────────────────────────────
-// v2.6.0: GCP workflows require multi-source legal_basis (≥3 core, ≥2 reference)
-const gcpWorkflowDir = path.join(workflowDir, 'domains', 'industry', 'gcp');
-const gcpSchemaFiles = walkDirExact(gcpWorkflowDir, 'schema.yaml');
-
-for (const file of gcpSchemaFiles) {
-    totalChecked++;
-    const content = fs.readFileSync(file, 'utf-8');
-    const rel = relPath(file);
-    try {
-        const doc = yaml.load(content) as any;
-        if (!doc) continue;
-        const isReference = doc.workflow_type === 'reference';
-        const requiredMin = isReference ? 2 : 3;
-        if (!Array.isArray(doc.legal_basis) || doc.legal_basis.length < requiredMin) {
-            errors.push(`${rel}: GCP ${isReference ? 'reference' : 'core'} workflow requires multi-source legal_basis (≥${requiredMin} entries)`);
-        }
-        if (isReference && !doc.target_agent) {
-            errors.push(`${rel}: GCP reference workflow requires target_agent field`);
-        }
-    } catch (e: any) {
-        errors.push(`${rel}: YAML parsing error - ${e.message}`);
-    }
-}
-
-// ── GCP-specific validation: evidence models ────────────────────────────────
-// v2.6.0: All gcp-*.json must include irb_approval_ref, ich_e6_compliance,
-// protocol_ref, site_id
-const gcpEvidenceFiles = evidenceFiles.filter(f => {
-    return path.basename(f).startsWith('gcp-') &&
-           path.dirname(f).includes(path.join('domains', 'industry', 'gcp'));
-});
-
-const REQUIRED_GCP_FIELDS = ['irb_approval_ref', 'ich_e6_compliance', 'protocol_ref', 'site_id'];
-
-for (const file of gcpEvidenceFiles) {
-    totalChecked++;
-    const content = fs.readFileSync(file, 'utf-8');
-    const rel = relPath(file);
-    try {
-        const doc = JSON.parse(content);
-        const props = doc.properties || {};
-        for (const field of REQUIRED_GCP_FIELDS) {
-            if (!props[field]) {
-                errors.push(`${rel}: missing GCP required field '${field}'`);
-            }
-        }
-        const legalBasis = props.legal_basis;
-        if (legalBasis && (!legalBasis.minItems || legalBasis.minItems < 3)) {
-            errors.push(`${rel}: GCP legal_basis must have minItems ≥3`);
-        }
-    } catch (e: any) {
-        errors.push(`${rel}: JSON parsing error - ${e.message}`);
-    }
-}
-
-// ── GVP-specific validation: workflows ───────────────────────────────────────
-// v2.7.0: GVP workflows require multi-source legal_basis (≥3 core, ≥2 reference)
-const gvpWorkflowDir = path.join(workflowDir, 'domains', 'industry', 'gvp');
-const gvpSchemaFiles = walkDirExact(gvpWorkflowDir, 'schema.yaml');
-
-for (const file of gvpSchemaFiles) {
-    totalChecked++;
-    const content = fs.readFileSync(file, 'utf-8');
-    const rel = relPath(file);
-    try {
-        const doc = yaml.load(content) as any;
-        if (!doc) continue;
-        const isReference = doc.workflow_type === 'reference';
-        const requiredMin = isReference ? 2 : 3;
-        if (!Array.isArray(doc.legal_basis) || doc.legal_basis.length < requiredMin) {
-            errors.push(`${rel}: GVP ${isReference ? 'reference' : 'core'} workflow requires multi-source legal_basis (≥${requiredMin} entries)`);
-        }
-        if (isReference && !doc.target_agent) {
-            errors.push(`${rel}: GVP reference workflow requires target_agent field`);
-        }
-    } catch (e: any) {
-        errors.push(`${rel}: YAML parsing error - ${e.message}`);
-    }
-}
-
-// ── GVP-specific validation: evidence models ────────────────────────────────
-// v2.7.0: All gvp-*.json must include ich_e2_compliance, pbrer_cycle_ref, product_id, rmp_version_ref
-const gvpEvidenceFiles = evidenceFiles.filter(f => {
-    return path.basename(f).startsWith('gvp-') &&
-           path.dirname(f).includes(path.join('domains', 'industry', 'gvp'));
-});
-
-const REQUIRED_GVP_FIELDS = ['ich_e2_compliance', 'pbrer_cycle_ref', 'product_id', 'rmp_version_ref'];
-
-for (const file of gvpEvidenceFiles) {
-    totalChecked++;
-    const content = fs.readFileSync(file, 'utf-8');
-    const rel = relPath(file);
-    try {
-        const doc = JSON.parse(content);
-        const props = doc.properties || {};
-        for (const field of REQUIRED_GVP_FIELDS) {
-            if (!props[field]) {
-                errors.push(`${rel}: missing GVP required field '${field}'`);
-            }
-        }
-        const legalBasis = props.legal_basis;
-        if (legalBasis && (!legalBasis.minItems || legalBasis.minItems < 3)) {
-            errors.push(`${rel}: GVP legal_basis must have minItems ≥3`);
-        }
-    } catch (e: any) {
-        errors.push(`${rel}: JSON parsing error - ${e.message}`);
-    }
-}
-
-// ── ehsconst-specific validation: workflows ─────────────────────────────────
-// v2.8.0: Construction Safety workflows require multi-source legal_basis (≥3 core, ≥2 reference)
-const ehsconstWorkflowDir = path.join(workflowDir, 'domains', 'industry', 'ehsconst');
-const ehsconstSchemaFiles = walkDirExact(ehsconstWorkflowDir, 'schema.yaml');
-
-for (const file of ehsconstSchemaFiles) {
-    totalChecked++;
-    const content = fs.readFileSync(file, 'utf-8');
-    const rel = relPath(file);
-    try {
-        const doc = yaml.load(content) as any;
-        if (!doc) continue;
-        const isReference = doc.workflow_type === 'reference';
-        const requiredMin = isReference ? 2 : 3;
-        if (!Array.isArray(doc.legal_basis) || doc.legal_basis.length < requiredMin) {
-            errors.push(`${rel}: ehsconst ${isReference ? 'reference' : 'core'} workflow requires multi-source legal_basis (≥${requiredMin} entries)`);
-        }
-        if (isReference && !doc.target_agent) {
-            errors.push(`${rel}: ehsconst reference workflow requires target_agent field`);
-        }
-    } catch (e: any) {
-        errors.push(`${rel}: YAML parsing error - ${e.message}`);
-    }
-}
-
-// ── ehsconst-specific validation: evidence models ───────────────────────────
-// v2.8.0: All ehsconst-*.json must include sapa_article_12_compliance, project_id,
-// contractor_tier, safety_officer_in_charge
-const ehsconstEvidenceFiles = evidenceFiles.filter(f => {
-    return path.basename(f).startsWith('ehsconst-') &&
-           path.dirname(f).includes(path.join('domains', 'industry', 'ehsconst'));
-});
-
-const REQUIRED_EHSCONST_FIELDS = ['sapa_article_12_compliance', 'project_id', 'contractor_tier', 'safety_officer_in_charge'];
-
-for (const file of ehsconstEvidenceFiles) {
-    totalChecked++;
-    const content = fs.readFileSync(file, 'utf-8');
-    const rel = relPath(file);
-    try {
-        const doc = JSON.parse(content);
-        const props = doc.properties || {};
-        for (const field of REQUIRED_EHSCONST_FIELDS) {
-            if (!props[field]) {
-                errors.push(`${rel}: missing ehsconst required field '${field}'`);
-            }
-        }
-        const legalBasis = props.legal_basis;
-        if (legalBasis && (!legalBasis.minItems || legalBasis.minItems < 3)) {
-            errors.push(`${rel}: ehsconst legal_basis must have minItems ≥3`);
-        }
-    } catch (e: any) {
-        errors.push(`${rel}: JSON parsing error - ${e.message}`);
-    }
-}
-
-// ── gasterm + powergen validation (v2.9.0) ───────────────────────────────────
-function validateDomainWorkflow(domainName: string, requiredMin: number = 3): string[] {
-    const domainDir = path.join(workflowDir, 'domains', domainName);
+function validateDomainWorkflow(domainName: string, requiredMin: number = 3, tier: string = 'industry'): string[] {
+    const domainDir = path.join(workflowDir, 'domains', tier, domainName);
     const schemaFiles = walkDirExact(domainDir, 'schema.yaml');
     const errs: string[] = [];
     for (const file of schemaFiles) {
@@ -658,72 +263,56 @@ function validateDomainEvidence(domainName: string, requiredFields: string[], mi
     return { files: domainEvidence, errs };
 }
 
-// gasterm validation
-const gastermSchemaFiles = walkDirExact(path.join(workflowDir, 'domains', 'industry', 'gasterm'), 'schema.yaml');
-const gastermWorkflowErrs = validateDomainWorkflow('gasterm');
-errors.push(...gastermWorkflowErrs);
-const gastermEvidenceResult = validateDomainEvidence('gasterm', ['facility_type', 'kgs_inspection_status', 'psm_applicable', 'gas_type']);
-errors.push(...gastermEvidenceResult.errs);
+// ── Generalized per-domain validation (v4.0.0) ─────────────────────────────
+// All domains validated uniformly from domain-config.ts DOMAINS array.
 
-// powergen validation
-const powergenSchemaFiles = walkDirExact(path.join(workflowDir, 'domains', 'industry', 'powergen'), 'schema.yaml');
-const powergenWorkflowErrs = validateDomainWorkflow('powergen');
-errors.push(...powergenWorkflowErrs);
-const powergenEvidenceResult = validateDomainEvidence('powergen', ['plant_type', 'kesa_inspection_status', 'voltage_class']);
-errors.push(...powergenEvidenceResult.errs);
-
-// ehschem validation
-const ehschemSchemaFiles = walkDirExact(path.join(workflowDir, 'domains', 'industry', 'ehschem'), 'schema.yaml');
-const ehschemWorkflowErrs = validateDomainWorkflow('ehschem');
-errors.push(...ehschemWorkflowErrs);
-const ehschemEvidenceResult = validateDomainEvidence('ehschem', ['plant_category', 'psm_applicable', 'chemical_category']);
-errors.push(...ehschemEvidenceResult.errs);
-
-// meddevice validation
-const meddeviceSchemaFiles = walkDirExact(path.join(workflowDir, 'domains', 'industry', 'meddevice'), 'schema.yaml');
-const meddeviceWorkflowErrs = validateDomainWorkflow('meddevice');
-errors.push(...meddeviceWorkflowErrs);
-const meddeviceEvidenceResult = validateDomainEvidence('meddevice', ['device_class', 'kgmp_certification_status', 'iso_13485_compliance']);
-errors.push(...meddeviceEvidenceResult.errs);
-
-// ── Config-driven domain validation (v3.2.0) ────────────────────────────────
-// Uses domain-config.ts to validate domains not already covered by hard-coded
-// blocks above. This ensures new domains get automatic validation without
-// requiring manual code additions.
-import { DOMAINS } from './domain-config.ts';
-
-const validatedDomains = new Set(['gmp', 'msds', 'gdp', 'glp', 'gcp', 'gvp', 'ehsconst', 'gasterm', 'powergen', 'ehschem', 'meddevice']);
 const domainCounts: Record<string, { workflows: number; evidence: number }> = {};
 
 for (const domain of DOMAINS) {
-    if (validatedDomains.has(domain.name)) {
-        // Already validated by hard-coded block above — skip to avoid duplicate checks
-        continue;
-    }
-    const wfErrs = validateDomainWorkflow(domain.name);
+    // Workflow validation (skip if domain uses non-array legal_basis format)
+    const wfErrs = domain.skip_workflow_validation
+        ? []
+        : validateDomainWorkflow(domain.name, domain.min_workflow_legal_basis, domain.tier);
     errors.push(...wfErrs);
+
+    // Evidence model validation
     const evResult = validateDomainEvidence(domain.name, domain.required_evidence_fields, domain.min_legal_basis);
     errors.push(...evResult.errs);
-    domainCounts[domain.name] = { workflows: wfErrs.length === 0 ? -1 : -1, evidence: evResult.files.length };
-    // Count workflows for this domain
+
+    // Count for report
     const wfDir = path.join(workflowDir, 'domains', domain.tier, domain.name);
-    domainCounts[domain.name].workflows = walkDirExact(wfDir, 'schema.yaml').length;
+    domainCounts[domain.name] = {
+        workflows: walkDirExact(wfDir, 'schema.yaml').length,
+        evidence: evResult.files.length,
+    };
+}
+
+// ── PSM applicable_industries validation ─────────────────────────────────────
+const psmWfDir = path.join(workflowDir, 'domains', 'functional', 'psm');
+if (fs.existsSync(psmWfDir)) {
+    for (const wfDir of fs.readdirSync(psmWfDir, { withFileTypes: true })) {
+        if (!wfDir.isDirectory()) continue;
+        const schemaPath = path.join(psmWfDir, wfDir.name, 'schema.yaml');
+        if (!fs.existsSync(schemaPath)) continue;
+        totalChecked++;
+        try {
+            const doc = yaml.load(fs.readFileSync(schemaPath, 'utf-8')) as any;
+            if (doc?.applicable_industries) {
+                const industries = Array.isArray(doc.applicable_industries) ? doc.applicable_industries : [];
+                for (const ind of industries) {
+                    if (!KNOWN_INDUSTRIES.includes(ind)) {
+                        errors.push(`psm/${wfDir.name}/schema.yaml: applicable_industries references unknown industry '${ind}'`);
+                    }
+                }
+            }
+        } catch { /* skip */ }
+    }
 }
 
 // ── Cross-domain reference integrity (v3.1.0) ──────────────────────────────
 // Validates that cross-domain reference fields in evidence models point to
 // domains that actually exist in the 2-Tier folder structure.
 console.log(`${CYAN}--- Cross-domain reference integrity ---${RESET}`);
-
-// Define known cross-domain reference fields and their target domains
-const CROSS_DOMAIN_REFS: Array<{ field: string; fromDomain: string; fromTier: string; toDomain: string; toTier: string }> = [
-    { field: 'batch_disposition_approved_ref', fromDomain: 'gdp', fromTier: 'industry', toDomain: 'gmp', toTier: 'industry' },
-    { field: 'msds_record_ref', fromDomain: 'glp', fromTier: 'industry', toDomain: 'msds', toTier: 'functional' },
-    { field: 'msds_record_ref', fromDomain: 'gasterm', fromTier: 'industry', toDomain: 'msds', toTier: 'functional' },
-    { field: 'msds_record_ref', fromDomain: 'ehschem', fromTier: 'industry', toDomain: 'msds', toTier: 'functional' },
-    { field: 'psm_psi_ref', fromDomain: 'ehschem', fromTier: 'industry', toDomain: 'psm', toTier: 'functional' },
-    { field: 'psm_applicable', fromDomain: 'gasterm', fromTier: 'industry', toDomain: 'psm', toTier: 'functional' },
-];
 
 for (const ref of CROSS_DOMAIN_REFS) {
     totalChecked++;
@@ -771,34 +360,14 @@ if (fs.existsSync(industryWorkflowDir)) {
     }
 }
 
-// Validate applicable_industries in PSM workflow schemas
-const psmWfDir = path.join(workflowDir, 'domains', 'functional', 'psm');
-if (fs.existsSync(psmWfDir)) {
-    for (const wfDir of fs.readdirSync(psmWfDir, { withFileTypes: true })) {
-        if (!wfDir.isDirectory()) continue;
-        const schemaPath = path.join(psmWfDir, wfDir.name, 'schema.yaml');
-        if (!fs.existsSync(schemaPath)) continue;
-        totalChecked++;
-        try {
-            const doc = yaml.load(fs.readFileSync(schemaPath, 'utf-8')) as any;
-            if (doc?.applicable_industries) {
-                const industries = Array.isArray(doc.applicable_industries) ? doc.applicable_industries : [];
-                for (const ind of industries) {
-                    // Check if a corresponding industry domain exists
-                    const knownIndustries = ['chemical', 'gas_terminal', 'power_generation', 'construction', 'medical_device'];
-                    if (!knownIndustries.includes(ind)) {
-                        errors.push(`psm/${wfDir.name}/schema.yaml: applicable_industries references unknown industry '${ind}'`);
-                    }
-                }
-            }
-        } catch { /* skip */ }
-    }
-}
+// ── Final report ──────────────────────────────────────────────────────────────
 
+const wfReport = Object.entries(domainCounts).map(([k, v]) => `${v.workflows} ${k}`).join(', ');
+const evReport = Object.entries(domainCounts).map(([k, v]) => `${v.evidence} ${k}`).join(', ');
 console.log(`Files checked : ${totalChecked}`);
-console.log(`  workflows/        : ${schemaFiles.length} schema.yaml file(s) (${gmpSchemaFiles.length} GMP, ${msdsSchemaFiles.length} MSDS, ${gdpSchemaFiles.length} GDP, ${glpSchemaFiles.length} GLP, ${gcpSchemaFiles.length} GCP, ${gvpSchemaFiles.length} GVP, ${ehsconstSchemaFiles.length} ehsconst, ${gastermSchemaFiles.length} gasterm, ${powergenSchemaFiles.length} powergen, ${ehschemSchemaFiles.length} ehschem, ${meddeviceSchemaFiles.length} meddevice${Object.entries(domainCounts).map(([k,v]) => `, ${v.workflows} ${k}`).join('')})`);
+console.log(`  workflows/        : ${schemaFiles.length} schema.yaml file(s) (${wfReport})`);
 console.log(`  regulations/      : ${regFiles.length} .yaml file(s)`);
-console.log(`  evidence-models/  : ${evidenceFiles.length} .json file(s) (${gmpEvidenceFiles.length} GMP, ${msdsEvidenceFiles.length} MSDS, ${gdpEvidenceFiles.length} GDP, ${glpEvidenceFiles.length} GLP, ${gcpEvidenceFiles.length} GCP, ${gvpEvidenceFiles.length} GVP, ${ehsconstEvidenceFiles.length} ehsconst, ${gastermEvidenceResult.files.length} gasterm, ${powergenEvidenceResult.files.length} powergen, ${ehschemEvidenceResult.files.length} ehschem, ${meddeviceEvidenceResult.files.length} meddevice${Object.entries(domainCounts).map(([k,v]) => `, ${v.evidence} ${k}`).join('')})\n`);
+console.log(`  evidence-models/  : ${evidenceFiles.length} .json file(s) (${evReport})\n`);
 
 if (errors.length === 0) {
     console.log(`${GREEN}✅ ${totalChecked} files checked, 0 errors${RESET}`);

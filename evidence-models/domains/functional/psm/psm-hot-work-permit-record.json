@@ -1,0 +1,83 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PSM Hot Work Permit Record",
+  "version": "1.0.0",
+  "type": "object",
+  "properties": {
+    "record_id": {
+      "type": "string",
+      "description": "Unique identifier for the hot work permit record."
+    },
+    "date": {
+      "type": "string",
+      "format": "date",
+      "description": "Date the hot work permit was issued."
+    },
+    "permit_number": {
+      "type": "string",
+      "description": "Unique permit number assigned to this hot work authorization."
+    },
+    "work_location": {
+      "type": "string",
+      "description": "Specific location within the facility where hot work will be performed."
+    },
+    "work_description": {
+      "type": "string",
+      "description": "Description of the hot work activity to be performed (e.g., welding, cutting, grinding)."
+    },
+    "fire_hazard_assessment": {
+      "type": "object",
+      "description": "Pre-work gas-free verification and fire hazard evaluation.",
+      "properties": {
+        "flammable_gas_test": {
+          "type": "string",
+          "description": "Name or type of gas detector instrument used for measurement."
+        },
+        "gas_concentration_ppm": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Measured flammable gas concentration in parts per million (ppm)."
+        },
+        "safe_to_proceed": {
+          "type": "boolean",
+          "description": "Confirmation that gas concentration is below acceptable threshold and work may proceed."
+        }
+      },
+      "required": ["flammable_gas_test", "gas_concentration_ppm", "safe_to_proceed"]
+    },
+    "authorized_by": {
+      "type": "string",
+      "description": "Name or ID of the supervisor who authorized the hot work permit."
+    },
+    "fire_watch_required": {
+      "type": "boolean",
+      "description": "Indicates whether a fire watch attendant is required for this hot work."
+    },
+    "fire_watch_name": {
+      "type": "string",
+      "description": "Name or ID of the assigned fire watch attendant (required when fire_watch_required is true)."
+    },
+    "permit_expiry": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Date and time at which the permit expires and work must stop unless renewed."
+    },
+    "closure_signature": {
+      "type": "string",
+      "description": "Signature or name of the person who closed the permit upon work completion."
+    }
+  },
+  "required": [
+    "record_id",
+    "date",
+    "permit_number",
+    "work_location",
+    "work_description",
+    "fire_hazard_assessment",
+    "authorized_by",
+    "fire_watch_required",
+    "fire_watch_name",
+    "permit_expiry",
+    "closure_signature"
+  ]
+}
