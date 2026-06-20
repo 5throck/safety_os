@@ -7,7 +7,7 @@
 
 > **Canonical agent index** - auto-loaded by Claude Code; referenced by all other AI tools.
 > Full agent definitions live in `agents/`.
-> **Agent architecture and governance rules**: See [CONSTITUTION.md §5 - Multi-Agent Architecture](CONSTITUTION.md#5-multi-agent-architecture).
+> **Agent architecture and governance rules**: See [CLAUDE.md - Agent Dispatch Rules (§5)](CLAUDE.md#5-agent-dispatch-rules).
 
 ---
 

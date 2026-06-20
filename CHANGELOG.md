@@ -6,6 +6,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+### Changed (2026-06-21 — CONSTITUTION.md Reroute + Repo Cleanup)
+
+- **P0 — `CONSTITUTION.md` reference reroute**: Rewrote the 3-line `CONSTITUTION.md` stub into a concise governance index (Required Reading + Governance Sections tables). Rerouted **12 broken links** across `CLAUDE.md` (6), `GEMINI.md` (5), and `AGENTS.md` (1) to valid in-file anchors. Half the links pointed to nonexistent stub anchors (`CONSTITUTION.md#3`/`#5`) and half to a nonexistent `docs/constitution/` directory; the actual governance content already lived inline in `CLAUDE.md`/`GEMINI.md`, so links were redirected there rather than duplicating content. CLAUDE.md ↔ GEMINI.md platform parity maintained.
+- **P1 — Repo cleanup**: Added `templates/common/scripts/` to `.gitignore` (L0/L1 workspace template infrastructure not needed in this L2 variant) and removed its stale auto-generated `README.md` (which referenced a nonexistent `SCRIPTS.md`). Audit script-sync check unaffected (0 shared files).
+
 ### Changed (2026-06-21 — 2-Tier Matrix Restructure)
 
 Refactored the **2-Tier Matrix Architecture** section in `README.md` and `README_ko.md` from a flat list (Functional Service rows + redundant Industry Coordinator rows) into a true **Tier 1 (rows) × Tier 2 (columns) matrix**. Industry domains (GxP, ehschem, gasterm, powergen, ehsconst, meddevice) are now column headers, eliminating duplicate coordinator rows and shortening the Pharma column label to `GxP`. The exact applicability data (`✓` cells: psm=ehschem/gasterm/powergen; msds/training/emergency=all 6) is preserved. Both READMEs use an identical 16-line symmetric structure.
