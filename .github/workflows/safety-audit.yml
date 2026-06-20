@@ -29,8 +29,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          submodules: recursive
 
       - name: Setup Bun
         uses: oven-sh/setup-bun@v1
@@ -38,7 +36,7 @@ jobs:
           bun-version: latest
 
       - name: Install dependencies
-        run: bun install
+        run: cd scripts && bun install
 
       - name: Run safety-audit
         run: bun scripts/safety-audit.ts
@@ -62,8 +60,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          submodules: recursive
 
       - name: Setup Bun
         uses: oven-sh/setup-bun@v1
@@ -71,7 +67,7 @@ jobs:
           bun-version: latest
 
       - name: Install dependencies
-        run: bun install
+        run: cd scripts && bun install
 
       - name: Run pharma-general profile test
         run: bun scripts/test-pharma-general-profile.ts
@@ -99,7 +95,7 @@ jobs:
           bun-version: latest
 
       - name: Install dependencies
-        run: bun install
+        run: cd scripts && bun install
 
       - name: TypeScript type-check
         run: |
@@ -144,8 +140,6 @@ jobs:
     needs: [validate, test-suite, lint]
     steps:
       - uses: actions/checkout@v4
-        with:
-          submodules: recursive
 
       - name: Setup Bun
         uses: oven-sh/setup-bun@v1
@@ -153,7 +147,7 @@ jobs:
           bun-version: latest
 
       - name: Install dependencies
-        run: bun install
+        run: cd scripts && bun install
 
       - name: Final audit gate
         run: bun scripts/safety-audit.ts
