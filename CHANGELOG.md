@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+### Changed (2026-06-21 — 2-Tier Matrix Restructure)
+
+Refactored the **2-Tier Matrix Architecture** section in `README.md` and `README_ko.md` from a flat list (Functional Service rows + redundant Industry Coordinator rows) into a true **Tier 1 (rows) × Tier 2 (columns) matrix**. Industry domains (GxP, ehschem, gasterm, powergen, ehsconst, meddevice) are now column headers, eliminating duplicate coordinator rows and shortening the Pharma column label to `GxP`. The exact applicability data (`✓` cells: psm=ehschem/gasterm/powergen; msds/training/emergency=all 6) is preserved. Both READMEs use an identical 16-line symmetric structure.
+
 ### Added (2026-06-17 — GVP Domain v1) — Final GxP Domain
 
 Good Pharmacovigilance Practice (GVP) domain implementation as **seventh and final GxP domain**. Completes pharmaceutical lifecycle coverage (GLP → GCP → GMP → GDP → GVP). Post-market drug safety surveillance per KGVP + ICH E2 series + EU GVP + WHO-UMC.

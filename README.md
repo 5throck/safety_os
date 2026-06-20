@@ -54,24 +54,16 @@
 
 ## 2-Tier Matrix Architecture
 
-| Domain (Tier) | Pharma | Chemical | Gas/Energy | Power | Construction | MedDevice |
-|---------------|:------:|:--------:|:----------:|:-----:|:------------:|:---------:|
-| **Functional Services** | | | | | | |
+| Functional Service (Tier 1) | `GxP` (Pharma) | `ehschem` (Chemical) | `gasterm` (Gas/Energy) | `powergen` (Power) | `ehsconst` (Construction) | `meddevice` (MedDevice) |
+|---|:---:|:---:|:---:|:---:|:---:|:---:|
 | `psm` (Process Safety) | | ✓ | ✓ | ✓ | | |
 | `msds` (Chemical Data) | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `training` (Safety Education) | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `emergency` (Cross-Cutting) | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
-| **Industry Coordinators** | | | | | | |
-| `gmp/gdp/glp/gcp/gvp` (GxP Pharma) | **●** | | | | | |
-| `ehsconst` (Construction) | | | | | **●** | |
-| `ehschem` (Chemical Plant) | | **●** | | | | |
-| `gasterm` (Gas Terminal) | | | **●** | | | |
-| `powergen` (Power Gen) | | | | **●** | | |
-| `meddevice` (Medical Device) | | | | | | **●** |
 
-> `✓` = functional service applies to this industry · `●` = industry domain owns this column · (blank) = not applicable
+> `✓` = functional service applies to this industry domain · (blank) = not applicable · `GxP` = GMP, GDP, GLP, GCP, GVP
 >
-> **Industry domains = matrix coordinators.** They dispatch to functional services (PSM, MSDS, Training) for cross-cutting concerns. [Learn more →](docs/_shared/domain-classification-guide.md)
+> **Industry domains (Tier 2, columns) = matrix coordinators.** They dispatch to functional services (Tier 1, rows) for cross-cutting concerns. [Learn more →](docs/_shared/domain-classification-guide.md)
 
 ---
 
