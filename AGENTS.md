@@ -34,7 +34,7 @@
 | Asset Integrity Agent | [`agents/_shared/asset-integrity-agent.md`](agents/_shared/asset-integrity-agent.md) | Medium | Asset integrity specialist; preventative maintenance and aging equipment management |
 | Contractor Safety Agent | [`agents/_shared/contractor-safety-agent.md`](agents/_shared/contractor-safety-agent.md) | Medium | Contractor safety management; onboarding and monitoring of external workers |
 | Occupational Health Agent | [`agents/_shared/occupational-health-agent.md`](agents/_shared/occupational-health-agent.md) | Medium | Occupational health specialist; worker health examinations and environment monitoring |
-| Chemical Safety Agent | [`agents/chemical-safety-agent.md`](agents/chemical-safety-agent.md) | Medium | MSDS and hazardous chemical control specialist; ensures compliance with OSHA-KR and CCA |
+| MSDS Agent | [`agents/domains/functional/msds/msds-agent.md`](agents/domains/functional/msds/msds-agent.md) | Medium | MSDS / chemical hazard data specialist (GHS classification, K-REACH, chemical inventory); ensures compliance with OSHA-KR and CCA |
 
 ### Compliance & Risk
 
@@ -53,6 +53,31 @@
 | Disaster Response Agent | [`agents/_shared/disaster-response-agent.md`](agents/_shared/disaster-response-agent.md) | High | Disaster response specialist; handles natural disasters like typhoons and earthquakes |
 | Incident Investigation Agent | [`agents/_shared/incident-investigation-agent.md`](agents/_shared/incident-investigation-agent.md) | Medium | Incident investigation and root cause analysis (RCA) specialist |
 | Audit Agent | [`agents/_shared/audit-agent.md`](agents/_shared/audit-agent.md) | Medium | Audit and evidence traceability; validates evidence records; prepares audit trail for regulatory inspection |
+
+### Industry Domains (EHS)
+
+| Agent | File | Tier | Role |
+|-------|------|------|------|
+| EHSChem Agent | [`agents/domains/industry/ehschem/ehschem-agent.md`](agents/domains/industry/ehschem/ehschem-agent.md) | Medium | Chemical Plant Safety specialist (정유/석유화학/정밀화학); industry coordinator dispatching to PSM/MSDS/Emergency services |
+| EHSConst Agent | [`agents/domains/industry/ehsconst/ehsconst-agent.md`](agents/domains/industry/ehsconst/ehsconst-agent.md) | Medium | Construction Safety specialist; manages safety plans, fall/collapse prevention, and SAPA Article 12 compliance per OSHA-KR construction provisions |
+| GasTerm Agent | [`agents/domains/industry/gasterm/gasterm-agent.md`](agents/domains/industry/gasterm/gasterm-agent.md) | Medium | Gas Terminal Safety specialist (LNG/LPG/수소 기지 및 충전소); KGS compliance, leak detection, and emergency preparedness |
+| PowerGen Agent | [`agents/domains/industry/powergen/powergen-agent.md`](agents/domains/industry/powergen/powergen-agent.md) | Medium | Power Generation Safety specialist (화력/신재생 발전설비); boiler/turbine, high-voltage electrical, and ESS fire safety (원자력 제외) |
+
+### GxP Domains
+
+| Agent | File | Tier | Role |
+|-------|------|------|------|
+| GMP Agent | [`agents/domains/industry/gmp/gmp-agent.md`](agents/domains/industry/gmp/gmp-agent.md) | Medium | Good Manufacturing Practice specialist; pharmaceutical quality systems, batch records, validation, deviation/CAPA per KP-GMP and PIC/S |
+| GLP Agent | [`agents/domains/industry/glp/glp-agent.md`](agents/domains/industry/glp/glp-agent.md) | Medium | Good Laboratory Practice specialist; non-clinical safety studies, MFDS/ME/OECD GLP compliance, QAU inspections, Study Director support |
+| GDP Agent | [`agents/domains/industry/gdp/gdp-agent.md`](agents/domains/industry/gdp/gdp-agent.md) | Medium | Good Distribution Practice specialist; pharmaceutical supply chain, storage, cold-chain transportation, DTS tracking, recalls per KGDP + PIC/S + EU GDP |
+| GCP Agent | [`agents/domains/industry/gcp/gcp-agent.md`](agents/domains/industry/gcp/gcp-agent.md) | Medium | Good Clinical Practice specialist; clinical trial management, IRB, informed consent, monitoring, SAE/SUSAR reporting per KGCP + ICH E6(R3) |
+| GVP Agent | [`agents/domains/industry/gvp/gvp-agent.md`](agents/domains/industry/gvp/gvp-agent.md) | Medium | Good Pharmacovigilance Practice specialist; post-market drug safety surveillance, ICSR management, signal detection, PBRER, RMP per KGVP + ICH E2 series |
+
+### Medical Devices
+
+| Agent | File | Tier | Role |
+|-------|------|------|------|
+| MedDevice Agent | [`agents/domains/industry/meddevice/meddevice-agent.md`](agents/domains/industry/meddevice/meddevice-agent.md) | Medium | Medical Device Safety specialist; KGMP-MD + ISO 13485 + ISO 14971; design controls, risk management, sterilization validation, and PMS for Class 1-4 devices |
 
 ---
 
@@ -113,7 +138,17 @@ All specialist agents below are dispatched ONLY through PM:
 | **incident-investigation-agent** | 5 | "Incident investigation", "Root cause analysis", "5-Why analysis" |
 | **audit-agent** | 5-6 | "Audit preparation", "Evidence traceability", "Regulatory inspection readiness" |
 | **occupational-health-agent** | 4 | "Health checkup", "Occupational disease", "Ergonomics" |
-| **chemical-safety-agent** | 4 | "MSDS", "Hazardous chemicals", "Chemical approval" |
+| **msds-agent** | 4 | "MSDS", "Hazardous chemicals", "Chemical approval" |
+| **ehschem-agent** | 4 | "화학공장", "정유", "석유화학", "정밀화학", "chemical plant", "refinery", "petrochemical", "turnaround", "TAR" |
+| **ehsconst-agent** | 4 | "건설안전", "construction safety", "안전보건관리계획", "추락 방지", "붕괴 방지", "TBM", "Tool Box Meeting", "건설 PTW", "안전감리", "안전관리비", "하도급 안전", "건설 중대재해" |
+| **gasterm-agent** | 4 | "가스터미널", "LNG", "LPG", "수소 충전소", "가스 저장탱크", "가스 누출", "KGS 검사", "고압가스" |
+| **powergen-agent** | 4 | "발전소", "발전설비", "터빈", "보일러", "고압 전기", "송전", "변전", "풍력", "태양광", "ESS", "에너지저장" |
+| **gmp-agent** | 4 | "GMP", "batch record", "validation", "change control", "deviation", "CAPA", "self-inspection", "quality risk", "supplier qualification", "stability testing" |
+| **glp-agent** | 4 | "GLP", "비임상시험", "non-clinical", "독성시험", "toxicology", "Study Director", "QAU", "Quality Assurance Unit", "OECD MAD", "test article" |
+| **gdp-agent** | 4 | "GDP", "의약품 유통", "냉장 유통", "cold chain", "DTS", "추적관리", "warehouse", "storage", "transportation", "recall", "returned goods" |
+| **gcp-agent** | 4 | "GCP", "임상시험", "clinical trial", "IRB", "생명윤리", "informed consent", "CRA", "monitoring", "SAE", "SUSAR", "ICF", "SDV", "CSR" |
+| **gvp-agent** | 4 | "GVP", "약물감시", "pharmacovigilance", "ICSR", "ADR", "이상반응", "signal detection", "PBRER", "PSUR", "RMP", "Risk Management Plan", "PMS", "재평가", "Drug Safety Officer", "DSUR" |
+| **meddevice-agent** | 4 | "의료기기", "medical device", "KGMP-MD", "ISO 13485", "ISO 14971", "설계관리", "멸균 밸리데이션", "의료기기 회수" |
 
 **IMPORTANT**: Do NOT invoke any specialist agent directly. All requests must go through PM.
 
