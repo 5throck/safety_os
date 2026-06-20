@@ -142,11 +142,11 @@ Must pass with 0 errors. The audit auto-recognizes new domains via recursive wal
 |--------|------|-------|--------|------------------|
 | `psm` | functional | pre-2026-06-17 | active | chemical-processing (LNG/LPG/발전 등 covered process 적용) |
 | `msds` | functional | 2026-06-17 | active (v1) | chemical-handling |
-| `gmp` | functional (pharma) | 2026-06-17 | active (v1) | pharma-general |
-| `gdp` | functional (pharma) | 2026-06-17 | active (v1) | pharma-distribution |
-| `glp` | functional (pharma) | 2026-06-17 | active (v1) | pharma-laboratory |
-| `gcp` | functional (pharma) | 2026-06-17 | active (v1) | clinical-research |
-| `gvp` | functional (pharma) | 2026-06-17 | active (v1) | pharmacovigilance |
+| `gmp` | industry (pharma) | 2026-06-17 | active (v1) | pharma-general |
+| `gdp` | industry (pharma) | 2026-06-17 | active (v1) | pharma-distribution |
+| `glp` | industry (pharma) | 2026-06-17 | active (v1) | pharma-laboratory |
+| `gcp` | industry (pharma) | 2026-06-17 | active (v1) | clinical-research |
+| `gvp` | industry (pharma) | 2026-06-17 | active (v1) | pharmacovigilance |
 | `ehsconst` | industry | 2026-06-18 | active (v1) | construction |
 | `gasterm` | industry | 2026-06-18 | active (v1) | gas-facility |
 | `powergen` | industry | 2026-06-18 | active (v1) | power-generation |

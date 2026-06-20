@@ -21,7 +21,7 @@ export const DOMAINS: DomainConfig[] = [
     // ── Functional domains ────────────────────────────────────────────
     {
         name: 'gmp',
-        tier: 'functional',
+        tier: 'industry',
         required_evidence_fields: ['e_signature', 'qrm_assessment', 'nomenclature', 'audit_trail'],
         min_legal_basis: 2,
         min_workflow_legal_basis: 2,
@@ -37,7 +37,7 @@ export const DOMAINS: DomainConfig[] = [
     },
     {
         name: 'gdp',
-        tier: 'functional',
+        tier: 'industry',
         required_evidence_fields: ['gdp_certification_status', 'temperature_condition', 'batch_disposition_approved_ref'],
         min_legal_basis: 3,
         min_workflow_legal_basis: 3,
@@ -45,7 +45,7 @@ export const DOMAINS: DomainConfig[] = [
     },
     {
         name: 'glp',
-        tier: 'functional',
+        tier: 'industry',
         required_evidence_fields: ['glp_certification_authority', 'oecd_mad_applicable', 'study_director_id'],
         min_legal_basis: 3,
         min_workflow_legal_basis: 3,
@@ -53,7 +53,7 @@ export const DOMAINS: DomainConfig[] = [
     },
     {
         name: 'gcp',
-        tier: 'functional',
+        tier: 'industry',
         required_evidence_fields: ['irb_approval_ref', 'ich_e6_compliance', 'protocol_ref'],
         min_legal_basis: 3,
         min_workflow_legal_basis: 3,
@@ -61,7 +61,7 @@ export const DOMAINS: DomainConfig[] = [
     },
     {
         name: 'gvp',
-        tier: 'functional',
+        tier: 'industry',
         required_evidence_fields: ['ich_e2_compliance', 'pbrer_cycle_ref', 'product_id'],
         min_legal_basis: 3,
         min_workflow_legal_basis: 3,
@@ -137,8 +137,8 @@ export const CROSS_DOMAIN_REFS: Array<{
     toDomain: string;
     toTier: string;
 }> = [
-    { field: 'batch_disposition_approved_ref', fromDomain: 'gdp', fromTier: 'functional', toDomain: 'gmp', toTier: 'functional' },
-    { field: 'msds_record_ref', fromDomain: 'glp', fromTier: 'functional', toDomain: 'msds', toTier: 'functional' },
+    { field: 'batch_disposition_approved_ref', fromDomain: 'gdp', fromTier: 'industry', toDomain: 'gmp', toTier: 'industry' },
+    { field: 'msds_record_ref', fromDomain: 'glp', fromTier: 'industry', toDomain: 'msds', toTier: 'functional' },
     { field: 'msds_record_ref', fromDomain: 'gasterm', fromTier: 'industry', toDomain: 'msds', toTier: 'functional' },
     { field: 'msds_record_ref', fromDomain: 'ehschem', fromTier: 'industry', toDomain: 'msds', toTier: 'functional' },
     { field: 'psm_psi_ref', fromDomain: 'ehschem', fromTier: 'industry', toDomain: 'psm', toTier: 'functional' },

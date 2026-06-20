@@ -65,43 +65,43 @@ console.log(`${CYAN}=== Domain Scenario Integration Test ===${RESET}\n`);
 console.log(`${CYAN}[S-01] 신약 개발 전 lifecycle (GLP→GCP→GMP→GDP→GVP→recall)${RESET}`);
 
 // GLP: 비임상 안전성 데이터 (시험물질 관리, MSDS 참조)
-check('S-01', 'GLP-1', 'GLP test-article evidence exists', evidenceExists('functional', 'glp', 'glp-test-article-record.json'));
+check('S-01', 'GLP-1', 'GLP test-article evidence exists', evidenceExists('industry', 'glp', 'glp-test-article-record.json'));
 check('S-01', 'GLP-2', 'GLP test-article references msds_record_ref',
-    evidenceHasField('functional', 'glp', 'glp-test-article-record.json', 'msds_record_ref'));
+    evidenceHasField('industry', 'glp', 'glp-test-article-record.json', 'msds_record_ref'));
 
 // GCP: 임상시험 (protocol, SAE reporting)
-check('S-01', 'GCP-1', 'GCP protocol evidence exists', evidenceExists('functional', 'gcp', 'gcp-protocol-record.json'));
-check('S-01', 'GCP-2', 'GCP SAE evidence exists', evidenceExists('functional', 'gcp', 'gcp-sae-record.json'));
+check('S-01', 'GCP-1', 'GCP protocol evidence exists', evidenceExists('industry', 'gcp', 'gcp-protocol-record.json'));
+check('S-01', 'GCP-2', 'GCP SAE evidence exists', evidenceExists('industry', 'gcp', 'gcp-sae-record.json'));
 check('S-01', 'GCP-3', 'GCP SAE references causality fields',
-    evidenceHasField('functional', 'gcp', 'gcp-sae-record.json', 'causality_assessment'));
+    evidenceHasField('industry', 'gcp', 'gcp-sae-record.json', 'causality_assessment'));
 check('S-01', 'GCP-4', 'GCP sae-reporting-reference workflow exists',
-    workflowExists('functional', 'gcp', 'sae-reporting-reference'));
+    workflowExists('industry', 'gcp', 'sae-reporting-reference'));
 
 // GMP: 제조 (batch release → GDP 인계)
-check('S-01', 'GMP-1', 'GMP batch evidence exists', evidenceExists('functional', 'gmp', 'gmp-batch-record.json'));
+check('S-01', 'GMP-1', 'GMP batch evidence exists', evidenceExists('industry', 'gmp', 'gmp-batch-record.json'));
 check('S-01', 'GMP-2', 'GMP batch has disposition field',
-    evidenceHasField('functional', 'gmp', 'gmp-batch-record.json', 'disposition'));
+    evidenceHasField('industry', 'gmp', 'gmp-batch-record.json', 'disposition'));
 
 // GDP: 유통 (batch_disposition_approved_ref → GMP batch 참조)
-check('S-01', 'GDP-1', 'GDP goods-receipt evidence exists', evidenceExists('functional', 'gdp', 'gdp-goods-receipt-record.json'));
+check('S-01', 'GDP-1', 'GDP goods-receipt evidence exists', evidenceExists('industry', 'gdp', 'gdp-goods-receipt-record.json'));
 check('S-01', 'GDP-2', 'GDP goods-receipt references batch_disposition_approved_ref',
-    evidenceHasField('functional', 'gdp', 'gdp-goods-receipt-record.json', 'batch_disposition_approved_ref'));
+    evidenceHasField('industry', 'gdp', 'gdp-goods-receipt-record.json', 'batch_disposition_approved_ref'));
 check('S-01', 'GDP-3', 'GDP product-recall-reference workflow exists',
-    workflowExists('functional', 'gdp', 'product-recall-reference'));
+    workflowExists('industry', 'gdp', 'product-recall-reference'));
 
 // GVP: 시판 후 감시 (SAE 데이터 후속, signal detection)
-check('S-01', 'GVP-1', 'GVP ICSR evidence exists', evidenceExists('functional', 'gvp', 'gvp-icsr-record.json'));
-check('S-01', 'GVP-2', 'GVP signal evidence exists', evidenceExists('functional', 'gvp', 'gvp-signal-record.json'));
+check('S-01', 'GVP-1', 'GVP ICSR evidence exists', evidenceExists('industry', 'gvp', 'gvp-icsr-record.json'));
+check('S-01', 'GVP-2', 'GVP signal evidence exists', evidenceExists('industry', 'gvp', 'gvp-signal-record.json'));
 check('S-01', 'GVP-3', 'GVP urgent-safety-action-reference workflow exists',
-    workflowExists('functional', 'gvp', 'urgent-safety-action-reference'));
+    workflowExists('industry', 'gvp', 'urgent-safety-action-reference'));
 
 // Cross-domain chain validation
 check('S-01', 'CHAIN-1', 'GMP batch → GDP goods-receipt chain field exists',
-    evidenceHasField('functional', 'gdp', 'gdp-goods-receipt-record.json', 'batch_disposition_approved_ref'));
+    evidenceHasField('industry', 'gdp', 'gdp-goods-receipt-record.json', 'batch_disposition_approved_ref'));
 check('S-01', 'CHAIN-2', 'GLP → MSDS chain field exists',
-    evidenceHasField('functional', 'glp', 'glp-test-article-record.json', 'msds_record_ref'));
+    evidenceHasField('industry', 'glp', 'glp-test-article-record.json', 'msds_record_ref'));
 check('S-01', 'CHAIN-3', 'GCP SAE → emergency dispatch workflow exists',
-    workflowExists('functional', 'gcp', 'sae-reporting-reference'));
+    workflowExists('industry', 'gcp', 'sae-reporting-reference'));
 
 console.log('');
 
@@ -200,14 +200,14 @@ console.log('');
 console.log(`${CYAN}[X-REF] Cross-domain reference field matrix${RESET}`);
 
 const crossRefs = [
-    { field: 'batch_disposition_approved_ref', from: 'functional/gdp', to: 'functional/gmp', desc: 'GDP→GMP batch release' },
-    { field: 'msds_record_ref', from: 'functional/glp', to: 'functional/msds', desc: 'GLP→MSDS test article' },
+    { field: 'batch_disposition_approved_ref', from: 'industry/gdp', to: 'industry/gmp', desc: 'GDP→GMP batch release' },
+    { field: 'msds_record_ref', from: 'industry/glp', to: 'functional/msds', desc: 'GLP→MSDS test article' },
     { field: 'msds_record_ref', from: 'industry/gasterm', to: 'functional/msds', desc: 'gasterm→MSDS gas chemicals' },
     { field: 'msds_record_ref', from: 'industry/ehschem', to: 'functional/msds', desc: 'ehschem→MSDS stored chemicals' },
     { field: 'psm_psi_ref', from: 'industry/ehschem', to: 'functional/psm', desc: 'ehschem→PSM process info' },
     { field: 'psm_applicable', from: 'industry/gasterm', to: 'functional/psm', desc: 'gasterm→PSM flag' },
-    { field: 'irb_approval_ref', from: 'functional/gcp', to: 'functional/gcp', desc: 'GCP IRB internal ref' },
-    { field: 'rmp_version_ref', from: 'functional/gvp', to: 'functional/gvp', desc: 'GVP RMP internal ref' },
+    { field: 'irb_approval_ref', from: 'industry/gcp', to: 'industry/gcp', desc: 'GCP IRB internal ref' },
+    { field: 'rmp_version_ref', from: 'industry/gvp', to: 'industry/gvp', desc: 'GVP RMP internal ref' },
 ];
 
 for (const ref of crossRefs) {

@@ -39,11 +39,11 @@ console.log(`${CYAN}=== Cross-Domain Integration Test ===${RESET}\n`);
 // ── T-01: Pharmaceutical lifecycle chain ─────────────────────────────────────
 console.log(`${CYAN}[T-01] Pharmaceutical lifecycle chain (GLP→GCP→GMP→GDP→GVP)${RESET}`);
 const lifecycleDomains = [
-    { name: 'glp', path: 'domains/functional/glp', agent: 'glp-agent' },
-    { name: 'gcp', path: 'domains/functional/gcp', agent: 'gcp-agent' },
-    { name: 'gmp', path: 'domains/functional/gmp', agent: 'gmp-agent' },
-    { name: 'gdp', path: 'domains/functional/gdp', agent: 'gdp-agent' },
-    { name: 'gvp', path: 'domains/functional/gvp', agent: 'gvp-agent' },
+    { name: 'glp', path: 'domains/industry/glp', agent: 'glp-agent' },
+    { name: 'gcp', path: 'domains/industry/gcp', agent: 'gcp-agent' },
+    { name: 'gmp', path: 'domains/industry/gmp', agent: 'gmp-agent' },
+    { name: 'gdp', path: 'domains/industry/gdp', agent: 'gdp-agent' },
+    { name: 'gvp', path: 'domains/industry/gvp', agent: 'gvp-agent' },
 ];
 let lifecycleComplete = true;
 for (const dom of lifecycleDomains) {
@@ -59,11 +59,11 @@ if (lifecycleComplete) record('T-01', 'All 5 lifecycle domains present (GLP→GC
 // ── T-02: Cross-domain reference fields ──────────────────────────────────────
 console.log(`\n${CYAN}[T-02] Cross-domain reference field resolution${RESET}`);
 const crossDomainRefs = [
-    { field: 'batch_disposition_approved_ref', fromDomain: 'gdp', targetDomain: 'gmp', targetTier: 'functional' },
+    { field: 'batch_disposition_approved_ref', fromDomain: 'gdp', targetDomain: 'gmp', targetTier: 'industry' },
     { field: 'msds_record_ref', fromDomain: 'glp', targetDomain: 'msds', targetTier: 'functional' },
     { field: 'msds_record_ref', fromDomain: 'gasterm', targetDomain: 'msds', targetTier: 'functional' },
-    { field: 'rmp_version_ref', fromDomain: 'gvp', targetDomain: 'gvp', targetTier: 'functional' },
-    { field: 'protocol_ref', fromDomain: 'gcp', targetDomain: 'gcp', targetTier: 'functional' },
+    { field: 'rmp_version_ref', fromDomain: 'gvp', targetDomain: 'gvp', targetTier: 'industry' },
+    { field: 'protocol_ref', fromDomain: 'gcp', targetDomain: 'gcp', targetTier: 'industry' },
     { field: 'psm_applicable', fromDomain: 'gasterm', targetDomain: 'psm', targetTier: 'functional' },
 ];
 let refsValid = true;
