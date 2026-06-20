@@ -11,10 +11,10 @@
 
 | # | Document | What You'll Learn |
 |---|----------|-------------------|
-| 1 | **[Tutorial](docs/_shared/tutorial.md)** / [KO](docs/_shared/tutorial_ko.md) | Onboarding tutorial — getting started with Safety OS end-to-end |
-| 2 | **[User Scenarios](docs/_shared/user-scenarios.md)** / [KO](docs/_shared/user-scenarios_ko.md) | 5 real-world walkthroughs: new chemical introduction, clinical SAE reporting, construction daily safety, pharma cold chain, chemical plant turnaround |
-| 3 | **[User Guide](docs/_shared/user-guide.md)** / [KO](docs/_shared/user-guide_ko.md) | How to select the right domain and dispatch agents (matrix coordinator pattern) |
-| 4 | **[Domain Classification Guide](docs/_shared/domain-classification-guide.md)** / [KO](docs/_shared/domain-classification-guide_ko.md) | 3-tier system (functional / industry / cross-cutting) — which domain handles what |
+| 1 | **[Tutorial](docs/_shared/tutorial.md)** | Onboarding tutorial — getting started with Safety OS end-to-end |
+| 2 | **[User Scenarios](docs/_shared/user-scenarios.md)** | 5 real-world walkthroughs: new chemical introduction, clinical SAE reporting, construction daily safety, pharma cold chain, chemical plant turnaround |
+| 3 | **[User Guide](docs/_shared/user-guide.md)** | How to select the right domain and dispatch agents (matrix coordinator pattern) |
+| 4 | **[Domain Classification Guide](docs/_shared/domain-classification-guide.md)** | 3-tier system (functional / industry / cross-cutting) — which domain handles what |
 
 ---
 
@@ -71,31 +71,31 @@
 
 > `✓` = functional service applies to this industry · `●` = industry domain owns this column · (blank) = not applicable
 >
-> **Industry domains = matrix coordinators.** They dispatch to functional services (PSM, MSDS, Training) for cross-cutting concerns. [Learn more →](docs/_shared/domain-classification-guide.md) ([KO](docs/_shared/domain-classification-guide_ko.md))
+> **Industry domains = matrix coordinators.** They dispatch to functional services (PSM, MSDS, Training) for cross-cutting concerns. [Learn more →](docs/_shared/domain-classification-guide.md)
 
 ---
 
 ## 📚 Key Documents
 
 ### Getting Started (for all users)
-| Document | Purpose | Lang |
-|----------|---------|------|
-| **[Tutorial](docs/_shared/tutorial.md)** / [KO](docs/_shared/tutorial_ko.md) | Onboarding tutorial | EN/KO |
-| **[User Scenarios](docs/_shared/user-scenarios.md)** / [KO](docs/_shared/user-scenarios_ko.md) | 5 real-world walkthroughs | EN/KO |
-| **[User Guide](docs/_shared/user-guide.md)** / [KO](docs/_shared/user-guide_ko.md) | Domain selection + dispatch patterns | EN/KO |
-| **[Domain Classification Guide](docs/_shared/domain-classification-guide.md)** / [KO](docs/_shared/domain-classification-guide_ko.md) | 3-tier classification + matrix dispatch | EN/KO |
+| Document | Purpose |
+|----------|---------|
+| **[Tutorial](docs/_shared/tutorial.md)** | Onboarding tutorial |
+| **[User Scenarios](docs/_shared/user-scenarios.md)** | 5 real-world walkthroughs |
+| **[User Guide](docs/_shared/user-guide.md)** | Domain selection + dispatch patterns |
+| **[Domain Classification Guide](docs/_shared/domain-classification-guide.md)** | 3-tier classification + matrix dispatch |
 
 ### Architecture & Design
-| Document | Purpose | Lang |
-|----------|---------|------|
-| [Architecture Overview](docs/_meta/architecture-overview.md) | 13-domain system architecture | EN |
-| [Domain Onboarding Guide](docs/_shared/domain-onboarding-guide.md) / [KO](docs/_shared/domain-onboarding-guide_ko.md) | 11-step SOP for adding new domains + Active Domains Registry | EN/KO |
-| [Reference Workflow Pattern](docs/_shared/reference-workflow-pattern.md) / [KO](docs/_shared/reference-workflow-pattern_ko.md) | Reference workflow design (10 applications) | EN/KO |
+| Document | Purpose |
+|----------|---------|
+| [Architecture Overview](docs/_meta/architecture-overview.md) | 13-domain system architecture |
+| [Domain Onboarding Guide](docs/_shared/domain-onboarding-guide.md) | 11-step SOP for adding new domains + Active Domains Registry |
+| [Reference Workflow Pattern](docs/_shared/reference-workflow-pattern.md) | Reference workflow design (10 applications) |
 
 ### Integration
-| Document | Purpose | Lang |
-|----------|---------|------|
-| [MCP Integration Guide](docs/_shared/mcp-integration-guide.md) / [KO](docs/_shared/mcp-integration-guide_ko.md) | Korean legislation MCP server connection | EN/KO |
+| Document | Purpose |
+|----------|---------|
+| [MCP Integration Guide](docs/_shared/mcp-integration-guide.md) | Korean legislation MCP server connection |
 
 ### Domain Scope Documents
 | Domain | Scope |

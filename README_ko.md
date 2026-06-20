@@ -11,10 +11,10 @@
 
 | # | 문서 | 학습 내용 |
 |---|------|-----------|
-| 1 | **[튜토리얼](docs/_shared/tutorial_ko.md)** / [EN](docs/_shared/tutorial.md) | 온보딩 튜토리얼 — Safety OS 시작부터 끝까지 |
-| 2 | **[사용자 시나리오](docs/_shared/user-scenarios_ko.md)** / [EN](docs/_shared/user-scenarios.md) | 5개 실전 워크스루: 신규 화학물질 도입, 임상 SAE 보고, 건설 일일 안전, 의약품 냉장유통, 화학공장 정기보수 |
-| 3 | **[사용자 가이드](docs/_shared/user-guide_ko.md)** / [EN](docs/_shared/user-guide.md) | 올바른 도메인 선택과 에이전트 dispatch 패턴 (매트릭스 코디네이터) |
-| 4 | **[도메인 분류 가이드](docs/_shared/domain-classification-guide_ko.md)** / [EN](docs/_shared/domain-classification-guide.md) | 3-tier 체계 (기능/산업/공통) — 각 도메인이 담당하는 영역 |
+| 1 | **[튜토리얼](docs/_shared/tutorial_ko.md)** | 온보딩 튜토리얼 — Safety OS 시작부터 끝까지 |
+| 2 | **[사용자 시나리오](docs/_shared/user-scenarios_ko.md)** | 5개 실전 워크스루: 신규 화학물질 도입, 임상 SAE 보고, 건설 일일 안전, 의약품 냉장유통, 화학공장 정기보수 |
+| 3 | **[사용자 가이드](docs/_shared/user-guide_ko.md)** | 올바른 도메인 선택과 에이전트 dispatch 패턴 (매트릭스 코디네이터) |
+| 4 | **[도메인 분류 가이드](docs/_shared/domain-classification-guide_ko.md)** | 3-tier 체계 (기능/산업/공통) — 각 도메인이 담당하는 영역 |
 
 ---
 
@@ -71,31 +71,31 @@
 
 > `✓` = 해당 산업에 기능 서비스 적용 · `●` = 산업 도메인이 해당 열(산업)을 담당 · 빈칸 = 해당 없음
 >
-> **산업 도메인 = 매트릭스 코디네이터.** 공정안전(PSM), 화학데이터(MSDS), 교육(Training) 등 기능 서비스에 dispatch합니다. [자세히 보기 →](docs/_shared/domain-classification-guide_ko.md) ([EN](docs/_shared/domain-classification-guide.md))
+> **산업 도메인 = 매트릭스 코디네이터.** 공정안전(PSM), 화학데이터(MSDS), 교육(Training) 등 기능 서비스에 dispatch합니다. [자세히 보기 →](docs/_shared/domain-classification-guide_ko.md)
 
 ---
 
 ## 📚 주요 문서
 
 ### 시작하기 (모든 사용자)
-| 문서 | 용도 | 언어 |
-|------|------|------|
-| **[튜토리얼](docs/_shared/tutorial_ko.md)** / [EN](docs/_shared/tutorial.md) | 온보딩 튜토리얼 | KO/EN |
-| **[사용자 시나리오](docs/_shared/user-scenarios_ko.md)** / [EN](docs/_shared/user-scenarios.md) | 5개 실전 워크스루 | KO/EN |
-| **[사용자 가이드](docs/_shared/user-guide_ko.md)** / [EN](docs/_shared/user-guide.md) | 도메인 선택 + dispatch 패턴 | KO/EN |
-| **[도메인 분류 가이드](docs/_shared/domain-classification-guide_ko.md)** / [EN](docs/_shared/domain-classification-guide.md) | 3-tier 분류 + 매트릭스 dispatch | KO/EN |
+| 문서 | 용도 |
+|------|------|
+| **[튜토리얼](docs/_shared/tutorial_ko.md)** | 온보딩 튜토리얼 |
+| **[사용자 시나리오](docs/_shared/user-scenarios_ko.md)** | 5개 실전 워크스루 |
+| **[사용자 가이드](docs/_shared/user-guide_ko.md)** | 도메인 선택 + dispatch 패턴 |
+| **[도메인 분류 가이드](docs/_shared/domain-classification-guide_ko.md)** | 3-tier 분류 + 매트릭스 dispatch |
 
 ### 아키텍처 및 설계
-| 문서 | 용도 | 언어 |
-|------|------|------|
-| [아키텍처 개요](docs/_meta/architecture-overview.md) | 13-도메인 시스템 아키텍처 | EN |
-| [도메인 추가 가이드](docs/_shared/domain-onboarding-guide_ko.md) / [EN](docs/_shared/domain-onboarding-guide.md) | 신규 도메인 11단계 SOP + Active Domains Registry | KO/EN |
-| [Reference 워크플로우 패턴](docs/_shared/reference-workflow-pattern_ko.md) / [EN](docs/_shared/reference-workflow-pattern.md) | Reference 워크플로우 설계 (10개 적용) | KO/EN |
+| 문서 | 용도 |
+|------|------|
+| [아키텍처 개요 (EN)](docs/_meta/architecture-overview.md) | 13-도메인 시스템 아키텍처 |
+| [도메인 추가 가이드](docs/_shared/domain-onboarding-guide_ko.md) | 신규 도메인 11단계 SOP + Active Domains Registry |
+| [Reference 워크플로우 패턴](docs/_shared/reference-workflow-pattern_ko.md) | Reference 워크플로우 설계 (10개 적용) |
 
 ### 통합
-| 문서 | 용도 | 언어 |
-|------|------|------|
-| [MCP 통합 가이드](docs/_shared/mcp-integration-guide_ko.md) / [EN](docs/_shared/mcp-integration-guide.md) | 한국 법령 MCP 서버 연결 | KO/EN |
+| 문서 | 용도 |
+|------|------|
+| [MCP 통합 가이드](docs/_shared/mcp-integration-guide_ko.md) | 한국 법령 MCP 서버 연결 |
 
 ### 도메인 Scope 문서
 | 도메인 | Scope |
