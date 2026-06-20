@@ -1,7 +1,7 @@
 # Safety OS — AI 기반 EHS/GxP 플랫폼
 
 > 2-Tier 기능×산업 매트릭스 아키텍처 기반 대한민국 EHS/GxP 규정 준수 자동화
-> English guide: [README.md](README.md)
+> 영문 가이드: [README.md](README.md)
 
 ---
 
@@ -11,10 +11,10 @@
 
 | # | 문서 | 학습 내용 |
 |---|------|-----------|
-| 1 | **[튜토리얼](docs/_shared/tutorial_ko.md)** / [Tutorial](docs/_shared/tutorial.md) | 온보딩 튜토리얼 — Safety OS 시작부터 끝까지 |
-| 2 | **[사용자 시나리오](docs/_shared/user-scenarios_ko.md)** / [User Scenarios](docs/_shared/user-scenarios.md) | 5개 실전 워크스루: 신규 화학물질 도입, 임상 SAE 보고, 건설 일일 안전, 의약품 냉장유통, 화학공장 정기보수 |
-| 3 | **[사용자 가이드](docs/_shared/user-guide_ko.md)** / [User Guide](docs/_shared/user-guide.md) | 올바른 도메인 선택과 에이전트 dispatch 패턴 (매트릭스 코디네이터) |
-| 4 | **[도메인 분류 가이드](docs/_shared/domain-classification-guide_ko.md)** / [Domain Classification Guide](docs/_shared/domain-classification-guide.md) | 3-tier 체계 (기능/산업/공통) — 각 도메인이 담당하는 영역 |
+| 1 | **[튜토리얼](docs/_shared/tutorial_ko.md)** / [EN](docs/_shared/tutorial.md) | 온보딩 튜토리얼 — Safety OS 시작부터 끝까지 |
+| 2 | **[사용자 시나리오](docs/_shared/user-scenarios_ko.md)** / [EN](docs/_shared/user-scenarios.md) | 5개 실전 워크스루: 신규 화학물질 도입, 임상 SAE 보고, 건설 일일 안전, 의약품 냉장유통, 화학공장 정기보수 |
+| 3 | **[사용자 가이드](docs/_shared/user-guide_ko.md)** / [EN](docs/_shared/user-guide.md) | 올바른 도메인 선택과 에이전트 dispatch 패턴 (매트릭스 코디네이터) |
+| 4 | **[도메인 분류 가이드](docs/_shared/domain-classification-guide_ko.md)** / [EN](docs/_shared/domain-classification-guide.md) | 3-tier 체계 (기능/산업/공통) — 각 도메인이 담당하는 영역 |
 
 ---
 
@@ -71,7 +71,7 @@
 
 > `✓` = 해당 산업에 기능 서비스 적용 · `●` = 산업 도메인이 해당 열(산업)을 담당 · 빈칸 = 해당 없음
 >
-> **산업 도메인 = 매트릭스 코디네이터.** 공정안전(PSM), 화학데이터(MSDS), 교육(Training) 등 기능 서비스에 dispatch합니다. [자세히 보기 →](docs/_shared/domain-classification-guide_ko.md) ([English](docs/_shared/domain-classification-guide.md))
+> **산업 도메인 = 매트릭스 코디네이터.** 공정안전(PSM), 화학데이터(MSDS), 교육(Training) 등 기능 서비스에 dispatch합니다. [자세히 보기 →](docs/_shared/domain-classification-guide_ko.md) ([EN](docs/_shared/domain-classification-guide.md))
 
 ---
 
@@ -80,22 +80,22 @@
 ### 시작하기 (모든 사용자)
 | 문서 | 용도 | 언어 |
 |------|------|------|
-| **[튜토리얼](docs/_shared/tutorial_ko.md)** / [Tutorial](docs/_shared/tutorial.md) | 온보딩 튜토리얼 | KO/EN |
-| **[사용자 시나리오](docs/_shared/user-scenarios_ko.md)** / [User Scenarios](docs/_shared/user-scenarios.md) | 5개 실전 워크스루 | KO/EN |
-| **[사용자 가이드](docs/_shared/user-guide_ko.md)** / [User Guide](docs/_shared/user-guide.md) | 도메인 선택 + dispatch 패턴 | KO/EN |
-| **[도메인 분류 가이드](docs/_shared/domain-classification-guide_ko.md)** / [Domain Classification Guide](docs/_shared/domain-classification-guide.md) | 3-tier 분류 + 매트릭스 dispatch | KO/EN |
+| **[튜토리얼](docs/_shared/tutorial_ko.md)** / [EN](docs/_shared/tutorial.md) | 온보딩 튜토리얼 | KO/EN |
+| **[사용자 시나리오](docs/_shared/user-scenarios_ko.md)** / [EN](docs/_shared/user-scenarios.md) | 5개 실전 워크스루 | KO/EN |
+| **[사용자 가이드](docs/_shared/user-guide_ko.md)** / [EN](docs/_shared/user-guide.md) | 도메인 선택 + dispatch 패턴 | KO/EN |
+| **[도메인 분류 가이드](docs/_shared/domain-classification-guide_ko.md)** / [EN](docs/_shared/domain-classification-guide.md) | 3-tier 분류 + 매트릭스 dispatch | KO/EN |
 
 ### 아키텍처 및 설계
 | 문서 | 용도 | 언어 |
 |------|------|------|
 | [아키텍처 개요](docs/_meta/architecture-overview.md) | 13-도메인 시스템 아키텍처 | EN |
-| [도메인 추가 가이드](docs/_shared/domain-onboarding-guide_ko.md) / [Domain Onboarding Guide](docs/_shared/domain-onboarding-guide.md) | 신규 도메인 11단계 SOP + Active Domains Registry | KO/EN |
-| [Reference 워크플로우 패턴](docs/_shared/reference-workflow-pattern_ko.md) / [Reference Workflow Pattern](docs/_shared/reference-workflow-pattern.md) | Reference 워크플로우 설계 (10개 적용) | KO/EN |
+| [도메인 추가 가이드](docs/_shared/domain-onboarding-guide_ko.md) / [EN](docs/_shared/domain-onboarding-guide.md) | 신규 도메인 11단계 SOP + Active Domains Registry | KO/EN |
+| [Reference 워크플로우 패턴](docs/_shared/reference-workflow-pattern_ko.md) / [EN](docs/_shared/reference-workflow-pattern.md) | Reference 워크플로우 설계 (10개 적용) | KO/EN |
 
 ### 통합
 | 문서 | 용도 | 언어 |
 |------|------|------|
-| [MCP 통합 가이드](docs/_shared/mcp-integration-guide_ko.md) / [MCP Integration Guide](docs/_shared/mcp-integration-guide.md) | 한국 법령 MCP 서버 연결 | KO/EN |
+| [MCP 통합 가이드](docs/_shared/mcp-integration-guide_ko.md) / [EN](docs/_shared/mcp-integration-guide.md) | 한국 법령 MCP 서버 연결 | KO/EN |
 
 ### 도메인 Scope 문서
 | 도메인 | Scope |
@@ -152,6 +152,5 @@ regulations/international/     ← ICH, OECD, GHS
 ## 면책 조항
 
 본 시스템은 워크플로우 자동화 지원만 제공합니다. 규제 해석 및 최종 컴플라이언스 판단은 자격을 갖춘 법률/EHS/GxP 전문가의 책임입니다.
-This system provides workflow automation assistance only. Regulatory interpretation and final compliance decisions are the responsibility of qualified professionals.
 
 *Last Updated: 2026-06-19*
