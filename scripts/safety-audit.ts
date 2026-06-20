@@ -30,8 +30,11 @@
  *   replaced with config-driven loop over DOMAINS from domain-config.ts.
  *   CROSS_DOMAIN_REFS and KNOWN_INDUSTRIES imported from domain-config.ts.
  *   validateDomainWorkflow now accepts tier parameter.
+ * v4.1.0 (2026-06-20): Added docs/_shared bilingual pair-consistency check —
+ *   enforces the <name>.md (EN canonical) + <name>_ko.md (KO mirror) convention.
+ *   Every markdown file in docs/_shared/ must have its language partner.
  *
- * @version 4.0.0
+ * @version 4.1.0
  */
 
 import * as fs from 'node:fs';
@@ -356,6 +359,27 @@ if (fs.existsSync(industryWorkflowDir)) {
                     }
                 }
             } catch { /* skip */ }
+        }
+    }
+}
+
+// ── docs/_shared bilingual pair consistency (v4.1.0) ──────────────────────────
+// Validates the <name>.md (EN canonical) + <name>_ko.md (KO mirror) convention
+// for user-facing docs. Every markdown file must have its language partner.
+console.log(`${CYAN}--- docs/_shared bilingual pair consistency ---${RESET}`);
+
+const sharedDocsDir = path.join(ROOT, 'docs', '_shared');
+if (fs.existsSync(sharedDocsDir)) {
+    const mdFiles = fs.readdirSync(sharedDocsDir).filter(f => f.endsWith('.md'));
+    for (const file of mdFiles) {
+        totalChecked++;
+        const isKo = file.endsWith('_ko.md');
+        const partner = isKo
+            ? file.replace(/_ko\.md$/, '.md')
+            : file.replace(/\.md$/, '_ko.md');
+        const partnerPath = path.join(sharedDocsDir, partner);
+        if (!fs.existsSync(partnerPath)) {
+            errors.push(`docs/_shared/${file}: missing bilingual partner '${partner}' (EN canonical + _ko mirror required)`);
         }
     }
 }

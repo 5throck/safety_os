@@ -1,0 +1,81 @@
+# MCP 통합 가이드
+
+> **목적**: Safety OS가 규제 데이터를 위해 한국 법령 MCP 서버와 어떻게 연결되는지 설명합니다.
+
+## 1. 사용 가능한 MCP 서버
+
+Safety OS는 3개의 한국 규제 MCP 서버를 포함합니다:
+
+| 서버 | 위치 | 도구 | 목적 |
+|--------|----------|-------|---------|
+| `k_skill` | `mcp/k-skill/` | 5개 도구 | OSHA/SAPA 규제 검색, 컴플라이언스 갭 분석 |
+| `legalize_kr` | `mcp/legalize-kr/` | 5개 도구 | 한국 법령 구조 파싱, 버전 비교 |
+| `kr_legislation` | `mcp/kr-legislation/` | 5개 도구 | 실시간 법령 API (국가법령정보센터) |
+
+## 2. 설정
+
+MCP 서버는 `.mcp.json`에 설정됩니다:
+
+```json
+{
+  "mcpServers": {
+    "k_skill": {
+      "command": "bun",
+      "args": ["run", "--env-file", ".env", "mcp/k-skill/index.ts"]
+    },
+    "legalize_kr": {
+      "command": "bun",
+      "args": ["run", "--env-file", ".env", "mcp/legalize-kr/index.ts"]
+    },
+    "kr_legislation": {
+      "command": "bun",
+      "args": ["run", "--env-file", ".env", "mcp/kr-legislation/index.ts"]
+    }
+  }
+}
+```
+
+## 3. 도메인 통합 지점
+
+### PSM 도메인
+- `regulations/KR/OSHA-KR-PSM.yaml` — 현행 법령 텍스트를 위해 kr_legislation 참조
+- `evidence-models/domains/functional/psm/` — `source_mcp: mcp-kr-legislation`
+
+### MSDS 도메인
+- `regulations/KR/OSHA-KR-MSDS.yaml` — kr_legislation 참조
+- `regulations/KR/K-REACH.yaml` — kr_legislation 참조
+- 컴플라이언스 갭 분석을 위한 k_skill 도구 (OSHA/SAPA 조항)
+
+### GMP 도메인
+- `regulations/KR/MFDS-GDP.yaml` — kr_legislation 참조
+
+### 모든 도메인
+- 모든 규제 .yaml 파일에 `source_mcp: mcp-kr-legislation` 필수 포함
+- 감사 스크립트가 이 필드를 검증
+
+## 4. 워크플로우 내 활용
+
+에이전트는 워크플로우 실행 중 MCP 서버를 조회할 수 있습니다:
+
+```
+1. 에이전트가 작업 수신
+2. 에이전트가 현행 법령 텍스트를 위해 kr_legislation 조회
+3. 에이전트가 현행 법령 대비 워크플로우 legal_basis 검증
+4. 에이전트가 검증된 법령 참조를 포함한 증거 기록 생성
+```
+
+## 5. 환경 설정
+
+```bash
+# .env 파일
+GITHUB_TOKEN=ghp_...          # legalize-kr용 (판례 검색)
+# kr-legislation은 공개 API 사용 (토큰 불필요)
+# k-skill은 캐시된 데이터 사용 (토큰 불필요)
+```
+
+## 6. 향후 통합 (v2)
+
+- 실시간 법령 개정 알림
+- 규제 변경 시 legal_basis 자동 갱신
+- ML 기반 규제 해석
+- 실제 법령 텍스트 대비 교차 참조 검증

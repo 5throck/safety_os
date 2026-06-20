@@ -53,7 +53,13 @@ evidence-models/
 
 skills/
 ├── _meta/                         # SKILLS.md, README files
-├── _shared/                       # Cross-domain skills
+├── <governance-skill>/SKILL.md    # Governance/build skills (flat)
+├── daily/                         # Routine EHS operations
+│   └── <skill>/SKILL.md
+├── investigation/                 # Hazard/incident analysis (HAZOP, RCA)
+│   └── <skill>/SKILL.md
+├── emergency/                     # Emergency response
+│   └── <skill>/SKILL.md
 └── domains/
     └── <name>/
         └── <skill>/SKILL.md       # Domain-specific skills

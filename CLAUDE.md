@@ -134,6 +134,8 @@ All `.md` files you create or modify MUST be in English, except when working in 
 - Git commit messages, PR titles, PR descriptions — English only
 - Branch names — English only
 - Code comments — English (unless documenting locale-specific logic)
+
+**Bilingual exception for user-facing docs**: Documents in `docs/_shared/` (user guides, tutorials, scenario walkthroughs) follow a paired convention: `<name>.md` is the English canonical base, and `<name>_ko.md` is the Korean mirror. This exception is sanctioned for `docs/_shared/` user-facing documentation only. Governance, regulatory-source, and structural documents (`docs/constitution/`, `docs/_meta/`, `regulations/`, evidence-model JSON schemas, agent/skill definitions) remain English-only to preserve a single source of truth for audit-trail integrity.
 <!-- COMMON-CLAUDE:END -->
 
 ### Skill Resolution Priority
@@ -142,11 +144,13 @@ When a user request matches a skill trigger, apply this priority order — **enf
 
 | Priority | Source | Location |
 |----------|--------|----------|
-| **1 (highest)** | Local project skills | `skills/<name>/SKILL.md` in the current working directory |
+| **1 (highest)** | Local project skills | `skills/` (scanned recursively): flat governance skills (`skills/<name>/SKILL.md`), operational category dirs (`skills/daily/`, `skills/investigation/`, `skills/emergency/`), and `skills/domains/` |
 | **2** | Platform config skills | `.gemini/skills/` or `.claude/skills/` in the project root |
 | **3 (lowest)** | Global plugin skills | e.g., `superpowers/brainstorming`, `superpowers/writing-plans` |
 
 **Rule**: If a local skill's `metadata.triggers` matches the user request, use it — do **not** fall through to a global plugin with overlapping intent.
+
+**`skills/` category layout**: governance/build skills live flat at `skills/<name>/`; routine EHS operations under `skills/daily/`; hazard/incident analysis (HAZOP, RCA) under `skills/investigation/`; emergency response under `skills/emergency/`; domain-specific under `skills/domains/<tier>/<domain>/`. The `_meta/` registry (`skills/_meta/SKILLS.md`) is the path-neutral name index.
 
 **Canonical conflict — meeting vs. brainstorming**:
 

@@ -1,195 +1,195 @@
 # Domain Classification Guide
 
-> **Purpose**: Safety OS 도메인의 기능적/산업적 혼재를 명확히 분류하고, 사용자 dispatch 시 적절한 도메인(또는 다중 도메인)을 선택하는 가이드.
+> **Purpose**: Clarify the functional/industrial domain mix in Safety OS, and guide users in selecting the appropriate domain (or multi-domain dispatch) at request time.
 
 ## 1. Why This Guide Exists
 
-Safety OS에는 10+ 도메인이 활성화되어 있으며, 다음 두 가지 성격이 혼재되어 있었습니다:
+Safety OS has 10+ active domains. Historically, two natures have been mixed together:
 
-- **기능적(Functional) 도메인**: 산업 무관, 방법론이나 데이터 중심 (PSM, MSDS, GxP family)
-- **산업적(Industry) 도메인**: 특정 산업 운영 중심 (ehsconst, gasterm, powergen, ehschem)
+- **Functional domains**: Industry-agnostic; methodology- or data-driven (PSM, MSDS, Training)
+- **Industry domains**: Centered on a specific industry's operations (ehsconst, gasterm, powergen, ehschem, meddevice, GxP family — gmp/gdp/glp/gcp/gvp)
 
-혼재의 결과:
-- 화학공장 사용자는 psm, msds, ehschem, emergency 중 무엇을 호출해야 할지 혼란
-- 동일 산업에서 다부처 규제가 동시 적용되나 어느 도메인이 통합 코디네이터인지 불분명
-- LNG 터미널/발전소 등 대규모 시설은 PSM도 적용되나 이를 어디에서 다루는지 모호
+Consequences of the mixed layout:
+- Chemical-plant users were unsure whether to invoke `psm`, `msds`, `ehschem`, or `emergency`.
+- Within the same industry, multiple agencies' regulations apply simultaneously, yet it was unclear which domain acts as the integrating coordinator.
+- For large facilities such as LNG terminals and power plants, PSM also applies, but where it is handled was ambiguous.
 
-본 가이드는 이를 **3-tier 분류 체계**로 정리합니다.
+This guide organizes the domains into a **3-tier classification system**.
 
 ---
 
 ## 2. 3-Tier Domain Classification
 
-### Tier 1: Functional Domains (기능 도메인)
-**특징**: 산업 무관. 방법론, 데이터, 시스템 관리 중심. 여러 산업 도메인이 참조.
+### Tier 1: Functional Domains
+**Characteristic**: Industry-agnostic. Centered on methodology, data, and system management. Referenced by multiple industry domains.
 
-| Domain | 기능 | 적용 산업 예시 |
-|--------|------|----------------|
-| `psm` | 공정안전 관리 방법론 (PHA, MOC, PSSR, MI, PSI, SOP) | 화학, 정유, **LNG/LPG 기지**, 대규모 발전, 반도체 (특수 가스) |
-| `msds` | 화학물질 데이터 관리 (16 sections) | 모든 산업 (화학 취급 시) |
-| `training` | 안전교육 관리 (OSHA-KR Art 13/29/31/32/114) | 모든 산업 |
+| Domain | Function | Example applicable industries |
+|--------|----------|-------------------------------|
+| `psm` | Process safety management methodology (PHA, MOC, PSSR, MI, PSI, SOP) | Chemicals, refining, **LNG/LPG bases**, large-scale power generation, semiconductors (specialty gases) |
+| `msds` | Chemical substance data management (16 sections) | All industries (whenever chemicals are handled) |
+| `training` | Safety training management (OSHA-KR Art 13/29/31/32/114) | All industries |
 
-### Tier 2: Industry Domains (산업 도메인)
-**특징**: 특정 산업 운영 중심. 산업별 다부처 규제 통합 관리.
+### Tier 2: Industry Domains
+**Characteristic**: Centered on a specific industry's operations. Integrates the multi-agency regulations for that industry.
 
-| Domain | 산업 | 통합 관리 규제 |
-|--------|------|----------------|
-| `gmp` | 의약품 제조 품질 | 약사법 Art 34, PIC/S, ICH Q7/Q9/Q10 |
-| `gdp` | 의약품 유통 품질 | 약사법 Art 47, EU GDP Guidelines |
-| `glp` | 비임상시험 관리 | 비임상시험관리기준, OECD GLP |
-| `gcp` | 임상시험 관리 | 약사법 Art 34의2, ICH E6(R3) |
-| `gvp` | 시판 후 약물감시 | 약사법 Art 73의2/73의3, KGVP, ICH E2 |
-| `ehsconst` | 건설업 | 산안법, 중대재해처벌법(건설업 특례), 건설기술진흥법 |
-| `gasterm` | 가스터미널/충전소 | 고압가스법, LPG법, 수소법 |
-| `powergen` | 발전설비 (원자력 제외) | 전기사업법, 전기안전관리법, 신재생에너지법 |
-| `ehschem` | 화학공장 (정유/석유화학/정밀화학) | 산안법, 화학물질관리법, K-REACH, 위험물안전관리법 |
-| `meddevice` | 의료기기 | KGMP-MD, ISO 13485, ISO 14971 |
+| Domain | Industry | Integrated regulations |
+|--------|----------|------------------------|
+| `gmp` | Pharmaceutical manufacturing quality | 약사법 (Pharmaceutical Affairs Act) Art 34, PIC/S, ICH Q7/Q9/Q10 |
+| `gdp` | Pharmaceutical distribution quality | 약사법 Art 47, EU GDP Guidelines |
+| `glp` | Non-clinical study management | 비임상시험관리기준 (Non-clinical Study Management Standards), OECD GLP |
+| `gcp` | Clinical trial management | 약사법 Art 34의2, ICH E6(R3) |
+| `gvp` | Post-market pharmacovigilance | 약사법 Art 73의2/73의3, KGVP, ICH E2 |
+| `ehsconst` | Construction | 산안법 (OSHA-KR), 중대재해처벌법 (SAPA, construction-industry special provisions), 건설기술진흥법 (Construction Technology Promotion Act) |
+| `gasterm` | Gas terminals / filling stations | 고압가스법 (High-Pressure Gas Safety Act), LPG법 (LPG Act), 수소법 (Hydrogen Act) |
+| `powergen` | Power generation facilities (excluding nuclear) | 전기사업법 (Electricity Business Act), 전기안전관리법 (Electrical Safety Management Act), 신재생에너지법 (New and Renewable Energy Act) |
+| `ehschem` | Chemical plants (refining / petrochemical / fine chemicals) | 산안법 (OSHA-KR), 화학물질관리법 (Chemical Substances Control Act), K-REACH, 위험물안전관리법 (Hazardous Materials Safety Control Act) |
+| `meddevice` | Medical devices | KGMP-MD, ISO 13485, ISO 14971 |
 
-### Tier 3: Cross-Cutting Services (공통 서비스)
-**특징**: 모든 도메인에서 참조. 비상 대응, 일상 점검 등.
+### Tier 3: Cross-Cutting Services
+**Characteristic**: Referenced by all domains. Emergency response, routine inspections, and the like.
 
-| Service | 역할 |
+| Service | Role |
 |---------|------|
-| `emergency/` (9 workflows) | 화재, 자연재해, 의료, 화학누출, 폭발, 밀폐/고소 구조, 감전, 기계 사고 |
-| `daily/` workflows | 위험성평가, 작업허가서, 안전점검 등 일상 EHS |
+| `emergency/` (9 workflows) | Fire, natural disasters, medical, chemical release, explosion, confined-space / high-angle rescue, electrocution, mechanical accidents |
+| `daily/` workflows | Routine EHS such as risk assessment, permit-to-work, and safety inspections |
 
 ---
 
-## 3. Multi-Domain Dispatch 가이드
+## 3. Multi-Domain Dispatch Guide
 
-### 원칙: 산업 도메인이 통합 코디네이터 (Tier 2 주도)
+### Principle: Industry domains are the integrating coordinator (Tier 2-led)
 
 ```
-사용자 (특정 산업 종사자)
+User (worker in a specific industry)
   ↓
-Tier 2 산업 도메인 (통합 코디네이터)
-  ├── 필요시 Tier 1 기능 도메인 dispatch
-  └── 사고 시 Tier 3 emergency dispatch
+Tier 2 industry domain (integrating coordinator)
+  ├── Dispatches to Tier 1 functional domains as needed
+  └── Dispatches to Tier 3 emergency on incident
 ```
 
-### 예시: LNG 터미널 운영자
+### Example: LNG terminal operator
 
 ```
-[일상 운영]
-→ gasterm-agent (Tier 2, 통합 코디네이터)
-  ├── 가스 저장탱크 점검 (gasterm 자체)
-  ├── 화학물질 처리 (MEA/MDEA) 데이터 필요 → msds-agent (Tier 1)
-  └── 대규모 시설 위험성평가 → psm-agent (Tier 1)
+[Routine operations]
+→ gasterm-agent (Tier 2, integrating coordinator)
+  ├── Gas storage tank inspection (gasterm itself)
+  ├── Chemical handling (MEA/MDEA) data needed → msds-agent (Tier 1)
+  └── Large-scale facility risk assessment → psm-agent (Tier 1)
 
-[비상 사태]
+[Emergency]
 → emergency-agent (Tier 3)
-  ├── explosion-gas-response 직접 실행
-  ├── msds Section 6 데이터 필요 → gasterm이나 msds-agent에서 제공
-  └── 대피/통제/신고
+  ├── Runs explosion-gas-response directly
+  ├── msds Section 6 data needed → provided by gasterm or msds-agent
+  └── Evacuation / access control / notification
 ```
 
-### 예시: 화학공장 운영자
+### Example: Chemical plant operator
 
 ```
-[일상 운영]
-→ ehschem-agent (Tier 2, 통합 코디네이터, 예정)
-  ├── 화학공장 일상 운영 (ehschem 자체)
-  ├── 화학물질 취급 → msds-agent (Tier 1)
-  ├── 대규모 위해 공정 → psm-agent (Tier 1)
-  └── 위험물 저장 → msds + ehschem 협업
+[Routine operations]
+→ ehschem-agent (Tier 2, integrating coordinator, planned)
+  ├── Chemical plant routine operations (ehschem itself)
+  ├── Chemical substance handling → msds-agent (Tier 1)
+  ├── Large-scale hazardous processes → psm-agent (Tier 1)
+  └── Hazardous materials storage → msds + ehschem collaboration
 
-[비상 사태]
+[Emergency]
 → emergency-agent (Tier 3)
-  ├── chemical-release 직접 실행
-  ├── msds Section 6 데이터 → msds-agent
-  └── psm-psi (공정 안전 정보) → psm-agent
+  ├── Runs chemical-release directly
+  ├── msds Section 6 data → msds-agent
+  └── psm-psi (process safety information) → psm-agent
 ```
 
-### 예시: 발전소 (LNG 화력) 운영자
+### Example: Power plant (LNG thermal) operator
 
 ```
-[일상 운영]
-→ powergen-agent (Tier 2, 통합 코디네이터)
-  ├── 발전설비 운영 (powergen 자체)
-  ├── LNG 가스 공급 → gasterm-agent (Tier 2, 산업 협업)
-  ├── 대규모 가스 공정 (PSM 의무) → psm-agent (Tier 1)
-  └── 화학 처리 (NOx 제거용 암모니아 등) → msds-agent (Tier 1)
+[Routine operations]
+→ powergen-agent (Tier 2, integrating coordinator)
+  ├── Power generation facility operations (powergen itself)
+  ├── LNG gas supply → gasterm-agent (Tier 2, industry collaboration)
+  ├── Large-scale gas process (PSM mandatory) → psm-agent (Tier 1)
+  └── Chemical treatment (e.g., ammonia for NOx removal) → msds-agent (Tier 1)
 ```
 
 ---
 
-## 4. PSM 적용 시나리오 (LNG 터미널 질문 반영)
+## 4. PSM Applicability Scenarios (reflecting the LNG terminal question)
 
-PSM (산업안전보건법 제44조)은 "covered process"를 가진 시설에 적용. 단순히 화학공장뿐 아니라 다음 시설에도 의무 적용:
+PSM (산업안전보건법 제44조) applies to facilities with a "covered process." It is not limited to chemical plants; the following facilities are also mandatorily subject to PSM:
 
-| 시설 유형 | PSM 의무 | 담당 산업 도메인 | 인터페이스 |
-|-----------|---------|------------------|------------|
-| 정유공장 | ✓ | `ehschem` | psm_record_ref 양방향 |
-| 석유화학공장 | ✓ | `ehschem` | psm_record_ref 양방향 |
-| **LNG 터미널 (대규모)** | ✓ | `gasterm` | `psm_applicable: true` 필드 |
-| **LPG 기지 (대규모)** | ✓ | `gasterm` | `psm_applicable: true` 필드 |
-| LNG 화력발전소 (대규모 가스) | ✓ | `powergen` | `psm_applicable` 필드 추가 예정 |
-| 수소 충전소 (대규모) | 일부 | `gasterm` | psm_applicable 조건부 |
-| 반도체 (특수 가스) | 일부 | (ehssemi 예정) | - |
-| 제약 (대규모 화학) | 일부 | `gmp` | gmp와 psm 협업 |
+| Facility type | PSM mandatory | Owning industry domain | Interface |
+|---------------|---------------|------------------------|-----------|
+| Refinery | ✓ | `ehschem` | `psm_record_ref` bidirectional |
+| Petrochemical plant | ✓ | `ehschem` | `psm_record_ref` bidirectional |
+| **LNG terminal (large-scale)** | ✓ | `gasterm` | `psm_applicable: true` field |
+| **LPG base (large-scale)** | ✓ | `gasterm` | `psm_applicable: true` field |
+| LNG thermal power plant (large-scale gas) | ✓ | `powergen` | `psm_applicable` field (to be added) |
+| Hydrogen filling station (large-scale) | Partial | `gasterm` | `psm_applicable` conditional |
+| Semiconductor (specialty gases) | Partial | (ehssemi, planned) | - |
+| Pharmaceutical (large-scale chemical) | Partial | `gmp` | gmp and psm collaboration |
 
-**구현 원칙**:
-- `psm-agent`는 기능적 코디네이터 (PSM 방법론 제공)
-- 산업 도메인의 evidence model에 `psm_applicable: boolean` 필드로 표시
-- `psm_applicable: true` 시 해당 시설은 psm-agent와 병행 협업
+**Implementation principles**:
+- `psm-agent` is the functional coordinator (provides PSM methodology).
+- An industry domain's evidence model flags applicability via a `psm_applicable: boolean` field.
+- When `psm_applicable: true`, the facility collaborates in parallel with psm-agent.
 
-### `gasterm`에서 PSM 인터페이스 (이미 구현됨)
+### PSM interface in `gasterm` (already implemented)
 
 ```yaml
 # gasterm evidence model
-psm_applicable: true  # 대규모 LNG/LPG 시설인 경우
+psm_applicable: true  # for large-scale LNG/LPG facilities
 psm_record_ref: "PSM-..."  # psm-record ID
 ```
 
-### `powergen` 보완 필요 (v1.1)
+### `powergen` PSM interface (already implemented)
 
-현재 powergen에는 `psm_applicable` 필드가 없음 → 추가 필요:
-- LNG 화력발전소 (대규모 가스 처리) — PSM 의무
-- 화력 발전 보일러 (대규모 고압) — PSM 의무
+The `psm_applicable` field has been added to the powergen evidence model (reflected across 7 records):
+- LNG thermal power plant (large-scale gas handling) — PSM mandatory
+- Thermal power boiler (large-scale, high-pressure) — PSM mandatory
 
 ---
 
 ## 5. Dispatch Decision Tree
 
 ```
-[사용자 요청]
+[User request]
        ↓
-[특정 산업 종사자?]
-   ├── Yes → Tier 2 산업 도메인 dispatch
-   │   ├── 화학공장 → ehschem-agent
-   │   ├── 건설현장 → ehsconst-agent
-   │   ├── 가스터미널 → gasterm-agent
-   │   ├── 발전소 → powergen-agent
-   │   └── 제약 (품질/감시) → gmp/gdp/glp/gcp/gvp-agent (Tier 2 — 제약 산업 도메인)
+[Worker in a specific industry?]
+   ├── Yes → dispatch to Tier 2 industry domain
+   │   ├── Chemical plant → ehschem-agent
+   │   ├── Construction site → ehsconst-agent
+   │   ├── Gas terminal → gasterm-agent
+   │   ├── Power plant → powergen-agent
+   │   └── Pharmaceutical (quality / surveillance) → gmp/gdp/glp/gcp/gvp-agent (Tier 2 — pharmaceutical industry domains)
    │
-   └── No → Tier 1 기능 도메인 dispatch
-       ├── 공정 위해 (covered process) → psm-agent
-       ├── 화학물질 데이터 → msds-agent
-       └── 비상 → emergency-agent
+   └── No → dispatch to Tier 1 functional domain
+       ├── Process hazard (covered process) → psm-agent
+       ├── Chemical substance data → msds-agent
+       └── Emergency → emergency-agent
 ```
 
 ---
 
 ## 6. Implementation Status
 
-### Phase 1 (현재 — 즉시)
-- [x] 본 분류 가이드 작성
-- [x] Active Domains Registry에 tier 필드 추가
-- [x] gasterm에 `psm_applicable` 필드 이미 구현됨
+### Phase 1 (complete)
+- [x] Author this classification guide
+- [x] Add `tier` field to the Active Domains Registry
+- [x] Implement `psm_applicable` field in gasterm
 
-### Phase 1.1 (보완)
-- [ ] powergen에 `psm_applicable` 필드 추가 (LNG/화력 대규모 시설)
-- [ ] ehschem에 `psm_applicable` 필드 추가 (기본값: true — 대부분 PSM 의무)
+### Phase 1.1 (complete)
+- [x] Add `psm_applicable` field to powergen (LNG / thermal large-scale facilities — 7 evidence models)
+- [x] Add `psm_applicable` field to ehschem (6 evidence models)
 
-### Phase 2 (v2)
-- [ ] 디렉토리 구조 논리적 그룹핑 (functional/ vs industry/)
-- [ ] dispatch 자동화 (tier 인식)
+### Phase 2 (complete)
+- [x] 2-tier directory grouping (functional/ vs industry/) — GxP family (gmp/gdp/glp/gcp/gvp) reclassified to the industry tier
+- [ ] Dispatch automation (tier-aware)
 
-### Phase 3 (v3+, 사용자 혼란 가중 시)
-- [ ] 본격 구조 재편 (Option C — 순수 산업 통합)
+### Phase 3 (v3+, if user confusion grows)
+- [ ] Full structural reorganization (Option C — pure industry integration)
 
 ---
 
 ## 7. Legal Disclaimer
 
-본 가이드는 사용자 dispatch 보조. 최종 도메인 선택은 PM (CSO)의 판단. 다중 도메인 협업 필요시 PM이 조정.
+This guide is a dispatch aid for users. Final domain selection is at the discretion of the PM (CSO). When multi-domain collaboration is required, the PM coordinates it.
