@@ -15,6 +15,8 @@ export interface DomainConfig {
     min_legal_basis: number;       // for evidence models
     min_workflow_legal_basis: number;  // for core workflows
     description: string;
+    /** Set true to skip array-format legal_basis check on workflow schemas (e.g. PSM uses plain string) */
+    skip_workflow_validation?: boolean;
 }
 
 export const DOMAINS: DomainConfig[] = [
@@ -73,6 +75,7 @@ export const DOMAINS: DomainConfig[] = [
         required_evidence_fields: [],
         min_legal_basis: 2,
         min_workflow_legal_basis: 2,
+        skip_workflow_validation: true, // PSM schemas use plain-string legal_basis, not array
         description: 'Process Safety Management',
     },
     {

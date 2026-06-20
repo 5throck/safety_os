@@ -1,0 +1,69 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PSM Worker Training Record",
+  "version": "1.0.0",
+  "type": "object",
+  "properties": {
+    "record_id": {
+      "type": "string",
+      "description": "Unique identifier for the training record."
+    },
+    "date": {
+      "type": "string",
+      "format": "date",
+      "description": "Date the training was conducted."
+    },
+    "worker_id": {
+      "type": "string",
+      "description": "Unique identifier for the worker who received training."
+    },
+    "training_type": {
+      "type": "string",
+      "enum": ["initial", "refresher", "incident-based"],
+      "description": "Type of training session delivered."
+    },
+    "psm_elements_covered": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of PSM element names covered during this training session."
+    },
+    "trainer_id": {
+      "type": "string",
+      "description": "Unique identifier for the trainer who delivered the session."
+    },
+    "completion_status": {
+      "type": "string",
+      "enum": ["completed", "incomplete", "failed"],
+      "description": "Overall completion status for the training session."
+    },
+    "test_score": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100,
+      "description": "Competency assessment score as a percentage."
+    },
+    "retraining_due_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Date by which refresher or retraining must be completed (3-year cycle or earlier if triggered)."
+    },
+    "acknowledgment_signature": {
+      "type": "string",
+      "description": "Worker's signed acknowledgment of participation and understanding (name or digital signature reference)."
+    }
+  },
+  "required": [
+    "record_id",
+    "date",
+    "worker_id",
+    "training_type",
+    "psm_elements_covered",
+    "trainer_id",
+    "completion_status",
+    "test_score",
+    "retraining_due_date",
+    "acknowledgment_signature"
+  ]
+}

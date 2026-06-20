@@ -1,0 +1,65 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PSM Employee Participation Record",
+  "version": "1.0.0",
+  "type": "object",
+  "properties": {
+    "record_id": {
+      "type": "string",
+      "description": "Unique identifier for the employee participation record."
+    },
+    "date": {
+      "type": "string",
+      "format": "date",
+      "description": "Date of the participation activity."
+    },
+    "activity_type": {
+      "type": "string",
+      "enum": [
+        "pha-participation",
+        "incident-review",
+        "audit-participation",
+        "procedure-review",
+        "safety-committee"
+      ],
+      "description": "Type of PSM activity in which employees participated."
+    },
+    "participants": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Array of worker IDs who participated in the activity."
+    },
+    "psm_element_discussed": {
+      "type": "string",
+      "description": "The PSM element that was the focus of the participation activity."
+    },
+    "recommendations_submitted": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of recommendations submitted by workers during the activity."
+    },
+    "management_response": {
+      "type": "string",
+      "description": "Management's formal written response to the recommendations submitted."
+    },
+    "implementation_status": {
+      "type": "string",
+      "enum": ["pending", "in-progress", "completed", "rejected"],
+      "description": "Current implementation status of the worker recommendations."
+    }
+  },
+  "required": [
+    "record_id",
+    "date",
+    "activity_type",
+    "participants",
+    "psm_element_discussed",
+    "recommendations_submitted",
+    "management_response",
+    "implementation_status"
+  ]
+}

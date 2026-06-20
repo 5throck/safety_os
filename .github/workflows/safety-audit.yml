@@ -6,8 +6,26 @@ on:
   pull_request:
     branches: [master]
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
-  audit:
+  pr-checks:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Validate branch name
+        run: |
+          BRANCH="${{ github.head_ref }}"
+          if echo "$BRANCH" | grep -qE '^(pr/[0-9]{8}-[a-z0-9-]+|feat/[a-z0-9-]+|fix/[a-z0-9-]+|refactor/[a-z0-9-]+|docs/[a-z0-9-]+|chore/[a-z0-9-]+)$'; then
+            echo "Branch name '$BRANCH' is valid."
+          else
+            echo "::error::Branch name '$BRANCH' does not match required pattern: pr/<date>-<slug>, feat/<slug>, fix/<slug>, refactor/<slug>, docs/<slug>, or chore/<slug>"
+            exit 1
+          fi
+
+  validate:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -18,10 +36,38 @@ jobs:
           bun-version: latest
 
       - name: Install dependencies
-        run: bun install
+        run: cd scripts && bun install
 
       - name: Run safety-audit
         run: bun scripts/safety-audit.ts
+
+      - name: Check scope-doc coverage
+        run: |
+          for domain in workflows/domains/functional/*/; do
+            name=$(basename "$domain")
+            if [ ! -f "docs/domains/functional/$name/scope.md" ]; then
+              echo "::warning::Missing scope doc: docs/domains/functional/$name/scope.md"
+            fi
+          done
+          for domain in workflows/domains/industry/*/; do
+            name=$(basename "$domain")
+            if [ ! -f "docs/domains/industry/$name/scope.md" ]; then
+              echo "::warning::Missing scope doc: docs/domains/industry/$name/scope.md"
+            fi
+          done
+
+  test-suite:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        run: cd scripts && bun install
 
       - name: Run pharma-general profile test
         run: bun scripts/test-pharma-general-profile.ts
@@ -32,5 +78,76 @@ jobs:
       - name: Run cross-domain integration test
         run: bun scripts/test-cross-domain-integration.ts
 
-      - name: Run FMEA scoring test
-        run: bun skills/domains/functional/gmp/qrm/fmea-scoring.ts
+      - name: Run domain scenarios test
+        run: bun scripts/test-domain-scenarios.ts
+
+      - name: Run FMEA scoring skill test
+        run: bun skills/domains/industry/gmp/qrm/fmea-scoring.ts
+
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        run: cd scripts && bun install
+
+      - name: TypeScript type-check
+        run: |
+          if [ -f tsconfig.json ]; then
+            bun x tsc --noEmit
+          else
+            echo "No tsconfig.json — skipping tsc"
+          fi
+
+      - name: YAML schema lint
+        run: |
+          ERRORS=0
+          while IFS= read -r -d '' file; do
+            bun -e "
+              const yaml = require('js-yaml');
+              const fs = require('fs');
+              try { yaml.load(fs.readFileSync('$file','utf8')); }
+              catch(e) { console.error('YAML parse error: $file —', e.message); process.exit(1); }
+            " || ERRORS=$((ERRORS+1))
+          done < <(find workflows -name "schema.yaml" -print0)
+          if [ $ERRORS -gt 0 ]; then echo "::error::$ERRORS schema.yaml file(s) failed YAML parse"; exit 1; fi
+          echo "All schema.yaml files are valid YAML"
+
+      - name: JSON evidence model lint
+        run: |
+          ERRORS=0
+          while IFS= read -r -d '' file; do
+            bun -e "
+              try { JSON.parse(require('fs').readFileSync('$file','utf8')); }
+              catch(e) { console.error('Invalid JSON: $file —', e.message); process.exit(1); }
+            " || ERRORS=$((ERRORS+1))
+          done < <(find evidence-models -name "*.json" -print0)
+          if [ $ERRORS -gt 0 ]; then echo "::error::$ERRORS evidence model JSON file(s) are invalid"; exit 1; fi
+          echo "All evidence model JSON files are valid"
+
+      - name: Markdown lint
+        continue-on-error: true
+        run: bun x markdownlint-cli2 "docs/**/*.md" "*.md" --ignore node_modules
+
+  audit:
+    runs-on: ubuntu-latest
+    needs: [validate, test-suite, lint]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        run: cd scripts && bun install
+
+      - name: Final audit gate
+        run: bun scripts/safety-audit.ts
