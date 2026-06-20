@@ -82,7 +82,7 @@ jobs:
         run: bun scripts/test-domain-scenarios.ts
 
       - name: Run FMEA scoring skill test
-        run: bun skills/domains/functional/gmp/qrm/fmea-scoring.ts
+        run: bun skills/domains/industry/gmp/qrm/fmea-scoring.ts
 
   lint:
     runs-on: ubuntu-latest
