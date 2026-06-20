@@ -1,5 +1,6 @@
 ---
 name: legalize-kr-sync
+version: 1.0.0
 owner: safety-workflow-manager
 scope: workspace
 status: active

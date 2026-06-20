@@ -1,6 +1,6 @@
 # VERSION_MANIFEST.md
 
-**Generated**: 2026-06-20T13:20:58.202Z
+**Generated**: 2026-06-20T13:37:31.261Z
 **Manifest Version**: 1.0
 **Location**: docs/VERSION_MANIFEST.md
 
@@ -31,7 +31,7 @@
 | api-documentation | 1.0.0 | .claude/skills/api-documentation/SKILL.md | claude | N/A | N/A |
 | documentation-writing | 1.0.0 | .claude/skills/documentation-writing/SKILL.md | claude | N/A | N/A |
 | finishing-a-development-branch | 1.0.0 | .claude/skills/finishing-a-development-branch/SKILL.md | both | N/A | N/A |
-| legalize-kr-sync | N/A | skills/legalize-kr-sync/SKILL.md | workspace | N/A | safety-workflow-manager |
+| legalize-kr-sync | 1.0.0 | skills/legalize-kr-sync/SKILL.md | workspace | N/A | safety-workflow-manager |
 | meeting-facilitation | 1.4.0 | skills/meeting-facilitation/SKILL.md | workspace | N/A | pm |
 | platform-command-lifecycle-manager | 1.0.0 | .claude/skills/platform-command-lifecycle-manager/SKILL.md | both | N/A | pm |
 | platform-skill-lifecycle-manager | 1.0.0 | .claude/skills/platform-skill-lifecycle-manager/SKILL.md | both | N/A | pm |
@@ -140,7 +140,6 @@
 - Skill api-documentation has no triggers defined
 - Skill documentation-writing has no triggers defined
 - Skill finishing-a-development-branch has no triggers defined
-- Skill legalize-kr-sync missing version
 - Skill legalize-kr-sync has no triggers defined
 - Skill meeting-facilitation has no triggers defined
 - Skill platform-command-lifecycle-manager has no triggers defined

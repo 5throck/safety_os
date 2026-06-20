@@ -1,5 +1,6 @@
 ---
 name: asset-integrity-check
+version: 1.0.0
 owner: asset-integrity-agent
 scope: workspace
 status: active

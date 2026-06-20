@@ -1,5 +1,6 @@
 ---
 name: root-cause-analysis
+version: 1.0.0
 owner: incident-investigation-agent
 scope: workspace
 status: active
