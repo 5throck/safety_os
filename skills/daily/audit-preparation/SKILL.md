@@ -1,5 +1,6 @@
 ---
 name: audit-preparation
+version: 1.0.0
 owner: audit-agent
 scope: workspace
 status: active

@@ -20,39 +20,39 @@
 
 | Agent | File | Tier | Role |
 |-------|------|------|------|
-| **PM / Chief Safety Officer (CSO)** | [`agents/pm.md`](agents/pm.md) | High | PM override — acts as CSO; orchestrates EHS agent team; enforces legal_basis gate on all workflows |
-| Documentation Writer | [`agents/docs-writer.md`](agents/docs-writer.md) | Medium | Formats official documentation; enforces English-only policy and specific translation zones |
+| **PM / Chief Safety Officer (CSO)** | [`agents/_core/pm.md`](agents/_core/pm.md) | High | PM override — acts as CSO; orchestrates EHS agent team; enforces legal_basis gate on all workflows |
+| Documentation Writer | [`agents/_shared/docs-writer.md`](agents/_shared/docs-writer.md) | Medium | Formats official documentation; enforces English-only policy and specific translation zones |
 
 ### Safety Management
 
 | Agent | File | Tier | Role |
 |-------|------|------|------|
-| Safety Governance Manager | [`agents/safety-governance-manager.md`](agents/safety-governance-manager.md) | High | Strategy, KPIs, and compliance objectives; owns annual safety targets and SAPA compliance metrics |
-| Safety Workflow Manager | [`agents/safety-workflow-manager.md`](agents/safety-workflow-manager.md) | Medium | Operational dispatch; orchestrates daily workflow agents; manages agent teams for manufacturing floor |
-| Training Agent | [`agents/training-agent.md`](agents/training-agent.md) | Medium | Manages safety training requirements; tracks compliance via Neo4j MCP; generates curricula |
-| PSM Agent | [`agents/psm-agent.md`](agents/psm-agent.md) | Medium | PSM Specialist Agent; oversees 12 elements of OSHA-KR Article 44 |
-| Asset Integrity Agent | [`agents/asset-integrity-agent.md`](agents/asset-integrity-agent.md) | Medium | Asset integrity specialist; preventative maintenance and aging equipment management |
-| Contractor Safety Agent | [`agents/contractor-safety-agent.md`](agents/contractor-safety-agent.md) | Medium | Contractor safety management; onboarding and monitoring of external workers |
-| Occupational Health Agent | [`agents/occupational-health-agent.md`](agents/occupational-health-agent.md) | Medium | Occupational health specialist; worker health examinations and environment monitoring |
+| Safety Governance Manager | [`agents/_core/safety-governance-manager.md`](agents/_core/safety-governance-manager.md) | High | Strategy, KPIs, and compliance objectives; owns annual safety targets and SAPA compliance metrics |
+| Safety Workflow Manager | [`agents/_core/safety-workflow-manager.md`](agents/_core/safety-workflow-manager.md) | Medium | Operational dispatch; orchestrates daily workflow agents; manages agent teams for manufacturing floor |
+| Training Agent | [`agents/domains/functional/training/training-agent.md`](agents/domains/functional/training/training-agent.md) | Medium | Manages safety training requirements; tracks compliance via Neo4j MCP; generates curricula |
+| PSM Agent | [`agents/domains/functional/psm/psm-agent.md`](agents/domains/functional/psm/psm-agent.md) | Medium | PSM Specialist Agent; oversees 12 elements of OSHA-KR Article 44 |
+| Asset Integrity Agent | [`agents/_shared/asset-integrity-agent.md`](agents/_shared/asset-integrity-agent.md) | Medium | Asset integrity specialist; preventative maintenance and aging equipment management |
+| Contractor Safety Agent | [`agents/_shared/contractor-safety-agent.md`](agents/_shared/contractor-safety-agent.md) | Medium | Contractor safety management; onboarding and monitoring of external workers |
+| Occupational Health Agent | [`agents/_shared/occupational-health-agent.md`](agents/_shared/occupational-health-agent.md) | Medium | Occupational health specialist; worker health examinations and environment monitoring |
 | Chemical Safety Agent | [`agents/chemical-safety-agent.md`](agents/chemical-safety-agent.md) | Medium | MSDS and hazardous chemical control specialist; ensures compliance with OSHA-KR and CCA |
 
 ### Compliance & Risk
 
 | Agent | File | Tier | Role |
 |-------|------|------|------|
-| Compliance Agent | [`agents/compliance-agent.md`](agents/compliance-agent.md) | Medium | Regulatory compliance monitoring; tracks OSHA-KR and SAPA requirements; flags non-compliance |
-| Legal Agent | [`agents/legal-agent.md`](agents/legal-agent.md) | Medium | Real-time legal interpretation and compliance advisory based on South Korean EHS laws |
-| Risk Assessment Agent | [`agents/risk-assessment-agent.md`](agents/risk-assessment-agent.md) | Medium | Risk assessment specialist; executes daily risk assessments; maintains risk register |
-| Reporting Agent | [`agents/reporting-agent.md`](agents/reporting-agent.md) | Medium | Safety KPI reporting specialist; tracks TRIR, LTIR, and near-misses |
+| Compliance Agent | [`agents/_shared/compliance-agent.md`](agents/_shared/compliance-agent.md) | Medium | Regulatory compliance monitoring; tracks OSHA-KR and SAPA requirements; flags non-compliance |
+| Legal Agent | [`agents/_shared/legal-agent.md`](agents/_shared/legal-agent.md) | Medium | Real-time legal interpretation and compliance advisory based on South Korean EHS laws |
+| Risk Assessment Agent | [`agents/_shared/risk-assessment-agent.md`](agents/_shared/risk-assessment-agent.md) | Medium | Risk assessment specialist; executes daily risk assessments; maintains risk register |
+| Reporting Agent | [`agents/_shared/reporting-agent.md`](agents/_shared/reporting-agent.md) | Medium | Safety KPI reporting specialist; tracks TRIR, LTIR, and near-misses |
 
 ### Emergency & Audit
 
 | Agent | File | Tier | Role |
 |-------|------|------|------|
-| Emergency Agent | [`agents/emergency-agent.md`](agents/emergency-agent.md) | High | Emergency response coordinator; activates emergency protocols; manages incident escalation |
-| Disaster Response Agent | [`agents/disaster-response-agent.md`](agents/disaster-response-agent.md) | High | Disaster response specialist; handles natural disasters like typhoons and earthquakes |
-| Incident Investigation Agent | [`agents/incident-investigation-agent.md`](agents/incident-investigation-agent.md) | Medium | Incident investigation and root cause analysis (RCA) specialist |
-| Audit Agent | [`agents/audit-agent.md`](agents/audit-agent.md) | Medium | Audit and evidence traceability; validates evidence records; prepares audit trail for regulatory inspection |
+| Emergency Agent | [`agents/_shared/emergency-agent.md`](agents/_shared/emergency-agent.md) | High | Emergency response coordinator; activates emergency protocols; manages incident escalation |
+| Disaster Response Agent | [`agents/_shared/disaster-response-agent.md`](agents/_shared/disaster-response-agent.md) | High | Disaster response specialist; handles natural disasters like typhoons and earthquakes |
+| Incident Investigation Agent | [`agents/_shared/incident-investigation-agent.md`](agents/_shared/incident-investigation-agent.md) | Medium | Incident investigation and root cause analysis (RCA) specialist |
+| Audit Agent | [`agents/_shared/audit-agent.md`](agents/_shared/audit-agent.md) | Medium | Audit and evidence traceability; validates evidence records; prepares audit trail for regulatory inspection |
 
 ---
 

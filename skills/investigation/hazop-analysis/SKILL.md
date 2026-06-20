@@ -1,5 +1,6 @@
 ---
 name: hazop-analysis
+version: 1.0.0
 owner: psm-agent
 scope: workspace
 status: active
