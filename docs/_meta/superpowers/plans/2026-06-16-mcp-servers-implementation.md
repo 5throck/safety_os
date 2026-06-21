@@ -1,6 +1,6 @@
 # Safety OS MCP Servers Implementation Plan
 
-> **For agentic workers:** REQUIRED: Use superpowers:subagent-driven-development (if subagents available) or superpowers:executing-plans to implement this plan. Steps use checkbox (`- [ ]`) syntax for tracking.
+> **For agentic workers:** Use native subagent dispatch (if available) or native plan mode to implement this plan. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** Implement three MCP servers (k_skill, legalize_kr, mcp_kr_legislation) that provide Korean EHS law lookup, law structure parsing, and real-time legislation API access to Safety OS agents.
 

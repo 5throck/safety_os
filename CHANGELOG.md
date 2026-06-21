@@ -6,6 +6,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+### Changed (2026-06-21 — Superpowers Plugin Policy Cleanup; Native Platform Parity)
+
+Both Claude Code and Antigravity now ship native subagent dispatch and plan mode, so external "superpowers plugin" install/leverage instructions are obsolete. Removed every instruct-the-PM-to-install/leverage-an-external-plugin reference; the valuable 3-tier Model Selection Override guidance is preserved (it is platform-native, not plugin-dependent). Same "Truth-in-Documentation" principle as the code-graph cleanup: documented capability must match implemented capability.
+
+- **CLAUDE.md + GEMINI.md**: renamed `#### Superpowers Plugin & Cost Optimization (3-Tier Strategy)` → `#### Cost Optimization (3-Tier Strategy)`; reframed the lead from "PM MUST leverage the superpowers plugin" to "uses the platform's native subagent dispatch and plan mode"; dropped the dangling `AGENTS.md#superpowers-plugin--...` link (AGENTS.md never had that section). The 3-tier `Model Selection Overrides` bullets kept verbatim per platform (Claude: opus/sonnet/haiku; Gemini: 3.1-pro/3.5-flash).
+- **Skill Resolution Priority table (both files)**: Priority-3 row `superpowers/brainstorming, superpowers/writing-plans` → "Platform-native skills (built-in plan mode and subagent capabilities, no external plugin)"; the canonical "brainstorm" conflict row likewise points to platform-native skills.
+- **`docs/_meta/superpowers/plans/*.md`** (2 MCP-server implementation plans): "REQUIRED: Use superpowers:subagent-driven-development / executing-plans" header → "Use native subagent dispatch (if available) or native plan mode". Directory name retained (historical; it documents the 3 active MCP servers).
+- **Validators**: `scripts/validate-md-language.ts` exclusion path corrected `docs/superpowers/` → `docs/_meta/superpowers/` (the real nested path — the old exclusion never matched, so plan docs were not actually excluded); `scripts/validate-doc-folder.ts` removed the dead `'superpowers'` entry from `OPTIONAL_FOLDERS` (validator checks top-level `docs/`, but the folder is nested under `_meta/`, so the entry could never match). Both bumped (`1.4.1`, `1.0.1`).
+- **Verification**: `grep superpowers` in CLAUDE/GEMINI/AGENTS → 0 refs; both validators exit 0; `bun scripts/safety-audit.ts` → 582 files, 0 errors.
+
 ### Removed (2026-06-21 — Code-Graph Remnant Cleanup; Truth-in-Documentation)
 
 Completed the code-graph removal begun 2026-06-16. The codegraph MCP and the Neo4j "Knowledge Graph Traceability Model" were never wired into `.mcp.json`; their design docs and dead runtime artifacts persisted as false capability claims, which is unsafe in a GxP/audit context. Enforces a new **"Truth-in-Documentation"** principle: documented capability = implemented capability; unimplemented items are archived and annotated.
