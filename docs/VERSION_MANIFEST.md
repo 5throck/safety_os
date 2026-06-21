@@ -1,6 +1,6 @@
 # VERSION_MANIFEST.md
 
-**Generated**: 2026-06-21T04:01:14.705Z
+**Generated**: 2026-06-21T04:09:16.271Z
 **Manifest Version**: 1.0
 **Location**: docs/VERSION_MANIFEST.md
 
@@ -9,7 +9,7 @@
 ## Summary
 
 - **Agents**: 0
-- **Skills**: 16
+- **Skills**: 17
 - **Scripts**: 56
 - **Commands**: 6
 
@@ -33,6 +33,7 @@
 | finishing-a-development-branch | 1.0.0 | .claude/skills/finishing-a-development-branch/SKILL.md | both | N/A | N/A |
 | legalize-kr-sync | 1.0.0 | skills/legalize-kr-sync/SKILL.md | workspace | N/A | safety-workflow-manager |
 | meeting-facilitation | 1.4.0 | skills/meeting-facilitation/SKILL.md | workspace | N/A | pm |
+| meeting-facilitation | 1.3.1 | .claude/skills/meeting-facilitation/SKILL.md | both | N/A | pm |
 | platform-command-lifecycle-manager | 1.0.0 | .claude/skills/platform-command-lifecycle-manager/SKILL.md | both | N/A | pm |
 | platform-skill-lifecycle-manager | 1.0.0 | .claude/skills/platform-skill-lifecycle-manager/SKILL.md | both | N/A | pm |
 | project-review | 1.0.0 | skills/project-review/SKILL.md | workspace | N/A | pm |
@@ -126,7 +127,7 @@
 **Checked**: Claude (.claude/) vs Gemini (.gemini/)
 
 - **Commands with parity**: 5 / 6
-- **Skills with parity**: 5 / 16
+- **Skills with parity**: 6 / 17
 
 ---
 
@@ -140,6 +141,7 @@
 - Skill documentation-writing has no triggers defined
 - Skill finishing-a-development-branch has no triggers defined
 - Skill legalize-kr-sync has no triggers defined
+- Skill meeting-facilitation has no triggers defined
 - Skill meeting-facilitation has no triggers defined
 - Skill platform-command-lifecycle-manager has no triggers defined
 - Skill platform-skill-lifecycle-manager has no triggers defined
