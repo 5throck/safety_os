@@ -6,6 +6,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+### Changed (2026-06-21 — Korean-Regulation Domain READMEs → Layer C Korean-Canonical)
+
+Applied the Layer C (Korean-canonical) policy to the **4 Korean-regulation industry domains**, converting their workflow READMEs from English-first to fully Korean-canonical for the Korean EHS/GxP practitioners who use them. This operationalizes the documentation language pivot for the human-operational layer (Layer C) — international-regulation domains (gcp/gvp/glp/meddevice) correctly remain Layer B (English-preferred) and were not touched.
+
+- **ehsconst** (Construction Safety, 9), **ehschem** (Chemical Plant, 8), **gasterm** (Gas Terminal, 8), **powergen** (Power Generation, 8) — **33 READMEs total** rewritten to Korean body + canonical H1 `# <Korean> (<Title Case English>) Workflow` matching the established `gmp` pattern.
+- **Content fidelity preserved** (verified): all evidence-record JSON filenames, technical identifiers/ref codes (`msds_record_ref`, `psm_psi_ref`, `legal_basis`, `permit_id`, etc.), cross-domain reference paths, and workflow step structure/numbering are byte-identical to the originals. Language conversion only — no logic, scope, or structural changes.
+- **Korean statute citations standardized** from `regulations/KR/legal-glossary.yaml` SSOT as `한글명 (English gloss) 제N조` (e.g. `중대재해처벌법 (SAPA) 제12조`, `고압가스안전관리법 (High-Pressure Gas Safety Control Act) 제17조`, `전기사업법 (Electric Utility Act) 제47조`). International standard names (GHS, OSHA PSM) retained in English.
+- **Verification**: `bun scripts/safety-audit.ts` → 583 files, 0 errors; canonical-pattern grep → 0 non-canonical titles.
+
 ### Changed (2026-06-21 — Documentation Language Policy Pivot: Korean-Default)
 
 Pivoted the documentation language policy from English-default to **Korean-default**, reflecting that Safety OS is a Korea-only EHS/GxP platform serving Korean practitioners exclusively. Forcing English on human operational documentation was counterproductive (usability loss, double maintenance, no international audience). English is now retained ONLY where a justification applies: **Layer A** (system/agent layer — governance files, agent definitions, code, schemas) for cross-platform AI-agent instruction clarity and L1–L2 fork parity, and **Layer B** (international-regulation content — ICH/OECD/GHS/PIC-S/ISO).

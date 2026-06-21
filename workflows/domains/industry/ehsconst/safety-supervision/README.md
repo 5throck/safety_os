@@ -1,7 +1,7 @@
-# safety-supervision Workflow
+# 안전감리 (Safety Supervision) Workflow
 
-## 1. Objective
-독립 안전감리 per 건설기술진흥법 Article 24. GLP QAU 패턴 차용 (조직적 독립성).
+## 1. 목적
+건설기술진흥법 (Construction Technology Promotion Act, CTPA) 제24조에 따른 독립 안전감리. GLP QAU 패턴 차용 (조직적 독립성).
 
 ## 2. 안전감리 역할
 - 안전관리계획서 적합성 검토
@@ -14,12 +14,12 @@
 - 발주처가 직접 지정 (원도급자 영향 배제)
 - 이해상충 방지
 
-## 4. Workflow Steps
+## 4. 워크플로우 단계 (Workflow Steps)
 1. **안전감리단 구성**: 발주처 지정.
 2. **사전 검토**: 안전관리계획서 검증.
 3. **정기 순찰**: 주 1회 이상.
 4. **핵심 공종 입회**: 거푸집/굴착 등.
 5. **발주처 보고**: 월 1회.
 
-## 5. Evidence Record
-Generate `ehsconst-supervision-record.json`.
+## 5. 증거 기록 (Evidence Record)
+`ehsconst-supervision-record.json` 생성.
