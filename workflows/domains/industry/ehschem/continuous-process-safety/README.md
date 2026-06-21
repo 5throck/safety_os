@@ -1,10 +1,10 @@
-# 연속 공정 안전 (Continuous Process Safety)
+# 연속 공정 안전 (Continuous Process Safety) Workflow
 
-## Matrix Position
-Industry-specific workflow. References functional services (PSM, MSDS, Emergency) for cross-cutting concerns.
+## 매트릭스 위치
+산업별 특화 워크플로우. 공통 관심사에 대해서는 기능 서비스(PSM, MSDS, Emergency)를 참조한다.
 
-## 1. Objective
-Continuous Process Safety for chemical plant operations.
+## 1. 목적
+화학공장 운영에 있어 연속 공정의 안전을 확보한다.
 
-## 2. Evidence Record
-Generate `ehschem-process-record.json`.
+## 2. 증거 기록
+`ehschem-process-record.json`을 생성한다.
