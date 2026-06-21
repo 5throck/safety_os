@@ -6,6 +6,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+### Added (2026-06-21 — meeting-facilitation Skill Registration Parity)
+
+`meeting-facilitation` was a skill in name only: it existed as the `/meeting` slash command (parity-paired on both platforms) and as a stub in the project-root `skills/` registry, but was ABSENT from `.claude/skills/` and `.gemini/skills/` — the only paths the native Skill tool scans. So `Skill(skill="meeting-facilitation")` returned "Unknown skill", directly contradicting the documented "used on both platforms" claim. Final item of the Truth-in-Documentation cleanup.
+
+- **Registered** `.claude/skills/meeting-facilitation/SKILL.md` + `.gemini/skills/meeting-facilitation/SKILL.md` (byte-identical parity). The canonical `/meeting` command already carried valid SKILL.md frontmatter (`metadata.triggers` etc.), so the skill body is the proven process verbatim, with one platform-neutral note to keep the skill and the command in sync.
+- **Confirmed resolvable**: `meeting-facilitation` now appears in the platform available-skills list; `Skill(skill="meeting-facilitation")` resolves on both Claude and Antigravity.
+- **Scope correction (PM verification)**: an earlier plan proposed backfilling 3 "missing" Gemini skills (`api-documentation`, `research-analysis`, `documentation-writing`). All three carry `gemini-parity: skip` — they are intentionally Claude-only per the §10 lifecycle rule. **No backfill performed**; the count mismatch was a false gap, not a parity violation.
+- **Verification**: `diff` of the two SKILL.md → IDENTICAL; `bun scripts/skill-lifecycle-audit.ts` → 41 skills, 0 errors; `bun scripts/safety-audit.ts` → 582 files, 0 errors.
+
 ### Changed (2026-06-21 — Superpowers Plugin Policy Cleanup; Native Platform Parity)
 
 Both Claude Code and Antigravity now ship native subagent dispatch and plan mode, so external "superpowers plugin" install/leverage instructions are obsolete. Removed every instruct-the-PM-to-install/leverage-an-external-plugin reference; the valuable 3-tier Model Selection Override guidance is preserved (it is platform-native, not plugin-dependent). Same "Truth-in-Documentation" principle as the code-graph cleanup: documented capability must match implemented capability.
