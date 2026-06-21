@@ -1,6 +1,6 @@
 # VERSION_MANIFEST.md
 
-**Generated**: 2026-06-20T23:29:32.498Z
+**Generated**: 2026-06-21T01:31:51.614Z
 **Manifest Version**: 1.0
 **Location**: docs/VERSION_MANIFEST.md
 
@@ -99,7 +99,7 @@
 | translate-readme.ts | N/A | scripts/translate-readme.ts | bun, fs, path |
 | validate-agents.ts | N/A | scripts/validate-agents.ts | N/A |
 | validate-doc-folder.ts | N/A | scripts/validate-doc-folder.ts | fs, path |
-| validate-md-language.ts | 1.3.0 | scripts/validate-md-language.ts | fs |
+| validate-md-language.ts | 1.4.0 | scripts/validate-md-language.ts | fs, js-yaml |
 | validate-model-registry.ts | N/A | scripts/validate-model-registry.ts | N/A |
 | validate-skills.ts | N/A | scripts/validate-skills.ts | N/A |
 | verify-agent-deliverables.ts | N/A | scripts/verify-agent-deliverables.ts | fs |
