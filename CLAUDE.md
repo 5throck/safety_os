@@ -127,15 +127,15 @@ Config file: `.mcp.json` (project root) - auto-loaded by both the CLI and the De
 <!-- COMMON-CLAUDE:START -->
 ### 4. Language Policy for Documentation
 
-All `.md` files you create or modify MUST be in English, except when working in `ko/` or `locales/ko/` directories (Korean translation zones).
+Safety OS is a Korea-only EHS/GxP compliance platform. **Korean is the default documentation language.** English is used ONLY where a specific justification applies:
 
-- README.md, CLAUDE.md, GEMINI.md, AGENTS.md, CONSTITUTION.md, CHANGELOG.md — English only
-- All documentation in docs/, agents/, skills/ — English only
-- Git commit messages, PR titles, PR descriptions — English only
-- Branch names — English only
-- Code comments — English (unless documenting locale-specific logic)
+- **Layer A — English required (internationalization)**: governance/system/agent files consumed by cross-platform AI agents and tooling — `CLAUDE.md`, `GEMINI.md`, `AGENTS.md`, `CONSTITUTION.md`, `README.md`, `agents/*.md`, `SKILL.md`, command files, code/scripts/code comments, schema keys, evidence-model JSON keys, `CHANGELOG.md`, and git artifacts (commit messages, PR titles/descriptions, branch names). These stay English for AI-agent instruction clarity, L1–L2 fork platform parity, and international audit interoperability.
+- **Layer B — International-regulation content (English-preferred)**: documentation whose source is an international standard — ICH (E6/E2), OECD GLP (MAD), GHS Rev 9, PIC/S GDP, ISO 13485/14971. Applies to domains `gcp`, `gvp`, `glp`, `meddevice`, and the GHS portions of `msds`.
+- **Layer C — Korean canonical (default)**: human operational documentation for Korean EHS/GxP practitioners — workflow READMEs, domain scope documents, user guides, tutorials, scenario walkthroughs. No internationalization or international-regulation justification applies, so Korean is the natural and correct language.
 
-**Bilingual exception for user-facing docs**: Documents in `docs/_shared/` (user guides, tutorials, scenario walkthroughs) follow a paired convention: `<name>.md` is the English canonical base, and `<name>_ko.md` is the Korean mirror. This exception is sanctioned for `docs/_shared/` user-facing documentation only. Governance, regulatory-source, and structural documents (`docs/constitution/`, `docs/_meta/`, `regulations/`, evidence-model JSON schemas, agent/skill definitions) remain English-only to preserve a single source of truth for audit-trail integrity.
+**Korean statute proper nouns are always preserved as Korean + English gloss** (e.g., `산업안전보건법 (OSHA-KR) Art 36`). Statute names and article citations are never translation targets — translating them breaks audit-trail traceability. The canonical statute → English gloss mapping is maintained in `regulations/KR/legal-glossary.yaml` (single source of truth for consistent citations).
+
+**Bilingual zones retained**: `docs/_shared/` paired convention (`<name>.md` English base + `<name>_ko.md` Korean mirror), and `ko/`, `locales/ko/` directories.
 <!-- COMMON-CLAUDE:END -->
 
 ### Skill Resolution Priority

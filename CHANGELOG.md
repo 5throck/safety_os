@@ -6,6 +6,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+### Changed (2026-06-21 — Documentation Language Policy Pivot: Korean-Default)
+
+Pivoted the documentation language policy from English-default to **Korean-default**, reflecting that Safety OS is a Korea-only EHS/GxP platform serving Korean practitioners exclusively. Forcing English on human operational documentation was counterproductive (usability loss, double maintenance, no international audience). English is now retained ONLY where a justification applies: **Layer A** (system/agent layer — governance files, agent definitions, code, schemas) for cross-platform AI-agent instruction clarity and L1–L2 fork parity, and **Layer B** (international-regulation content — ICH/OECD/GHS/PIC-S/ISO).
+
+- **§4 Language Policy rewritten** in `CLAUDE.md` + `GEMINI.md` (byte-identical body, platform parity held) as a 3-layer classification: Layer A (English required — internationalization), Layer B (English-preferred — international regulation), Layer C (Korean canonical — human operational docs: workflow READMEs, scope docs, user guides). Korean statute proper nouns always preserved as `Korean (English gloss)` per audit-trail integrity.
+- **Legal/regulatory glossary SSOT** added at `regulations/KR/legal-glossary.yaml` — 19 Korean statutes (80 codebase-grounded article citations) + 20 international standards. Serves as the canonical statute→English-gloss reference and the validator's Korean allowlist input.
+- **`validate-md-language.ts` reoriented** (v1.3.0 → v1.4.0): loads the glossary statute keys as an allowlist so statute citations pass in Layer A files; Layer C operational docs remain Korean-allowed by default. Glossary load failure fails loudly (never silently allows all Korean).
+
 ### Changed (2026-06-21 — CONSTITUTION.md Reroute + Repo Cleanup)
 
 - **P0 — `CONSTITUTION.md` reference reroute**: Rewrote the 3-line `CONSTITUTION.md` stub into a concise governance index (Required Reading + Governance Sections tables). Rerouted **12 broken links** across `CLAUDE.md` (6), `GEMINI.md` (5), and `AGENTS.md` (1) to valid in-file anchors. Half the links pointed to nonexistent stub anchors (`CONSTITUTION.md#3`/`#5`) and half to a nonexistent `docs/constitution/` directory; the actual governance content already lived inline in `CLAUDE.md`/`GEMINI.md`, so links were redirected there rather than duplicating content. CLAUDE.md ↔ GEMINI.md platform parity maintained.
