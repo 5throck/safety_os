@@ -467,22 +467,7 @@ else
     info "  Note: If you run this script inside WSL, it will be detected as Linux and install rtk normally."
 fi
 
-# ── 5. Initialize CodeGraph MCP ───────────────────────────────────────────────
-if command -v npx >/dev/null 2>&1; then
-    info "Initializing and indexing CodeGraph for AI context…"
-    echo "2" | npx @colbymchenry/codegraph@0.9.7 init 2>/dev/null || true
-    npx @colbymchenry/codegraph@0.9.7 index 2>/dev/null || true
-    npx @colbymchenry/codegraph@0.9.7 sync 2>/dev/null || true
-    if [ $? -eq 0 ]; then
-        pass "CodeGraph initialized successfully"
-    else
-        warn "Failed to initialize CodeGraph"
-    fi
-else
-    warn "npx not found - skipping CodeGraph initialization"
-fi
-
-# ── 6. Initialize memory log ──────────────────────────────────────────────────
+# ── 5. Initialize memory log ──────────────────────────────────────────────────
 DATE_STR=$(date +%Y-%m-%d)
 mkdir -p memory
 LOG_PATH="memory/${DATE_STR}.md"
@@ -496,7 +481,7 @@ if [ -f "$INDEX_PATH" ]; then
   fi
 fi
 
-# ── 7. Initial commit ─────────────────────────────────────────────────────────
+# ── 6. Initial commit ─────────────────────────────────────────────────────────
 if [ "$SKIP_COMMIT" = false ]; then
   if git rev-parse --git-dir > /dev/null 2>&1; then
     git add -A 2>/dev/null

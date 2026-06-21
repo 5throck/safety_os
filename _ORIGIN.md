@@ -34,7 +34,7 @@ Files with identical content to workspace root will be stripped during Phase B p
 - All files in `agents/`, `skills/`, `workflows/`, `regulations/`, `evidence-models/` — Safety OS originals, no workspace root equivalents
 - `industry-profiles/manufacturing.yaml` — Safety OS original
 - `PROMOTION_CHECKLIST.md`, `_ORIGIN.md`, `_COMMON_VERSION.md` — Safety OS originals
-- `.mcp.json` — Safety OS-specific minimal config (codegraph only)
+- `.mcp.json` — Safety OS-specific MCP config: `k_skill`, `legalize_kr`, `mcp_kr_legislation` (Korean legislation)
 
 ## Root Skills (`skills/`) — Deployment Record
 

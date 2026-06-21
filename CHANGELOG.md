@@ -6,6 +6,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+### Removed (2026-06-21 — Code-Graph Remnant Cleanup; Truth-in-Documentation)
+
+Completed the code-graph removal begun 2026-06-16. The codegraph MCP and the Neo4j "Knowledge Graph Traceability Model" were never wired into `.mcp.json`; their design docs and dead runtime artifacts persisted as false capability claims, which is unsafe in a GxP/audit context. Enforces a new **"Truth-in-Documentation"** principle: documented capability = implemented capability; unimplemented items are archived and annotated.
+
+- **Deleted dead remnants**: `evidence-models/graph-schema.json` (0 references), `scripts/generate-playbook.ts` (stale generator reading nonexistent `docs/blueprint/`), and the CodeGraph MCP init block from `scripts/setup.sh` + `scripts/setup.ps1` (was still running `npx @colbymchenry/codegraph`).
+- **Corrected** `_ORIGIN.md` false claim ".mcp.json (codegraph only)" → accurate active servers (`k_skill`, `legalize_kr`, `mcp_kr_legislation`).
+- **Archived** unimplemented design docs to `docs/_meta/archive/code-graph/` (with a NOT-IMPLEMENTED README): blueprint `18-knowledge-graph.md`, `19-graph-schema.md`, `appendix/H-knowledge-graph-examples.md`, `architecture/knowledge-graph-ingestion.md`, and the `v4.0-playbook-2026-06-06.md` snapshot.
+- **Re-specified agents** off the non-existent graph: `training-agent.md` and `audit-agent.md` now describe compliance/audit traceability via the LIVE mechanism — `evidence-models/*.json` + workflow `schema.yaml` `legal_basis` fields + `regulations/KR/legal-glossary.yaml` SSOT. `AGENTS.md` Training roster line updated to match. Zero residual Neo4j/graph capability claims across `agents/`.
+- **Annotated** the 4 remaining blueprint docs with embedded graph refs (`02-architecture.md` diagram node fixed + banner; `04-agent-catalog.md`, `05-implementation-roadmap.md`, `appendix/A-agent-definitions.md` bannered) as NOT-IMPLEMENTED historical design, rather than gutting the broader docs.
+- **Verification**: `bun scripts/safety-audit.ts` → 582 files, 0 errors; active-area `codegraph|neo4j|knowledge graph` grep → 0 unannotated hits.
+
 ### Changed (2026-06-21 — Korean-Regulation Domain READMEs → Layer C Korean-Canonical)
 
 Applied the Layer C (Korean-canonical) policy to the **4 Korean-regulation industry domains**, converting their workflow READMEs from English-first to fully Korean-canonical for the Korean EHS/GxP practitioners who use them. This operationalizes the documentation language pivot for the human-operational layer (Layer C) — international-regulation domains (gcp/gvp/glp/meddevice) correctly remain Layer B (English-preferred) and were not touched.
