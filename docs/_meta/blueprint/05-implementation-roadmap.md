@@ -1,5 +1,7 @@
 # Part XII — Implementation Strategy
 
+> **⚠️ Historical v4.0 design note (updated 2026-06):** The **CodeGraph** MCP and **Neo4j Knowledge Graph** described here were **NOT IMPLEMENTED** and have been archived (see [`_meta/archive/code-graph/README.md`](../archive/code-graph/README.md)). Live regulatory traceability uses `evidence-models/*.json` + workflow `legal_basis` fields + `regulations/KR/legal-glossary.yaml` SSOT. Graph references below are design history only.
+
 ## Document Control
 
 | Property | Value |

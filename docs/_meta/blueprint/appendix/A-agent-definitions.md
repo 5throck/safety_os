@@ -1,5 +1,7 @@
 # Appendix A: Agent Definitions
 
+> **⚠️ Historical v4.0 design note (updated 2026-06):** The **CodeGraph** MCP and **Neo4j Knowledge Graph** described here were **NOT IMPLEMENTED** and have been archived (see [`_meta/archive/code-graph/README.md`](../../archive/code-graph/README.md)). Live regulatory traceability uses `evidence-models/*.json` + workflow `legal_basis` fields + `regulations/KR/legal-glossary.yaml` SSOT. Graph references below are design history only.
+
 This appendix provides a summary of the 15 agents comprising the Safety OS system. Each agent has a distinct operational boundary and regulatory mandate under South Korean EHS laws.
 
 ## 1. Orchestration

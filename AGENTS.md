@@ -29,7 +29,7 @@
 |-------|------|------|------|
 | Safety Governance Manager | [`agents/_core/safety-governance-manager.md`](agents/_core/safety-governance-manager.md) | High | Strategy, KPIs, and compliance objectives; owns annual safety targets and SAPA compliance metrics |
 | Safety Workflow Manager | [`agents/_core/safety-workflow-manager.md`](agents/_core/safety-workflow-manager.md) | Medium | Operational dispatch; orchestrates daily workflow agents; manages agent teams for manufacturing floor |
-| Training Agent | [`agents/domains/functional/training/training-agent.md`](agents/domains/functional/training/training-agent.md) | Medium | Manages safety training requirements; tracks compliance via Neo4j MCP; generates curricula |
+| Training Agent | [`agents/domains/functional/training/training-agent.md`](agents/domains/functional/training/training-agent.md) | Medium | Manages safety training requirements; tracks compliance via training evidence records + `legal_basis` traceability; generates curricula |
 | PSM Agent | [`agents/domains/functional/psm/psm-agent.md`](agents/domains/functional/psm/psm-agent.md) | Medium | PSM Specialist Agent; oversees 12 elements of OSHA-KR Article 44 |
 | Asset Integrity Agent | [`agents/_shared/asset-integrity-agent.md`](agents/_shared/asset-integrity-agent.md) | Medium | Asset integrity specialist; preventative maintenance and aging equipment management |
 | Contractor Safety Agent | [`agents/_shared/contractor-safety-agent.md`](agents/_shared/contractor-safety-agent.md) | Medium | Contractor safety management; onboarding and monitoring of external workers |

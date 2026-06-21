@@ -1,5 +1,7 @@
 # Safety OS Blueprint: Part II — Enterprise Architecture
 
+> **⚠️ Historical v4.0 design note (updated 2026-06):** The **CodeGraph** MCP and **Neo4j Knowledge Graph** described below were **NOT IMPLEMENTED** and have been removed/archived (see [`_meta/archive/code-graph/README.md`](../archive/code-graph/README.md)). Live regulatory traceability is achieved via `evidence-models/*.json` records + workflow `schema.yaml` `legal_basis` fields + `regulations/KR/legal-glossary.yaml` SSOT — not a graph database. References to CodeGraph/Neo4j/Knowledge Graph in this document are retained as design history only.
+
 ## Document Control
 
 | Version | Date       | Author          | Description                                  |
@@ -66,9 +68,9 @@ flowchart TD
         L2_3[Local Shell Executor]
     end
 
-    subgraph Layer 1: Data Storage & Knowledge Graph
+    subgraph Layer 1: Evidence & Regulation Store
         L1_1[Local File Storage / Workspace]
-        L1_2[CodeGraph Database]
+        L1_2[evidence-models/ JSON + regulations/KR/]
         L1_3[Memory & Session Logging]
     end
 

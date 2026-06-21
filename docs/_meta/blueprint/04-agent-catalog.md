@@ -1,5 +1,7 @@
 # Part IV — Agent Architecture
 
+> **⚠️ Historical v4.0 design note (updated 2026-06):** The **CodeGraph** MCP and **Neo4j Knowledge Graph** described here were **NOT IMPLEMENTED** and have been archived (see [`_meta/archive/code-graph/README.md`](../archive/code-graph/README.md)). Live regulatory traceability uses `evidence-models/*.json` + workflow `legal_basis` fields + `regulations/KR/legal-glossary.yaml` SSOT. Graph references below are design history only.
+
 ## Document Control
 
 | Property | Value |
@@ -40,5 +42,5 @@ These agents introduce advanced capabilities for proactive learning, comprehensi
 
 12. **Training & Certification Agent**: Monitors employee safety training requirements, schedules sessions, and ensures no worker performs a task without valid certification.
 13. **Reporting & Analytics Agent**: Aggregates data from all other agents to generate executive dashboards, predictive safety trends, and automated regulatory filings.
-14. **Knowledge Graph Agent**: Constructs and queries a semantic knowledge graph of all safety entities (hazards, locations, personnel, regulations) to identify hidden systemic risks.
+14. **Knowledge Graph Agent**: Constructs and queries a semantic knowledge graph of all safety entities (hazards, locations, personnel, regulations) to identify hidden systemic risks. *(NOT IMPLEMENTED — graph subsystem archived 2026-06; see [`_meta/archive/code-graph/README.md`](../archive/code-graph/README.md))*
 15. **Legal Intelligence Agent**: Monitors proposed legislative changes, analyzes case law related to SAPA, and advises the SGM on future compliance strategies.

@@ -1,6 +1,6 @@
 # VERSION_MANIFEST.md
 
-**Generated**: 2026-06-21T01:55:06.315Z
+**Generated**: 2026-06-21T02:24:47.667Z
 **Manifest Version**: 1.0
 **Location**: docs/VERSION_MANIFEST.md
 
@@ -10,7 +10,7 @@
 
 - **Agents**: 0
 - **Skills**: 16
-- **Scripts**: 57
+- **Scripts**: 56
 - **Commands**: 6
 
 ---
@@ -70,7 +70,6 @@
 | error-handling.ts | N/A | scripts/lib/error-handling.ts | N/A |
 | fetch-legalize.ts | N/A | scripts/fetch-legalize.ts | child_process, fs, path |
 | gen-pr-body.ts | N/A | scripts/gen-pr-body.ts | bun |
-| generate-playbook.ts | N/A | scripts/generate-playbook.ts | fs, path |
 | generate-scripts-readme.ts | N/A | scripts/generate-scripts-readme.ts | N/A |
 | generate-version-manifest.ts | 1.0.1 | scripts/generate-version-manifest.ts | bun |
 | mcp-cache.ts | N/A | scripts/lib/mcp-cache.ts | N/A |
