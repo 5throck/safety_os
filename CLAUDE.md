@@ -146,7 +146,7 @@ When a user request matches a skill trigger, apply this priority order — **enf
 |----------|--------|----------|
 | **1 (highest)** | Local project skills | `skills/` (scanned recursively): flat governance skills (`skills/<name>/SKILL.md`), operational category dirs (`skills/daily/`, `skills/investigation/`, `skills/emergency/`), and `skills/domains/` |
 | **2** | Platform config skills | `.gemini/skills/` or `.claude/skills/` in the project root |
-| **3 (lowest)** | Global plugin skills | e.g., `superpowers/brainstorming`, `superpowers/writing-plans` |
+| **3 (lowest)** | Platform-native skills | built-in plan mode and subagent capabilities (no external plugin required) |
 
 **Rule**: If a local skill's `metadata.triggers` matches the user request, use it — do **not** fall through to a global plugin with overlapping intent.
 
@@ -157,7 +157,7 @@ When a user request matches a skill trigger, apply this priority order — **enf
 | User says | Correct skill | Priority |
 |-----------|--------------|----------|
 | "meeting", "facilitate", "agent discussion" | `skills/meeting-facilitation` | 1 |
-| "brainstorm", "design before coding", "explore options" | `superpowers/brainstorming` | 3 |
+| "brainstorm", "design before coding", "explore options" | platform-native plan mode / subagent skills | 3 |
 
 When ambiguous, prefer the local skill and confirm intent with the user.
 Explicit invocation: `/meeting "topic" [--agents a,b] [--rounds N] [--dialogue]`
@@ -235,8 +235,8 @@ Each implementation task follows the **Phase 4 execution loop** (see [AGENTS.md 
 
 > Loop and correct if review errors are flagged - maximum **3 iterations** before escalating to the user.
 
-#### Superpowers Plugin & Cost Optimization (3-Tier Strategy)
-The PM agent MUST leverage the **`superpowers`** plugin (e.g., `subagent-driven-development`, `dispatching-parallel-agents`) for multi-agent harness engineering using a 3-tier model strategy (see [AGENTS.md - Superpowers Plugin](AGENTS.md#superpowers-plugin--cost-optimization-3-tier-strategy)):
+#### Cost Optimization (3-Tier Strategy)
+The PM agent uses the platform's **native subagent dispatch and plan mode** for multi-agent harness engineering, applying a 3-tier model strategy for cost optimization:
 **Model Selection Overrides** (overridden per agent invocation when appropriate):
 - **High-tier (Design/Planning)** — `claude-opus-4-7`: Complex analysis, architectural refactoring, or PM orchestration.
 - **Medium-tier (Review/QA)** — `claude-sonnet-4.6`: Code review, testing, standard implementation logic, and quality gates. Supervises the Low-tier.

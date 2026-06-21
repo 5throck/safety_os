@@ -1,6 +1,6 @@
 # 3 MCP Servers Implementation Plan
 
-> **For agentic workers:** REQUIRED: Use superpowers:subagent-driven-development (if subagents available) or superpowers:executing-plans to implement this plan. Steps use checkbox (`- [ ]`) syntax for tracking.
+> **For agentic workers:** Use native subagent dispatch (if available) or native plan mode to implement this plan. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** Build 3 MCP servers for Safety OS to provide Korean law and regulatory data with caching and real-time updates
 
