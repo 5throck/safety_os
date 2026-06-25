@@ -110,6 +110,16 @@ When a specialist agent's required tool is denied, PM applies the [Permission De
 User Request → PM Triage → Design Approval → Specialist Dispatch → QA Gate → Finalization
 ```
 
+### Execution Plan Boilerplate
+
+Every execution plan MUST end with `/sync` as the final step — it handles lifecycle update (VERSION_MANIFEST, SCRIPTS.md), full audit, commit, push, and PR creation in one pipeline. No separate Lifecycle Update or Final QA Audit rows are needed.
+
+| # | Task | Agent | Tier | Model |
+|---|------|-------|------|-------|
+| N | `/sync "type(scope): message"` — lifecycle + audit + commit + push + PR | pm | Medium | claude-sonnet-4-6 |
+
+For full execution plan format, mandatory criteria, platform parity, and examples, see [workspace `AGENTS.md §5`](../../../AGENTS.md#5-execution-plan-templates).
+
 ### Specialist Agent Roster (PM-ONLY INVOCATION)
 
 All specialist agents below are dispatched ONLY through PM:

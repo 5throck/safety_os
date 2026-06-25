@@ -174,12 +174,10 @@ Before any multi-agent dispatch (2+ agents), PM **must** output an execution pla
 | # | Task | Agent | Tier | Model | Platform |
 |---|------|-------|------|-------|----------|
 | 1 | [task] | [agent] | High/Medium/Low | opus/sonnet/haiku | Both/Claude/Antigravity/L0-only |
-| N-1 | Lifecycle Update (Version, Timestamp, SCRIPTS.md) | lifecycle-manager (workspace) / pm (variant) | Medium | [Model String] | Both |
-| N | Final QA Audit (bun scripts/audit.ts) | auditor (workspace) / pm (variant) | Medium | [Model String] | Both |
+| N | `/sync "type(scope): message"` — lifecycle + audit + commit + push + PR | pm | Medium | claude-sonnet-4-6 | Both |
 
 State parallel vs sequential order below the table. The Agent tool must not be called until this table is visible to the user.
-*Rule: You MUST always include the Lifecycle Update followed by the Final QA Audit as the final two steps of the plan.*
-*Context rule: At **workspace root**, dispatch `lifecycle-manager` for N-1 and `auditor` for N. In **variant projects**, PM handles both directly. Always declare context above the execution plan table: "**Context**: workspace root — specialist dispatch" or "**Context**: variant project — pm direct".*
+*Rule: Every execution plan MUST end with `/sync` as the final step — it handles lifecycle update (VERSION_MANIFEST, SCRIPTS.md), full audit, commit, push, and PR creation in one pipeline. No separate Lifecycle Update or Final QA Audit rows are needed.*
 
 #### Phase Determination Checklist (Safety OS)
 

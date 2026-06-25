@@ -75,10 +75,10 @@ When entering Planning Mode, Gemini **MUST** leverage the following three precis
     | Step | Task | Agent | Tier | Model |
     |:---:|---|:---:|:---:|---|
     | 1 | [Task Description] | [agent-name] | [High/Medium/Low] | [Model String] |
-    | N-1 | Lifecycle Update (Version, Timestamp, SCRIPTS.md) | lifecycle-manager (workspace) / pm (variant) | Medium | [Model String] |
-    | N | Final QA Audit (bun scripts/audit.ts) | auditor (workspace) / pm (variant) | Medium | [Model String] |
+    | N | `/sync "type(scope): message"` — lifecycle + audit + commit + push + PR | pm | Medium | [Model String] |
 
     *Execution Order: [Parallel/Sequential]*
+    *Rule: Every execution plan MUST end with `/sync` — it handles lifecycle update, full audit, commit, push, and PR creation. No separate Lifecycle Update or Final QA Audit rows are needed.*
     ```
 *   **Governance**: Stop and wait for explicit user approval before modifying any application source code.
 
@@ -175,8 +175,10 @@ Before any multi-agent dispatch (2+ agents), PM **must** output an execution pla
 | # | Task | Agent | Tier | Model |
 |---|------|-------|------|-------|
 | 1 | [task] | [agent] | High/Medium/Low | high/medium/low |
+| N | `/sync "type(scope): message"` — lifecycle + audit + commit + push + PR | pm | Medium | gemini-3.5-flash |
 
 State parallel vs sequential order below the table. The Agent tool must not be called until this table is visible to the user.
+*Rule: Every execution plan MUST end with `/sync` as the final step — it handles lifecycle update, full audit, commit, push, and PR creation. No separate Lifecycle Update or Final QA Audit rows are needed.*
 
 #### Specialist Agent List
 All agents below require PM dispatch:

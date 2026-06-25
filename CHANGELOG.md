@@ -6,6 +6,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+### Changed (2026-06-25 — Execution Plan Boilerplate Unification to `/sync` Single Row)
+
+The variant execution plan boilerplate required two separate terminating rows — **N-1 (Lifecycle Update)** dispatched to `lifecycle-manager (workspace) / pm (variant)` and **N (Final QA Audit)** to `auditor (workspace) / pm (variant)` — which conflicted with the workspace root policy (workspace `AGENTS.md §5.1`) where `/sync` handles lifecycle update + full audit + commit + push + PR in a single pipeline. The variant boilerplate also omitted the `/sync` row entirely, leaving the lifecycle/audit steps it mandated with no pipeline to execute them. Unified all three variant governance files to the workspace single-`/sync`-row policy. Same "Truth-in-Documentation" principle as prior cleanups: the documented boilerplate must match the implemented `/sync` pipeline.
+
+- **CLAUDE.md §5** ("Mandatory Execution Plan Display"): replaced the 3-row table (`1` + `N-1` + `N`) with a 2-row table (`1` + `N` `/sync`); removed the Context rule (workspace-root vs variant lifecycle/auditor dispatch) since `/sync` handles both; added a rule stating `/sync` is the mandatory final step covering lifecycle + audit + commit + push + PR.
+- **GEMINI.md §2** (`implementation_plan.md` artifact template): replaced the `N-1`/`N` Step rows with a single `/sync` `N` row + rule (inside the code-fence).
+- **GEMINI.md §5** ("Mandatory Execution Plan Display"): added the `/sync` `N` row + rule to the existing 1-row table.
+- **AGENTS.md**: added a new "Execution Plan Boilerplate" subsection under PM Gateway Policy (single `/sync` row table + cross-reference to workspace `AGENTS.md §5`); the variant AGENTS.md previously had no execution plan policy at all.
+- **Scope note**: workspace root `templates/common/AGENTS.md` carries the same legacy N-1/N boilerplate but was left untouched per CLAUDE.md §9 boundary isolation (workspace-root template vs variant cannot be modified in the same session); deferred to a follow-up task.
+- **Verification**: `git stash` baseline confirmed the 6 `audit.ts` failures are pre-existing structural drift (unrelated to this change); `bun scripts/safety-audit.ts` → 582 files, 0 errors; platform parity — CLAUDE.md and GEMINI.md carry an identical `/sync` policy (model differs per platform: `claude-sonnet-4-6` vs `gemini-3.5-flash`).
+
 ### Added (2026-06-21 — meeting-facilitation Skill Registration Parity)
 
 `meeting-facilitation` was a skill in name only: it existed as the `/meeting` slash command (parity-paired on both platforms) and as a stub in the project-root `skills/` registry, but was ABSENT from `.claude/skills/` and `.gemini/skills/` — the only paths the native Skill tool scans. So `Skill(skill="meeting-facilitation")` returned "Unknown skill", directly contradicting the documented "used on both platforms" claim. Final item of the Truth-in-Documentation cleanup.
