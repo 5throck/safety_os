@@ -110,7 +110,7 @@
 ### Step 1 — Clone & Install
 
 ```bash
-git clone <repo-url> && cd co-safety_prototype
+git clone <repo-url> && cd safety_os
 cp .env.sample .env              # Copy environment variable template
 cd scripts && bun install         # Install script dependencies
 cd ..
