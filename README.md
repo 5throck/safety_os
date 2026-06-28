@@ -99,12 +99,68 @@
 
 ## Quick Start
 
+### Prerequisites
+
+| Requirement | Details |
+|-------------|---------|
+| **Bun** | `>= 1.0.0` — install from [bun.sh](https://bun.sh) |
+| **AI tool** | Claude Code CLI or Gemini CLI |
+| **API keys** (2) | 국가법령정보센터 OC key + GitHub PAT (optional — see Step 2) |
+
+### Step 1 — Clone & Install
+
 ```bash
-bun install
-bun scripts/safety-audit.ts                         # 458+ files, 0 errors
-bun scripts/test-domain-scenarios.ts                # 5 real-world scenarios (56 checks)
-bun scripts/test-cross-domain-integration.ts        # cross-domain integrity (8 checks)
+git clone <repo-url> && cd co-safety_prototype
+cp .env.sample .env              # Copy environment variable template
+cd scripts && bun install         # Install script dependencies
+cd ..
 ```
+
+### Step 2 — Configure `.env`
+
+Open `.env` and fill in the two keys. Both are **free** — no paid plans required.
+
+```env
+# 1) 국가법령정보센터 Open API OC key
+#    → https://www.law.go.kr/LSO/openApi/openApiOcPage.do
+#    → Required: enables real-time Korean law queries (mcp_kr_legislation server)
+LAW_API_OC=your_oc_key_here
+
+# 2) GitHub Personal Access Token (no scopes needed — public repo read only)
+#    → https://github.com/settings/tokens
+#    → Optional: enables legal precedent search (legalize_kr server)
+#    → If unset: precedent search is disabled, all other features work normally
+GITHUB_TOKEN=your_github_token_here
+```
+
+| Key | Required? | What it enables |
+|-----|:---------:|-----------------|
+| `LAW_API_OC` | **Yes** | Real-time Korean legislation API (법령 목록, 개정 이력, 조문 해석) |
+| `GITHUB_TOKEN` | No | Legal precedent search via GitHub API. Without it, everything else still works. |
+
+### Step 3 — Verify Installation
+
+```bash
+bun scripts/safety-audit.ts              # 458+ files, 0 errors
+```
+
+### Step 4 — Start Using with AI Tools
+
+Open this project directory in Claude Code or Gemini CLI. The `.mcp.json` file is auto-detected — **3 MCP servers start automatically**, providing live Korean regulatory data:
+
+| MCP Server | Tools | Purpose |
+|------------|-------|---------|
+| `k_skill` | 5 tools | OSHA/SAPA regulation search, compliance gap analysis |
+| `legalize_kr` | 5 tools | Korean law structure parsing, version comparison, precedent search |
+| `kr_legislation` | 5 tools | Real-time legislation from 국가법령정보센터 API |
+
+No additional MCP configuration needed — just start chatting with your AI agent.
+
+> **Minimum viable setup**: Clone → `bun install` in `scripts/` → set `LAW_API_OC` → done.
+
+---
+
+## Advanced Usage
 
 ### Rule-Based Skills (executable TypeScript)
 
@@ -112,6 +168,13 @@ bun scripts/test-cross-domain-integration.ts        # cross-domain integrity (8 
 bun skills/domains/industry/gmp/qrm/fmea-scoring.ts                        # FMEA risk scoring
 bun skills/domains/functional/msds/ghs-classifier/ghs-classifier.ts          # GHS hazard classification
 bun skills/domains/industry/ehsconst/fall-hazard-assessor/fall-hazard-assessor.ts  # Fall hazard assessment
+```
+
+### Test Suites
+
+```bash
+bun scripts/test-domain-scenarios.ts                # 5 real-world scenarios (56 checks)
+bun scripts/test-cross-domain-integration.ts        # cross-domain integrity (8 checks)
 ```
 
 ### Sync Pipeline (commit + push + PR)
@@ -145,4 +208,4 @@ Pharmaceutical Affairs Act, Occupational Safety and Health Act (OSHA-KR), Seriou
 
 This system provides workflow automation assistance only. Regulatory interpretation and final compliance decisions are the responsibility of qualified legal/EHS/GxP professionals.
 
-*Last Updated: 2026-06-19*
+*Last Updated: 2026-06-29*
