@@ -276,11 +276,13 @@ try {
 
 const pushRetry = await withRetry(
     () => $`git push -u origin ${branch}`.nothrow(),
-    { ...DEFAULT_CONFIG, maxRetries: 3, initialDelay: 1000 },
+    { ...DEFAULT_CONFIG, maxRetries: 3, initialDelay: 1000, isSuccess: (r: any) => r.exitCode === 0 },
     'git push'
 );
 const pushProc = pushRetry.result as { exitCode: number; stderr: { toString(): string } } | undefined;
-if (!pushRetry.success || pushProc?.exitCode !== 0) {
+if (!pushRetry.success) {
+    // With isSuccess wired above, pushRetry.success is the single source of truth.
+    // pushProc.stderr is kept as defense-in-depth (Trade-off #3 (b)) for the error message.
     const errMsg = pushProc?.stderr.toString().trim() || pushRetry.lastError?.message || 'unknown error';
     console.log(`${RED}❌ git push failed: ${errMsg}${RESET}`);
     process.exit(1);
@@ -296,23 +298,30 @@ try {
     prBody = stdout.toString().trim();
 } catch {}
 
+let prCreateRetry: Awaited<ReturnType<typeof withRetry>>;
 if (prBody) {
-    await withRetry(
+    prCreateRetry = await withRetry(
         () => $`gh pr create --base ${prBase} --title ${msg} --body ${prBody}`.nothrow(),
-        { ...DEFAULT_CONFIG, maxRetries: 3, initialDelay: 1000 },
+        { ...DEFAULT_CONFIG, maxRetries: 3, initialDelay: 1000, isSuccess: (r: any) => r.exitCode === 0 },
         'gh pr create'
     );
 } else if (fs.existsSync(path.join('.github', 'pull_request_template.md'))) {
     const prTpl = fs.readFileSync(path.join('.github', 'pull_request_template.md'), 'utf-8');
-    await withRetry(
+    prCreateRetry = await withRetry(
         () => $`gh pr create --base ${prBase} --title ${msg} --body ${prTpl}`.nothrow(),
-        { ...DEFAULT_CONFIG, maxRetries: 3, initialDelay: 1000 },
+        { ...DEFAULT_CONFIG, maxRetries: 3, initialDelay: 1000, isSuccess: (r: any) => r.exitCode === 0 },
         'gh pr create'
     );
 } else {
-    await withRetry(
+    prCreateRetry = await withRetry(
         () => $`gh pr create --base ${prBase} --fill`.nothrow(),
-        { ...DEFAULT_CONFIG, maxRetries: 3, initialDelay: 1000 },
+        { ...DEFAULT_CONFIG, maxRetries: 3, initialDelay: 1000, isSuccess: (r: any) => r.exitCode === 0 },
         'gh pr create'
     );
+}
+
+if (!prCreateRetry.success) {
+    const errMsg = prCreateRetry.lastError?.message || 'unknown error';
+    console.log(`${RED}❌ gh pr create failed: ${errMsg}${RESET}`);
+    process.exit(1);
 }
