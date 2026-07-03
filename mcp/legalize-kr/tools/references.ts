@@ -2,6 +2,7 @@ import { readdirSync, readFileSync, existsSync } from 'fs';
 import { join } from 'path';
 import { createLogger } from '../../shared/logger.js';
 import { getRepoDir } from '../git-sync.js';
+import { resolveLawDir } from '../resolve.js';
 
 const log = createLogger('legalize_kr');
 
@@ -18,11 +19,12 @@ export async function findReferences(lawId: string): Promise<LawReference[]> {
     return [];
   }
 
+  const resolvedDir = resolveLawDir(lawId);
   const pattern = new RegExp(lawId.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g');
   const refs: LawReference[] = [];
 
   for (const lawName of readdirSync(krDir)) {
-    if (lawName === lawId) continue;
+    if (lawName === resolvedDir) continue;
     const lawFile = join(krDir, lawName, '법률.md');
     if (!existsSync(lawFile)) continue;
 
