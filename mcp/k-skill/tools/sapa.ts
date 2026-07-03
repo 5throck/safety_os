@@ -4,6 +4,7 @@ import { createLogger } from '../../shared/logger.js';
 
 const log = createLogger('k_skill');
 const cache = new MCPCache();
+const OC = process.env.LAW_API_OC ?? 'test';
 
 export async function getSapaRequirements(industry?: string): Promise<object> {
   const cacheKey = `sapa:requirements:${industry ?? 'all'}`;
@@ -14,14 +15,22 @@ export async function getSapaRequirements(industry?: string): Promise<object> {
     return mockSapaData(industry);
   }
 
-  const url = `https://www.law.go.kr/DRF/lawService.do?OC=test&target=law&MST=272966&type=JSON`;
+  const url = `https://www.law.go.kr/DRF/lawService.do?OC=${OC}&target=law&MST=272966&type=JSON`;
   const res = await fetchWithRetry(url);
   const json = await res.json() as any;
+
+  const requirements = extractSapaRequirements(json, industry);
+
+  // OC=test는 IP 등록 없이 차단됨 — 빈 결과 대신 mock fallback 제공 (mcp/kr-legislation/tools/current-law.ts와 동일 패턴)
+  if (requirements.length === 0) {
+    log.warn(`API returned empty result for industry "${industry ?? '전체'}" (OC key may not be registered or reachable). Falling back to mock data.`);
+    return mockSapaData(industry);
+  }
 
   const result = {
     lawName: '중대재해처벌법',
     industry: industry ?? '전체',
-    requirements: extractSapaRequirements(json, industry),
+    requirements,
   };
 
   await cache.set(cacheKey, result, 86_400);
