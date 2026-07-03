@@ -28,6 +28,23 @@
     "psm_pssr_required": { "type": "boolean", "default": true },
     "pre_tar_risk_assessment": { "type": "boolean" },
     "post_tar_pssr_completed": { "type": "boolean" },
+    "contractor_surge_ref": {
+      "type": ["string", "null"],
+      "description": "contractor-safety-agent가 관리하는 contractor-tar-surge-record.json의 record_id 참조. 이 파일의 turnaround_id와 contractor-tar-surge-record.json의 tar_id는 동일한 대정비(Turnaround) 이벤트를 가리키는 동일 값이다."
+    },
+    "health_screening_ref": {
+      "type": ["string", "null"],
+      "description": "occupational-health-agent가 관리하는 oh-tar-health-record.json의 record_id 참조. 이 파일의 turnaround_id와 oh-tar-health-record.json의 tar_id는 동일한 대정비(Turnaround) 이벤트를 가리키는 동일 값이다."
+    },
+    "non_psm_equipment_handoff_ref": {
+      "type": ["string", "null"],
+      "description": "asset-integrity-agent로의 '비-PSM 설비 목록(non-PSM equipment list)' 전달(C-04 handoff) 완료 여부 또는 참조 메모. 별도 evidence-model 파일이 아직 없어 자유 텍스트 참조로 기록한다."
+    },
+    "loto_records_ref": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "이 TAR 기간 중 발급된 psm-loto-record.json 레코드들의 record_id 배열 (설비/격리 지점별로 다수의 개별 LOTO 허가가 발생하므로 단일 참조가 아닌 배열)."
+    },
 
     "legal_basis": { "type": "array", "items": { "type": "string" }, "minItems": 3 },
     "e_signature": { "$ref": "../../../_shared/base/common.schema.json#/definitions/e_signature" },

@@ -9,8 +9,13 @@
  *   bun scripts/agent-lifecycle-audit.ts
  *   bun scripts/agent-lifecycle-audit.ts --json   # JSON output
  *
- * @version 1.1.1
- * @last_updated 2026-06-02
+ * @version 1.1.2
+ * @last_updated 2026-07-03
+ *
+ * v1.1.2 (2026-07-03): Fixed Check 5 false-positive "not registered in AGENTS.md" for
+ *   nested-directory agent projects (agents/_core/, agents/_shared/, agents/domains/**)
+ *   — registeredAgents held path-based keys (e.g. "_core/pm") while agentName was a bare
+ *   basename ("pm"), so the comparison never matched. Now checks both forms.
  * @license MIT
  */
 
@@ -322,7 +327,14 @@ function auditAgents(jsonMode = false): AuditResult {
     }
 
     // Check 5: Agent not registered in AGENTS.md
-    if (!registeredAgents.has(agentName) && frontmatter.status !== 'archived') {
+    // registeredAgents stores the AGENTS.md link path relative to "agents/" (e.g. "_core/pm"
+    // for a nested-directory project, or just "pm" for a flat one). Compare against both the
+    // basename and the "agents/"-relative path so both conventions match correctly.
+    const agentsDirIdx = relPath.indexOf('agents/');
+    const registeredPathKey = agentsDirIdx !== -1
+      ? relPath.slice(agentsDirIdx + 'agents/'.length).replace(/\.md$/, '')
+      : agentName;
+    if (!registeredAgents.has(agentName) && !registeredAgents.has(registeredPathKey) && frontmatter.status !== 'archived') {
       warnings.push({
         level: 'warning',
         file: relPath,

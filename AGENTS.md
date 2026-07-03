@@ -210,6 +210,29 @@ All specialist agents below are dispatched ONLY through PM:
 | audit-preparation | audit-agent | Generate audit preparation checklists |
 | contractor-onboarding | contractor-safety-agent | Handle contractor onboarding and training packages |
 | asset-integrity-check | asset-integrity-agent | Generate equipment preventative maintenance plans |
+| chemical-risk-assessment | msds-agent | Scenario-based chemical risk assessment combining GHS hazard data with exposure evaluation |
+| ghs-classifier | msds-agent | Apply GHS Rev 9 (2021) classification rules to chemical substances and mixtures per OSHA-KR Article 243 |
+| msds-parser | msds-agent | Parse MSDS/SDS documents into structured GHS 16-section records (hybrid rule-based + ML fallback) |
+| environmental-compliance-checker | ehschem-agent | Check environmental discharge compliance for chemical plants (air/water/noise/vibration) |
+| process-hazard-screening | ehschem-agent | Initial hazard screening for chemical plant processes; dispatches detailed PHA to PSM service |
+| fall-hazard-assessor | ehsconst-agent | Assess fall hazards at construction sites — leading edge identification, protection hierarchy, rescue plan |
+| safety-inspection-validator | ehsconst-agent | Validate construction safety inspections per OSHA-KR construction provisions |
+| gas-dispersion-analyzer | gasterm-agent | Model gas dispersion after leak for emergency response (LNG/LPG/수소 characteristics) |
+| tank-integrity-validator | gasterm-agent | Validate LNG/LPG/수소 storage tank structural integrity (pressure/temperature/corrosion/fatigue) |
+| protocol-deviation-analyzer | gcp-agent | Analyze clinical trial protocol deviations per ICH E6(R3); classify severity and recommend CAPA |
+| sae-causality-assessor | gcp-agent | Assess SAE causality using ImPACT criteria for investigator/sponsor determinations |
+| dts-verification | gdp-agent | Verify DTS (Drug Tracking System) barcode/RFID scans against manufacturer and MFDS records |
+| temperature-excursion-analyzer | gdp-agent | Analyze temperature excursion events in cold chain pharmaceutical distribution |
+| glp-data-integrity-checker | glp-agent | Validate ALCOA+ data integrity principles for GLP raw data per OECD GLP Section 9 |
+| glp-study-protocol-validator | glp-agent | Validate study protocol compliance with OECD GLP Section 8 requirements |
+| gmp-change-control | gmp-agent | Manage GMP Change Control (변경관리) workflows per KP-GMP + ICH Q10 |
+| gmp-deviation-capa | gmp-agent | Manage GMP Deviation (이상관리) and CAPA (시정예방조치) workflows per KP-GMP + ICH Q10 |
+| gmp-qrm | gmp-agent | ICH Q9 Quality Risk Management (품질 위해 관리) cross-cutting skill for pharmaceutical manufacturing |
+| benefit-risk-assessor | gvp-agent | Integrated benefit-risk assessment per EU GVP Module 12 (PrOACT-URL, BRAT, MCDA) |
+| signal-detector | gvp-agent | Statistical signal detection in pharmacovigilance case database (PRR, ROR, BCPNN, EBGM) |
+| iso14971-risk-scorer | meddevice-agent | ISO 14971 risk estimation and scoring for medical devices (Severity x Probability matrix) |
+| arc-flash-analyzer | powergen-agent | Arc flash hazard analysis per IEEE 1584 (incident energy, arc flash boundary, PPE category) |
+| ess-fire-risk-assessor | powergen-agent | Lithium-ion ESS fire risk assessment (thermal runaway prediction, suppression strategy) |
 
 ---
 

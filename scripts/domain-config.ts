@@ -5,7 +5,10 @@
  * define all domains in this config array. The audit script iterates and
  * applies the same validation logic to each domain.
  *
- * @version 1.0.0
+ * @version 1.1.0
+ * v1.1.0 (2026-07-03): Registered contractor-safety and occupational-health functional
+ *   domains (TAR/Major Turnaround surge-scenario schemas) so safety-audit.ts validates
+ *   their evidence-model legal_basis and required fields.
  */
 
 export interface DomainConfig {
@@ -85,6 +88,22 @@ export const DOMAINS: DomainConfig[] = [
         min_legal_basis: 2,
         min_workflow_legal_basis: 3,
         description: 'Safety Training Management (OSHA-KR Art 13, 29, 31, 32, 114 + SAPA)',
+    },
+    {
+        name: 'contractor-safety',
+        tier: 'functional',
+        required_evidence_fields: ['contractor_tier', 'surge_headcount', 'prequalification_completed'],
+        min_legal_basis: 2,
+        min_workflow_legal_basis: 2,
+        description: 'Contractor Safety Management (TAR/Major Turnaround surge scenarios)',
+    },
+    {
+        name: 'occupational-health',
+        tier: 'functional',
+        required_evidence_fields: ['tar_id', 'special_health_exam_completion_rate', 'heat_exposure_monitoring'],
+        min_legal_basis: 2,
+        min_workflow_legal_basis: 2,
+        description: 'Occupational Health Surveillance (TAR/Major Turnaround health screening)',
     },
 
     // ── Industry domains ──────────────────────────────────────────────

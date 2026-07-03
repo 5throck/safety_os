@@ -25,4 +25,5 @@
 - **Escalation Triggers**:
   - Immediate escalation to PM (CSO) if critical safety equipment fails inspection.
 - **Handoff Protocols**:
-  - Handoff to `safety-workflow-manager` for implementing lockout/tagout (LOTO) protocols when machinery is deemed unsafe.
+  - Handoff to `psm-agent`'s `loto-lockout-tagout` workflow for implementing lockout/tagout (LOTO) protocols when machinery is deemed unsafe. Pass this agent's inspection `record_id` via the `asset_integrity_trigger_ref` field in `psm-loto-record.json` so the LOTO record traces back to the triggering finding.
+  - During Major Turnaround (TAR) planning, receive a "non-PSM equipment list" from `ehschem-agent` (or any other industry agent running a TAR event) identifying equipment outside `psm-agent`'s PSM-covered scope (per the Scope Limitation boundary in `psm-agent.md`), and schedule this agent's own inspections for that equipment during the turnaround window.
