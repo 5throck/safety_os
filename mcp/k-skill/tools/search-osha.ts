@@ -7,6 +7,7 @@ import type { RegulatoryArticle } from '../../shared/types.js';
 const log = createLogger('k_skill');
 const cache = new MCPCache();
 const limiter = new RateLimiter(100, 60_000);
+const OC = process.env.LAW_API_OC ?? 'test';
 
 const BASE_URL = 'https://www.law.go.kr/DRF/lawSearch.do';
 
@@ -23,7 +24,7 @@ export async function searchOshaRegulations(keyword: string): Promise<Regulatory
   }
 
   await limiter.acquireToken();
-  const url = `${BASE_URL}?OC=test&target=law&type=JSON&query=${encodeURIComponent(keyword)}`;
+  const url = `${BASE_URL}?OC=${OC}&target=law&type=JSON&query=${encodeURIComponent(keyword)}`;
   const res = await fetchWithRetry(url);
   const json = await res.json() as any;
 
@@ -35,6 +36,12 @@ export async function searchOshaRegulations(keyword: string): Promise<Regulatory
     content: item.조문내용 ?? '',
     effectiveDate: item.시행일자 ?? undefined,
   }));
+
+  // OC=test는 IP 등록 없이 차단됨 — 빈 결과 대신 mock fallback 제공 (mcp/kr-legislation/tools/current-law.ts와 동일 패턴)
+  if (articles.length === 0) {
+    log.warn(`API returned empty result for "${keyword}" (OC key may not be registered or reachable). Falling back to mock data.`);
+    return mockOshaResults(keyword);
+  }
 
   await cache.set(cacheKey, articles, 86_400);
   return articles;

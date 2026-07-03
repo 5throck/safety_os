@@ -291,6 +291,18 @@ if (!pushRetry.success) {
 // 7. Generate PR body and open PR
 // Always specify --base master to avoid wrong-base issue when repo default
 // branch is set to a PR branch instead of master.
+//
+// gh CLI env precedence: GH_TOKEN/GITHUB_TOKEN, if set, override the keychain-stored
+// `gh auth login` credential. Bun auto-loads .env (which defines GITHUB_TOKEN for
+// legalize_kr's search_precedent tool) into every `bun run` process, so `gh` calls made
+// from within this script were silently picking up that unrelated token and failing with
+// "HTTP 401: Bad credentials" — even though `gh auth status` and direct shell `gh` calls
+// (outside a bun-launched process) work fine. Strip both vars for gh invocations only;
+// .env itself is untouched since GITHUB_TOKEN is legitimately needed elsewhere.
+const ghEnv = { ...process.env };
+delete ghEnv.GITHUB_TOKEN;
+delete ghEnv.GH_TOKEN;
+
 const prBase = 'master';
 let prBody = "";
 try {
@@ -301,20 +313,20 @@ try {
 let prCreateRetry: Awaited<ReturnType<typeof withRetry>>;
 if (prBody) {
     prCreateRetry = await withRetry(
-        () => $`gh pr create --base ${prBase} --title ${msg} --body ${prBody}`.nothrow(),
+        () => $`gh pr create --base ${prBase} --title ${msg} --body ${prBody}`.env(ghEnv).nothrow(),
         { ...DEFAULT_CONFIG, maxRetries: 3, initialDelay: 1000, isSuccess: (r: any) => r.exitCode === 0 },
         'gh pr create'
     );
 } else if (fs.existsSync(path.join('.github', 'pull_request_template.md'))) {
     const prTpl = fs.readFileSync(path.join('.github', 'pull_request_template.md'), 'utf-8');
     prCreateRetry = await withRetry(
-        () => $`gh pr create --base ${prBase} --title ${msg} --body ${prTpl}`.nothrow(),
+        () => $`gh pr create --base ${prBase} --title ${msg} --body ${prTpl}`.env(ghEnv).nothrow(),
         { ...DEFAULT_CONFIG, maxRetries: 3, initialDelay: 1000, isSuccess: (r: any) => r.exitCode === 0 },
         'gh pr create'
     );
 } else {
     prCreateRetry = await withRetry(
-        () => $`gh pr create --base ${prBase} --fill`.nothrow(),
+        () => $`gh pr create --base ${prBase} --fill`.env(ghEnv).nothrow(),
         { ...DEFAULT_CONFIG, maxRetries: 3, initialDelay: 1000, isSuccess: (r: any) => r.exitCode === 0 },
         'gh pr create'
     );
