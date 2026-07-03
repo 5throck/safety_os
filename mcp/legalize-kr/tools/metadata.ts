@@ -3,15 +3,20 @@ import { join } from 'path';
 import simpleGit from 'simple-git';
 import { createLogger } from '../../shared/logger.js';
 import { getRepoDir } from '../git-sync.js';
+import { resolveLawDir } from '../resolve.js';
 
 const log = createLogger('legalize_kr');
 
 export async function getLawMetadata(lawId: string): Promise<object> {
   const repoDir = getRepoDir();
-  const lawFile = join(repoDir, 'kr', lawId, '법률.md');
+  const resolvedDir = resolveLawDir(lawId);
+  if (!resolvedDir) {
+    return { error: `Law not found: ${lawId}` };
+  }
+  const lawFile = join(repoDir, 'kr', resolvedDir, '법률.md');
 
   if (!existsSync(lawFile)) {
-    return { error: `Law file not found: kr/${lawId}/법률.md` };
+    return { error: `Law file not found: kr/${resolvedDir}/법률.md` };
   }
 
   const stat = statSync(lawFile);
@@ -29,7 +34,7 @@ export async function getLawMetadata(lawId: string): Promise<object> {
   }
 
   const git = simpleGit(repoDir);
-  const relPath = `kr/${lawId}/법률.md`;
+  const relPath = `kr/${resolvedDir}/법률.md`;
   const gitLog = await git.log({ file: relPath, maxCount: 1 }).catch(() => null);
 
   return {

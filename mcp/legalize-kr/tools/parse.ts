@@ -2,6 +2,7 @@ import { readFileSync, existsSync } from 'fs';
 import { join } from 'path';
 import { createLogger } from '../../shared/logger.js';
 import { getRepoDir } from '../git-sync.js';
+import { resolveLawDir } from '../resolve.js';
 
 const log = createLogger('legalize_kr');
 
@@ -15,7 +16,12 @@ interface LawNode {
 
 export async function parseLawStructure(lawId: string): Promise<LawNode[]> {
   const repoDir = getRepoDir();
-  const lawFile = join(repoDir, 'kr', lawId, '법률.md');
+  const resolvedDir = resolveLawDir(lawId);
+  if (!resolvedDir) {
+    log.warn(`Law not found: ${lawId}`);
+    return [];
+  }
+  const lawFile = join(repoDir, 'kr', resolvedDir, '법률.md');
 
   if (!existsSync(lawFile)) {
     log.warn(`Law file not found: ${lawFile}`);

@@ -2,6 +2,7 @@ import { readFileSync, existsSync } from 'fs';
 import { join } from 'path';
 import { createLogger } from '../../shared/logger.js';
 import { getRepoDir } from '../git-sync.js';
+import { resolveLawDir } from '../resolve.js';
 
 const log = createLogger('legalize_kr');
 
@@ -18,10 +19,14 @@ interface ArticleChange {
  */
 export async function compareVersions(lawId: string, sinceDate?: string): Promise<object> {
   const repoDir = getRepoDir();
-  const lawFile = join(repoDir, 'kr', lawId, '법률.md');
+  const resolvedDir = resolveLawDir(lawId);
+  if (!resolvedDir) {
+    return { error: `Law not found: ${lawId}` };
+  }
+  const lawFile = join(repoDir, 'kr', resolvedDir, '법률.md');
 
   if (!existsSync(lawFile)) {
-    return { error: `Law file not found: kr/${lawId}/법률.md` };
+    return { error: `Law file not found: kr/${resolvedDir}/법률.md` };
   }
 
   const content = readFileSync(lawFile, 'utf-8');
