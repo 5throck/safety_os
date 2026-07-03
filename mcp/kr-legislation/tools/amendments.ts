@@ -7,11 +7,14 @@ const log = createLogger('mcp_kr_legislation');
 const cache = new MCPCache();
 const OC = process.env.LAW_API_OC ?? 'test';
 
-// MST = 법령마스터번호 (legalize-kr 캐시 frontmatter 기준)
-const LAW_MST: Record<string, string> = {
+// MST = 법령마스터번호. Values verified live against law.go.kr's lawService.do
+// (see memory/2026-07-03.md for the SAPA MST correction that prompted this verification).
+// Exported so interpret.ts can resolve the same law-name → MST mapping.
+export const LAW_MST: Record<string, string> = {
   '산업안전보건법': '285379',
   '화학물질관리법': '285367',
   '개인정보보호법': '283839',
+  '중대재해처벌법': '228817',
 };
 
 export async function getLawAmendments(lawId: string, since?: string): Promise<object[]> {

@@ -26,9 +26,9 @@ server.setRequestHandler(ListToolsRequestSchema, async () => ({
   tools: [
     { name: 'get_current_law', description: '현행 법령 목록을 조회합니다.', inputSchema: { type: 'object', properties: { lawType: { type: 'string' } } } },
     { name: 'get_law_amendments', description: '법령 개정 이력을 조회합니다.', inputSchema: { type: 'object', properties: { lawId: { type: 'string' }, since: { type: 'string' } }, required: ['lawId'] } },
-    { name: 'interpret_regulation', description: '법령 조문을 해석합니다.', inputSchema: { type: 'object', properties: { articleId: { type: 'string' } }, required: ['articleId'] } },
+    { name: 'interpret_regulation', description: '법령 조문 원문을 조회합니다 ("<법령명> 제N조" 형식, 예: "산업안전보건법 제38조"). 행정해석·판례가 아닌 조문 원문만 반환합니다.', inputSchema: { type: 'object', properties: { articleId: { type: 'string' } }, required: ['articleId'] } },
     { name: 'get_penalties', description: '위반 시 처벌 내용을 조회합니다.', inputSchema: { type: 'object', properties: { articleId: { type: 'string' } }, required: ['articleId'] } },
-    { name: 'get_compliance_guide', description: '컴플라이언스 실행 가이드라인을 반환합니다.', inputSchema: { type: 'object', properties: { topic: { type: 'string' } }, required: ['topic'] } },
+    { name: 'get_compliance_guide', description: '주제어와 일치하는 법령명을 검색합니다 (law.go.kr은 체크리스트 API가 아닌 법령명 검색만 지원).', inputSchema: { type: 'object', properties: { topic: { type: 'string' } }, required: ['topic'] } },
   ],
 }));
 
