@@ -36,7 +36,7 @@ This workflow controls the authorization and safe execution of non-routine, high
 
 2. **Risk Assessment** — risk-assessment-agent conducts a task-specific risk assessment per the risk-assessment workflow. The completed risk assessment is attached to the permit. Work must not proceed if residual risk exceeds the site's acceptable threshold.
 
-3. **Control Verification** — safety-workflow-manager physically verifies (or delegates to site supervisor) that all required controls are in place: energy isolation and lock-out/tag-out confirmed, atmospheric testing completed (for confined spaces), fire watch assigned (for hot work), fall arrest systems in place (for height work), PPE available and correct specification.
+3. **Control Verification** — safety-workflow-manager physically verifies (or delegates to site supervisor) that all required controls are in place: energy isolation confirmed complete by referencing the corresponding `psm-loto-record.json` record under `loto_record_ref` (lockout/tagout itself is performed and recorded by psm-agent's dedicated `loto-lockout-tagout` workflow, not confirmed directly by SWM here), atmospheric testing completed (for confined spaces), fire watch assigned (for hot work), fall arrest systems in place (for height work), PPE available and correct specification.
 
 4. **Permit Issuance** — compliance-agent reviews the permit package for regulatory completeness and approves. safety-workflow-manager issues the permit with: permit number, work type, authorized personnel list, valid time window, all required controls listed, issuing authority signature.
 
@@ -51,6 +51,7 @@ The following records must be created and retained:
 - Signed PTW form including all required fields (permit number, dates, personnel, controls, signatures)
 - Attached risk assessment record (reference by `memory/findings/` path)
 - Control verification checklist with confirming signatures
+- `loto_record_ref` — reference to the corresponding `psm-loto-record.json` record when the permitted work requires energy isolation (lock-out/tag-out)
 - Atmospheric test results (for confined space work)
 - Any permit suspensions or modifications with reasons documented
 - Post-work sign-off with performing authority signature

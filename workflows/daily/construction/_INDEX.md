@@ -12,6 +12,6 @@ legal_basis:
 | TBM (Tool Box Meeting) | Daily safety briefing before work starts | General | Pending |
 | Heavy Equipment Operations | Safety checks for cranes, excavators, etc. | High | Pending |
 | Fall Protection | Harness inspection, scaffolding checks | High | Pending |
-| Electrical Safety | LOTO, temporary wiring checks | Medium | Pending |
+| Electrical Safety | LOTO redirected to `workflows/domains/functional/psm/loto-lockout-tagout/` (cross-industry, covers construction); temporary wiring checks still pending | Medium | Pending |
 | Hot Work | Welding, cutting, grinding safety | Medium | Pending |
 | Confined Space Entry | Ventilation, gas monitoring, standby person | High | Pending |
