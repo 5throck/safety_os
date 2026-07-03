@@ -86,7 +86,7 @@
         "type": "string"
       },
       "minItems": 2,
-      "description": "Multi-source legal basis — TBD, pending legal-agent verification via mcp_kr_legislation"
+      "description": "Multi-source legal basis. Confirmed: OSHA-KR Article 38 (안전조치 — machinery/equipment hazard safety measures) and SAPA Article 4 (안전보건관리체계 구축 의무). Note: the specific Occupational Safety and Health Standards Rule (산업안전보건기준에관한규칙) article governing LOTO implementation detail could not be verified via mcp_kr_legislation/legalize_kr/k_skill in this session (not indexed by any connected legal MCP) — requires confirmation by a qualified safety professional before operational use, per this project's Legal Disclaimer."
     },
     "closure_signature": {
       "type": "string",
