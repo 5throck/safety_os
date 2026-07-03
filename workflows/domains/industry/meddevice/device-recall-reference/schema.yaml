@@ -11,7 +11,7 @@ handoff_protocol:
   trigger: device_recall_or_fscf
   dispatch_to: emergency-agent
   include_data: [device_class, recall_classification]
-legal_basis: [의료기기법 Article 20, 중대재해처벌법 Article 7, MDR Article 87]
+legal_basis: [의료기기법 Article 20, 약사법 Article 43조의3, EU MDR Article 87 (Field Safety Corrective Actions)]
 industry_profile: medical-device
 agent: meddevice-agent
 evidence_model: meddevice-pms-record.json

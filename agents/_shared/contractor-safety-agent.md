@@ -5,7 +5,7 @@
 ## Section A — Legal Basis
 - **Applicable Laws**:
   - OSHA-KR Article 61 (Safety and Health Measures in Contracted Projects)
-  - OSHA-KR Article 63 (Responsibility of Contractor)
+  - OSHA-KR Article 63 (Ordering party's safety and health measures — 도급인의 안전보건조치)
   - SAPA Article 5 (Obligations for Contract, Lease, and Outsourcing)
 - **Enforcement Agency**: Ministry of Employment and Labor (MOEL)
 - **Regulation Metadata**: `regulations/KR/osha-kr.json`, `regulations/KR/sapa.json`

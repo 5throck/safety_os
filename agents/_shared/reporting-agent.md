@@ -5,7 +5,7 @@
 ## Section A — Legal Basis
 - **Applicable Laws**:
   - OSHA-KR Article 14 (Board of Directors' Approval of Safety and Health Plan)
-  - SAPA Article 4 (Management Responsibility and Reporting)
+  - SAPA Article 4 (Safety and Health Management System establishment)
 - **Enforcement Agency**: Ministry of Employment and Labor (MOEL)
 - **Regulation Metadata**: `regulations/KR/osha-kr.json`, `regulations/KR/sapa.json`
 

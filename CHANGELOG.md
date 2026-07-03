@@ -6,6 +6,31 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+### Fixed (2026-07-03 — Legal Basis Audit: Post-MCP-Fix Content Verification)
+
+After fixing all 9 MCP server issues (previous entry), audited all existing content created during the 17-day window when legal MCP tools were broken (2026-06-16 ~ 2026-07-03). Verified that mock/fabricated data did NOT contaminate any schema, but found several citation accuracy issues introduced from agent training knowledge without live law verification.
+
+**Agent description corrections (3):**
+- **`agents/_shared/contractor-safety-agent.md`**: fixed OSHA-KR Article 63 description from "Responsibility of Contractor" to "Ordering party's safety and health measures (도급인의 안전보건조치)" — Article 63 places duty on the ordering party, not the contractor ([Source: law.go.kr](https://www.law.go.kr/lsLawLinkInfo.do?lsJoLnkSeq=900387016&chrClsCd=010202)).
+- **`agents/_shared/asset-integrity-agent.md`**: fixed SAPA Article 4 description from "Measures to Prevent Serious Industrial Accidents" to "Safety and Health Management System establishment" — Article 4 is about the obligation to establish a management system, not direct accident prevention.
+- **`agents/_shared/reporting-agent.md`**: fixed SAPA Article 4 description from "Management Responsibility and Reporting" to "Safety and Health Management System establishment" — "Management Responsibility" is Article 3.
+
+**SAPA Article 12 misuse corrected (4 workflows):**
+- SAPA Article 12 ("형 확정 사실의 통보" — procedural notification of final convictions) was incorrectly cited as "건설업 특례" in 4 ehschem/ehsconst workflows. Construction liability provisions are in SAPA Article 3 (scope), Article 5 (contract/outsourcing), and Article 6 (punishment).
+- **`workflows/domains/industry/ehsconst/sapa-serious-accident-reference/schema.yaml`**: replaced SAPA Art 12 → Art 5 + Art 6.
+- **`workflows/domains/industry/ehsconst/collapse-prevention/schema.yaml`**: replaced SAPA Art 12 → Art 6.
+- **`workflows/domains/industry/ehsconst/fall-prevention/schema.yaml`**: replaced SAPA Art 12 → Art 6.
+- **`workflows/domains/industry/ehsconst/safety-supervision/schema.yaml`**: replaced SAPA Art 12 → Art 6.
+
+**Legal glossary updates (`regulations/KR/legal-glossary.yaml`):**
+- Added OSHA-KR Article 13 (구급설비/first-aid equipment) — cited in `first-aid-training` and `medical-emergency` schemas but missing from glossary allowlist.
+- Expanded SAPA from 6 to 14 articles (added Art 6-11, 14-16) — verified via `k_skill.get_sapa_requirements` MCP (MST=228817, 16 articles confirmed). Corrected Art 3 description from "Management responsibility" to "Scope — application to business owners and management responsible persons."
+- Resolved `의료기기법 Article 83` UNVERIFIED flag: confirmed as EU MDR Article 83 (PMS system) carryover; updated schema to cite "EU MDR Article 83" explicitly.
+- Upgraded `환경보건법` from UNVERIFIED to verified active law ([Source: law.go.kr](https://www.law.go.kr/LSW/lsSc.do?menuId=1&dt=20201211&query=%ED%99%98%EA%B2%BD%EB%B3%B4%EA%B1%B4%EB%B2%95&subMenuId=15)).
+
+**Stretched SAPA applicability fix:**
+- **`workflows/domains/industry/meddevice/device-recall-reference/schema.yaml`**: replaced SAPA Art 7 (industrial accident dual liability) with 약사법 Art 43조의3 (pharmaceutical recall duty) + "EU MDR Article 87" (explicit EU prefix to avoid Korean Act confusion).
+
 ### Fixed (2026-07-03 — MCP Server Audit: 9 Findings Resolved Across 3 Korean Legal MCP Servers)
 
 Comprehensive audit of all tools in `legalize_kr` (6 tools), `mcp_kr_legislation` (5 tools), and `k_skill` (5 tools) uncovered 9 issues spanning protocol pollution, stale paths, missing auth, law name mismatches, and permission gaps. All resolved.
