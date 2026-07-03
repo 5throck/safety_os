@@ -37,3 +37,16 @@ This workflow supports **Group LOTO** — multiple crews or contractors working 
 - Equipment may only be restored to service after all locks from all crews have been removed and accounted for.
 - The person confirming full lock removal and safe restoration signs off under `removal_confirmed_by`, and the permit is closed under `closure_signature`.
 - Retain completed LOTO permits as evidence records for PSM compliance audits.
+
+## Reference / Best Practice Alignment
+
+This section is informational only — it does **not** form part of this workflow's `legal_basis` (which remains OSHA-KR Article 38 and SAPA Article 4 per this project's Legal Basis Gate; Korean statute citations are the operative legal basis for the PSM/functional domain, and international standards are not substituted in as legal_basis here the way they are for the GxP-tier domains).
+
+**US OSHA 29 CFR 1910.147** ("The Control of Hazardous Energy (Lockout/Tagout)") is referenced as an international best-practice alignment, since the specific 산업안전보건기준에관한규칙 (Occupational Safety and Health Standards Rule) article governing LOTO implementation detail could not be verified via the connected legal MCPs in this session (see project memory log). Concepts drawn from 29 CFR 1910.147 that inform this workflow's design:
+
+- **Authorized vs. affected employees**: the person applying/removing a lock (authorized) is distinguished from workers merely present in the area (affected) — reflected here via `lock_applied_by` per isolation point.
+- **Energy control procedure**: a documented, equipment-specific procedure identifying all energy sources before isolation — reflected via `energy_types_isolated` and the `risk_assessment_ref` cross-reference.
+- **Periodic inspection**: 29 CFR 1910.147 requires at least annual inspection of energy control procedures — not yet implemented as a recurring check in this workflow; a candidate follow-up item.
+- **Group lockout procedures**: 29 CFR 1910.147 explicitly addresses multi-crew/multi-employer lockout, which is the direct precedent for this workflow's `group_lockout` / `isolation_points[]` design supporting TAR-scenario multi-contractor isolation.
+
+Confirmation of the exact Korean 안전보건규칙 article remains an open item requiring review by a qualified safety professional before operational use, per this project's Legal Disclaimer.
