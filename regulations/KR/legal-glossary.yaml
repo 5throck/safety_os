@@ -23,6 +23,7 @@ statutes:
     abbreviation: OSHA-KR
     regulator: MOEL (고용노동부)
     articles:
+      - { number: "제13조",  topic_en: "First-aid equipment and measures (구급설비/구급조치)" }
       - { number: "제14조",  topic_en: "Safety and Health Management Regulations (rules creation / BoD approval of safety plan)" }
       - { number: "제15조",  topic_en: "Safety and Health Management Supervisor (안전보건관리책임자) duties" }
       - { number: "제16조",  topic_en: "Management Supervisor (관리감독자) duties" }
@@ -64,13 +65,22 @@ statutes:
     english: Serious Accidents Punishment Act
     abbreviation: SAPA
     regulator: MOEL (고용노동부)
+    note: "Full 16-article structure: Ch.1 General (Art 1-2), Ch.2 Serious Industrial Accidents (Art 3-9), Ch.3 Serious Civic Disasters (Art 10-11), Ch.4 Supplementary (Art 12-16). Verified via k_skill MCP (MST=228817)."
     articles:
-      - { number: "제3조",  topic_en: "Management responsibility (경영책임자 처벌)" }
-      - { number: "제4조",  topic_en: "Safety and Health Management System / prevention of severe occupational illness" }
-      - { number: "제5조",  topic_en: "Obligations for Contract, Lease, and Outsourcing" }
-      - { number: "제7조",  topic_en: "Employer obligations (안전보건관리체계)" }
-      - { number: "제12조", topic_en: "Construction project special provisions (발주처/원사업주 책임 강화)" }
-      - { number: "제13조", topic_en: "Subcontractor safety/health obligations (하도급업체 안전보건 의무)" }
+      - { number: "제3조",  topic_en: "Scope — application to business owners and management responsible persons (경영책임자등의 범위)" }
+      - { number: "제4조",  topic_en: "Safety and health assurance obligation — management system establishment (사업주와 경영책임자등의 안전 및 보건 확보의무)" }
+      - { number: "제5조",  topic_en: "Obligations for Contract, Lease, and Outsourcing (도급·용역·위탁 등 관계에서의 안전·보건 확보의무)" }
+      - { number: "제6조",  topic_en: "Punishment for serious industrial accidents (중대산업재해 사업주와 경영책임자등의 처벌)" }
+      - { number: "제7조",  topic_en: "Dual liability for serious industrial accidents — corporate penalty (중대산업재해의 양벌규정)" }
+      - { number: "제8조",  topic_en: "Mandatory safety and health education attendance (안전보건교육의 수강)" }
+      - { number: "제9조",  topic_en: "Safety and health assurance obligation for civic disasters (중대시민재해 사업주와 경영책임자등의 안전 및 보건 확보의무)" }
+      - { number: "제10조", topic_en: "Punishment for serious civic disasters (중대시민재해 사업주와 경영책임자등의 처벌)" }
+      - { number: "제11조", topic_en: "Dual liability for serious civic disasters — corporate penalty (중대시민재해의 양벌규정)" }
+      - { number: "제12조", topic_en: "Notification of final conviction (형 확정 사실의 통보)" }
+      - { number: "제13조", topic_en: "Public disclosure of serious industrial accident occurrence (중대산업재해 발생사실 공표)" }
+      - { number: "제14조", topic_en: "Special procedural rules for trials (심리절차에 관한 특례)" }
+      - { number: "제15조", topic_en: "Damages liability (손해배상의 책임)" }
+      - { number: "제16조", topic_en: "Government support and reporting requirements (정부의 사업주 등에 대한 지원 및 보고)" }
 
   약사법:
     english: Pharmaceutical Affairs Act
@@ -127,7 +137,7 @@ statutes:
       - { number: "제20조", topic_en: "Medical device PMS / recall" }
       - { number: "제23조", topic_en: "Medical device distribution / supply chain" }
       - { number: "제83조", topic_en: "Post-market surveillance (PMS) framework" }
-    note_unverified: "의료기기법 Article 83 cited only in device-pms schema as 'MDR Article 83' — likely EU MDR carryover; kept here as Korean Act placeholder, UNVERIFIED."
+    note: "의료기기법 Article 83 was mistakenly mapped from EU MDR Article 83 (PMS system). Korea's PMS equivalent is '시판 후 조사' under separate provisions. Schema corrected to cite 'EU MDR Article 83' explicitly."
 
   고압가스안전관리법:
     english: High-Pressure Gas Safety Control Act
@@ -222,7 +232,7 @@ statutes:
     english: Environmental Health Act
     abbreviation: EHA
     regulator: ME (환경부)
-    note: "Referenced once in emergency/chemical-release schema as a legal_basis token. Possibly an informal citation of 대기/수질환경보전법 or the Environmental Health Act (환경보건법); UNVERIFIED specific scope."
+    note: "Verified as active Korean law on law.go.kr (법률 제20384호, 2024.3.19 개정). Covers environmental health impact assessment, environmental health monitoring, and hazardous substance exposure management."
     articles: []
 
 # =============================================================================

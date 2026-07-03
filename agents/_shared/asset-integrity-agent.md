@@ -6,7 +6,7 @@
 - **Applicable Laws**:
   - OSHA-KR Article 38 (Safety Measures)
   - OSHA-KR Article 93 (Safety Inspection of Hazardous Machines)
-  - SAPA Article 4 (Measures to Prevent Serious Industrial Accidents)
+  - SAPA Article 4 (Safety and Health Management System establishment / prevention of severe occupational illness)
 - **Enforcement Agency**: Ministry of Employment and Labor (MOEL)
 - **Regulation Metadata**: `regulations/KR/osha-kr.json`, `regulations/KR/sapa.json`
 

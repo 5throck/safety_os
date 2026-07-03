@@ -19,7 +19,8 @@ handoff_protocol:
     - contractor_responsibilities
 legal_basis:
   - 중대재해처벌법 Article 3
-  - 중대재해처벌법 Article 12
+  - 중대재해처벌법 Article 5
+  - 중대재해처벌법 Article 6
   - 산업안전보건법 Article 54
 industry_profile: construction
 agent: ehsconst-agent
