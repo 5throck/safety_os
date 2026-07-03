@@ -1,10 +1,17 @@
+---
+legal_basis:
+  - OSHA-KR Articles 15, 17, 98-103
+---
+
 # Construction Daily Workflows
 
-| Workflow | Description | Risk |
-|----------|-------------|------|
-| TBM (Tool Box Meeting) | Daily safety briefing before work starts | General |
-| Heavy Equipment Operations | Safety checks for cranes, excavators, etc. | High |
-| Fall Protection | Harness inspection, scaffolding checks | High |
-| Electrical Safety | LOTO, temporary wiring checks | Medium |
-| Hot Work | Welding, cutting, grinding safety | Medium |
-| Confined Space Entry | Ventilation, gas monitoring, standby person | High |
+> Reserved for future industry-specific daily workflow expansion — not yet implemented.
+
+| Workflow | Description | Risk | Status |
+|----------|-------------|------|--------|
+| TBM (Tool Box Meeting) | Daily safety briefing before work starts | General | Pending |
+| Heavy Equipment Operations | Safety checks for cranes, excavators, etc. | High | Pending |
+| Fall Protection | Harness inspection, scaffolding checks | High | Pending |
+| Electrical Safety | LOTO, temporary wiring checks | Medium | Pending |
+| Hot Work | Welding, cutting, grinding safety | Medium | Pending |
+| Confined Space Entry | Ventilation, gas monitoring, standby person | High | Pending |
