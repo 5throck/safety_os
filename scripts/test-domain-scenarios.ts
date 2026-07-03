@@ -228,6 +228,14 @@ check('S-06', 'LOTO-5', 'psm LOTO record references risk_assessment_ref',
     evidenceHasField('functional', 'psm', 'psm-loto-record.json', 'risk_assessment_ref'));
 check('S-06', 'LOTO-6', 'psm LOTO record supports Group LOTO (isolation_points array)',
     evidenceHasField('functional', 'psm', 'psm-loto-record.json', 'isolation_points'));
+check('S-06', 'LOTO-7', 'psm LOTO record uses KOSHA GUIDE Z-40-2022 3-tier lock_type classification',
+    evidenceHasField('functional', 'psm', 'psm-loto-record.json', 'lock_type'));
+check('S-06', 'LOTO-8', 'psm LOTO record references tbm_ref (joint Tool Box Meeting)',
+    evidenceHasField('functional', 'psm', 'psm-loto-record.json', 'tbm_ref'));
+check('S-06', 'LOTO-9', 'psm LOTO record supports emergency_removal (KOSHA GUIDE Z-40-2022 §6.3)',
+    evidenceHasField('functional', 'psm', 'psm-loto-record.json', 'emergency_removal'));
+check('S-06', 'LOTO-10', 'psm LOTO record tracks last_periodic_review_date (KOSHA GUIDE Z-40-2022 §9.1)',
+    evidenceHasField('functional', 'psm', 'psm-loto-record.json', 'last_periodic_review_date'));
 
 // contractor-safety: TAR surge workflow + evidence, cross-referenced to occupational-health via tar_id
 check('S-06', 'CONTRACTOR-1', 'contractor-safety TAR surge evidence exists',

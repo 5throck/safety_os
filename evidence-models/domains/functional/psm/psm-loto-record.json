@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "PSM Lockout/Tagout (LOTO) Record",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "type": "object",
   "properties": {
     "record_id": {
@@ -31,7 +31,7 @@
     },
     "isolation_points": {
       "type": "array",
-      "description": "Isolation points (locks/tags) applied for this LOTO, supporting multiple simultaneous locks (Group LOTO).",
+      "description": "Isolation points (locks/tags) applied for this LOTO, supporting multiple simultaneous locks (Group LOTO). Per KOSHA GUIDE Z-40-2022 §6.2, the tag must remain attached to the lock and identify the person, work window, and contact information.",
       "items": {
         "type": "object",
         "properties": {
@@ -51,26 +51,58 @@
             "type": "string",
             "description": "Unique identifier of the lock applied at this isolation point."
           },
+          "contact_info": {
+            "type": "string",
+            "description": "Contact information for the person who applied the lock, as required on the tag (꼬리표) per KOSHA GUIDE Z-40-2022 §3.5 and §6.2."
+          },
           "timestamp": {
             "type": "string",
             "format": "date-time",
             "description": "Date and time the lock was applied."
           }
         },
-        "required": ["point_id", "location", "lock_applied_by", "lock_id", "timestamp"]
+        "required": ["point_id", "location", "lock_applied_by", "lock_id", "contact_info", "timestamp"]
       }
     },
-    "group_lockout": {
-      "type": "boolean",
-      "description": "Indicates whether multiple crews or contractors applied separate locks to the same equipment."
+    "lock_type": {
+      "type": "string",
+      "enum": ["personal_lock", "individual_locking", "group_isolation_locking"],
+      "description": "Lock classification per KOSHA GUIDE Z-40-2022 §3.2-3.4: personal_lock (개인잠금 — solo worker, solo lock), individual_locking (개별잠금 — one isolation point, 2+ workers), group_isolation_locking (그룹잠금 — 2+ isolation points or 2+ work teams, e.g. multi-contractor TAR scenarios)."
+    },
+    "supervisor_confirmation_by": {
+      "type": "string",
+      "description": "Name or ID of the 관리감독자 (supervisor) confirming lock/tag safety measures are in place, per KOSHA GUIDE Z-40-2022 §5.2 responsibility structure."
     },
     "verified_zero_energy_by": {
       "type": "string",
       "description": "Name or ID of the person who confirmed zero-energy state before work began."
     },
+    "expected_reenergize_notified": {
+      "type": "boolean",
+      "description": "Confirms all related personnel were notified of the expected re-energize time before lock/tag removal and equipment restart, per KOSHA GUIDE Z-40-2022 §6.1.3(3)(사)."
+    },
     "removal_confirmed_by": {
       "type": "string",
-      "description": "Name or ID of the person who confirmed all locks were removed and equipment restored."
+      "description": "Name or ID of the person who confirmed all locks were removed and equipment restored. Per KOSHA GUIDE Z-40-2022 §6.1.4/§8.5, only the person who applied a given lock may remove it under normal conditions."
+    },
+    "emergency_removal": {
+      "type": ["object", "null"],
+      "description": "Present only if a lock was removed without its owner present, per KOSHA GUIDE Z-40-2022 §6.3 (emergency lock removal procedure). Null under normal lock-removal conditions.",
+      "properties": {
+        "reason": { "type": "string", "description": "Documented reason the emergency removal was necessary." },
+        "authorized_by": { "type": "string", "description": "Supervisor/department head who authorized the emergency removal after confirming worker evacuation/safety." },
+        "signage_posted": { "type": "boolean", "description": "Confirms warning signage/a monitor was placed at the isolation point so the returning lock owner is not exposed to an unexpected re-energized state, per §6.3.3." }
+      },
+      "required": ["reason", "authorized_by", "signage_posted"]
+    },
+    "last_periodic_review_date": {
+      "type": ["string", "null"],
+      "format": "date",
+      "description": "Date this equipment's lock/tag procedure was last reviewed, per KOSHA GUIDE Z-40-2022 §9.1 (minimum annual review of all lock/tag procedures). Null if this equipment has not yet had its first periodic review — tracked here as a compliance marker; scheduling/reminder automation is not implemented in this workflow yet."
+    },
+    "tbm_ref": {
+      "type": ["string", "null"],
+      "description": "Reference to the joint Tool Box Meeting (합동 Tool Box Meeting) record where all involved parties (including contractors) determined the lock scope, per KOSHA GUIDE Z-40-2022 §6.1.2(1) and §8.2/§8.4. May reference an ehsconst-agent tbm-tool-box-meeting record when contractors are involved (e.g., during TAR)."
     },
     "asset_integrity_trigger_ref": {
       "type": ["string", "null"],
@@ -90,7 +122,7 @@
         "type": "string"
       },
       "minItems": 2,
-      "description": "Multi-source legal basis. Confirmed: OSHA-KR Article 38 (안전조치 — machinery/equipment hazard safety measures) and SAPA Article 4 (안전보건관리체계 구축 의무). Note: the specific Occupational Safety and Health Standards Rule (산업안전보건기준에관한규칙) article governing LOTO implementation detail could not be verified via mcp_kr_legislation/legalize_kr/k_skill in this session (not indexed by any connected legal MCP) — requires confirmation by a qualified safety professional before operational use, per this project's Legal Disclaimer."
+      "description": "Multi-source legal basis. Confirmed: OSHA-KR Article 38 (안전조치), 산업안전보건기준에관한규칙 (Occupational Safety and Health Standards Rule) 제92조 (정비 등의 작업 시의 운전정지 등) — this specific sub-statute article was confirmed directly from KOSHA GUIDE Z-40-2022's own revision history (개정 이력, 2022.12.29), which cites it as the LOTO implementation basis. Also relevant: SAPA Article 4 (안전보건관리체계 구축 의무) and SAPA Article 5 (제3자/도급 근로자 안전조치 의무 — cited in KOSHA GUIDE Z-40-2022 §7.4 for contractor/third-party LOTO training obligations, relevant to Group Isolation Locking scenarios)."
     },
     "closure_signature": {
       "type": "string",
@@ -104,8 +136,10 @@
     "equipment_id",
     "energy_types_isolated",
     "isolation_points",
-    "group_lockout",
+    "lock_type",
+    "supervisor_confirmation_by",
     "verified_zero_energy_by",
+    "expected_reenergize_notified",
     "removal_confirmed_by",
     "legal_basis",
     "closure_signature"
