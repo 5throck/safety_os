@@ -2,12 +2,13 @@
 /**
  * Domain Scenario Integration Test
  *
- * Simulates real-world cross-domain data flows through 5 scenarios:
+ * Simulates real-world cross-domain data flows through 6 scenarios:
  *   S-01: 신약 개발 전 lifecycle (GLP→GCP→GMP→GDP→GVP→recall)
  *   S-02: 화학공장 사고 대응 (ehschem→PSM→MSDS→emergency)
  *   S-03: 가스터미널 비상 (gasterm→PSM→MSDS→emergency)
  *   S-04: 의료기기 회수 (meddevice→emergency→compliance)
  *   S-05: 건설 현장 중대재해 (ehsconst→emergency→SAPA)
+ *   S-06: 대정수(TAR) 통합 대응 (ehschem→psm LOTO→contractor-safety→occupational-health)
  *
  * Each scenario validates:
  *   - Evidence models for all involved domains exist
@@ -16,7 +17,11 @@
  *   - Legal basis chains are consistent
  *   - Common fields (e_signature, nomenclature, audit_trail) present
  *
- * @version 1.0.0
+ * @version 1.1.0
+ * v1.1.0 (2026-07-03): Added S-06 (Major Turnaround/TAR + LOTO integrated scenario),
+ *   validating the tar_id/turnaround_id cross-reference chain introduced across
+ *   ehschem-turnaround-record.json, psm-loto-record.json, contractor-tar-surge-record.json,
+ *   and oh-tar-health-record.json.
  */
 
 import * as fs from 'node:fs';
@@ -195,6 +200,76 @@ check('S-05', 'EMERG-2', 'Emergency disaster-response workflow exists',
 console.log('');
 
 // ════════════════════════════════════════════════════════════════════════════
+// S-06: 대정수(TAR) 통합 대응 (ehschem→psm LOTO→contractor-safety→occupational-health)
+// ════════════════════════════════════════════════════════════════════════════
+console.log(`${CYAN}[S-06] 대정수(TAR) 통합 대응 (ehschem→psm LOTO→contractor-safety→occupational-health)${RESET}`);
+
+// ehschem: TAR planning workflow + evidence, plus the 4 cross-reference fields added for TAR integration
+check('S-06', 'EHSCHEM-1', 'ehschem turnaround evidence exists', evidenceExists('industry', 'ehschem', 'ehschem-turnaround-record.json'));
+check('S-06', 'EHSCHEM-2', 'ehschem turnaround-shutdown-planning workflow exists',
+    workflowExists('industry', 'ehschem', 'turnaround-shutdown-planning'));
+check('S-06', 'EHSCHEM-3', 'ehschem turnaround references contractor_surge_ref',
+    evidenceHasField('industry', 'ehschem', 'ehschem-turnaround-record.json', 'contractor_surge_ref'));
+check('S-06', 'EHSCHEM-4', 'ehschem turnaround references health_screening_ref',
+    evidenceHasField('industry', 'ehschem', 'ehschem-turnaround-record.json', 'health_screening_ref'));
+check('S-06', 'EHSCHEM-5', 'ehschem turnaround references non_psm_equipment_handoff_ref',
+    evidenceHasField('industry', 'ehschem', 'ehschem-turnaround-record.json', 'non_psm_equipment_handoff_ref'));
+check('S-06', 'EHSCHEM-6', 'ehschem turnaround references loto_records_ref',
+    evidenceHasField('industry', 'ehschem', 'ehschem-turnaround-record.json', 'loto_records_ref'));
+
+// psm: LOTO workflow + evidence, plus its own cross-reference fields back to asset-integrity/risk-assessment/TAR
+check('S-06', 'LOTO-1', 'psm LOTO evidence exists', evidenceExists('functional', 'psm', 'psm-loto-record.json'));
+check('S-06', 'LOTO-2', 'psm loto-lockout-tagout workflow exists', workflowExists('functional', 'psm', 'loto-lockout-tagout'));
+check('S-06', 'LOTO-3', 'psm LOTO record references tar_id',
+    evidenceHasField('functional', 'psm', 'psm-loto-record.json', 'tar_id'));
+check('S-06', 'LOTO-4', 'psm LOTO record references asset_integrity_trigger_ref',
+    evidenceHasField('functional', 'psm', 'psm-loto-record.json', 'asset_integrity_trigger_ref'));
+check('S-06', 'LOTO-5', 'psm LOTO record references risk_assessment_ref',
+    evidenceHasField('functional', 'psm', 'psm-loto-record.json', 'risk_assessment_ref'));
+check('S-06', 'LOTO-6', 'psm LOTO record supports Group LOTO (isolation_points array)',
+    evidenceHasField('functional', 'psm', 'psm-loto-record.json', 'isolation_points'));
+
+// contractor-safety: TAR surge workflow + evidence, cross-referenced to occupational-health via tar_id
+check('S-06', 'CONTRACTOR-1', 'contractor-safety TAR surge evidence exists',
+    evidenceExists('functional', 'contractor-safety', 'contractor-tar-surge-record.json'));
+check('S-06', 'CONTRACTOR-2', 'contractor-safety tar-contractor-surge-management workflow exists',
+    workflowExists('functional', 'contractor-safety', 'tar-contractor-surge-management'));
+check('S-06', 'CONTRACTOR-3', 'contractor-safety TAR record references tar_id',
+    evidenceHasField('functional', 'contractor-safety', 'contractor-tar-surge-record.json', 'tar_id'));
+check('S-06', 'CONTRACTOR-4', 'contractor-safety TAR record references health_screening_ref',
+    evidenceHasField('functional', 'contractor-safety', 'contractor-tar-surge-record.json', 'health_screening_ref'));
+
+// occupational-health: TAR health screening workflow + evidence, cross-referenced back to contractor-safety
+check('S-06', 'HEALTH-1', 'occupational-health TAR screening evidence exists',
+    evidenceExists('functional', 'occupational-health', 'oh-tar-health-record.json'));
+check('S-06', 'HEALTH-2', 'occupational-health tar-health-screening workflow exists',
+    workflowExists('functional', 'occupational-health', 'tar-health-screening'));
+check('S-06', 'HEALTH-3', 'occupational-health TAR record references tar_id',
+    evidenceHasField('functional', 'occupational-health', 'oh-tar-health-record.json', 'tar_id'));
+check('S-06', 'HEALTH-4', 'occupational-health TAR record references contractor_surge_ref (bidirectional link back)',
+    evidenceHasField('functional', 'occupational-health', 'oh-tar-health-record.json', 'contractor_surge_ref'));
+
+// Cross-domain chain validation — the full tar_id thread across all 4 schemas
+check('S-06', 'CHAIN-1', 'ehschem↔contractor-safety TAR chain complete (both sides have their half of the ref)',
+    evidenceHasField('industry', 'ehschem', 'ehschem-turnaround-record.json', 'contractor_surge_ref') &&
+    evidenceHasField('functional', 'contractor-safety', 'contractor-tar-surge-record.json', 'tar_id'));
+check('S-06', 'CHAIN-2', 'contractor-safety↔occupational-health bidirectional TAR chain complete',
+    evidenceHasField('functional', 'contractor-safety', 'contractor-tar-surge-record.json', 'health_screening_ref') &&
+    evidenceHasField('functional', 'occupational-health', 'oh-tar-health-record.json', 'contractor_surge_ref'));
+check('S-06', 'CHAIN-3', 'ehschem↔psm LOTO TAR chain complete',
+    evidenceHasField('industry', 'ehschem', 'ehschem-turnaround-record.json', 'loto_records_ref') &&
+    evidenceHasField('functional', 'psm', 'psm-loto-record.json', 'tar_id'));
+check('S-06', 'CHAIN-4', 'asset-integrity-agent LOTO handoff documented (Handoff Protocols mentions psm-agent, not stale safety-workflow-manager reference)',
+    (() => {
+        try {
+            const content = fs.readFileSync(path.join(ROOT, 'agents', '_shared', 'asset-integrity-agent.md'), 'utf-8');
+            return content.includes('psm-agent') && content.toLowerCase().includes('loto');
+        } catch { return false; }
+    })());
+
+console.log('');
+
+// ════════════════════════════════════════════════════════════════════════════
 // Cross-domain reference field matrix validation
 // ════════════════════════════════════════════════════════════════════════════
 console.log(`${CYAN}[X-REF] Cross-domain reference field matrix${RESET}`);
@@ -208,6 +283,12 @@ const crossRefs = [
     { field: 'psm_applicable', from: 'industry/gasterm', to: 'functional/psm', desc: 'gasterm→PSM flag' },
     { field: 'irb_approval_ref', from: 'industry/gcp', to: 'industry/gcp', desc: 'GCP IRB internal ref' },
     { field: 'rmp_version_ref', from: 'industry/gvp', to: 'industry/gvp', desc: 'GVP RMP internal ref' },
+    { field: 'contractor_surge_ref', from: 'industry/ehschem', to: 'functional/contractor-safety', desc: 'ehschem→contractor-safety TAR surge' },
+    { field: 'health_screening_ref', from: 'industry/ehschem', to: 'functional/occupational-health', desc: 'ehschem→occupational-health TAR screening' },
+    { field: 'loto_records_ref', from: 'industry/ehschem', to: 'functional/psm', desc: 'ehschem→psm LOTO records' },
+    { field: 'health_screening_ref', from: 'functional/contractor-safety', to: 'functional/occupational-health', desc: 'contractor-safety→occupational-health TAR linkage' },
+    { field: 'contractor_surge_ref', from: 'functional/occupational-health', to: 'functional/contractor-safety', desc: 'occupational-health→contractor-safety bidirectional TAR linkage' },
+    { field: 'tar_id', from: 'functional/psm', to: 'industry/ehschem', desc: 'psm LOTO→ehschem TAR event linkage' },
 ];
 
 for (const ref of crossRefs) {
