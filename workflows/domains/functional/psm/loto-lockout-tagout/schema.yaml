@@ -1,0 +1,10 @@
+schema_version: "1.0"
+workflow_id: loto-lockout-tagout
+title: "Lockout/Tagout (LOTO)"
+status: active
+applicability: mandatory
+applicable_industries: [chemical, gas_terminal, power_generation, construction]
+legal_basis: "OSHA-KR Article 38 (안전조치) — TBD pending legal-agent verification of specific Occupational Safety and Health Standards Rule (안전보건규칙) LOTO article"
+industry_profile: chemical-processing
+agent: psm-agent
+evidence_model: psm-loto-record.json

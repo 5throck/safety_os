@@ -1,0 +1,109 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PSM Lockout/Tagout (LOTO) Record",
+  "version": "1.0.0",
+  "type": "object",
+  "properties": {
+    "record_id": {
+      "type": "string",
+      "description": "Unique identifier for the LOTO record."
+    },
+    "date": {
+      "type": "string",
+      "format": "date",
+      "description": "Date the LOTO permit was issued."
+    },
+    "permit_number": {
+      "type": "string",
+      "description": "Unique permit number assigned to this LOTO authorization."
+    },
+    "equipment_id": {
+      "type": "string",
+      "description": "Identifier of the equipment being isolated."
+    },
+    "energy_types_isolated": {
+      "type": "array",
+      "description": "Hazardous energy source types isolated for this LOTO.",
+      "items": {
+        "type": "string",
+        "enum": ["electrical", "mechanical", "hydraulic", "pneumatic", "thermal", "chemical"]
+      }
+    },
+    "isolation_points": {
+      "type": "array",
+      "description": "Isolation points (locks/tags) applied for this LOTO, supporting multiple simultaneous locks (Group LOTO).",
+      "items": {
+        "type": "object",
+        "properties": {
+          "point_id": {
+            "type": "string",
+            "description": "Identifier of the isolation point (e.g., breaker, valve, disconnect)."
+          },
+          "location": {
+            "type": "string",
+            "description": "Physical location of the isolation point."
+          },
+          "lock_applied_by": {
+            "type": "string",
+            "description": "Name or ID of the person who applied the lock at this isolation point."
+          },
+          "lock_id": {
+            "type": "string",
+            "description": "Unique identifier of the lock applied at this isolation point."
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date and time the lock was applied."
+          }
+        },
+        "required": ["point_id", "location", "lock_applied_by", "lock_id", "timestamp"]
+      }
+    },
+    "group_lockout": {
+      "type": "boolean",
+      "description": "Indicates whether multiple crews or contractors applied separate locks to the same equipment."
+    },
+    "verified_zero_energy_by": {
+      "type": "string",
+      "description": "Name or ID of the person who confirmed zero-energy state before work began."
+    },
+    "removal_confirmed_by": {
+      "type": "string",
+      "description": "Name or ID of the person who confirmed all locks were removed and equipment restored."
+    },
+    "asset_integrity_trigger_ref": {
+      "type": ["string", "null"],
+      "description": "Reference to the asset-integrity-agent inspection record that flagged this equipment as unsafe, if this LOTO was triggered by an asset-integrity finding rather than routine maintenance."
+    },
+    "risk_assessment_ref": {
+      "type": ["string", "null"],
+      "description": "Reference to the risk-assessment-agent record identifying which energy sources are hazardous for this equipment."
+    },
+    "legal_basis": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 2,
+      "description": "Multi-source legal basis — TBD, pending legal-agent verification via mcp_kr_legislation"
+    },
+    "closure_signature": {
+      "type": "string",
+      "description": "Signature or name of the person who closed the permit upon work completion."
+    }
+  },
+  "required": [
+    "record_id",
+    "date",
+    "permit_number",
+    "equipment_id",
+    "energy_types_isolated",
+    "isolation_points",
+    "group_lockout",
+    "verified_zero_energy_by",
+    "removal_confirmed_by",
+    "legal_basis",
+    "closure_signature"
+  ]
+}
