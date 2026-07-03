@@ -1,5 +1,8 @@
 # disaster-response Workflow
 
+## Owning Agent
+`disaster-response-agent` (`agents/_shared/disaster-response-agent.md`)
+
 ## 1. Objective
 자연재해 (태풍/홍수/지진/폭설) 시 시설/인력 보호 및 작업 통제.
 
