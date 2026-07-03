@@ -6,6 +6,22 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+### Fixed (2026-07-03 — MCP Server Audit: 9 Findings Resolved Across 3 Korean Legal MCP Servers)
+
+Comprehensive audit of all tools in `legalize_kr` (6 tools), `mcp_kr_legislation` (5 tools), and `k_skill` (5 tools) uncovered 9 issues spanning protocol pollution, stale paths, missing auth, law name mismatches, and permission gaps. All resolved.
+
+- **`mcp/legalize-kr/resolve.ts`** (NEW): fuzzy law directory resolver — resolves current law names (e.g. `중대재해처벌법`) against the git mirror's former-name directories (e.g. `중대재해처벌등에관한법률`) via YAML title scan with whitespace normalization and Korean suffix stripping; in-memory `Map` cache on first miss; all JSDoc in English (Bun v1.3.14 parser rejects Korean in comments).
+- **`mcp/legalize-kr/tools/parse.ts`**: updated to use `resolveLawDir(lawId)` instead of raw `lawId` for path lookup.
+- **`mcp/legalize-kr/tools/references.ts`**: added `LawReference` interface, removed `any` casts, wired `resolveLawDir`.
+- **`mcp/legalize-kr/tools/metadata.ts`**: wired `resolveLawDir` for both `lawFile` and `gitLog` paths.
+- **`mcp/legalize-kr/tools/compare.ts`**: wired `resolveLawDir`.
+- **`mcp/legalize-kr/tools/precedent.ts`**: added optional `date` field to `PrecedentResult`; reads `GITHUB_TOKEN` from `process.env` for GitHub Code Search API auth.
+- **`scripts/lib/mcp-cache.ts`**: changed `console.log` to `process.stderr.write` — stdout pollution corrupted MCP JSON-RPC protocol.
+- **`scripts/start-mcp.ts`**: fixed stale `vendor/` → `mcp/` paths after 2026-06-16 directory rename; added `--env-file .env`.
+- **`mcp/shared/retry.ts`**: added 4xx client error skip-retry logic (401/403/404/429 fast-fail).
+- **`mcp/mcp-connector.ts`**: deleted (dead code, zero runtime imports).
+- **`.claude/settings.local.json`**: added 5 `k_skill` tool permissions (`search_osha_regulations`, `get_sapa_requirements`, `list_industry_controls`, `check_compliance_gaps`, `invalidate_cache`).
+
 ### Fixed (2026-07-03 — `withRetry` Fail-Fast Predicate + Error Classification)
 
 `withRetry()` in `scripts/retry-handler.ts` determined success/failure solely by whether `fn()` threw. Bun Shell's `.nothrow()` suppresses the throw on non-zero exit codes, so `.nothrow()`-wrapped shell commands were unconditionally reported as `"Success on attempt 1"` — including real, persistent failures such as a `401` from `gh pr create`. The three `gh pr create` branches in `dev-sync.ts` discarded the return value, so a GitHub auth failure silently exited 0 having created no PR.
