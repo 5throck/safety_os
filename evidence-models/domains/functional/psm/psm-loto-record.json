@@ -80,6 +80,10 @@
       "type": ["string", "null"],
       "description": "Reference to the risk-assessment-agent record identifying which energy sources are hazardous for this equipment."
     },
+    "tar_id": {
+      "type": ["string", "null"],
+      "description": "Turnaround (TAR) event ID this LOTO permit was issued under, if applicable — links back to the same turnaround_id/tar_id value used in ehschem-turnaround-record.json, contractor-tar-surge-record.json, and oh-tar-health-record.json. Null for routine, non-TAR maintenance LOTO records."
+    },
     "legal_basis": {
       "type": "array",
       "items": {
