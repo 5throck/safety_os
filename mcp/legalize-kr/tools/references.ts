@@ -5,7 +5,12 @@ import { getRepoDir } from '../git-sync.js';
 
 const log = createLogger('legalize_kr');
 
-export async function findReferences(lawId: string): Promise<object[]> {
+interface LawReference {
+  lawName: string;
+  referenceCount: number;
+}
+
+export async function findReferences(lawId: string): Promise<LawReference[]> {
   const repoDir = getRepoDir();
   const krDir = join(repoDir, 'kr');
   if (!existsSync(krDir)) {
@@ -14,7 +19,7 @@ export async function findReferences(lawId: string): Promise<object[]> {
   }
 
   const pattern = new RegExp(lawId.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g');
-  const refs: object[] = [];
+  const refs: LawReference[] = [];
 
   for (const lawName of readdirSync(krDir)) {
     if (lawName === lawId) continue;
@@ -28,5 +33,5 @@ export async function findReferences(lawId: string): Promise<object[]> {
     }
   }
 
-  return refs.sort((a: any, b: any) => b.referenceCount - a.referenceCount);
+  return refs.sort((a, b) => b.referenceCount - a.referenceCount);
 }

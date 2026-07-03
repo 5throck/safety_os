@@ -7,6 +7,7 @@ const limiter = new RateLimiter(10, 60_000); // GitHub Search API: 10 req/min (u
 interface PrecedentResult {
   caseNumber: string;
   court: string;
+  date: string;
   category: string;
   path: string;
   url: string;

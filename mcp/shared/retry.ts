@@ -4,10 +4,18 @@ export async function fetchWithRetry(url: string, options?: RequestInit, maxRetr
   for (let i = 0; i < maxRetries; i++) {
     try {
       const res = await fetch(url, options);
-      if (!res.ok) throw new MCPNetworkError(`HTTP ${res.status}: ${url}`);
+      if (!res.ok) {
+        // 4xx errors are client-side — retrying won't help
+        if (res.status >= 400 && res.status < 500) {
+          throw new MCPNetworkError(`HTTP ${res.status} (client error, no retry): ${url}`);
+        }
+        throw new MCPNetworkError(`HTTP ${res.status}: ${url}`);
+      }
       return res;
     } catch (err) {
       if (i === maxRetries - 1) throw err;
+      // 4xx errors should not be retried
+      if (err instanceof MCPNetworkError && err.message.includes('client error')) throw err;
       await new Promise(r => setTimeout(r, Math.pow(2, i) * 1000));
     }
   }
