@@ -1,9 +1,9 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "gmp-common.schema.json",
-  "title": "GMP Common Fields",
-  "description": "Common fields shared across all GMP evidence models (v1). Includes electronic signature schema (v1: schema-only, cryptography deferred to v2), ICH Q9 Quality Risk Management reference, and multilingual nomenclature per meeting decisions 2026-06-17.",
-  "version": "1.0.0",
+  "$id": "common.schema.json",
+  "title": "Safety OS Common Fields",
+  "description": "Common fields shared across all Safety OS evidence models (v1). Includes electronic signature schema (v1: schema-only, cryptography deferred to v2), ICH Q9 Quality Risk Management reference, and multilingual nomenclature per meeting decisions 2026-06-17.",
+  "version": "1.0.1",
   "type": "object",
   "definitions": {
     "e_signature": {
@@ -102,6 +102,32 @@
         }
       },
       "required": ["created_at", "created_by", "record_status"]
+    },
+    "risk_assessment_ref": {
+      "type": "object",
+      "description": "Reference to a workplace risk assessment (위험성평가) per OSHA-KR Article 36. Used to trace evidence records back to the originating risk assessment.",
+      "properties": {
+        "assessment_id": {
+          "type": "string",
+          "pattern": "^RA-[0-9]{4}-[0-9]{4}$",
+          "description": "Risk assessment record ID"
+        },
+        "assessment_date": {
+          "type": "string",
+          "format": "date",
+          "description": "Date the risk assessment was completed"
+        },
+        "risk_level": {
+          "type": "string",
+          "enum": ["low", "medium", "high", "critical"],
+          "description": "Overall risk level from the assessment"
+        },
+        "assessor_id": {
+          "type": "string",
+          "description": "ID of the person who performed the assessment"
+        }
+      },
+      "required": ["assessment_id", "assessment_date"]
     }
   }
 }

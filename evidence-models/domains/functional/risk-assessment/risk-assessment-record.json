@@ -1,0 +1,111 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "risk-assessment-record.json",
+  "title": "Workplace Risk Assessment Record",
+  "description": "Structured risk assessment record per OSHA-KR Article 36 (위험성평가 실시). Documents hazard identification, risk scoring, and control measures for workplace tasks.",
+  "version": "1.0.0",
+  "type": "object",
+  "required": ["record_id", "assessment_scope", "assessment_date", "assessor_id", "legal_basis", "hazards", "e_signature", "nomenclature", "audit_trail"],
+  "properties": {
+    "record_id": { "type": "string", "pattern": "^RA-[0-9]{4}-[0-9]{4}$" },
+    "assessment_scope": {
+      "type": "string",
+      "description": "Work area, task, or process being assessed"
+    },
+    "assessment_date": { "type": "string", "format": "date" },
+    "assessment_type": {
+      "type": "string",
+      "enum": ["initial", "periodic", "task_specific", "change_driven", "post_incident"],
+      "description": "Type of risk assessment (초기/정기/작업별/변경/사후)"
+    },
+    "assessor_id": { "type": "string", "description": "Risk assessor ID" },
+    "assessor_name": { "type": "string" },
+    "assessor_role": { "type": "string" },
+    "industry_profile": {
+      "type": "string",
+      "enum": ["manufacturing", "construction", "chemical", "gas_terminal", "power_generation"],
+      "description": "Industry sector"
+    },
+    "hazards": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "hazard_id": { "type": "string", "description": "Unique hazard identifier" },
+          "hazard_description": { "type": "string", "description": "Description of the identified hazard" },
+          "hazard_category": {
+            "type": "string",
+            "enum": ["mechanical", "electrical", "chemical", "thermal", "fall", "collapse", "confined_space", "biological", "ergonomic", "noise", "radiation", "other"],
+            "description": "Hazard classification"
+          },
+          "likelihood_before": {
+            "type": "string",
+            "enum": ["rare", "unlikely", "possible", "likely", "almost_certain"],
+            "description": "Likelihood without controls"
+          },
+          "severity_before": {
+            "type": "string",
+            "enum": ["negligible", "minor", "moderate", "major", "catastrophic"],
+            "description": "Severity without controls"
+          },
+          "risk_level_before": {
+            "type": "string",
+            "enum": ["low", "medium", "high", "critical"],
+            "description": "Risk level before controls"
+          },
+          "control_measures": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "control_type": {
+                  "type": "string",
+                  "enum": ["elimination", "substitution", "engineering", "administrative", "ppe"],
+                  "description": "Hierarchy of controls level"
+                },
+                "control_description": { "type": "string" },
+                "responsible_party": { "type": "string" },
+                "implementation_date": { "type": ["string", "null"], "format": "date" },
+                "status": {
+                  "type": "string",
+                  "enum": ["implemented", "planned", "overdue", "na"],
+                  "description": "Implementation status"
+                }
+              },
+              "required": ["control_type", "control_description", "status"]
+            }
+          },
+          "risk_level_after": {
+            "type": "string",
+            "enum": ["low", "medium", "high", "critical"],
+            "description": "Residual risk level after controls"
+          }
+        },
+        "required": ["hazard_id", "hazard_description", "hazard_category", "likelihood_before", "severity_before", "risk_level_before", "risk_level_after"]
+      },
+      "minItems": 1
+    },
+    "overall_risk_level": {
+      "type": "string",
+      "enum": ["low", "medium", "high", "critical"],
+      "description": "Highest risk level across all assessed hazards"
+    },
+    "worker_communication_date": {
+      "type": ["string", "null"],
+      "format": "date",
+      "description": "Date risk assessment results were communicated to workers (per Art 36 + Art 29)"
+    },
+    "training_record_ref": {
+      "type": ["string", "null"],
+      "description": "Reference to training-record.json for risk assessment communication training"
+    },
+    "legal_basis": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 1
+    },
+    "e_signature": { "$ref": "../../../_shared/base/common.schema.json#/definitions/e_signature" },
+    "nomenclature": { "$ref": "../../../_shared/base/common.schema.json#/definitions/nomenclature" },
+    "audit_trail": { "$ref": "../../../_shared/base/common.schema.json#/definitions/audit_trail" }
+  }
+}

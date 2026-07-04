@@ -3,7 +3,7 @@
   "$id": "ehsconst-tbm-record.json",
   "title": "Construction TBM (Tool Box Meeting) Record",
   "description": "일일 작업 전 안전회보 기록.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "type": "object",
   "required": ["record_id", "sapa_article_12_compliance", "project_id", "contractor_tier", "safety_officer_in_charge", "legal_basis", "e_signature", "nomenclature", "audit_trail"],
   "properties": {
@@ -39,6 +39,10 @@
     "signatures_collected": { "type": "boolean" },
     "photographic_evidence": { "type": "boolean" },
     "absentees_follow_up": { "type": "boolean", "description": "결근자 별도 교육 실시" },
+    "risk_assessment_ref": {
+      "type": ["string", "null"],
+      "description": "Reference to the applicable 위험성평가 (risk assessment) record per OSHA-KR Article 36 discussed in this TBM"
+    },
 
     "legal_basis": {
       "type": "array",
