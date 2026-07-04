@@ -13,7 +13,7 @@ This workflow applies to all suppliers of GMP-regulated materials (APIs, excipie
 - Document supplier information, certificates (ISO, GMP), and references.
 
 ### Step 2: Risk-Based Assessment
-- Apply ICH Q9 methodology via `skills/gmp-qrm/`.
+- Apply ICH Q9 methodology via `skills/domains/industry/gmp/qrm/`.
 - Risk classification: low (commodity materials) / medium / high (APIs, primary packaging).
 
 ### Step 3: Initial Assessment

@@ -2,12 +2,16 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "psm-incident-investigation-record.json",
   "title": "PSM Incident Investigation Record",
-  "description": "공정안전 사고 조사 per OSHA PSM Element 11 (48시간 내 착수).",
+  "description": "Evidence model for PSM incident investigation records per OSHA-KR Article 44 (48-hour initiation requirement).",
   "version": "1.0.0",
   "type": "object",
-  "required": ["record_id", "legal_basis", "version"],
+  "required": ["version", "record_id", "timestamp", "agent_id", "workflow_id", "legal_basis"],
   "properties": {
+    "version": { "type": "string", "default": "1.0.0" },
     "record_id": { "type": "string", "pattern": "^PSM-INC-[0-9]{4}-[0-9]{4}$" },
+    "timestamp": { "type": "string", "format": "date-time", "description": "Timestamp when the record was created" },
+    "agent_id": { "type": "string", "description": "ID of the agent that generated this record" },
+    "workflow_id": { "type": "string", "description": "ID of the workflow execution" },
     "incident_id": { "type": "string" },
     "incident_date": { "type": "string", "format": "date" },
     "investigation_started_within_48h": { "type": "boolean" },
@@ -15,8 +19,6 @@
     "root_causes_identified": { "type": "array", "items": { "type": "string" } },
     "recommendations": { "type": "array", "items": { "type": "string" } },
     "report_completion_date": { "type": "string", "format": "date" },
-
-    "legal_basis": { "type": "array", "items": { "type": "string" }, "minItems": 2 },
-    "version": { "type": "string", "default": "1.0.0" }
+    "legal_basis": { "type": "array", "items": { "type": "string" }, "minItems": 1, "description": "Legal basis for the incident investigation record (OSHA-KR Article 44)" }
   }
 }

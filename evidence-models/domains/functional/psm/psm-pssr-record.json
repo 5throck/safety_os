@@ -1,6 +1,9 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "psm-pssr-record.json",
   "title": "PSSR Record",
+  "description": "Evidence model for Pre-Startup Safety Review (PSSR) records per OSHA-KR Article 44.",
+  "version": "1.0.0",
   "type": "object",
   "properties": {
     "version": {
@@ -10,6 +13,7 @@
     },
     "record_id": {
       "type": "string",
+      "pattern": "^PSM-PSSR-[0-9]{4}-[0-9]{4}$",
       "description": "Unique identifier for the PSSR record"
     },
     "timestamp": {

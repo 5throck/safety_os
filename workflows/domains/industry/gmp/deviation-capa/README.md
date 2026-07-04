@@ -21,7 +21,7 @@ This workflow applies to all GMP-regulated operations at pharmaceutical manufact
 - Include description, classification, immediate action, impact assessment.
 
 ### Step 4: Investigation (Root Cause Analysis)
-- Apply ICH Q9 methodology (FMEA, FTA, or 5-Whys) via `skills/gmp-qrm/`.
+- Apply ICH Q9 methodology (FMEA, FTA, or 5-Whys) via `skills/domains/industry/gmp/qrm/`.
 - Identify root cause(s) — distinguish from contributing causes.
 
 ### Step 5: CAPA Development

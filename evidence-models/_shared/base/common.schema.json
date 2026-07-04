@@ -40,7 +40,7 @@
     },
     "qrm_assessment": {
       "type": "object",
-      "description": "ICH Q9 Quality Risk Management assessment reference per skills/gmp-qrm/SKILL.md.",
+      "description": "ICH Q9 Quality Risk Management assessment reference per skills/domains/industry/gmp/qrm/SKILL.md.",
       "properties": {
         "methodology": {
           "type": "string",

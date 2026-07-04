@@ -2,12 +2,16 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "psm-compliance-audit-record.json",
   "title": "PSM Compliance Audit Record",
-  "description": "3년 주기 PSM 규정 준수 감사 per OSHA PSM Element 13.",
+  "description": "Evidence model for 3-year cycle PSM compliance audit records per OSHA-KR Article 44.",
   "version": "1.0.0",
   "type": "object",
-  "required": ["record_id", "legal_basis", "version"],
+  "required": ["version", "record_id", "timestamp", "agent_id", "workflow_id", "legal_basis"],
   "properties": {
+    "version": { "type": "string", "default": "1.0.0" },
     "record_id": { "type": "string", "pattern": "^PSM-AUD-[0-9]{4}-[0-9]{4}$" },
+    "timestamp": { "type": "string", "format": "date-time", "description": "Timestamp when the record was created" },
+    "agent_id": { "type": "string", "description": "ID of the agent that generated this record" },
+    "workflow_id": { "type": "string", "description": "ID of the workflow execution" },
     "audit_cycle": { "type": "integer", "description": "3-year cycle" },
     "audit_start_date": { "type": "string", "format": "date" },
     "audit_end_date": { "type": "string", "format": "date" },
@@ -16,8 +20,6 @@
     "critical_findings": { "type": "integer" },
     "corrective_actions": { "type": "array", "items": { "type": "string" } },
     "next_audit_due": { "type": "string", "format": "date" },
-
-    "legal_basis": { "type": "array", "items": { "type": "string" }, "minItems": 2 },
-    "version": { "type": "string", "default": "1.0.0" }
+    "legal_basis": { "type": "array", "items": { "type": "string" }, "minItems": 1, "description": "Legal basis for the compliance audit record (OSHA-KR Article 44)" }
   }
 }
