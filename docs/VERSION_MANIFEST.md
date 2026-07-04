@@ -1,6 +1,6 @@
 # VERSION_MANIFEST.md
 
-**Generated**: 2026-07-04T21:37:04.099Z
+**Generated**: 2026-07-04T22:34:42.828Z
 **Manifest Version**: 1.0
 **Location**: docs\VERSION_MANIFEST.md
 
@@ -364,7 +364,7 @@
 | meeting | .claude/commands/meeting.md | both | N/A |
 | memlog | .claude/commands/memlog.md | both | N/A |
 | new-task | .claude/commands/new-task.md | both | N/A |
-| sync | .claude/commands/sync.md | claude | N/A |
+| sync | .claude/commands/sync.md | both | N/A |
 
 ---
 
@@ -372,7 +372,7 @@
 
 **Checked**: Claude (.claude/) vs Gemini (.gemini/)
 
-- **Commands with parity**: 5 / 6
+- **Commands with parity**: 6 / 6
 - **Skills with parity**: 45 / 56
 
 ---
