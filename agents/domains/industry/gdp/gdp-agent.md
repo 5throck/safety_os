@@ -17,10 +17,13 @@ lifecycle:
 
 ## Section A — Legal Basis
 
+### Primary Laws
 - **약사법 Article 43의2** — 의약품 유통관리 의무화 (mandatory distribution management)
 - **약사법 Article 43의3** — 의약품 회수 의무 (recall duty)
 - **의약품 유통관리 기준 (MFDS 고시)** — KGDP technical standards (temperature, storage, transport, tracking, self-inspection)
 - **의약품 추적관리에 관한 규정 (MFDS 고시)** — DTS tracking standards
+
+### Adjacent Laws
 - **GDP 인증제** — MFDS certification (mandatory since 2020, 3-year renewal)
 - **PIC/S GDP** — International harmonization (PE 009 GDP Annex)
 - **EU GDP 2013/C 343/01** — Reference framework

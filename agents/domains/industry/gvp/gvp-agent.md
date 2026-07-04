@@ -17,15 +17,18 @@ lifecycle:
 
 ## Section A — Legal Basis
 
+### Primary Laws
 - **약사법 Article 73의2** — 의약품 안전사용 관리 (mandatory ADR reporting)
 - **약사법 Article 73의3** — 의약품 재평가 (re-evaluation)
 - **의약품 이상반응 보고 등에 관한 규정 (MFDS 고시)** — KGVP detailed standards
 - **의약품 재평가 규정** — 5-7 year cycle re-evaluation
+
+### Adjacent Laws
 - **ICH E2 series** — A (1994), B(R3 2016), C(R2 2012), D (2003), E (2004), F (2010)
 - **EU GVP Modules 1-16** — international harmonization
 - **WHO-UMC** — global signal sharing (VigiBase)
 
-> **Multi-source legal_basis**: All GVP workflows require minimum 3 sources (Korean statutory + Korean delegated + ICH/international). Enforced by `safety-audit.ts` v2.7.0.
+> **Multi-source legal_basis policy**: All GVP evidence records MUST cite >= 3 legal sources (Korean statutory + Korean delegated + ICH/international). Enforced by `safety-audit.ts` v2.7.0.
 
 ---
 

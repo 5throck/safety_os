@@ -13,10 +13,19 @@ primary_law:
       topic_ko: 고압가스 취급 기준
     - article: "28"
       topic_ko: 안전관리자 선임
+    - article: "22-2"
+      topic_ko: 시설·기술·검사 상세기준 위임 (KGS Code)
 kgs_inspection:
   storage_tank: 연 1회
   gas_detector: 월 1회
   safety_relief_valve: 연 1회
+kgs_code_delegation:
+  description: "고압가스안전관리법 제22조의2에 따라 시설·기술·검사의 상세기준을 한국가스안전공사가 정함"
+  covered_by_kgs_code: true
+permit_procedure:
+  pre_review: "KGS 기술검토 (시행규칙 제7조)"
+  mid_inspection: "KGS 입회 중간검사"
+  completion_inspection: "KGS 입회 완성검사 → 지자체 허가"
 applicable_facilities:
   - LNG_터미널 (인천/평택/삼척/통영)
   - LPG_충전소 (전국 1200+)

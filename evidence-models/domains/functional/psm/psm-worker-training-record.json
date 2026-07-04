@@ -5,7 +5,22 @@
   "description": "Evidence model for PSM Worker Training records per OSHA-KR Article 44.",
   "version": "1.0.0",
   "type": "object",
-  "required": ["version", "record_id", "timestamp", "agent_id", "workflow_id", "legal_basis", "worker_id", "training_type", "psm_elements_covered", "trainer_id", "completion_status", "test_score", "retraining_due_date", "acknowledgment_signature"],
+  "required": [
+    "version",
+    "record_id",
+    "timestamp",
+    "agent_id",
+    "workflow_id",
+    "legal_basis",
+    "worker_id",
+    "training_type",
+    "psm_elements_covered",
+    "trainer_id",
+    "completion_status",
+    "test_score",
+    "retraining_due_date",
+    "acknowledgment_signature"
+  ],
   "properties": {
     "version": {
       "type": "string",
@@ -32,9 +47,16 @@
     },
     "legal_basis": {
       "type": "array",
-      "items": { "type": "string" },
-      "minItems": 2,
-      "description": "Legal basis for the worker training record (OSHA-KR Article 44)"
+      "items": {
+        "type": "string"
+      },
+      "minItems": 3,
+      "description": "Multi-source legal basis. Primary: OSHA-KR Article 44 (PSM — training). Adjacent laws may include: OSHA-KR Article 29 (safety and health education), SAPA Article 4 (education as part of safety system), Occupational Safety and Health Standards Rule Article 92 (LOTO training per KOSHA GUIDE Z-40-2022).",
+      "examples": [
+        "산업안전보건법 Article 44 (공정안전관리 — 안전교육)",
+        "산업안전보건법 Article 29 (안전보건교육)",
+        "안전보건기준에관한규칙 Article 92 (LOTO 교육 — KOSHA GUIDE Z-40-2022)"
+      ]
     },
     "worker_id": {
       "type": "string",
@@ -42,7 +64,11 @@
     },
     "training_type": {
       "type": "string",
-      "enum": ["initial", "refresher", "incident-based"],
+      "enum": [
+        "initial",
+        "refresher",
+        "incident-based"
+      ],
       "description": "Type of training session delivered."
     },
     "psm_elements_covered": {
@@ -58,7 +84,11 @@
     },
     "completion_status": {
       "type": "string",
-      "enum": ["completed", "incomplete", "failed"],
+      "enum": [
+        "completed",
+        "incomplete",
+        "failed"
+      ],
       "description": "Overall completion status for the training session."
     },
     "test_score": {

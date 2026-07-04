@@ -5,7 +5,18 @@
   "description": "Evidence model for Management of Change (MOC) records per OSHA-KR Article 44. v1 aligned with GMP change-control pattern.",
   "version": "1.0.0",
   "type": "object",
-  "required": ["version", "record_id", "change_id", "title", "description", "status", "legal_basis", "agent_id", "workflow_id", "hazard_review"],
+  "required": [
+    "version",
+    "record_id",
+    "change_id",
+    "title",
+    "description",
+    "status",
+    "legal_basis",
+    "agent_id",
+    "workflow_id",
+    "hazard_review"
+  ],
   "properties": {
     "version": {
       "type": "string",
@@ -31,24 +42,46 @@
     },
     "change_type": {
       "type": "string",
-      "enum": ["temporary", "permanent", "emergency"],
+      "enum": [
+        "temporary",
+        "permanent",
+        "emergency"
+      ],
       "description": "Classification of the change duration."
     },
     "classification": {
       "type": "string",
-      "enum": ["minor", "major", "critical"],
+      "enum": [
+        "minor",
+        "major",
+        "critical"
+      ],
       "description": "Risk-based classification of the change."
     },
     "status": {
       "type": "string",
-      "enum": ["initiated", "under_review", "approved", "implemented", "closed", "rejected"],
+      "enum": [
+        "initiated",
+        "under_review",
+        "approved",
+        "implemented",
+        "closed",
+        "rejected"
+      ],
       "description": "Current status of the MOC."
     },
     "legal_basis": {
       "type": "array",
-      "items": { "type": "string" },
-      "minItems": 2,
-      "description": "Legal basis for the MOC (OSHA-KR Article 44)"
+      "items": {
+        "type": "string"
+      },
+      "minItems": 3,
+      "description": "Multi-source legal basis. Primary: OSHA-KR Article 44 (PSM — management of change). Adjacent laws may include: SAPA Article 4 (change management as part of safety system), OSHA-KR Article 38 (safety measures before work), Occupational Safety and Health Standards Rule Article 92 (equipment isolation for changes).",
+      "examples": [
+        "산업안전보건법 Article 44 (공정안전관리 — 변경관리)",
+        "산업안전보건법 Article 38 (작업 전 안전조치)",
+        "안전보건기준에관한규칙 Article 92 (정비 등 작업 시 운전정지 등)"
+      ]
     },
     "timestamp": {
       "type": "string",
@@ -87,7 +120,12 @@
           "description": "Date when the hazard review was completed"
         }
       },
-      "required": ["assessment_type", "findings", "completed_by", "completion_date"]
+      "required": [
+        "assessment_type",
+        "findings",
+        "completed_by",
+        "completion_date"
+      ]
     },
     "approval_chain": {
       "type": "array",
@@ -109,7 +147,11 @@
           },
           "decision": {
             "type": "string",
-            "enum": ["approved", "rejected", "pending"],
+            "enum": [
+              "approved",
+              "rejected",
+              "pending"
+            ],
             "description": "Approval decision status"
           },
           "comments": {
@@ -117,7 +159,12 @@
             "description": "Approver comments or conditions"
           }
         },
-        "required": ["role", "approver_id", "approval_date", "decision"]
+        "required": [
+          "role",
+          "approver_id",
+          "approval_date",
+          "decision"
+        ]
       }
     }
   }

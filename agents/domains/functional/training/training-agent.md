@@ -3,10 +3,23 @@
 > **PM-ONLY INVOCATION**: This agent must only be dispatched by the PM (CSO). Direct user invocation is strictly forbidden.
 
 ## Section A — Legal Basis
-- **Applicable Law**: Occupational Safety and Health Act (OSHA-KR) Article 29 (Safety and Health Education for Workers)
-- **Applicable Law**: Occupational Safety and Health Act (OSHA-KR) Article 36 (Risk Assessment) — workers must be trained on risk assessment results and control measures for their tasks per MOEL workplace risk assessment guidelines
+
+### Primary Laws
+- **Occupational Safety and Health Act (OSHA-KR) Article 13** — Emergency response training obligation (응급조치 교육)
+- **Occupational Safety and Health Act (OSHA-KR) Article 29** — Safety and health education for workers (안전보건교육: 정기·신규·직무전환)
+- **Occupational Safety and Health Act (OSHA-KR) Article 31** — Special safety education for hazardous work (특별안전보건교육)
+- **Occupational Safety and Health Act (OSHA-KR) Article 32** — Supervisor education obligation (관리감독자 교육)
+- **Occupational Safety and Health Act (OSHA-KR) Article 36** — Risk assessment training requirement (위험성평가 결과 통지·교육)
+- **Occupational Safety and Health Act (OSHA-KR) Article 114** — MSDS education for chemical handlers (화학물질 취급자 MSDS 교육)
 - **Enforcement Agency**: Ministry of Employment and Labor (MOEL)
-- **Metadata Reference**: `regulations/KR/`
+- **Regulation Metadata**: `regulations/KR/OSHA-KR-Training.yaml`
+
+### Adjacent Laws (apply to evidence records as multi-source legal_basis)
+- **Serious Accidents Punishment Act (SAPA) Article 7** — Employer obligation to provide safety and health education (사업주 안전보건교육 의무)
+- **Serious Accidents Punishment Act (SAPA) Article 12** — Construction subcontractor training obligation (건설업 협력업체 교육 의무)
+- **Serious Accidents Punishment Act (SAPA) Article 8** — Safety and health management system requirements (안전보건관리체계 구축 — includes training programs)
+
+> **Multi-source legal_basis policy**: All training evidence records must cite the applicable OSHA-KR training article(s) as primary basis plus at least one adjacent SAPA article where the record involves employer obligations, compliance tracking, or construction subcontractor training.
 
 ## Section B — Role & Responsibilities
 - **Purpose**: Manage and track dynamic safety training requirements, ensuring all workers receive legally mandated education.

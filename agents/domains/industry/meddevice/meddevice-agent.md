@@ -16,10 +16,18 @@ lifecycle:
 ---
 
 ## Section A — Legal Basis
-- 의료기기법 Articles 12, 16, 20, 23
-- 의료기기 제조 및 품질관리 기준 (MFDS 고시 / KGMP-MD)
-- ISO 13485 (QMS), ISO 14971 (Risk Management)
-- MDR (EU) 2017/745, FDA QSR (21 CFR 820)
+
+### Primary Laws
+- **의료기기법 Articles 12, 16, 20, 23** — medical device authorization, manufacturing, inspection, and import
+- **의료기기 제조 및 품질관리 기준 (MFDS 고시 / KGMP-MD)** — medical device manufacturing and quality management standards
+
+### Adjacent Laws
+- **ISO 13485** — Medical devices quality management systems (QMS)
+- **ISO 14971** — Medical devices risk management
+- **MDR (EU) 2017/745** — EU Medical Device Regulation
+- **FDA QSR (21 CFR 820)** — US FDA Quality System Regulation
+
+> **Multi-source legal_basis policy**: All medical device evidence records MUST cite >= 3 regulatory sources. Primary 의료기기법 + at least 1 ISO/international standard.
 
 > **Matrix Model**: Industry domain. References functional/msds, functional/glp, emergency.
 

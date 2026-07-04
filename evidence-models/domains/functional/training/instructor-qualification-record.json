@@ -63,10 +63,16 @@
     },
     "legal_basis": {
       "type": "array",
+      "description": "Multi-source legal basis. Primary: OSHA-KR Article 29 §4 (instructor qualification requirements for safety education) or Article 31 §3 (instructor requirements for special safety education). Adjacent laws may include: SAPA Article 7 (employer must ensure qualified instructors — quality of training provision), KOSHA qualification standards (안전보건교육 강사 자격 기준).",
       "items": {
         "type": "string"
       },
-      "minItems": 2
+      "minItems": 3,
+      "examples": [
+        ["OSHA-KR Art.29 §4", "KOSHA GUIDE T-XX-2022", "SAPA Art.7"],
+        ["OSHA-KR Art.31 §3", "KOSHA GUIDE T-XX-2022", "SAPA Art.7"],
+        ["OSHA-KR Art.29 §4", "OSHA-KR Art.32 §2", "SAPA Art.7"]
+      ]
     }
   }
 }

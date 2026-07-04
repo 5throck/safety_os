@@ -17,13 +17,16 @@ lifecycle:
 
 ## Section A — Legal Basis
 
+### Primary Laws
 - **약사법 (Pharmaceutical Affairs Act)** — basis for MFDS GLP requirement for drug safety testing
 - **비임상시험 관리기준 (MFDS 고시)** — Non-Clinical Study Management Standards
+
+### Adjacent Laws
 - **화학물질등록 및 평가 등에 관한 법률 (K-REACH)** — chemical hazard assessment requires GLP
 - **화학물질 위해성평가 시험기관 관리기준 (환경부 고시)** — ME GLP for K-REACH tests
 - **OECD GLP Principles (C(97)186/Final)** — international standard for Mutual Acceptance of Data (MAD)
 
-> **Multi-source legal_basis**: All GLP workflows require minimum 3 sources (Korean statutory + Korean delegated + OECD/international). Enforced by `safety-audit.ts` v2.5.0.
+> **Multi-source legal_basis policy**: All GLP evidence records MUST cite >= 3 legal sources (Korean statutory + Korean delegated + OECD/international). Enforced by `safety-audit.ts` v2.5.0.
 
 ---
 

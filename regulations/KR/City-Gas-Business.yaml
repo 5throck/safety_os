@@ -1,0 +1,19 @@
+source_mcp: mcp-kr-legislation
+jurisdiction: KR
+regulator: MOTIE (산업통상자원부) / KGS (한국가스안전공사)
+framework: City-Gas-Business
+title_ko: 도시가스사업법
+title_en: City Gas Business Act
+primary_law:
+  name_ko: 도시가스사업법
+  articles:
+    - article: "17-5"
+      topic_ko: 시설·기술·검사 기준 위임 (KGS Code)
+kgs_code_delegation:
+  description: "도시가스사업법 제17조의5에 따라 시설·기술·검사의 상세기준을 한국가스안전공사가 정함"
+  covered_by_kgs_code: true
+applicable_facilities:
+  - 도시가스_배관시설
+  - 도시가스_저장시설
+  - 도시가스_공급시설
+last_updated: "2026-07-05"

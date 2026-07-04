@@ -5,7 +5,17 @@
   "description": "Evidence model for PSM Standard Operating Procedure (SOP) records per OSHA-KR Article 44.",
   "version": "1.0.0",
   "type": "object",
-  "required": ["version", "record_id", "sop_id", "sop_version", "acknowledgments", "timestamp", "agent_id", "workflow_id", "legal_basis"],
+  "required": [
+    "version",
+    "record_id",
+    "sop_id",
+    "sop_version",
+    "acknowledgments",
+    "timestamp",
+    "agent_id",
+    "workflow_id",
+    "legal_basis"
+  ],
   "properties": {
     "version": {
       "type": "string",
@@ -44,7 +54,10 @@
             "description": "Date the worker signed the SOP acknowledgment"
           }
         },
-        "required": ["worker_id", "signature_date"]
+        "required": [
+          "worker_id",
+          "signature_date"
+        ]
       }
     },
     "timestamp": {
@@ -62,9 +75,16 @@
     },
     "legal_basis": {
       "type": "array",
-      "items": { "type": "string" },
-      "minItems": 2,
-      "description": "Legal basis for the SOP record (OSHA-KR Article 44)"
+      "items": {
+        "type": "string"
+      },
+      "minItems": 3,
+      "description": "Multi-source legal basis. Primary: OSHA-KR Article 44 (PSM — operating procedures). Adjacent laws may include: OSHA-KR Article 13 (worker safety and health rules), SAPA Article 4 (establishment of safety work procedures).",
+      "examples": [
+        "산업안전보건법 Article 44 (공정안전관리 — 작업절차서)",
+        "산업안전보건법 Article 13 (안전보건규칙 준수)",
+        "중대재해처벌법 Article 4 (경영책임자 안전보건확보 의무)"
+      ]
     }
   }
 }

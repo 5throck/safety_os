@@ -17,16 +17,19 @@ lifecycle:
 
 ## Section A — Legal Basis
 
-- **산업안전보건법 (OSHA-KR)** — Article 36 (위험성평가), Article 44 (PSM for covered processes), Article 15 (안전관리자)
-- **중대재해처벌법 (SAPA)** — Article 3 (경영책임), Article 7 (사업주 의무)
+### Primary Laws
+- **산업안전보건법 (OSHA-KR)** — Article 36 (위험성평가), Article 44 (PSM for covered processes)
+
+### Adjacent Laws
 - **화학물질관리법 (CCA)** — Articles 20, 23 (유해화학물질, 사고대비물질)
+- **중대재해처벌법 (SAPA)** — Article 3 (경영책임), Article 4 (사업주 의무), Article 7 (안전·보건조치의무)
 - **위험물안전관리법** — 위험물 저장/취급 (지정수량 이상)
 - **대기환경보전법 / 수질환경보전법** — 배출 허용 기준
 - **K-REACH** — 화학물질 등록/평가 (연계 to MSDS/GLP)
 
 > **Matrix Model**: This domain provides **industry-specific** workflows only. For PSM (PHA, MOC, MI, PSSR), MSDS data, and Emergency response, this agent dispatches to functional services (`functional/psm/`, `functional/msds/`, `emergency/`).
 
-> **Multi-source legal_basis**: All workflows ≥3 sources.
+> **Multi-source legal_basis policy**: All ehschem evidence records MUST cite >= 3 regulatory sources. Primary OSHA-KR article + at least one adjacent statute or international standard.
 
 ---
 

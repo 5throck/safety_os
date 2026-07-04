@@ -5,66 +5,160 @@
   "description": "Evidence model for GMP Batch Manufacturing Record (제조 및 포장기록) records. v1 per KP-GMP 의약품등기준규정 Article 12 + ICH Q7.",
   "version": "1.0.0",
   "type": "object",
-  "required": ["record_id", "batch_id", "product_code", "disposition", "legal_basis", "e_signature", "qrm_assessment", "nomenclature", "audit_trail"],
+  "required": [
+    "record_id",
+    "batch_id",
+    "product_code",
+    "disposition",
+    "legal_basis",
+    "e_signature",
+    "qrm_assessment",
+    "nomenclature",
+    "audit_trail"
+  ],
   "properties": {
     "record_id": {
       "type": "string",
       "pattern": "^GMP-BATCH-[0-9]{4}-[0-9]{4}$"
     },
-    "batch_id": { "type": "string" },
-    "product_code": { "type": "string" },
-    "product_name": { "type": "string" },
-    "batch_size": { "type": "string" },
-    "manufacturing_date": { "type": "string", "format": "date-time" },
-    "expiry_date": { "type": "string", "format": "date-time" },
-    "bmr_ref": { "type": "string" },
+    "batch_id": {
+      "type": "string"
+    },
+    "product_code": {
+      "type": "string"
+    },
+    "product_name": {
+      "type": "string"
+    },
+    "batch_size": {
+      "type": "string"
+    },
+    "manufacturing_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "expiry_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "bmr_ref": {
+      "type": "string"
+    },
     "in_process_controls": {
       "type": "array",
       "items": {
         "type": "object",
         "properties": {
-          "parameter": { "type": "string" },
-          "specification": { "type": "string" },
-          "result": { "type": "string" },
-          "result_status": { "type": "string", "enum": ["pass", "fail", "oot"] }
+          "parameter": {
+            "type": "string"
+          },
+          "specification": {
+            "type": "string"
+          },
+          "result": {
+            "type": "string"
+          },
+          "result_status": {
+            "type": "string",
+            "enum": [
+              "pass",
+              "fail",
+              "oot"
+            ]
+          }
         }
       }
     },
     "yield": {
       "type": "object",
       "properties": {
-        "theoretical": { "type": "number" },
-        "actual": { "type": "number" },
-        "percentage": { "type": "number" },
-        "within_spec": { "type": "boolean" }
+        "theoretical": {
+          "type": "number"
+        },
+        "actual": {
+          "type": "number"
+        },
+        "percentage": {
+          "type": "number"
+        },
+        "within_spec": {
+          "type": "boolean"
+        }
       }
     },
     "deviation_refs": {
       "type": "array",
-      "items": { "type": "string", "pattern": "^GMP-DEV-[0-9]{4}-[0-9]{4}$" }
+      "items": {
+        "type": "string",
+        "pattern": "^GMP-DEV-[0-9]{4}-[0-9]{4}$"
+      }
     },
     "qa_review": {
       "type": "object",
       "properties": {
-        "reviewer_id": { "type": "string" },
-        "review_date": { "type": "string", "format": "date-time" },
-        "days_to_review": { "type": "integer" },
-        "within_30_days": { "type": "boolean" }
+        "reviewer_id": {
+          "type": "string"
+        },
+        "review_date": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "days_to_review": {
+          "type": "integer"
+        },
+        "within_30_days": {
+          "type": "boolean"
+        }
       }
     },
     "disposition": {
       "type": "string",
-      "enum": ["pending", "approved", "rejected", "conditional"]
+      "enum": [
+        "pending",
+        "approved",
+        "rejected",
+        "conditional"
+      ]
     },
-    "disposition_rationale": { "type": "string" },
+    "disposition_rationale": {
+      "type": "string"
+    },
     "legal_basis": {
       "type": "array",
-      "items": { "type": "string" },
-      "minItems": 2
+      "items": {
+        "type": "string"
+      },
+      "minItems": 3,
+      "description": "Multi-source legal basis. Primary: Pharmaceutical Affairs Act (약사법) Article 34 (GMP manufacturing obligation) and MFDS delegated legislation (의약품등기준규정). Adjacent laws may include: ICH Q7 (API GMP), ICH Q9 (Quality Risk Management), ICH Q10 (Pharmaceutical Quality System), PIC/S PE 009 (harmonized GMP).",
+      "examples": [
+        [
+          "약사법 Art.34",
+          "의약품등기준규정 Art.12",
+          "ICH Q7"
+        ],
+        [
+          "약사법 Art.34",
+          "의약품등기준규정 Art.16",
+          "ICH Q10"
+        ],
+        [
+          "약사법 Art.34",
+          "PIC/S PE 009-1",
+          "ICH Q9"
+        ]
+      ]
     },
-    "e_signature": { "$ref": "../../../_shared/base/common.schema.json#/definitions/e_signature" },
-    "qrm_assessment": { "$ref": "../../../_shared/base/common.schema.json#/definitions/qrm_assessment" },
-    "nomenclature": { "$ref": "../../../_shared/base/common.schema.json#/definitions/nomenclature" },
-    "audit_trail": { "$ref": "../../../_shared/base/common.schema.json#/definitions/audit_trail" }
+    "e_signature": {
+      "$ref": "../../../_shared/base/common.schema.json#/definitions/e_signature"
+    },
+    "qrm_assessment": {
+      "$ref": "../../../_shared/base/common.schema.json#/definitions/qrm_assessment"
+    },
+    "nomenclature": {
+      "$ref": "../../../_shared/base/common.schema.json#/definitions/nomenclature"
+    },
+    "audit_trail": {
+      "$ref": "../../../_shared/base/common.schema.json#/definitions/audit_trail"
+    }
   }
 }

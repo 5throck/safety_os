@@ -221,6 +221,10 @@ All specialist agents below are dispatched ONLY through PM:
 | safety-inspection-validator | ehsconst-agent | Validate construction safety inspections per OSHA-KR construction provisions |
 | gas-dispersion-analyzer | gasterm-agent | Model gas dispersion after leak for emergency response (LNG/LPG/수소 characteristics) |
 | tank-integrity-validator | gasterm-agent | Validate LNG/LPG/수소 storage tank structural integrity (pressure/temperature/corrosion/fatigue) |
+| construction-permit-overview | gasterm-agent | Orchestrate full construction/permit lifecycle (3-phase KGS Code inspection) |
+| pre-construction-technical-review | gasterm-agent | Execute KGS Code pre-construction technical review (시설·기술 기준) |
+| mid-construction-inspection | gasterm-agent | Execute KGS on-site mid-construction inspection |
+| completion-inspection | gasterm-agent | Execute KGS on-site completion inspection and permit issuance |
 | protocol-deviation-analyzer | gcp-agent | Analyze clinical trial protocol deviations per ICH E6(R3); classify severity and recommend CAPA |
 | sae-causality-assessor | gcp-agent | Assess SAE causality using ImPACT criteria for investigator/sponsor determinations |
 | dts-verification | gdp-agent | Verify DTS (Drug Tracking System) barcode/RFID scans against manufacturer and MFDS records |
@@ -310,9 +314,9 @@ All agents, regardless of their role, must adhere to the following:
 ### Legal Basis Gate
 
 All Safety OS agents MUST enforce the legal basis gate:
-- Before dispatching any workflow, verify the workflow has a `legal_basis` field
-- If `legal_basis` is missing, escalate to PM (CSO) immediately — do not execute
-- Legal basis must reference specific articles from OSHA-KR or SAPA
+- Before dispatching any workflow, verify the workflow has a `legal_basis` array with >= 3 regulatory sources
+- If `legal_basis` is missing or has fewer than 3 entries, escalate to PM (CSO) immediately — do not execute
+- Legal basis must reference specific articles from applicable Korean EHS laws (OSHA-KR, SAPA, domain-specific acts)
 
 ### 3-Section Agent Structure
 

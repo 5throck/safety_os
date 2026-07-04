@@ -29,6 +29,16 @@
     "assessment_required": { "type": "boolean" },
     "passing_score": { "type": ["number", "null"] },
     "refresh_cycle_months": { "type": "number", "description": "Retraining interval (12 = annual)" },
-    "legal_basis": { "type": "array", "items": { "type": "string" }, "minItems": 2 }
+    "legal_basis": {
+      "type": "array",
+      "description": "Multi-source legal basis. Primary: OSHA-KR Article 29 (curriculum content requirements for regular/new-hire/job-transfer education) or Article 31 (special curriculum for hazardous work) or Article 114 (MSDS curriculum content). Adjacent laws may include: SAPA Article 7 (employer obligation to provide adequate training content), OSHA-KR Article 36 (risk assessment results must be included in training curriculum for affected tasks).",
+      "items": { "type": "string" },
+      "minItems": 3,
+      "examples": [
+        ["OSHA-KR Art.29 §1", "OSHA-KR Art.36 §1", "SAPA Art.7"],
+        ["OSHA-KR Art.31 §1", "OSHA-KR Art.114 §1", "SAPA Art.7"],
+        ["OSHA-KR Art.114 §1", "OSHA-KR Art.29 §1", "SAPA Art.7"]
+      ]
+    }
   }
 }

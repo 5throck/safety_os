@@ -81,7 +81,7 @@ All include ALCOA+ audit trail fields. Common schema extensions defined in `evid
 
 | Gate | Verification |
 |------|--------------|
-| Multi-source legal_basis (≥2 references per workflow) | `bun scripts/safety-audit.ts` GMP extension |
+| Multi-source legal_basis (≥3 references per workflow) | `bun scripts/safety-audit.ts` |
 | E-signature required fields enforced | `bun scripts/safety-audit.ts` GMP extension |
 | QRM methodology enumerated (5 ICH Q9 techniques) | `bun scripts/safety-audit.ts` GMP extension |
 | Nomenclature dual declaration (KO + EN) | JSON schema validation |

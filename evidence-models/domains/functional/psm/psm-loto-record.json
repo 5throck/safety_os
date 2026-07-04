@@ -47,7 +47,14 @@
       "description": "Hazardous energy source types isolated for this LOTO.",
       "items": {
         "type": "string",
-        "enum": ["electrical", "mechanical", "hydraulic", "pneumatic", "thermal", "chemical"]
+        "enum": [
+          "electrical",
+          "mechanical",
+          "hydraulic",
+          "pneumatic",
+          "thermal",
+          "chemical"
+        ]
       }
     },
     "isolation_points": {
@@ -82,12 +89,23 @@
             "description": "Date and time the lock was applied."
           }
         },
-        "required": ["point_id", "location", "lock_applied_by", "lock_id", "contact_info", "timestamp"]
+        "required": [
+          "point_id",
+          "location",
+          "lock_applied_by",
+          "lock_id",
+          "contact_info",
+          "timestamp"
+        ]
       }
     },
     "lock_type": {
       "type": "string",
-      "enum": ["personal_lock", "individual_locking", "group_isolation_locking"],
+      "enum": [
+        "personal_lock",
+        "individual_locking",
+        "group_isolation_locking"
+      ],
       "description": "Lock classification per KOSHA GUIDE Z-40-2022 §3.2-3.4: personal_lock (개인잠금 — solo worker, solo lock), individual_locking (개별잠금 — one isolation point, 2+ workers), group_isolation_locking (그룹잠금 — 2+ isolation points or 2+ work teams, e.g. multi-contractor TAR scenarios)."
     },
     "supervisor_confirmation_by": {
@@ -107,34 +125,65 @@
       "description": "Name or ID of the person who confirmed all locks were removed and equipment restored. Per KOSHA GUIDE Z-40-2022 §6.1.4/§8.5, only the person who applied a given lock may remove it under normal conditions."
     },
     "emergency_removal": {
-      "type": ["object", "null"],
+      "type": [
+        "object",
+        "null"
+      ],
       "description": "Present only if a lock was removed without its owner present, per KOSHA GUIDE Z-40-2022 §6.3 (emergency lock removal procedure). Null under normal lock-removal conditions.",
       "properties": {
-        "reason": { "type": "string", "description": "Documented reason the emergency removal was necessary." },
-        "authorized_by": { "type": "string", "description": "Supervisor/department head who authorized the emergency removal after confirming worker evacuation/safety." },
-        "signage_posted": { "type": "boolean", "description": "Confirms warning signage/a monitor was placed at the isolation point so the returning lock owner is not exposed to an unexpected re-energized state, per §6.3.3." }
+        "reason": {
+          "type": "string",
+          "description": "Documented reason the emergency removal was necessary."
+        },
+        "authorized_by": {
+          "type": "string",
+          "description": "Supervisor/department head who authorized the emergency removal after confirming worker evacuation/safety."
+        },
+        "signage_posted": {
+          "type": "boolean",
+          "description": "Confirms warning signage/a monitor was placed at the isolation point so the returning lock owner is not exposed to an unexpected re-energized state, per §6.3.3."
+        }
       },
-      "required": ["reason", "authorized_by", "signage_posted"]
+      "required": [
+        "reason",
+        "authorized_by",
+        "signage_posted"
+      ]
     },
     "last_periodic_review_date": {
-      "type": ["string", "null"],
+      "type": [
+        "string",
+        "null"
+      ],
       "format": "date",
       "description": "Date this equipment's lock/tag procedure was last reviewed, per KOSHA GUIDE Z-40-2022 §9.1 (minimum annual review of all lock/tag procedures). Null if this equipment has not yet had its first periodic review — tracked here as a compliance marker; scheduling/reminder automation is not implemented in this workflow yet."
     },
     "tbm_ref": {
-      "type": ["string", "null"],
+      "type": [
+        "string",
+        "null"
+      ],
       "description": "Reference to the joint Tool Box Meeting (합동 Tool Box Meeting) record where all involved parties (including contractors) determined the lock scope, per KOSHA GUIDE Z-40-2022 §6.1.2(1) and §8.2/§8.4. May reference an ehsconst-agent tbm-tool-box-meeting record when contractors are involved (e.g., during TAR)."
     },
     "asset_integrity_trigger_ref": {
-      "type": ["string", "null"],
+      "type": [
+        "string",
+        "null"
+      ],
       "description": "Reference to the asset-integrity-agent inspection record that flagged this equipment as unsafe, if this LOTO was triggered by an asset-integrity finding rather than routine maintenance."
     },
     "risk_assessment_ref": {
-      "type": ["string", "null"],
+      "type": [
+        "string",
+        "null"
+      ],
       "description": "Reference to the risk-assessment-agent record identifying which energy sources are hazardous for this equipment."
     },
     "tar_id": {
-      "type": ["string", "null"],
+      "type": [
+        "string",
+        "null"
+      ],
       "description": "Turnaround (TAR) event ID this LOTO permit was issued under, if applicable — links back to the same turnaround_id/tar_id value used in ehschem-turnaround-record.json, contractor-tar-surge-record.json, and oh-tar-health-record.json. Null for routine, non-TAR maintenance LOTO records."
     },
     "legal_basis": {
@@ -142,8 +191,13 @@
       "items": {
         "type": "string"
       },
-      "minItems": 2,
-      "description": "Multi-source legal basis. Confirmed: OSHA-KR Article 38 (안전조치), 산업안전보건기준에관한규칙 (Occupational Safety and Health Standards Rule) 제92조 (정비 등의 작업 시의 운전정지 등) — this specific sub-statute article was confirmed directly from KOSHA GUIDE Z-40-2022's own revision history (개정 이력, 2022.12.29), which cites it as the LOTO implementation basis. Also relevant: SAPA Article 4 (안전보건관리체계 구축 의무) and SAPA Article 5 (제3자/도급 근로자 안전조치 의무 — cited in KOSHA GUIDE Z-40-2022 §7.4 for contractor/third-party LOTO training obligations, relevant to Group Isolation Locking scenarios)."
+      "minItems": 3,
+      "description": "Multi-source legal basis. Primary: OSHA-KR Article 44 (PSM — hazardous energy isolation). LOTO-specific: OSHA-KR Article 38 (safety measures including work stoppage), Occupational Safety and Health Standards Rule Article 92 (zero energy state / lockout-tagout — confirmed from KOSHA GUIDE Z-40-2022 revision history, 2022.12.29). Adjacent laws may include: SAPA Article 4 (safety management system obligation), SAPA Article 5 (third-party/contractor safety duty — KOSHA GUIDE Z-40-2022 section 7.4 for contractor LOTO training), OSHA-KR Article 34-2 (periodic inspection of safety devices).",
+      "examples": [
+        "산업안전보건법 Article 44 (공정안전관리 — 위험에너지 통제/LOTO)",
+        "안전보건기준에관한규칙 Article 92 (정비 등 작업 시 운전정지 등 — KOSHA GUIDE Z-40-2022)",
+        "중대재해처벌법 Article 5 (도급 근로자 안전조치 의무 — KOSHA GUIDE Z-40-2022 §7.4)"
+      ]
     },
     "closure_signature": {
       "type": "string",

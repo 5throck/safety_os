@@ -17,14 +17,17 @@ lifecycle:
 
 ## Section A — Legal Basis
 
+### Primary Laws
 - **약사법 (Pharmaceutical Affairs Act) Article 34** — GMP 제조업 관리 의무화: Pharmaceutical manufacturers must comply with GMP standards. This is the primary statutory mandate.
 - **의약품 등의 기준 및 규정 (Standards and Specifications for Pharmaceuticals, etc.)** — MFDS delegated legislation codifying technical GMP requirements (Articles 12, 15, 16, 17, 18, 19, 20).
+
+### Adjacent Laws
 - **ICH Q7** — Active Pharmaceutical Ingredients GMP standard (adopted in Korea).
 - **ICH Q9** — Quality Risk Management methodology (horizontal application across all GMP workflows).
 - **ICH Q10** — Pharmaceutical Quality System (PQS) framework.
 - **PIC/S PE 009** — Internationally harmonized GMP Annexes for export mutual recognition.
 
-> **Multi-source legal_basis**: All GMP workflows must declare at minimum 2 regulatory sources (Korean statutory + international alignment). Enforced by `safety-audit.ts` GMP extension.
+> **Multi-source legal_basis policy**: All GMP evidence records MUST cite >= 3 regulatory sources. Primary 약사법 + at least 1 ICH/PIC/S standard.
 
 ---
 

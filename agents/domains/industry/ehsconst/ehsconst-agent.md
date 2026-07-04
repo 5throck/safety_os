@@ -17,15 +17,18 @@ lifecycle:
 
 ## Section A — Legal Basis
 
+### Primary Laws
 - **산업안전보건법 (OSHA-KR) Articles 15, 17, 98-103** — Construction safety provisions, safety manager appointment, safety budget, fall/collapse/electrical prevention, safety management plan
 - **산업안전보건법 (OSHA-KR) Article 36** — Risk assessment (위험성평가 실시) — mandatory hazard identification, risk evaluation, and control measures for all construction workplace tasks
+
+### Adjacent Laws
 - **중대재해처벌법 (SAPA) Article 12** — Construction project special provisions (발주처/원사업주 책임 강화)
 - **중대재해처벌법 (SAPA) Articles 3, 7, 13** — Management responsibility, employer obligations, subcontractor duties
-- **건설기술진흥법 Articles 24, 25** — Construction safety management, independent safety supervision
 - **건설산업기본법 Articles 45, 83** — Subcontractor management, safety obligations
+- **건설기술진흥법 Articles 24, 25** — Construction safety management, independent safety supervision
 - **안전보건관리계획 작성 기준 (MOEL 고시)** — Safety management plan content standards
 
-> **Multi-source legal_basis**: All ehsconst workflows require minimum 3 sources (OSHA-KR + SAPA + construction-specific). Enforced by `safety-audit.ts` v2.8.0.
+> **Multi-source legal_basis policy**: All ehsconst evidence records MUST cite >= 3 regulatory sources. Primary OSHA-KR construction article + at least one adjacent statute or delegated standard.
 
 ---
 

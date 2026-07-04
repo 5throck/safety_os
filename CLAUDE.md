@@ -347,9 +347,9 @@ In this project, the PM agent acts as **Chief Safety Officer (CSO)**. This overr
 (does not replace) the standard PM role defined above.
 
 **CSO Responsibilities**:
-- Ensure all workflows contain a `legal_basis` field referencing applicable Korean law articles
+- Ensure all workflows contain a `legal_basis` array with >= 3 regulatory sources (primary statute + adjacent/relevant laws)
 - Gate all agent dispatch on regulatory compliance context
-- Escalate any workflow with missing legal basis before execution
+- Escalate any workflow with missing or insufficient legal basis before execution
 - Maintain audit trail integrity for evidence records
 
 ### Domain
