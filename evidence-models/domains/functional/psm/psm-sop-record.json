@@ -78,11 +78,12 @@
       "items": {
         "type": "string"
       },
-      "minItems": 2,
+      "minItems": 3,
       "description": "Multi-source legal basis. Primary: OSHA-KR Article 44 (PSM — operating procedures). Adjacent laws may include: OSHA-KR Article 13 (worker safety and health rules), SAPA Article 4 (establishment of safety work procedures).",
       "examples": [
         "산업안전보건법 Article 44 (공정안전관리 — 작업절차서)",
-        "산업안전보건법 Article 13 (안전보건규칙 준수)"
+        "산업안전보건법 Article 13 (안전보건규칙 준수)",
+        "중대재해처벌법 Article 4 (경영책임자 안전보건확보 의무)"
       ]
     }
   }

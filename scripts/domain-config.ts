@@ -76,8 +76,8 @@ export const DOMAINS: DomainConfig[] = [
         name: 'psm',
         tier: 'functional',
         required_evidence_fields: [],
-        min_legal_basis: 2,
-        min_workflow_legal_basis: 2,
+        min_legal_basis: 3,
+        min_workflow_legal_basis: 3,
         skip_workflow_validation: true, // PSM schemas use plain-string legal_basis, not array
         description: 'Process Safety Management',
     },

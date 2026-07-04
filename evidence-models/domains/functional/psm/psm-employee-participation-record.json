@@ -48,11 +48,12 @@
       "items": {
         "type": "string"
       },
-      "minItems": 2,
+      "minItems": 3,
       "description": "Multi-source legal basis. Primary: OSHA-KR Article 44 (PSM — employee participation). Adjacent laws may include: OSHA-KR Article 12 (safety and health committee), SAPA Article 4 (worker participation in safety system).",
       "examples": [
         "산업안전보건법 Article 44 (공정안전관리 — 근로자 참여)",
-        "산업안전보건법 Article 12 (안전보건위원회)"
+        "산업안전보건법 Article 12 (안전보건위원회)",
+        "중대재해처벌법 Article 4 (경영책임자 안전보건확보 의무)"
       ]
     },
     "activity_type": {

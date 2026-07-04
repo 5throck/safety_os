@@ -74,11 +74,12 @@
       "items": {
         "type": "string"
       },
-      "minItems": 2,
+      "minItems": 3,
       "description": "Multi-source legal basis. Primary: OSHA-KR Article 44 (PSM — compliance audit). Adjacent laws may include: SAPA Article 4 (safety management system verification), OSHA-KR Article 15 (risk assessment compliance for hazardous facilities).",
       "examples": [
         "산업안전보건법 Article 44 (공정안전관리 — 규정준수평가)",
-        "중대재해처벌법 Article 4 (경영책임자 안전보건확보 의무)"
+        "중대재해처벌법 Article 4 (경영책임자 안전보건확보 의무)",
+        "산업안전보건법 Article 15 (유해·위험방지계획 수립)"
       ]
     }
   }
