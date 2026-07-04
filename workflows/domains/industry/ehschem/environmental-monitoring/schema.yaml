@@ -9,7 +9,7 @@ uses_functional_services: [functional/psm, functional/msds, emergency]
 legal_basis:
   - 대기환경보전법
   - 수질환경보전법
-  - 환경보전법
+  - 산업안전보건법 Article 125
 industry_profile: chemical-plant
 agent: ehschem-agent
 evidence_model: ehschem-environmental-record.json

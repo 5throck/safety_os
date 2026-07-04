@@ -3,6 +3,7 @@ workflow_id: self-inspection
 title: "자체점검 (Self-Inspection)"
 status: active
 applicability: mandatory
+workflow_type: core
 legal_basis:
   - 약사법 Article 34
   - 의약품등기준규정 Article 15

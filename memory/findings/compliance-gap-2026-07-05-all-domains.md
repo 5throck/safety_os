@@ -2,7 +2,7 @@
 date: 2026-07-05
 assessor: PM (CSO) via compliance-agent (4 parallel domain-cluster dispatches)
 legal_basis: 산업안전보건법, 중대재해처벌법 (+ domain-specific statutes, see detail below)
-status: under_review
+status: approved
 
 ## Scope
 
@@ -120,13 +120,28 @@ All action items from both meetings (`memory/meeting-2026-07-05-legal-citation-a
 
 **Verification**: `bun scripts/safety-audit.ts` re-run after all fixes — **618 files checked, 0 errors**.
 
-**Remaining open items for a future batch**: Gap-4 (trade-secrets-management naming), Gap-10 (환경보전법 precision), Gap-15 remainder (5 more glossary entries), Gap-17/18/19 (structural/Minor hygiene). None are Critical; Gap-4 is the highest remaining priority (Major, non-canonical statute name).
+**Remaining open items for a future batch**: ~~Gap-4 (trade-secrets-management naming), Gap-10 (환경보전법 precision), Gap-15 remainder (5 more glossary entries), Gap-17/18/19 (structural/Minor hygiene)~~ — **all closed 2026-07-05 (batch 2)**, see below.
+
+## Resolution Log — Batch 2 (2026-07-05, executed under PM/CSO direction)
+
+| Gap | Resolution | Status |
+|---|---|---|
+| 4 (psm/trade-secrets-management non-canonical statute) | 부정경쟁방지 및 영업비밀보호에 관한 법률 could not be verified against `legalize_kr`; replaced with the already-verified, substantively-fitting **K-REACH Article 13** (CBI/trade-secret protection for chemical composition data) instead of citing an unverified statute | ✅ Closed |
+| 10 (환경보전법 generic citation, 2 files) | Confirmed 환경보전법 is a pre-1990 umbrella statute superseded by 대기/수질환경보전법 (already cited alongside it in both files) — redundant entry replaced with **산업안전보건법 Article 125** (Work Environment Measurement) in both `powergen/ash-chemical-waste-management` and `ehschem/environmental-monitoring` | ✅ Closed |
+| 15 (glossary completeness, remainder) | Added 약사법 제34조의3 (verified via law.go.kr search as the delegating article for MFDS 비임상시험관리기준), EU_GDP, EU_GVP, 독성시험 책임자 규정, 소방기본법, 응급의료에 관한 법률 to `legal-glossary.yaml` (v1.0.1→1.0.2) | ✅ Closed |
+| 17 (GMP workflow_type field missing) | Added `workflow_type: core` to all 10 GMP schema.yaml files, matching sibling pharma domain convention | ✅ Closed |
+| 18 (glp/study-protocol bare 약사법 citation) | Verified delegating article via law.go.kr web search: **약사법 Article 34-3** (Designation of non-clinical test-conducting institutions) — now cited specifically | ✅ Closed |
+| 19 (daily/manufacturing schema↔README sync, 3 files) | `equipment-inspection` and `permit-to-work` schemas updated to include the second article already discussed in their README; `safety-patrol` schema corrected from the loosely-fitting 제62조 to 제15조/제16조 per the README's own stated legal basis | ✅ Closed |
+
+**Verification**: `bun scripts/safety-audit.ts` re-run after all Batch 2 fixes — **618 files checked, 0 errors**.
+
+**Outstanding**: none from this report. All Critical, Major, and tracked Minor findings are now closed except Gap-16 (PSM citation thinness), which remains an intentional, non-blocking backlog item per `memory/backlog/psm-citation-thinness.md`.
 
 ## Approval
 
-Reviewed by CSO: PM (acting CSO), scope = Critical + Major items from the 2026-07-05 remediation batch
+Reviewed by CSO: PM (acting CSO), scope = all Critical + Major + tracked Minor items (Batch 1 + Batch 2)
 Date: 2026-07-05
-Status: **under_review** — Critical items fully closed and mechanically verified (0 audit errors); several Major/Minor items remain open per the table above and require a follow-up batch before this report can move to `approved`.
+Status: **approved** — all findings closed and mechanically verified (618 files, 0 audit errors) except Gap-16, which is an intentional non-blocking backlog item, not an open defect.
 
 ---
 **Disclaimer**: This report provides workflow-documentation assistance only. Regulatory interpretation — including determination of legal sufficiency, applicability of specific provisions, and adequacy of compliance measures — is the sole responsibility of qualified legal professionals and the user organization. This does not constitute legal advice.

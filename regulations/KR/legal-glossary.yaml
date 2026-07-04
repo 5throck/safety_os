@@ -9,7 +9,7 @@ source_mcp: mcp-kr-legislation  # curated reference glossary; statute content so
 # (agents/*.md Section A Legal Basis blocks, workflows/**/schema.yaml legal_basis fields,
 # regulations/KR/*.yaml). Articles NOT referenced anywhere in the codebase are omitted;
 # accuracy over completeness. Unverified entries are explicitly commented.
-version: 1.0.1
+version: 1.0.2
 last_updated: 2026-07-05
 
 # =============================================================================
@@ -104,6 +104,7 @@ statutes:
       - { number: "제69조",     topic_en: "Clinical Trial Application (CTA) approval required" }
       - { number: "제73조의2",  topic_en: "SAE reporting / ADR reporting (의약품 안전사용 관리)" }
       - { number: "제73조의3",  topic_en: "Pharmaceutical re-evaluation (의약품 재평가)" }
+      - { number: "제34조의3",  topic_en: "Designation of non-clinical test-conducting institutions (비임상시험실시기관 지정)" }
 
   의약품등기준규정:
     english: Standards and Specifications for Pharmaceuticals, etc. (KP-GMP delegated regulation)
@@ -272,6 +273,23 @@ statutes:
     note: "Verified as active Korean law via legalize_kr (MST 283851). Canonical name for what several workflows informally cited as '재난관리기본법'. Article-level detail pending future verification."
     articles: []
 
+  독성시험 책임자 규정:
+    english: Toxicity Study Director Regulation
+    note: "Cited in workflows/domains/industry/glp/personnel-qualification/schema.yaml. Appears to be an internal MFDS rule reference (cf. '비임상시험 관리기준 (MFDS 고시)' pattern documented in regulations/KR/MFDS-GLP.yaml) rather than a standalone statute. Abbreviation, regulator, and article-level detail unverified — not fabricated pending confirmation."
+    articles: []
+
+  소방기본법:
+    english: Basic Fire Services Act
+    regulator: NFA (소방청)
+    note: "Cited in emergency workflows (confined-space-rescue, high-angle-rescue) as '소방기본법 (구조)'. Abbreviation and article-level detail unverified."
+    articles: []
+
+  응급의료에 관한 법률:
+    english: Emergency Medical Service Act
+    regulator: MOHW (보건복지부)
+    note: "Cited in workflows/emergency/medical-emergency/schema.yaml. Abbreviation and article-level detail unverified."
+    articles: []
+
 # =============================================================================
 # INTERNATIONAL STANDARDS (reference only — NOT part of the Korean allowlist)
 # =============================================================================
@@ -324,3 +342,9 @@ international_standards:
     full_name: "21 CFR Part 11 — FDA Electronic Records / Electronic Signatures"
   GAMP_5:
     full_name: "GAMP 5 — Risk-based approach to compliant GxP computerized systems"
+  EU_GDP:
+    full_name: "EU Guidelines on Good Distribution Practice of medicinal products for human use (2013/C 343/01)"
+    note: "Cited across most GDP workflows; documented as international_alignment in regulations/KR/MFDS-GDP.yaml."
+  EU_GVP:
+    full_name: "EU Good Pharmacovigilance Practices — Modules I-XVI"
+    note: "Cited across most GVP workflows; documented as international_alignment in regulations/KR/MFDS-GVP.yaml."
