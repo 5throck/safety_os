@@ -1,7 +1,13 @@
 #!/usr/bin/env bun
 /**
- * k_skill MCP Server v1.0.0
+ * k_skill MCP Server v2.0.0
  * Korean OSHA / SAPA regulations search with 24-hour caching.
+ *
+ * v2.0.0: Hybrid 3-tier search replaces mock-data fallback:
+ *   Tier 1 — Static article index (88+ articles from legal-glossary.yaml, instant)
+ *   Tier 2 — MST full-law fetch + local grep (full article content)
+ *   Tier 3 — lawSearch.do law name search (last resort)
+ *   Empty   — Honest empty result (no mock/fake data)
  */
 
 import { Server } from '@modelcontextprotocol/sdk/server/index.js';
@@ -18,7 +24,7 @@ import { invalidateCache } from './tools/cache-admin.js';
 const log = createLogger('k_skill');
 
 const server = new Server(
-  { name: 'k_skill', version: '1.0.0' },
+  { name: 'k_skill', version: '2.0.0' },
   { capabilities: { tools: {} } }
 );
 
@@ -26,7 +32,7 @@ server.setRequestHandler(ListToolsRequestSchema, async () => ({
   tools: [
     {
       name: 'search_osha_regulations',
-      description: '산업안전보건법 관련 규정을 키워드로 검색합니다.',
+      description: 'Search Korean EHS regulations (OSHA-KR, SAPA, CCA, etc.) by keyword. Supports article numbers (e.g. "제36조"), English topics ("risk assessment"), Korean keywords ("위험성평가"), and law names ("산업안전보건법"). Returns real law data via 3-tier hybrid search; returns empty array (never mock) when no match is found.',
       inputSchema: { type: 'object', properties: { keyword: { type: 'string' } }, required: ['keyword'] },
     },
     {
