@@ -93,7 +93,7 @@ All scripts in this workspace follow a Hybrid Scripting Architecture divided int
 | sync-md.sh | L0 | 1.0.0 | active | — | — | L0+L1 | — |
 | sync-md.ts | L0 | 1.0.0 | active | — | — | L0+L1 | — |
 | sync-skill-status.ts | L0 | 1.0.0 | active | — | — | L0+L1 | — |
-| sync-skills.ts | L0 | 1.0.0 | active | — | — | L0+L1 | — |
+| sync-skills.ts | L0 | 1.1.0 | active | — | — | L0+L1 | — |
 | tag-template.ts | L0 | 1.0.0 | active | — | — | L0+L1 | — |
 | team-builder.ts | L0 | 1.0.0 | active | — | — | L0+L1 | — |
 | test-runner.ts | L0 | 1.0.0 | active | — | — | L0+L1 | — |
@@ -104,14 +104,14 @@ All scripts in this workspace follow a Hybrid Scripting Architecture divided int
 | validate-doc-folder.ts | L0 | 1.0.0 | active | — | — | L0+L1 | — |
 | validate-md-language.ts | L0 | 1.0.0 | active | — | — | L0+L1 | — |
 | validate-model-registry.ts | L0 | 1.0.0 | active | — | — | L0+L1 | — |
-| validate-skills.ts | L0 | 1.0.0 | active | — | — | L0+L1 | — |
+| validate-skills.ts | L0 | 1.1.0 | active | — | — | L0+L1 | — |
 | verify-agent-deliverables.ts | L0 | 1.0.0 | active | — | — | L0+L1 | — |
 | verify-memory.ts | L0 | 1.0.0 | active | — | — | L0+L1 | — |
 | verify-new-project-tests.ts | L0 | 1.0.0 | active | — | — | L0+L1 | — |
 | verify-platform-lifecycle.ts | L0 | 1.0.0 | active | — | — | L0+L1 | — |
 | verify-readme-sync.ts | L0 | 1.0.0 | active | — | — | L0+L1 | — |
 | verify-scripts.ts | L0 | 1.0.0 | active | — | — | L0+L1 | — |
-| verify-skills.ts | L0 | 1.0.0 | active | — | — | L0+L1 | — |
+| verify-skills.ts | L0 | 1.1.0 | active | — | — | L0+L1 | — |
 | verify-template-integrity.ts | L0 | 1.0.0 | active | — | — | L0+L1 | — |
 | `validate-templates.ts` | L0 | 1.0.0 | active | —| —| L0+L1 | —|
 | `publish-to-template.ts` | L0 | 1.0.0 | active | —| —| L0+L1 | —|
@@ -124,7 +124,7 @@ All scripts in this workspace follow a Hybrid Scripting Architecture divided int
 | `agent-verify.ts` | L0 | 1.0.1 | active | —| —| L0+L1 | —|
 | `analyze-git-history.ts` | L0 | 1.0.0 | active | —| —| L0+L1 | —|
 | `archive-memory.ts` | L0 | 1.0.0 | active | —| —| L0+L1 | —|
-| `audit.ts` | L0 | 2.5.3 | active | —| —| L0+L1 | —|
+| `audit.ts` | L0 | 2.6.0 | active | —| —| L0+L1 | —|
 | `check-pm-approval.ts` | L0 | 1.0.0 | deprecated | 2026-11-30 | —| L0+L1 | —|
 | `cleanup-completed-md.ps1` | L0 | 1.0.0 | active | —| —| L0+L1 | —|
 | `cleanup-completed-md.sh` | L0 | 1.0.0 | active | —| —| L0+L1 | —|
@@ -174,7 +174,7 @@ All scripts in this workspace follow a Hybrid Scripting Architecture divided int
 | `sync-agent-status.ts` | L0 | 1.0.0 | active | —| —| L0+L1 | —|
 | `sync-md.ts` | L0 | 1.2.0 | active | —| —| L0+L1 | —|
 | `sync-skill-status.ts` | L0 | 1.0.0 | active | —| —| L0+L1 | —|
-| `sync-skills.ts` | L0 | 1.0.0 | active | —| —| L0+L1 | —|
+| `sync-skills.ts` | L0 | 1.1.0 | active | —| —| L0+L1 | —|
 | `tag-template.ts` | L0 | 1.0.0 | active | —| —| L0 | —|
 | `team-builder.ts` | L0 | 1.2.0 | active | —| —| L0+L1 | —|
 | `test-runner.ts` | L0 | 1.0.0 | active | —| —| L0+L1 | —|
@@ -185,14 +185,14 @@ All scripts in this workspace follow a Hybrid Scripting Architecture divided int
 | `validate-doc-folder.ts` | L0 | 1.0.0 | active | —| —| L0+L1 | —|
 | `validate-md-language.ts` | L0 | 1.3.0 | active | —| —| L0+L1 | —|
 | `validate-model-registry.ts` | L0 | 1.0.1 | active | —| —| L0+L1 | —|
-| `validate-skills.ts` | L0 | 1.0.0 | active | —| —| L0+L1 | —|
+| `validate-skills.ts` | L0 | 1.1.0 | active | —| —| L0+L1 | —|
 | `verify-agent-deliverables.ts` | L0 | 1.0.0 | active | —| —| L0+L1 | —|
 | `verify-memory.ts` | L0 | 1.0.0 | active | —| —| L0+L1 | —|
 | `verify-new-project-tests.ts` | L0 | 1.0.2 | active | —| —| L0 | —|
 | `verify-platform-lifecycle.ts` | L0 | 1.1.0 | active | —| —| L0+L1 | —|
 | `verify-readme-sync.ts` | L0 | 1.1.1 | active | —| —| L0+L1 | —|
 | `verify-scripts.ts` | L0 | 1.0.0 | active | —| —| L0+L1 | —|
-| `verify-skills.ts` | L0 | 1.0.0 | active | —| —| L0+L1 | —|
+| `verify-skills.ts` | L0 | 1.1.0 | active | —| —| L0+L1 | —|
 | `verify-template-integrity.ts` | L0 | 1.0.0 | active | —| —| L0 | —|
 
 ---

@@ -1,7 +1,8 @@
 #!/usr/bin/env bun
 /**
  * Skill Lifecycle Validation Script
- * @version 1.0.0
+ * @version 1.1.0
+ */
 // Validates skills/*/SKILL.md files for required frontmatter
 // and checks governance records in docs/lifecycle/skills/*.md
 //
@@ -9,8 +10,8 @@
 //   bun scripts/validate-skills.ts
 //   bun scripts/validate-skills.ts --json
 
-import { readFileSync, existsSync, readdirSync } from 'node:fs';
-import { join } from 'node:path';
+import { readFileSync, existsSync, readdirSync, statSync } from 'node:fs';
+import { join, relative, dirname } from 'node:path';
 import { cwd } from 'node:process';
 
 interface ValidationIssue {
@@ -129,17 +130,34 @@ function hasField(rawContent: string, fieldName: string): boolean {
   return false;
 }
 
+
+// Recursively find all SKILL.md files under a directory
+function findSkillFiles(dir: string): string[] {
+  const results: string[] = [];
+  if (!existsSync(dir)) return results;
+  const list = readdirSync(dir);
+  for (const file of list) {
+    if (file === '_meta' || file === '_archive' || file.startsWith('.')) continue;
+    const filePath = join(dir, file);
+    const stat = statSync(filePath);
+    if (stat && stat.isDirectory()) {
+      results.push(...findSkillFiles(filePath));
+    } else if (file === 'SKILL.md') {
+      results.push(filePath);
+    }
+  }
+  return results;
+}
+
 // Part 1: Validate runtime definitions (skills/*/SKILL.md)
 function validateRuntimeDefinitions(): void {
   if (!JSON_MODE) console.log(`\n${colors.cyan}📋 Part 1: Runtime Definition Validation (skills/*/SKILL.md)${colors.reset}`);
 
-  const skillDirs = readdirSync(SKILLS_DIR, { withFileTypes: true })
-    .filter(dirent => dirent.isDirectory())
-    .map(dirent => dirent.name);
+  const skillFiles = findSkillFiles(SKILLS_DIR);
 
-  for (const skillDir of skillDirs) {
-    const skillFile = join(SKILLS_DIR, skillDir, 'SKILL.md');
-    if (!existsSync(skillFile)) continue;
+  for (const skillFile of skillFiles) {
+    const parentDir = dirname(skillFile);
+    const skillDir = relative(SKILLS_DIR, parentDir).replace(/\\/g, '/');
 
     totalFiles++;
     const rawContent = readFileSync(skillFile, 'utf-8');

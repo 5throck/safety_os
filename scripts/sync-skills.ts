@@ -2,7 +2,8 @@
 /**
  * sync-skills.ts
  * Distributes skills from the SSOT (skills/) to .claude/skills/ and .gemini/skills/
- * @version 1.0.0
+ * @version 1.1.0
+ */
 
 import * as fs from 'node:fs';
 import * as path from 'node:path';
@@ -25,38 +26,98 @@ if (!fs.existsSync(ssotSkills)) {
   process.exit(0);
 }
 
-for (const item of fs.readdirSync(ssotSkills)) {
-  const itemPath = path.join(ssotSkills, item);
-  const stat = fs.statSync(itemPath);
-  if (!stat.isDirectory()) continue;
+// Clean up legacy category folders in target directories if they exist
+const legacyCategories = ['daily', 'domains', 'emergency', 'investigation', '_meta'];
+for (const cat of legacyCategories) {
+  const claudeCatPath = path.join(claudeSkills, cat);
+  if (fs.existsSync(claudeCatPath)) {
+    fs.rmSync(claudeCatPath, { recursive: true, force: true });
+    console.log(`  -> Cleaned up legacy category folder: .claude/skills/${cat}`);
+  }
+  const geminiCatPath = path.join(geminiSkills, cat);
+  if (fs.existsSync(geminiCatPath)) {
+    fs.rmSync(geminiCatPath, { recursive: true, force: true });
+    console.log(`  -> Cleaned up legacy category folder: .gemini/skills/${cat}`);
+  }
+}
+
+// Recursively find all SKILL.md files under a directory
+function findSkillFiles(dir: string): string[] {
+  const results: string[] = [];
+  if (!fs.existsSync(dir)) return results;
+  const list = fs.readdirSync(dir);
+  for (const file of list) {
+    const filePath = path.join(dir, file);
+    const stat = fs.statSync(filePath);
+    if (stat && stat.isDirectory()) {
+      results.push(...findSkillFiles(filePath));
+    } else if (file === 'SKILL.md') {
+      results.push(filePath);
+    }
+  }
+  return results;
+}
+
+// Parse YAML frontmatter to extract the 'name' field
+function extractSkillName(filePath: string): string | null {
+  try {
+    const content = fs.readFileSync(filePath, 'utf-8');
+    const match = content.match(/^---\r?\n([\s\S]*?)\r?\n---/);
+    if (!match) return null;
+    const lines = match[1].split(/\r?\n/);
+    for (const line of lines) {
+      const colonIndex = line.indexOf(':');
+      if (colonIndex === -1) continue;
+      const key = line.slice(0, colonIndex).trim();
+      const value = line.slice(colonIndex + 1).trim();
+      if (key === 'name') {
+        return value.replace(/^['"]|['"]$/g, '');
+      }
+    }
+  } catch (e) {
+    console.error(`Failed to parse frontmatter from ${filePath}:`, e);
+  }
+  return null;
+}
+
+const skillFiles = findSkillFiles(ssotSkills);
+
+for (const skillMdPath of skillFiles) {
+  const skillDir = path.dirname(skillMdPath);
+  const skillName = extractSkillName(skillMdPath);
+  if (!skillName) {
+    console.warn(`  [WARN] Could not extract skill name from: ${skillMdPath}`);
+    continue;
+  }
 
   // Copy to .claude/skills/
-  const claudeTarget = path.join(claudeSkills, item);
-  if (fs.existsSync(claudeTarget)) fs.rmSync(claudeTarget, { recursive: true, force: true });
-  fs.cpSync(itemPath, claudeTarget, { recursive: true });
-  console.log(`  -> Synced ${item} to .claude/skills/`);
+  const claudeTarget = path.join(claudeSkills, skillName);
+  if (fs.existsSync(claudeTarget)) {
+    fs.rmSync(claudeTarget, { recursive: true, force: true });
+  }
+  fs.cpSync(skillDir, claudeTarget, { recursive: true });
+  console.log(`  -> Synced ${skillName} to .claude/skills/`);
 
   // Copy to .gemini/skills/
-  const geminiTarget = path.join(geminiSkills, item);
-  if (fs.existsSync(geminiTarget)) fs.rmSync(geminiTarget, { recursive: true, force: true });
-  fs.cpSync(itemPath, geminiTarget, { recursive: true });
-  console.log(`  -> Synced ${item} to .gemini/skills/`);
+  const geminiTarget = path.join(geminiSkills, skillName);
+  if (fs.existsSync(geminiTarget)) {
+    fs.rmSync(geminiTarget, { recursive: true, force: true });
+  }
+  fs.cpSync(skillDir, geminiTarget, { recursive: true });
+  console.log(`  -> Synced ${skillName} to .gemini/skills/`);
 
   // Special logic for commands derived from skills
-  if (item === 'meeting-facilitation') {
+  if (skillName === 'meeting-facilitation') {
     const claudeCmdDir = path.join(workspaceRoot, '.claude', 'commands');
     const geminiCmdDir = path.join(workspaceRoot, '.gemini', 'commands');
     fs.mkdirSync(claudeCmdDir, { recursive: true });
     fs.mkdirSync(geminiCmdDir, { recursive: true });
 
-    const skillMdPath = path.join(itemPath, 'SKILL.md');
-    if (fs.existsSync(skillMdPath)) {
-      fs.copyFileSync(skillMdPath, path.join(claudeCmdDir, 'meeting.md'));
-      console.log(`  -> Synced SKILL.md to .claude/commands/meeting.md`);
-      
-      fs.copyFileSync(skillMdPath, path.join(geminiCmdDir, 'meeting.md'));
-      console.log(`  -> Synced SKILL.md to .gemini/commands/meeting.md`);
-    }
+    fs.copyFileSync(skillMdPath, path.join(claudeCmdDir, 'meeting.md'));
+    console.log(`  -> Synced SKILL.md to .claude/commands/meeting.md`);
+    
+    fs.copyFileSync(skillMdPath, path.join(geminiCmdDir, 'meeting.md'));
+    console.log(`  -> Synced SKILL.md to .gemini/commands/meeting.md`);
   }
 }
 

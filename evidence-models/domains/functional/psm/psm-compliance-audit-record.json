@@ -20,6 +20,6 @@
     "critical_findings": { "type": "integer" },
     "corrective_actions": { "type": "array", "items": { "type": "string" } },
     "next_audit_due": { "type": "string", "format": "date" },
-    "legal_basis": { "type": "array", "items": { "type": "string" }, "minItems": 1, "description": "Legal basis for the compliance audit record (OSHA-KR Article 44)" }
+    "legal_basis": { "type": "array", "items": { "type": "string" }, "minItems": 2, "description": "Legal basis for the compliance audit record (OSHA-KR Article 44)" }
   }
 }

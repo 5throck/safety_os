@@ -63,7 +63,7 @@
     "legal_basis": {
       "type": "array",
       "items": { "type": "string" },
-      "minItems": 1,
+      "minItems": 2,
       "description": "Legal basis for the SOP record (OSHA-KR Article 44)"
     }
   }

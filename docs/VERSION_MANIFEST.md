@@ -1,6 +1,6 @@
 # VERSION_MANIFEST.md
 
-**Generated**: 2026-07-03T14:26:28.381Z
+**Generated**: 2026-07-04T21:37:04.099Z
 **Manifest Version**: 1.0
 **Location**: docs\VERSION_MANIFEST.md
 
@@ -9,7 +9,7 @@
 ## Summary
 
 - **Agents**: 0
-- **Skills**: 17
+- **Skills**: 56
 - **Scripts**: 263
 - **Commands**: 6
 
@@ -29,20 +29,59 @@
 | agent-lifecycle-manager | 1.0.0 | skills/agent-lifecycle-manager/SKILL.md | workspace | N/A | pm |
 | agent-lifecycle-manager | 1.0.0 | .claude/skills/agent-lifecycle-manager/SKILL.md | both | N/A | pm |
 | api-documentation | 1.0.0 | .claude/skills/api-documentation/SKILL.md | claude | N/A | N/A |
+| arc-flash-analyzer | 1.0 | .claude/skills/arc-flash-analyzer/SKILL.md | both | N/A | powergen-agent |
+| asset-integrity-check | 1.0.0 | .claude/skills/asset-integrity-check/SKILL.md | both | N/A | asset-integrity-agent |
+| audit-preparation | 1.0.0 | .claude/skills/audit-preparation/SKILL.md | both | N/A | audit-agent |
+| benefit-risk-assessor | 1.0 | .claude/skills/benefit-risk-assessor/SKILL.md | both | N/A | gvp-agent |
+| chemical-risk-assessment | 1.0 | .claude/skills/chemical-risk-assessment/SKILL.md | both | N/A | msds-agent |
+| compliance-gap | 1.0.0 | .claude/skills/compliance-gap/SKILL.md | both | N/A | compliance-agent |
+| contractor-onboarding | 1.0.0 | .claude/skills/contractor-onboarding/SKILL.md | both | N/A | contractor-safety-agent |
 | documentation-writing | 1.0.0 | .claude/skills/documentation-writing/SKILL.md | claude | N/A | N/A |
+| dts-verification | 1.0 | .claude/skills/dts-verification/SKILL.md | both | N/A | gdp-agent |
+| emergency-response | 1.0.0 | .claude/skills/emergency-response/SKILL.md | both | N/A | emergency-agent |
+| environmental-compliance-checker | 1.0 | .claude/skills/environmental-compliance-checker/SKILL.md | both | N/A | ehschem-agent |
+| ess-fire-risk-assessor | 1.0 | .claude/skills/ess-fire-risk-assessor/SKILL.md | both | N/A | powergen-agent |
+| fall-hazard-assessor | 1.0 | .claude/skills/fall-hazard-assessor/SKILL.md | both | N/A | ehsconst-agent |
 | finishing-a-development-branch | 1.0.0 | .claude/skills/finishing-a-development-branch/SKILL.md | both | N/A | N/A |
+| gas-dispersion-analyzer | 1.0 | .claude/skills/gas-dispersion-analyzer/SKILL.md | both | N/A | gasterm-agent |
+| ghs-classifier | 1.0 | .claude/skills/ghs-classifier/SKILL.md | both | N/A | msds-agent |
+| glp-data-integrity-checker | 1.0 | .claude/skills/glp-data-integrity-checker/SKILL.md | both | N/A | glp-agent |
+| glp-study-protocol-validator | 1.0 | .claude/skills/glp-study-protocol-validator/SKILL.md | both | N/A | glp-agent |
+| gmp-change-control | 1.0 | .claude/skills/gmp-change-control/SKILL.md | both | N/A | gmp-agent |
+| gmp-deviation-capa | 1.0 | .claude/skills/gmp-deviation-capa/SKILL.md | both | N/A | gmp-agent |
+| gmp-qrm | 1.0 | .claude/skills/gmp-qrm/SKILL.md | both | N/A | gmp-agent |
+| hazop-analysis | 1.0.0 | .claude/skills/hazop-analysis/SKILL.md | both | N/A | psm-agent |
+| iso14971-risk-scorer | 1.0 | .claude/skills/iso14971-risk-scorer/SKILL.md | both | N/A | meddevice-agent |
 | legalize-kr-sync | 1.0.0 | skills/legalize-kr-sync/SKILL.md | workspace | N/A | safety-workflow-manager |
+| legalize-kr-sync | 1.0.0 | .claude/skills/legalize-kr-sync/SKILL.md | both | N/A | safety-workflow-manager |
 | meeting-facilitation | 1.4.0 | skills/meeting-facilitation/SKILL.md | workspace | N/A | pm |
-| meeting-facilitation | 1.3.1 | .claude/skills/meeting-facilitation/SKILL.md | both | N/A | pm |
+| meeting-facilitation | 1.4.0 | .claude/skills/meeting-facilitation/SKILL.md | both | N/A | pm |
+| msds-parser | 1.0 | .claude/skills/msds-parser/SKILL.md | both | N/A | msds-agent |
+| permit-to-work | 1.0.0 | .claude/skills/permit-to-work/SKILL.md | both | N/A | safety-workflow-manager |
 | platform-command-lifecycle-manager | 1.0.0 | .claude/skills/platform-command-lifecycle-manager/SKILL.md | both | N/A | pm |
 | platform-skill-lifecycle-manager | 1.0.0 | .claude/skills/platform-skill-lifecycle-manager/SKILL.md | both | N/A | pm |
+| process-hazard-screening | 1.0 | .claude/skills/process-hazard-screening/SKILL.md | both | N/A | ehschem-agent |
 | project-review | 1.0.0 | skills/project-review/SKILL.md | workspace | N/A | pm |
+| project-review | 1.0.0 | .claude/skills/project-review/SKILL.md | both | N/A | pm |
+| protocol-deviation-analyzer | 1.0 | .claude/skills/protocol-deviation-analyzer/SKILL.md | both | N/A | gcp-agent |
+| psm-moc | 1.0 | .claude/skills/psm-moc/SKILL.md | both | N/A | psm-agent |
 | research-analysis | 1.0.0 | .claude/skills/research-analysis/SKILL.md | claude | N/A | N/A |
+| risk-assessment | 1.0.0 | .claude/skills/risk-assessment/SKILL.md | both | N/A | risk-assessment-agent |
+| root-cause-analysis | 1.0.0 | .claude/skills/root-cause-analysis/SKILL.md | both | N/A | incident-investigation-agent |
+| sae-causality-assessor | 1.0 | .claude/skills/sae-causality-assessor/SKILL.md | both | N/A | gcp-agent |
+| safety-inspection-validator | 1.0 | .claude/skills/safety-inspection-validator/SKILL.md | both | N/A | ehsconst-agent |
 | script-lifecycle-manager | 1.2.0 | skills/script-lifecycle-manager/SKILL.md | workspace | N/A | pm |
+| script-lifecycle-manager | 1.2.0 | .claude/skills/script-lifecycle-manager/SKILL.md | both | N/A | pm |
+| signal-detector | 1.0 | .claude/skills/signal-detector/SKILL.md | both | N/A | gvp-agent |
 | simulate-project-creation | 1.0.0 | .claude/skills/simulate-project-creation/SKILL.md | both | N/A | scaffolding-expert |
 | skill-lifecycle-manager | 1.2.0 | skills/skill-lifecycle-manager/SKILL.md | workspace | N/A | pm |
+| skill-lifecycle-manager | 1.2.0 | .claude/skills/skill-lifecycle-manager/SKILL.md | both | N/A | pm |
+| tank-integrity-validator | 1.0 | .claude/skills/tank-integrity-validator/SKILL.md | both | N/A | gasterm-agent |
 | team-builder | 1.1.0 | skills/team-builder/SKILL.md | workspace | N/A | pm |
+| team-builder | 1.1.0 | .claude/skills/team-builder/SKILL.md | both | N/A | pm |
+| temperature-excursion-analyzer | 1.0 | .claude/skills/temperature-excursion-analyzer/SKILL.md | both | N/A | gdp-agent |
 | translate | 1.0.0 | skills/translate/SKILL.md | workspace | N/A | pm |
+| translate | 1.0.0 | .claude/skills/translate/SKILL.md | both | N/A | pm |
 
 ---
 
@@ -62,7 +101,7 @@
 | archive-memory.ts | N/A | scripts/archive-memory.ts | N/A |
 | assert.d.ts | N/A | scripts/node_modules/@types/node/assert.d.ts | N/A |
 | async_hooks.d.ts | N/A | scripts/node_modules/@types/node/async_hooks.d.ts | N/A |
-| audit.ts | 2.5.3 | scripts/audit.ts | bun |
+| audit.ts | 2.6.0 | scripts/audit.ts | bun |
 | auto-executor.ts | N/A | scripts/lib/auto-executor.ts | N/A |
 | balanced-pool.d.ts | N/A | scripts/node_modules/undici-types/balanced-pool.d.ts | url |
 | buffer.buffer.d.ts | N/A | scripts/node_modules/@types/node/buffer.buffer.d.ts | N/A |
@@ -334,7 +373,7 @@
 **Checked**: Claude (.claude/) vs Gemini (.gemini/)
 
 - **Commands with parity**: 5 / 6
-- **Skills with parity**: 6 / 17
+- **Skills with parity**: 45 / 56
 
 ---
 
@@ -345,19 +384,58 @@
 - Skill agent-lifecycle-manager has no triggers defined
 - Skill agent-lifecycle-manager has no triggers defined
 - Skill api-documentation has no triggers defined
+- Skill arc-flash-analyzer has no triggers defined
+- Skill asset-integrity-check has no triggers defined
+- Skill audit-preparation has no triggers defined
+- Skill benefit-risk-assessor has no triggers defined
+- Skill chemical-risk-assessment has no triggers defined
+- Skill compliance-gap has no triggers defined
+- Skill contractor-onboarding has no triggers defined
 - Skill documentation-writing has no triggers defined
+- Skill dts-verification has no triggers defined
+- Skill emergency-response has no triggers defined
+- Skill environmental-compliance-checker has no triggers defined
+- Skill ess-fire-risk-assessor has no triggers defined
+- Skill fall-hazard-assessor has no triggers defined
 - Skill finishing-a-development-branch has no triggers defined
+- Skill gas-dispersion-analyzer has no triggers defined
+- Skill ghs-classifier has no triggers defined
+- Skill glp-data-integrity-checker has no triggers defined
+- Skill glp-study-protocol-validator has no triggers defined
+- Skill gmp-change-control has no triggers defined
+- Skill gmp-deviation-capa has no triggers defined
+- Skill gmp-qrm has no triggers defined
+- Skill hazop-analysis has no triggers defined
+- Skill iso14971-risk-scorer has no triggers defined
+- Skill legalize-kr-sync has no triggers defined
 - Skill legalize-kr-sync has no triggers defined
 - Skill meeting-facilitation has no triggers defined
 - Skill meeting-facilitation has no triggers defined
+- Skill msds-parser has no triggers defined
+- Skill permit-to-work has no triggers defined
 - Skill platform-command-lifecycle-manager has no triggers defined
 - Skill platform-skill-lifecycle-manager has no triggers defined
+- Skill process-hazard-screening has no triggers defined
 - Skill project-review has no triggers defined
+- Skill project-review has no triggers defined
+- Skill protocol-deviation-analyzer has no triggers defined
+- Skill psm-moc has no triggers defined
 - Skill research-analysis has no triggers defined
+- Skill risk-assessment has no triggers defined
+- Skill root-cause-analysis has no triggers defined
+- Skill sae-causality-assessor has no triggers defined
+- Skill safety-inspection-validator has no triggers defined
 - Skill script-lifecycle-manager has no triggers defined
+- Skill script-lifecycle-manager has no triggers defined
+- Skill signal-detector has no triggers defined
 - Skill simulate-project-creation has no triggers defined
 - Skill skill-lifecycle-manager has no triggers defined
+- Skill skill-lifecycle-manager has no triggers defined
+- Skill tank-integrity-validator has no triggers defined
 - Skill team-builder has no triggers defined
+- Skill team-builder has no triggers defined
+- Skill temperature-excursion-analyzer has no triggers defined
+- Skill translate has no triggers defined
 - Skill translate has no triggers defined
 - Command changelog not integrated as a skill
 - Command commit-push-pr not integrated as a skill
