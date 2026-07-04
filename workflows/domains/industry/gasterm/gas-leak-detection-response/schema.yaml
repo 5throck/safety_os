@@ -8,7 +8,7 @@ workflow_type: core
 legal_basis:
   - 고압가스안전관리법 Article 17
   - LPG 안전관리법 Article 30
-  - 위험물안전관리법
+  - 위험물안전관리법 Article 27, Article 22-2
 industry_profile: gas-facility
 agent: gasterm-agent
 evidence_model: gasterm-leak-detection-record.json

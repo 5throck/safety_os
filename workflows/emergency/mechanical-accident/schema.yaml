@@ -6,7 +6,7 @@ applicability: mandatory
 
 legal_basis:
   - 산업안전보건법 Article 32 (기계위해 방지)
-  - 중대재해처벌법 Article 7
+  - 중대재해처벌법 Article 4
   - 산업안전보건법 Article 98
 industry_profile: all
 agent: emergency-agent

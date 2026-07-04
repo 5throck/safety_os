@@ -6,8 +6,8 @@ applicability: mandatory
 
 legal_basis:
   - 재난 및 안전관리 기본법
-  - 산업안전보건법 Article 5 (안전확보 의무)
-  - 중대재해처벌법 Article 7
+  - 중대재해처벌법 Article 4
+  - 산업안전보건법 Article 54 (Action upon Serious Accidents)
 industry_profile: all
 agent: emergency-agent
 evidence_model: emergency-disaster-record.json

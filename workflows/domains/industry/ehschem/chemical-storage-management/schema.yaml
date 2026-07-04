@@ -7,7 +7,7 @@ workflow_type: core
 uses_functional_services: [functional/psm, functional/msds, emergency]
 
 legal_basis:
-  - 위험물안전관리법
+  - 위험물안전관리법 Article 5
   - 화학물질관리법 Article 20
   - 산업안전보건법 Article 38
 industry_profile: chemical-plant

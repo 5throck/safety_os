@@ -7,7 +7,7 @@ applicability: mandatory
 legal_basis:
   - 응급의료에 관한 법률
   - 산업안전보건법 Article 13 (구급설비)
-  - 중대재해처벌법 Article 7
+  - 중대재해처벌법 Article 4
 industry_profile: all
 agent: emergency-agent
 evidence_model: emergency-medical-record.json

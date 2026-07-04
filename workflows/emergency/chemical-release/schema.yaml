@@ -8,6 +8,7 @@ legal_basis:
   - 화학물질관리법 (CCA)
   - 산업안전보건법 Article 38
   - 환경보건법
+  - 화학물질관리법 (CCA) Article 23
 industry_profile: all
 agent: emergency-agent
 evidence_model: emergency-chemical-release-record.json

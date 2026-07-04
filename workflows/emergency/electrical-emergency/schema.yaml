@@ -7,7 +7,7 @@ applicability: mandatory
 legal_basis:
   - 전기안전관리법
   - 산업안전보건법 Article 101 (전기위해 방지)
-  - 중대재해처벌법 Article 7
+  - 중대재해처벌법 Article 4
 industry_profile: all
 agent: emergency-agent
 evidence_model: emergency-electrical-record.json
