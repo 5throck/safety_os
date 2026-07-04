@@ -150,9 +150,9 @@ Claude Code 또는 Gemini CLI에서 프로젝트 디렉토리를 엽니다. `.mc
 
 | MCP 서버 | 도구 수 | 용도 |
 |----------|--------|------|
-| `k_skill` | 5개 | OSHA/SAPA 규제 검색, 컴플라이언스 갭 분석 |
+| `kr_safety` | 5개 | 한국 안전 규제 검색 (OSHA-KR, SAPA, CCA), 컴플라이언스 갭 분석 |
 | `legalize_kr` | 5개 | 한국 법령 구조 분석, 버전 비교, 판례 검색 |
-| `kr_legislation` | 5개 | 국가법령정보센터 실시간 법령 API |
+| `mcp_kr_legislation` | 5개 | 국가법령정보센터 실시간 법령 API |
 
 별도 MCP 설정 불필요 — AI 에이전트와 대화를 시작하면 됩니다.
 

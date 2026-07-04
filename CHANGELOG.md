@@ -6,6 +6,22 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+### Changed (2026-07-03 — kr_safety MCP v2.0.0: Hybrid Search + Rename)
+
+**Hybrid 3-tier search replaces mock-data fallback in `search_osha_regulations`:**
+- **Tier 1 (Static index)**: Parse `legal-glossary.yaml` at startup — 88 articles across 12 statutes, instant O(1) keyword match against article numbers, English topics, and Korean terms. No API calls.
+- **Tier 2 (MST full-text fetch)**: Fetch entire law via `lawService.do?MST=NNN`, cache for 24h, grep locally for keyword in article title+content. Expanded MST table from 4 to 12 core EHS statutes (added 약사법, 의료기기법, 고압가스안전관리법, LPG법, 수소경제법, 전기사업법, 전기안전관리법, 건설기술진흥법, K-REACH). All MST codes verified live against law.go.kr.
+- **Tier 3 (lawSearch.do)**: Law name search as last resort.
+- **Honest empty**: All tiers failing returns `[]` (no mock/fake data). `mockOshaResults()` deleted entirely.
+- **New files**: `mcp/kr-safety-regs/tools/article-index.ts` (glossary parser), `mcp/kr-safety-regs/tools/mst-table.ts` (MST code table).
+- `checkComplianceGaps` returns honest empty analysis when no regulations found.
+
+**Renamed `k_skill` → `kr_safety` for clarity:**
+- The old name was opaque and did not convey function. `kr_safety` accurately reflects the server's purpose: Korean safety regulations search (OSHA-KR, SAPA, CCA, etc.).
+- Directory: `mcp/k-skill/` → `mcp/kr-safety-regs/`, server name: `k_skill` → `kr_safety`.
+- Updated: `.mcp.json`, `scripts/start-mcp.ts`, `docs/_shared/mcp-integration-guide.md/.ko`, `AGENTS.md`, `mcp/LICENSE_REVIEW.md`.
+- Logger names updated in all 7 tool files.
+
 ### Fixed (2026-07-03 — Legal Basis Audit: Post-MCP-Fix Content Verification)
 
 After fixing all 9 MCP server issues (previous entry), audited all existing content created during the 17-day window when legal MCP tools were broken (2026-06-16 ~ 2026-07-03). Verified that mock/fabricated data did NOT contaminate any schema, but found several citation accuracy issues introduced from agent training knowledge without live law verification.
@@ -24,7 +40,7 @@ After fixing all 9 MCP server issues (previous entry), audited all existing cont
 
 **Legal glossary updates (`regulations/KR/legal-glossary.yaml`):**
 - Added OSHA-KR Article 13 (구급설비/first-aid equipment) — cited in `first-aid-training` and `medical-emergency` schemas but missing from glossary allowlist.
-- Expanded SAPA from 6 to 14 articles (added Art 6-11, 14-16) — verified via `k_skill.get_sapa_requirements` MCP (MST=228817, 16 articles confirmed). Corrected Art 3 description from "Management responsibility" to "Scope — application to business owners and management responsible persons."
+- Expanded SAPA from 6 to 14 articles (added Art 6-11, 14-16) — verified via `kr_safety.get_sapa_requirements` MCP (MST=228817, 16 articles confirmed). Corrected Art 3 description from "Management responsibility" to "Scope — application to business owners and management responsible persons."
 - Resolved `의료기기법 Article 83` UNVERIFIED flag: confirmed as EU MDR Article 83 (PMS system) carryover; updated schema to cite "EU MDR Article 83" explicitly.
 - Upgraded `환경보건법` from UNVERIFIED to verified active law ([Source: law.go.kr](https://www.law.go.kr/LSW/lsSc.do?menuId=1&dt=20201211&query=%ED%99%98%EA%B2%BD%EB%B3%B4%EA%B1%B4%EB%B2%95&subMenuId=15)).
 

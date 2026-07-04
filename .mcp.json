@@ -1,8 +1,8 @@
 {
   "mcpServers": {
-    "k_skill": {
+    "kr_safety": {
       "command": "bun",
-      "args": ["run", "--env-file", ".env", "./mcp/k-skill/index.ts"],
+      "args": ["run", "--env-file", ".env", "./mcp/kr-safety-regs/index.ts"],
       "env": {}
     },
     "legalize_kr": {

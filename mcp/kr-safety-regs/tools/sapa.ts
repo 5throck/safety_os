@@ -2,7 +2,7 @@ import { MCPCache } from '../../../scripts/lib/mcp-cache.js';
 import { fetchWithRetry } from '../../shared/retry.js';
 import { createLogger } from '../../shared/logger.js';
 
-const log = createLogger('k_skill');
+const log = createLogger('kr_safety');
 const cache = new MCPCache();
 const OC = process.env.LAW_API_OC ?? 'test';
 

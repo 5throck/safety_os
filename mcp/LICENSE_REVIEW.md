@@ -2,7 +2,7 @@
 
 ## Ecosystem Repositories
 - **legalize-kr**: MIT License
-- **k-skill**: MIT License
+- **kr-safety-regs**: MIT License
 - **mcp-kr-legislation**: Apache 2.0 License
 
 ## Assessment

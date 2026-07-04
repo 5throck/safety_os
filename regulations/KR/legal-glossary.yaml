@@ -65,7 +65,7 @@ statutes:
     english: Serious Accidents Punishment Act
     abbreviation: SAPA
     regulator: MOEL (고용노동부)
-    note: "Full 16-article structure: Ch.1 General (Art 1-2), Ch.2 Serious Industrial Accidents (Art 3-9), Ch.3 Serious Civic Disasters (Art 10-11), Ch.4 Supplementary (Art 12-16). Verified via k_skill MCP (MST=228817)."
+    note: "Full 16-article structure: Ch.1 General (Art 1-2), Ch.2 Serious Industrial Accidents (Art 3-9), Ch.3 Serious Civic Disasters (Art 10-11), Ch.4 Supplementary (Art 12-16). Verified via kr_safety MCP (MST=228817)."
     articles:
       - { number: "제3조",  topic_en: "Scope — application to business owners and management responsible persons (경영책임자등의 범위)" }
       - { number: "제4조",  topic_en: "Safety and health assurance obligation — management system establishment (사업주와 경영책임자등의 안전 및 보건 확보의무)" }

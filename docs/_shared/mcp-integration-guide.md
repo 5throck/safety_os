@@ -8,7 +8,7 @@ Safety OS includes 3 Korean regulatory MCP servers:
 
 | Server | Location | Tools | Purpose |
 |--------|----------|-------|---------|
-| `k_skill` | `mcp/k-skill/` | 5 tools | OSHA/SAPA regulation search, compliance gap analysis |
+| `kr_safety` | `mcp/kr-safety-regs/` | 5 tools | Korean safety regulations search (OSHA-KR, SAPA, CCA), compliance gap analysis |
 | `legalize_kr` | `mcp/legalize-kr/` | 5 tools | Korean law structure parsing, version comparison |
 | `kr_legislation` | `mcp/kr-legislation/` | 5 tools | Real-time legislation API (국가법령정보센터) |
 
@@ -19,9 +19,9 @@ MCP servers are configured in `.mcp.json`:
 ```json
 {
   "mcpServers": {
-    "k_skill": {
+    "kr_safety": {
       "command": "bun",
-      "args": ["run", "--env-file", ".env", "mcp/k-skill/index.ts"]
+      "args": ["run", "--env-file", ".env", "mcp/kr-safety-regs/index.ts"]
     },
     "legalize_kr": {
       "command": "bun",
@@ -44,7 +44,7 @@ MCP servers are configured in `.mcp.json`:
 ### MSDS Domain
 - `regulations/KR/OSHA-KR-MSDS.yaml` — references kr_legislation
 - `regulations/KR/K-REACH.yaml` — references kr_legislation
-- k_skill tools for compliance gap analysis (OSHA/SAPA articles)
+- kr_safety tools for compliance gap analysis (OSHA-KR, SAPA articles)
 
 ### GMP Domain
 - `regulations/KR/MFDS-GDP.yaml` — references kr_legislation
@@ -70,7 +70,7 @@ Agents can query MCP servers during workflow execution:
 # .env file
 GITHUB_TOKEN=ghp_...          # For legalize-kr (precedent search)
 # kr-legislation uses public API (no token needed)
-# k-skill uses cached data (no token needed)
+# kr-safety-regs uses cached data + live API (no token needed)
 ```
 
 ## 6. Future Integration (v2)
