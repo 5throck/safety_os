@@ -192,10 +192,10 @@
         "type": "string"
       },
       "minItems": 3,
-      "description": "Multi-source legal basis. Confirmed: OSHA-KR Article 38 (안전조치), 산업안전보건기준에관한규칙 (Occupational Safety and Health Standards Rule) 제92조 (정비 등의 작업 시의 운전정지 등) — this specific sub-statute article was confirmed directly from KOSHA GUIDE Z-40-2022's own revision history (개정 이력, 2022.12.29), which cites it as the LOTO implementation basis. Also relevant: SAPA Article 4 (안전보건관리체계 구축 의무) and SAPA Article 5 (제3자/도급 근로자 안전조치 의무 — cited in KOSHA GUIDE Z-40-2022 §7.4 for contractor/third-party LOTO training obligations, relevant to Group Isolation Locking scenarios).",
+      "description": "Multi-source legal basis. Primary: OSHA-KR Article 44 (PSM — hazardous energy isolation). LOTO-specific: OSHA-KR Article 38 (safety measures including work stoppage), Occupational Safety and Health Standards Rule Article 92 (zero energy state / lockout-tagout — confirmed from KOSHA GUIDE Z-40-2022 revision history, 2022.12.29). Adjacent laws may include: SAPA Article 4 (safety management system obligation), SAPA Article 5 (third-party/contractor safety duty — KOSHA GUIDE Z-40-2022 section 7.4 for contractor LOTO training), OSHA-KR Article 34-2 (periodic inspection of safety devices).",
       "examples": [
-        "산업안전보건법 Article 38 (안전조치 — 작업정지 등)",
-        "안전보건기준에관한규칙 Article 92 (제로에너지상태 확보)",
+        "산업안전보건법 Article 44 (공정안전관리 — 위험에너지 통제/LOTO)",
+        "안전보건기준에관한규칙 Article 92 (정비 등 작업 시 운전정지 등 — KOSHA GUIDE Z-40-2022)",
         "중대재해처벌법 Article 5 (도급 근로자 안전조치 의무 — KOSHA GUIDE Z-40-2022 §7.4)"
       ]
     },
