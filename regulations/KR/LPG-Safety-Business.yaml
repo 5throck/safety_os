@@ -13,7 +13,18 @@ primary_law:
       topic_ko: LPG 저장기준
     - article: "37"
       topic_ko: 안전관리자 선임 (LPG)
+    - article: "27-2"
+      topic_ko: 시설·기술·검사 상세기준 위임 (KGS Code)"
+    - article: "45"
+      topic_ko: 검사 기준 (공사인허가·완성검사)
 charging_stations:
   count_korea: 1200+
   regulatory_distance: 15-50m (학교/병원 등)
+kgs_code_delegation:
+  description: "액화석유가스의 안전관리 및 사업법 제27조의2에 따라 시설·기술·검사의 상세기준을 한국가스안전공사가 정함"
+  covered_by_kgs_code: true
+permit_procedure:
+  pre_review: "KGS 기술검토 (별지 제8호서식 준용)"
+  mid_inspection: "KGS 입회 중간검사"
+  completion_inspection: "KGS 입회 완성검사 → 지자체 허가"
 last_updated: "2026-06-18"
