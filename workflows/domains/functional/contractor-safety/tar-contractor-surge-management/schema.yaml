@@ -7,6 +7,7 @@ applicable_industries: [chemical, gas_terminal, power_generation, construction]
 legal_basis:
   - OSHA-KR Article 61
   - OSHA-KR Article 63
+  - SAPA Article 5
 industry_profile: cross-industry
 agent: contractor-safety-agent
 evidence_model: contractor-tar-surge-record.json
