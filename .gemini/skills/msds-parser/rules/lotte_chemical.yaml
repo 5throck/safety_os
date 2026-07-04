@@ -1,0 +1,44 @@
+supplier_id: lotte_chemical
+supplier_name: 롯데케미칼 (Lotte Chemical)
+template_format: pdf
+template_version: "2024"
+section_patterns:
+  s1_identification:
+    header_pattern: "^1[\\.\\)]\\s*제품\\s*식별|Section\\s*1[:\\s]Identification"
+    field_patterns:
+      product_name: "제품명[\\s]*:[\\s]*([^\\n]+)"
+      product_code: "제품번호[\\s]*:[\\s]*([A-Z0-9\\-]+)"
+      supplier_name: "공급자[\\s]*:[\\s]*([^\\n]+)"
+      supplier_address: "주소[\\s]*:[\\s]*([^\\n]+)"
+      emergency_phone: "긴급전화[\\s]*:[\\s]*([0-9\\-]+)"
+  s2_hazard_identification:
+    header_pattern: "^2[\\.\\)]\\s*유해\\s*·\\s*위험\\s*문구|Hazard\\s*Identification"
+    field_patterns:
+      ghs_classification: "GHS\\s*분류[\\s]*:[\\s]*([^\\n]+)"
+      signal_word: "신호어[\\s]*:[\\s]*(위험|경고)"
+      hazard_statements: "유해위험문구[\\s]*:[\\s]*([^\\n]+)"
+      precautionary_statements: "예방조치문구[\\s]*:[\\s]*([^\\n]+)"
+  s3_composition:
+    header_pattern: "^3[\\.\\)]\\s*성분\\s*정보|Composition"
+    field_patterns:
+      chemical_name: "화학물질명[\\s]*:[\\s]*([^\\n]+)"
+      cas_number: "CAS\\s*번호[\\s]*:[\\s]*([0-9\\-]+)"
+      concentration: "함유량[\\s]*\\(\\s*%\\s*\\)[\\s]*:[\\s]*([0-9.]+)"
+  s8_exposure_controls:
+    header_pattern: "^8[\\.\\)]\\s*노출\\s*방지|Exposure\\s*Controls"
+    field_patterns:
+      oel_kr: "직업적\\s*노출\\s*한도[\\s]*:[\\s]*([^\\n]+)"
+      pel: "허용\\s*노출\\s*농도[\\s]*:[\\s]*([^\\n]+)"
+      ppe_respiratory: "호흡용\\s*보호구[\\s]*:[\\s]*([^\\n]+)"
+      ppe_hand: "손\\s*보호[\\s]*:[\\s]*([^\\n]+)"
+      ppe_eye: "눈\\s*보호[\\s]*:[\\s]*([^\\n]+)"
+  s11_toxicological:
+    header_pattern: "^11[\\.\\)]\\s*독성\\s*정보|Toxicological"
+    field_patterns:
+      acute_toxicity: "급성\\s*독성[\\s]*:[\\s]*([^\\n]+)"
+      skin_corrosion: "피부\\s*부식성[\\s]*:[\\s]*([^\\n]+)"
+      eye_damage: "눈\\s*손상[\\s]*:[\\s]*([^\\n]+)"
+      carcinogenicity: "발암성[\\s]*:[\\s]*([^\\n]+)"
+      reproductive_toxicity: "생식\\s*독성[\\s]*:[\\s]*([^\\n]+)"
+confidence_baseline: 95
+last_updated: "2026-06-17"

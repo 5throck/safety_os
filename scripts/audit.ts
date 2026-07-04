@@ -1,4 +1,4 @@
-// @version 2.5.3
+// @version 2.6.0
 import { $ } from 'bun';
 import * as fs from 'node:fs';
 import * as path from 'node:path';
@@ -29,6 +29,39 @@ function Fail(msg: string) {
 }
 function Warn(msg: string) {
     console.log(`${YELLOW}[WARN] ${msg}${RESET}`);
+}
+
+function findAgentMdFiles(dir: string): string[] {
+    const results: string[] = [];
+    if (!fs.existsSync(dir)) return results;
+    const list = fs.readdirSync(dir);
+    for (const file of list) {
+        const filePath = path.join(dir, file);
+        const stat = fs.statSync(filePath);
+        if (stat && stat.isDirectory()) {
+            results.push(...findAgentMdFiles(filePath));
+        } else if (file.endsWith('.md')) {
+            results.push(filePath);
+        }
+    }
+    return results;
+}
+
+function findSourceSkillFiles(dir: string): string[] {
+    const results: string[] = [];
+    if (!fs.existsSync(dir)) return results;
+    const list = fs.readdirSync(dir);
+    for (const file of list) {
+        if (file === '_meta' || file === '_archive' || file.startsWith('.')) continue;
+        const filePath = path.join(dir, file);
+        const stat = fs.statSync(filePath);
+        if (stat && stat.isDirectory()) {
+            results.push(...findSourceSkillFiles(filePath));
+        } else if (file === 'SKILL.md') {
+            results.push(filePath);
+        }
+    }
+    return results;
 }
 
 console.log(`${CYAN}=== audit.ts - workspace standards check ===${RESET}`);
@@ -187,7 +220,7 @@ if (fs.existsSync('AGENTS.md')) { Pass('AGENTS.md exists'); }
 else { Fail('AGENTS.md missing (required for agent-first projects)'); }
 
 // 5. At least one agent file must exist in agents/
-if (fs.existsSync('agents') && fs.readdirSync('agents').some(f => f.endsWith('.md'))) {
+if (fs.existsSync('agents') && findAgentMdFiles('agents').length > 0) {
     Pass('agents/ has agent files');
 } else {
     Fail('agents/ is empty or missing - create at least agents/pm.md');
@@ -313,10 +346,20 @@ if (!LIFECYCLE_ONLY && fs.existsSync(path.join('scripts', 'SCRIPTS.md'))) {
 }
 
 // Skills registry cross-check
-for (const skillsDir of ['skills', path.join('.claude', 'skills')]) {
-    if (fs.existsSync(skillsDir)) {
-        for (const dir of fs.readdirSync(skillsDir)) {
-            const fullDir = path.join(skillsDir, dir);
+// Source skills: recursively scan skills/ (ignoring _meta, _archive, dotfiles)
+const sourceSkillsDir = 'skills';
+if (fs.existsSync(sourceSkillsDir)) {
+    const skillFiles = findSourceSkillFiles(sourceSkillsDir);
+    for (const skillMd of skillFiles) {
+        Pass(`skill exists: ${skillMd}`);
+    }
+}
+
+// Target flat skills: check .claude/skills and .gemini/skills directly
+for (const flatSkillsDir of [path.join('.claude', 'skills'), path.join('.gemini', 'skills')]) {
+    if (fs.existsSync(flatSkillsDir)) {
+        for (const dir of fs.readdirSync(flatSkillsDir)) {
+            const fullDir = path.join(flatSkillsDir, dir);
             if (fs.statSync(fullDir).isDirectory()) {
                 const skillMd = path.join(fullDir, 'SKILL.md');
                 if (fs.existsSync(skillMd)) {
@@ -637,12 +680,10 @@ function checkStaleShellReferences() {
         }
     }
 
-    // Add any SKILL.md files in skills/*/
+    // Add any SKILL.md files in skills/ recursively
     if (fs.existsSync('skills')) {
-        for (const dir of fs.readdirSync('skills')) {
-            const skillMd = path.join('skills', dir, 'SKILL.md');
-            if (fs.existsSync(skillMd)) filesToScan.push(skillMd);
-        }
+        const sourceSkills = findSourceSkillFiles('skills');
+        filesToScan.push(...sourceSkills);
     }
 
     let staleErrors = 0;

@@ -33,7 +33,7 @@
     "legal_basis": {
       "type": "array",
       "items": { "type": "string" },
-      "minItems": 1,
+      "minItems": 2,
       "description": "Legal basis for the hot work permit record (OSHA-KR Article 44)"
     },
     "permit_number": {

@@ -19,6 +19,6 @@
     "emergency_contacts": { "type": "array", "items": { "type": "string" } },
     "local_fire_dept_coordinated": { "type": "boolean" },
     "employee_training_completed": { "type": "boolean" },
-    "legal_basis": { "type": "array", "items": { "type": "string" }, "minItems": 1, "description": "Legal basis for the EAP record (OSHA-KR Article 44)" }
+    "legal_basis": { "type": "array", "items": { "type": "string" }, "minItems": 2, "description": "Legal basis for the EAP record (OSHA-KR Article 44)" }
   }
 }

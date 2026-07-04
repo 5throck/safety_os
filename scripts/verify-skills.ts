@@ -1,11 +1,12 @@
 #!/usr/bin/env bun
 /**
  * Skill Verification Script
- * @version 1.0.0
+ * @version 1.1.0
  * Verifies all skills in skills/ directory are loadable and properly formatted
  */
 
 import path from "node:path";
+import fs from "node:fs";
 
 const scriptDir = path.dirname(import.meta.path);
 const projectRoot = path.resolve(scriptDir, "..");
@@ -66,11 +67,20 @@ async function scanSkills(): Promise<SkillCheck[]> {
     const files: string[] = [];
     const skillsPath = path.isAbsolute(dir) ? dir : path.join(projectRoot, dir);
 
-    for await (const entry of Bun.glob(`${skillsPath}/**/*`)) {
-      if (entry.endsWith("SKILL.md")) {
-        files.push(entry);
+    function walk(currentDir: string) {
+      if (!fs.existsSync(currentDir)) return;
+      for (const entry of fs.readdirSync(currentDir, { withFileTypes: true })) {
+        const fullPath = path.join(currentDir, entry.name);
+        if (entry.isDirectory()) {
+          if (entry.name === '_meta' || entry.name === '_archive' || entry.name.startsWith('.')) continue;
+          walk(fullPath);
+        } else if (entry.name === "SKILL.md") {
+          files.push(fullPath);
+        }
       }
     }
+
+    walk(skillsPath);
     return files;
   }
 
@@ -154,7 +164,8 @@ async function generateSkillsIndex(checks: SkillCheck[]): Promise<void> {
   for (const [type, typeChecks] of skillsByType) {
     content += `## ${type.charAt(0).toUpperCase() + type.slice(1)}\n\n`;
     for (const check of typeChecks) {
-      content += `- [${check.name}](skills/${check.name}/SKILL.md)\n`;
+      const relPath = path.relative(projectRoot, check.path).replace(/\\/g, '/');
+      content += `- [${check.name}](${relPath})\n`;
     }
     content += "\n";
   }
@@ -209,7 +220,8 @@ async function verifySkill(skillFile: string): Promise<SkillCheck> {
       }
     }
 
-    const skillName = skillFile.match(/skills\/([^/]+)\//)?.[1] || skillFile;
+    const metadata = extractSkillMetadata(content, skillFile);
+    const skillName = metadata.name || path.basename(path.dirname(skillFile));
 
     return {
       name: skillName,
