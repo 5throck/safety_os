@@ -165,6 +165,8 @@ export const CROSS_DOMAIN_REFS: Array<{
     { field: 'msds_record_ref', fromDomain: 'ehschem', fromTier: 'industry', toDomain: 'msds', toTier: 'functional' },
     { field: 'psm_psi_ref', fromDomain: 'ehschem', fromTier: 'industry', toDomain: 'psm', toTier: 'functional' },
     { field: 'psm_applicable', fromDomain: 'gasterm', fromTier: 'industry', toDomain: 'psm', toTier: 'functional' },
+    { field: 'construction_permit_ref', fromDomain: 'gasterm', fromTier: 'industry', toDomain: 'ehsconst', toTier: 'industry' },
+    { field: 'contractor_safety_plan_ref', fromDomain: 'gasterm', fromTier: 'industry', toDomain: 'contractor-safety', toTier: 'functional' },
 ];
 
 /**
