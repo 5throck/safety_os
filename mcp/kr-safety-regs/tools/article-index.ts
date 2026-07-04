@@ -3,7 +3,7 @@ import { join, dirname } from 'path';
 import { createLogger } from '../../shared/logger.js';
 import type { RegulatoryArticle } from '../../shared/types.js';
 
-const log = createLogger('k_skill');
+const log = createLogger('kr_safety');
 
 /** Parsed article entry from legal-glossary.yaml */
 interface ArticleEntry {
@@ -22,7 +22,7 @@ interface ArticleEntry {
  */
 let index: ArticleEntry[] | null = null;
 
-/** Resolve to project root (4 levels up from mcp/k-skill/tools/) */
+/** Resolve to project root (4 levels up from mcp/kr-safety-regs/tools/) */
 const PROJECT_ROOT = dirname(dirname(dirname(dirname(new URL(import.meta.url).pathname.replace(/^\//, '')))));
 
 function loadIndex(): ArticleEntry[] {

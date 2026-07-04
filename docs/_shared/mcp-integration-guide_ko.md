@@ -8,7 +8,7 @@ Safety OS는 3개의 한국 규제 MCP 서버를 포함합니다:
 
 | 서버 | 위치 | 도구 | 목적 |
 |--------|----------|-------|---------|
-| `k_skill` | `mcp/k-skill/` | 5개 도구 | OSHA/SAPA 규제 검색, 컴플라이언스 갭 분석 |
+| `kr_safety` | `mcp/kr-safety-regs/` | 5개 도구 | 한국 안전 규제 검색 (OSHA-KR, SAPA, CCA), 컴플라이언스 갭 분석 |
 | `legalize_kr` | `mcp/legalize-kr/` | 5개 도구 | 한국 법령 구조 파싱, 버전 비교 |
 | `kr_legislation` | `mcp/kr-legislation/` | 5개 도구 | 실시간 법령 API (국가법령정보센터) |
 
@@ -19,9 +19,9 @@ MCP 서버는 `.mcp.json`에 설정됩니다:
 ```json
 {
   "mcpServers": {
-    "k_skill": {
+    "kr_safety": {
       "command": "bun",
-      "args": ["run", "--env-file", ".env", "mcp/k-skill/index.ts"]
+      "args": ["run", "--env-file", ".env", "mcp/kr-safety-regs/index.ts"]
     },
     "legalize_kr": {
       "command": "bun",
@@ -44,7 +44,7 @@ MCP 서버는 `.mcp.json`에 설정됩니다:
 ### MSDS 도메인
 - `regulations/KR/OSHA-KR-MSDS.yaml` — kr_legislation 참조
 - `regulations/KR/K-REACH.yaml` — kr_legislation 참조
-- 컴플라이언스 갭 분석을 위한 k_skill 도구 (OSHA/SAPA 조항)
+- 컴플라이언스 갭 분석을 위한 kr_safety 도구 (OSHA-KR, SAPA 조항)
 
 ### GMP 도메인
 - `regulations/KR/MFDS-GDP.yaml` — kr_legislation 참조
@@ -70,7 +70,7 @@ MCP 서버는 `.mcp.json`에 설정됩니다:
 # .env 파일
 GITHUB_TOKEN=ghp_...          # legalize-kr용 (판례 검색)
 # kr-legislation은 공개 API 사용 (토큰 불필요)
-# k-skill은 캐시된 데이터 사용 (토큰 불필요)
+# kr-safety-regs은 캐시된 데이터 + 실시간 API 사용 (토큰 불필요)
 ```
 
 ## 6. 향후 통합 (v2)

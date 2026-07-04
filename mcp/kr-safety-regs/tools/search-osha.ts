@@ -6,7 +6,7 @@ import type { RegulatoryArticle } from '../../shared/types.js';
 import { searchArticleIndex } from './article-index.js';
 import { MST_TABLE, TIER2_SEARCH_ORDER, MAX_TIER2_LOOKUPS } from './mst-table.js';
 
-const log = createLogger('k_skill');
+const log = createLogger('kr_safety');
 const cache = new MCPCache();
 const limiter = new RateLimiter(100, 60_000);
 const OC = process.env.LAW_API_OC ?? 'test';

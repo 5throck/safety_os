@@ -254,7 +254,7 @@ All agents, regardless of their role, must adhere to the following:
 ## Regulatory Scope
 
 > Law text is retrieved live via MCP — this section defines **which regulations are in scope** and their authority tier.
-> Live queries: `mcp_kr_legislation` (real-time API), `legalize_kr` (git mirror), `k_skill` (OSHA/SAPA index).
+> Live queries: `mcp_kr_legislation` (real-time API), `legalize_kr` (git mirror), `kr_safety` (OSHA-KR/SAPA index).
 
 ### Tier 1 — Core Statutes
 

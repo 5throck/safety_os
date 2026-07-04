@@ -3,7 +3,7 @@ import { createLogger } from '../../shared/logger.js';
 import { searchOshaRegulations } from './search-osha.js';
 
 const cache = new MCPCache();
-const log = createLogger('k_skill');
+const log = createLogger('kr_safety');
 
 export async function checkComplianceGaps(industry: string, currentControls: string[]): Promise<object> {
   const required = await searchOshaRegulations(industry);

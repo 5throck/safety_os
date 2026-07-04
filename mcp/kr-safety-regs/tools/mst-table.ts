@@ -1,10 +1,10 @@
 /**
- * MST (법령마스터번호) lookup table for k-skill tools.
+ * MST (법령마스터번호) lookup table for kr_safety tools.
  * Used by Tier 2 (full-law full-text search) in the hybrid search pipeline.
  *
  * Values verified live against law.go.kr's lawService.do endpoint.
  * Duplicated from kr-legislation/tools/amendments.ts to avoid cross-server imports
- * (k-skill and kr-legislation are independent MCP server processes).
+ * (kr-safety-regs and kr-legislation are independent MCP server processes).
  */
 
 /** MST code → Korean statute name */

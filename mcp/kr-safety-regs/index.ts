@@ -1,7 +1,7 @@
 #!/usr/bin/env bun
 /**
- * k_skill MCP Server v2.0.0
- * Korean OSHA / SAPA regulations search with 24-hour caching.
+ * kr_safety MCP Server v2.0.0
+ * Korean safety regulations search (OSHA-KR, SAPA, CCA, etc.) with 24-hour caching.
  *
  * v2.0.0: Hybrid 3-tier search replaces mock-data fallback:
  *   Tier 1 — Static article index (88+ articles from legal-glossary.yaml, instant)
@@ -21,10 +21,10 @@ import { listIndustryControls } from './tools/industry.js';
 import { checkComplianceGaps } from './tools/gaps.js';
 import { invalidateCache } from './tools/cache-admin.js';
 
-const log = createLogger('k_skill');
+const log = createLogger('kr_safety');
 
 const server = new Server(
-  { name: 'k_skill', version: '2.0.0' },
+  { name: 'kr_safety', version: '2.0.0' },
   { capabilities: { tools: {} } }
 );
 
@@ -102,4 +102,4 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
 
 const transport = new StdioServerTransport();
 await server.connect(transport);
-log.info('k_skill MCP server started');
+log.info('kr_safety MCP server started');
