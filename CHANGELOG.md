@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+### Fixed
+
+- **audit**: Resolved `agents/` path check in `scripts/audit.ts` to recursively scan subdirectories (supporting nested directories like `agents/_core/`).
+- **audit**: Updated skills check in `scripts/audit.ts` to recursively check skill folders while skipping category folders.
+- **commands**: Added `.gemini/commands/sync.md` matching `.claude/commands/sync.md` for platform command parity.
+
 ### Changed (2026-07-03 — Documentation Gap Fixes: LOTO/TAR Legal Basis + Art 36 Risk Assessment Cross-References)
 
 **Evidence model wiring (follow-up):**

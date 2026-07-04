@@ -47,6 +47,21 @@ function findAgentMdFiles(dir: string): string[] {
     return results;
 }
 
+function hasAgentFiles(dir: string): boolean {
+    if (!fs.existsSync(dir)) return false;
+    const list = fs.readdirSync(dir);
+    for (const file of list) {
+        const filePath = path.join(dir, file);
+        const stat = fs.statSync(filePath);
+        if (stat && stat.isDirectory()) {
+            if (hasAgentFiles(filePath)) return true;
+        } else if (file.endsWith('.md')) {
+            return true;
+        }
+    }
+    return false;
+}
+
 function findSourceSkillFiles(dir: string): string[] {
     const results: string[] = [];
     if (!fs.existsSync(dir)) return results;
@@ -220,7 +235,7 @@ if (fs.existsSync('AGENTS.md')) { Pass('AGENTS.md exists'); }
 else { Fail('AGENTS.md missing (required for agent-first projects)'); }
 
 // 5. At least one agent file must exist in agents/
-if (fs.existsSync('agents') && findAgentMdFiles('agents').length > 0) {
+if (fs.existsSync('agents') && hasAgentFiles('agents')) {
     Pass('agents/ has agent files');
 } else {
     Fail('agents/ is empty or missing - create at least agents/pm.md');
@@ -346,31 +361,60 @@ if (!LIFECYCLE_ONLY && fs.existsSync(path.join('scripts', 'SCRIPTS.md'))) {
 }
 
 // Skills registry cross-check
-// Source skills: recursively scan skills/ (ignoring _meta, _archive, dotfiles)
-const sourceSkillsDir = 'skills';
-if (fs.existsSync(sourceSkillsDir)) {
-    const skillFiles = findSourceSkillFiles(sourceSkillsDir);
-    for (const skillMd of skillFiles) {
-        Pass(`skill exists: ${skillMd}`);
-    }
-}
+const knownCategoryDirs = new Set<string>([
+    'skills',
+    '.claude/skills',
+    '.gemini/skills',
+    'skills/daily',
+    'skills/domains',
+    'skills/domains/functional',
+    'skills/domains/industry',
+    'skills/domains/functional/msds',
+    'skills/domains/functional/psm',
+    'skills/domains/industry/ehschem',
+    'skills/domains/industry/ehsconst',
+    'skills/domains/industry/gasterm',
+    'skills/domains/industry/gcp',
+    'skills/domains/industry/gdp',
+    'skills/domains/industry/glp',
+    'skills/domains/industry/gmp',
+    'skills/domains/industry/gvp',
+    'skills/domains/industry/meddevice',
+    'skills/domains/industry/powergen',
+    'skills/emergency',
+    'skills/investigation',
+    'skills/_meta'
+]);
 
-// Target flat skills: check .claude/skills and .gemini/skills directly
-for (const flatSkillsDir of [path.join('.claude', 'skills'), path.join('.gemini', 'skills')]) {
-    if (fs.existsSync(flatSkillsDir)) {
-        for (const dir of fs.readdirSync(flatSkillsDir)) {
-            const fullDir = path.join(flatSkillsDir, dir);
-            if (fs.statSync(fullDir).isDirectory()) {
-                const skillMd = path.join(fullDir, 'SKILL.md');
-                if (fs.existsSync(skillMd)) {
-                    Pass(`skill exists: ${skillMd}`);
-                } else {
-                    Fail(`skill directory missing SKILL.md: ${fullDir}${path.sep}`);
+function checkSkills(dir: string) {
+    if (!fs.existsSync(dir)) return;
+    const normalizedDir = dir.replace(/\\/g, '/');
+    if (knownCategoryDirs.has(normalizedDir)) {
+        const list = fs.readdirSync(dir);
+        for (const file of list) {
+            if (file.startsWith('.')) continue;
+            const filePath = path.join(dir, file);
+            const stat = fs.statSync(filePath);
+            if (stat && stat.isDirectory()) {
+                if (['scripts', 'examples', 'resources', 'references'].includes(file)) {
+                    continue;
                 }
+                checkSkills(filePath);
             }
+        }
+    } else {
+        const skillMd = path.join(dir, 'SKILL.md');
+        if (fs.existsSync(skillMd)) {
+            Pass(`skill exists: ${skillMd}`);
+        } else {
+            Fail(`skill directory missing SKILL.md: ${dir}${path.sep}`);
         }
     }
 }
+
+checkSkills('skills');
+checkSkills(path.join('.claude', 'skills'));
+checkSkills(path.join('.gemini', 'skills'));
 
 // Lifecycle Audits
 const hasBun = (await $`bun --version`.quiet().nothrow()).exitCode === 0;
@@ -534,16 +578,16 @@ if (!LIFECYCLE_ONLY && fs.existsSync('AGENTS.md') && fs.existsSync('agents')) {
     let syncErrors = 0;
     const agentsContent = fs.readFileSync('AGENTS.md', 'utf-8');
     
-    for (const file of fs.readdirSync('agents')) {
-        if (!file.endsWith('.md')) continue;
-        const agentFile = path.join('agents', file);
+    const agentFiles = findAgentMdFiles('agents');
+    for (const agentFile of agentFiles) {
+        const file = path.basename(agentFile);
         const agentName = path.basename(file, '.md');
         const content = fs.readFileSync(agentFile, 'utf-8');
         
         const statusMatch = /^status:\s*(.+)$/m.exec(content);
         if (statusMatch) {
             const fileStatus = statusMatch[1].trim();
-            const agentsRegex = new RegExp(`\`${agentName}\\.md\`[\\s\\S]*?status:\\s*(\\w+)`);
+            const agentsRegex = new RegExp(`\`${agentName}\.md\`[\\s\\S]*?status:\\s*(\\w+)`);
             const agentsMatch = agentsRegex.exec(agentsContent);
             if (agentsMatch) {
                 const agentsMdStatus = agentsMatch[1].trim();
@@ -727,13 +771,14 @@ const IS_WORKSPACE_ROOT = fs.existsSync('CONSTITUTION.md') && !fs.existsSync('va
 
 // Check: Agent files must have a non-empty ## Required Tools section (workspace root only)
 if (IS_WORKSPACE_ROOT && fs.existsSync('agents')) {
-    const agentFiles = fs.readdirSync('agents').filter(f =>
-        f.endsWith('.md') && f !== '_COMMON.md' && f !== 'README.md'
-    );
+    const agentFiles = findAgentMdFiles('agents').filter(filePath => {
+        const file = path.basename(filePath);
+        return file !== '_COMMON.md' && file !== 'README.md';
+    });
     let missingSection = 0;
     let emptySection = 0;
-    for (const file of agentFiles) {
-        const filePath = path.join('agents', file);
+    for (const filePath of agentFiles) {
+        const file = path.basename(filePath);
         const content = fs.readFileSync(filePath, 'utf-8');
         const sectionIdx = content.indexOf('## Required Tools');
         if (sectionIdx === -1) {
