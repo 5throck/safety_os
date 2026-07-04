@@ -25,6 +25,16 @@
     },
     "overdue_worker_list": { "type": "array", "items": { "type": "object", "properties": { "worker_id": { "type": "string" }, "training_type": { "type": "string" }, "days_overdue": { "type": "integer" } } } },
     "sapa_risk_flagged": { "type": "boolean", "description": "중대재해처벌법 위반 위험 (미이수자 존재)" },
-    "legal_basis": { "type": "array", "items": { "type": "string" }, "minItems": 2 }
+    "legal_basis": {
+      "type": "array",
+      "description": "Multi-source legal basis. Primary: OSHA-KR Article 29 (training compliance monitoring) or Article 31 (special education compliance). Adjacent laws may include: SAPA Article 7 (employer training obligation — non-compliance triggers SAPA liability), SAPA Article 12 (construction subcontractor training compliance). Records with sapa_risk_flagged=true MUST cite SAPA.",
+      "items": { "type": "string" },
+      "minItems": 3,
+      "examples": [
+        ["OSHA-KR Art.29 §1", "OSHA-KR Art.31 §1", "SAPA Art.7"],
+        ["OSHA-KR Art.29 §1", "OSHA-KR Art.32 §1", "SAPA Art.7"],
+        ["OSHA-KR Art.29 §1", "SAPA Art.7", "SAPA Art.12"]
+      ]
+    }
   }
 }

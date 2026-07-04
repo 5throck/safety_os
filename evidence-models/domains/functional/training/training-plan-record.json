@@ -26,6 +26,16 @@
     },
     "budget_krw": { "type": ["number", "null"] },
     "approved_by": { "type": "string" },
-    "legal_basis": { "type": "array", "items": { "type": "string" }, "minItems": 2 }
+    "legal_basis": {
+      "type": "array",
+      "description": "Multi-source legal basis. Primary: OSHA-KR Article 29 (training plan establishment obligation). Adjacent laws may include: SAPA Article 7 (employer obligation to establish training program), SAPA Article 8 (safety and health management system — includes training planning), OSHA-KR Article 31 (special education planning for hazardous work).",
+      "items": { "type": "string" },
+      "minItems": 3,
+      "examples": [
+        ["OSHA-KR Art.29 §1", "SAPA Art.7", "SAPA Art.8"],
+        ["OSHA-KR Art.29 §1", "OSHA-KR Art.31 §1", "SAPA Art.7"],
+        ["OSHA-KR Art.29 §1", "OSHA-KR Art.32 §1", "SAPA Art.7"]
+      ]
+    }
   }
 }

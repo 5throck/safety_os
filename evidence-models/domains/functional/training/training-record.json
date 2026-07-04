@@ -29,7 +29,17 @@
     "retraining_required": { "type": "boolean" },
     "training_location": { "type": "string" },
     "training_method": { "type": "string", "enum": ["classroom", "online", "on_the_job", "field", "vr_ar"] },
-    "legal_basis": { "type": "array", "items": { "type": "string" }, "minItems": 2 },
+    "legal_basis": {
+      "type": "array",
+      "description": "Multi-source legal basis. Primary: OSHA-KR Article 29 (worker safety education) or Article 31 (special/hazardous work education) or Article 13 (emergency response) or Article 32 (supervisor education) or Article 114 (MSDS education) or Article 36 (risk assessment communication). Adjacent laws may include: SAPA Article 7 (employer training obligation), SAPA Article 12 (construction subcontractor training).",
+      "items": { "type": "string" },
+      "minItems": 3,
+      "examples": [
+        ["OSHA-KR Art.29 §1", "OSHA-KR Art.36 §1", "SAPA Art.7"],
+        ["OSHA-KR Art.31 §1", "OSHA-KR Art.13 §1", "SAPA Art.7"],
+        ["OSHA-KR Art.114 §1", "OSHA-KR Art.29 §1", "SAPA Art.12"]
+      ]
+    },
     "e_signature": { "$ref": "../../../_shared/base/common.schema.json#/definitions/e_signature" },
     "nomenclature": { "$ref": "../../../_shared/base/common.schema.json#/definitions/nomenclature" },
     "audit_trail": { "$ref": "../../../_shared/base/common.schema.json#/definitions/audit_trail" }
