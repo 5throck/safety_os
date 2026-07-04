@@ -220,6 +220,59 @@ ls workflows/domains/industry/     # 산업 운영 (건설, 가스, 발전 등)
 
 ---
 
+## 시나리오 6: 작업 위험성평가 (Art 36 위험성평가)
+
+**상황**: 제조 현장에서 컨베이어 시스템 정비 작업에 대해 산업안전보건법 제36조에 따른 위험성평가를 실시해야 합니다. 작업에는 밀폐공간 출입과 LOTO 절차가 포함됩니다.
+
+### 단계별 절차
+
+1. **위험성평가 시작**
+   ```
+   사용자: "위험성평가 실시 — 컨베이어 정비 작업 (밀폐공간 + LOTO)"
+   → PM이 SWM으로 라우팅 → SWM이 risk-assessment-agent에 dispatch
+   → risk-assessment 워크플로우 로드 (workflows/daily/manufacturing/risk-assessment/)
+   ```
+
+2. **위험 요소 식별**
+   ```
+   → risk-assessment-agent가 위험 요소 식별:
+     - 밀폐공간 (산소결핍, 유독가스)
+     - 위험 에너지 (컨베이어 LOTO 필수)
+     - 기계적 (끼임 지점, 회전부)
+   → legal_basis: 산업안전보건법 제36조
+   ```
+
+3. **위험도 평가 및 통제 조치**
+   ```
+   → 각 위험 요소에 심각도 × 발생가능성 행렬 적용
+   → 통제 계층:
+     - 공학적: 환기 시스템, 영구 LOTO 장치
+     - 관리적: 작업허가, 밀폐공간 출입허가
+     - 개인보호구: 가스탐지기, 안전대, 구조 삼각대
+   → risk-assessment-record.json 생성
+   ```
+
+4. **LOTO 협업**
+   ```
+   → psm-agent가 KOSHA GUIDE Z-40-2022에 따른 LOTO 절차 검증
+   → 에너지 차단 지점 식별 및 자물쇠 부착
+   ```
+
+5. **근로자 전달**
+   ```
+   → 위험성평가 결과 전달을 위해 TBM 일정 확정
+   → training-agent에 위험성평가 교육 기록 통지
+   → training_record_ref를 risk-assessment-record.json에 연결
+   ```
+
+### 생성되는 증거 기록
+- `risk-assessment-record.json` (제36조 위험성평가 — 위험 점수 및 통제 조치)
+- `psm-loto-record.json` (LOTO 절차 검증)
+- `training-record.json` (위험성평가 결과 전달 교육)
+- `ehsconst-tbm-record.json` (risk_assessment_ref 연결된 TBM 기록)
+
+---
+
 ## 에이전트 Dispatch 패턴
 
 ```

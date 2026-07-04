@@ -230,6 +230,59 @@ ls workflows/domains/industry/     # Industry operations (construction, gas, pow
 
 ---
 
+## Scenario 6: Workplace Risk Assessment (Art 36 위험성평가)
+
+**Situation**: A manufacturing site needs to conduct a mandatory risk assessment for a new non-routine maintenance task on a conveyor system, per OSHA-KR Article 36. The task involves confined space entry and LOTO procedures.
+
+### Step-by-Step
+
+1. **Initiate Risk Assessment**
+   ```
+   User: "위험성평가 실시 — 컨베이어 정비 작업 (confined space + LOTO)"
+   → PM routes to SWM → SWM dispatches risk-assessment-agent
+   → risk-assessment workflow loaded (workflows/daily/manufacturing/risk-assessment/)
+   ```
+
+2. **Hazard Identification**
+   ```
+   → risk-assessment-agent identifies hazards:
+     - Confined space (oxygen deficiency, toxic atmosphere)
+     - Hazardous energy (LOTO required for conveyor)
+     - Mechanical (pinch points, rotating parts)
+   → legal_basis: 산업안전보건법 제36조
+   ```
+
+3. **Risk Scoring & Control Measures**
+   ```
+   → Severity x Likelihood matrix applied to each hazard
+   → Control hierarchy:
+     - Engineering: Ventilation system, permanent LOTO devices
+     - Administrative: Work permit, confined space entry permit
+     - PPE: Gas detector, harness, rescue tripod
+   → risk-assessment-record.json generated with all hazards
+   ```
+
+4. **LOTO Coordination**
+   ```
+   → psm-agent verifies LOTO procedure per KOSHA GUIDE Z-40-2022
+   → Energy isolation points identified and locked out
+   ```
+
+5. **Worker Communication**
+   ```
+   → TBM scheduled to communicate risk assessment findings
+   → training-agent notified for risk assessment training record
+   → training_record_ref linked to risk-assessment-record.json
+   ```
+
+### Evidence Generated
+- `risk-assessment-record.json` (Art 36 risk assessment with hazard scoring and control measures)
+- `psm-loto-record.json` (LOTO procedure verification)
+- `training-record.json` (Risk assessment result communication training)
+- `ehsconst-tbm-record.json` (TBM with risk_assessment_ref linked)
+
+---
+
 ## Agent Dispatch Pattern
 
 ```

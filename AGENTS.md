@@ -140,7 +140,7 @@ All specialist agents below are dispatched ONLY through PM:
 | **risk-assessment-agent** | 4 | "Risk assessment", "Hazard identification", "Risk register update" |
 | **reporting-agent** | 4 | "Safety reporting", "KPI tracking", "TRIR calculations" |
 | **training-agent** | 4 | "Safety training", "Worker compliance tracking", "Curriculum generation" |
-| **psm-agent** | 4 | "Process Safety Management", "MOC review", "PHA analysis" |
+| **psm-agent** | 4 | "Process Safety Management", "MOC review", "PHA analysis", "Lockout/Tagout", "LOTO", "Lockout", "Tagout" |
 | **asset-integrity-agent** | 4 | "Equipment maintenance", "Aging equipment", "Preventative maintenance" |
 | **contractor-safety-agent** | 4 | "Contractor management", "Onboarding", "Worker monitoring" |
 | **emergency-agent** | 4 | "Emergency response", "Incident escalation", "Emergency protocol activation" |
@@ -206,6 +206,8 @@ All specialist agents below are dispatched ONLY through PM:
 | risk-assessment | risk-assessment-agent | Trigger risk assessment workflow for hazard identification and scoring |
 | hazop-analysis | psm-agent | Support execution of HAZOP procedures |
 | psm-moc | psm-agent | Generate Management of Change (MOC) packages |
+| psm-loto | psm-agent | Execute Lockout/Tagout (LOTO) procedure verification per KOSHA GUIDE Z-40-2022 and 안전보건기준규칙 Article 92 |
+| tar-planning | ehschem-agent | Chemical plant turnaround (TAR) shutdown planning — pre-TAR risk assessment, PSSR, contractor surge management |
 | root-cause-analysis | incident-investigation-agent | Execute 5-Why / RCA / Bow-Tie investigations |
 | audit-preparation | audit-agent | Generate audit preparation checklists |
 | contractor-onboarding | contractor-safety-agent | Handle contractor onboarding and training packages |

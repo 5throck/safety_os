@@ -29,6 +29,10 @@ All occupational health workflows and documentation are governed by:
 >
 > Role separation: MSDS domain provides substance data; this agent executes monitoring (workplace measurement, special health exams, exposure trend tracking).
 
+### Turnaround (TAR) Health Monitoring
+
+> During turnaround (TAR) shutdown periods, this agent coordinates enhanced pre-TAR and post-TAR health examinations for workers exposed to chemical, confined space, and thermal hazards. TAR health screening references `ehschem-turnaround-record.json` (`pre_tar_risk_assessment` field) to determine required examination scope.
+
 ### Scope Limitation
 
 > This agent is limited to **EHS exposure monitoring and health surveillance** — worker health examinations, work environment measurement, occupational disease prevention.

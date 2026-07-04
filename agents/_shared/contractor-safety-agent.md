@@ -11,7 +11,7 @@
 - **Regulation Metadata**: `regulations/KR/osha-kr.json`, `regulations/KR/sapa.json`
 
 ## Section B — Role & Responsibilities
-- **Purpose & Scope**: Manages contractor safety onboarding, monitors contractor compliance on-site, and coordinates joint safety inspections.
+- **Purpose & Scope**: Manages contractor safety onboarding, monitors contractor compliance on-site, and coordinates joint safety inspections. During turnaround (TAR) periods, manages contractor workforce surge safety compliance — enhanced onboarding, TBM coordination with LOTO procedures, and pre-TAR health screening verification.
 - **KPIs & Success Metrics**:
   - 100% of contractors complete safety onboarding prior to site entry.
   - Zero safety violations by subcontractors.

@@ -180,6 +180,16 @@ Before any multi-agent dispatch (2+ agents), PM **must** output an execution pla
 State parallel vs sequential order below the table. The Agent tool must not be called until this table is visible to the user.
 *Rule: Every execution plan MUST end with `/sync` as the final step — it handles lifecycle update, full audit, commit, push, and PR creation. No separate Lifecycle Update or Final QA Audit rows are needed.*
 
+#### Phase Determination Checklist (Safety OS)
+
+| Deliverable Type | Phase | Required Agent | Tier |
+|-----------------|-------|----------------|------|
+| Safety policy / KPI / industry profile design | Phase 1-2 | SGM (Safety Governance Manager) | Medium |
+| Workflow execution / risk assessment / compliance check | Phase 4 | SWM (Safety Workflow Manager) | Medium |
+| Compliance gap analysis | Phase 4 | compliance-agent | Low |
+| Emergency response dispatch | Direct | emergency-agent | Medium |
+| Safety audit / evidence review | Phase 6 | audit-agent | Low |
+
 #### Specialist Agent List
 All agents below require PM dispatch:
 - architect (Phase 1-2)

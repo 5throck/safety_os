@@ -6,6 +6,25 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+### Changed (2026-07-03 — Documentation Gap Fixes: LOTO/TAR Legal Basis + Art 36 Risk Assessment Cross-References)
+
+**LOTO+TAR documentation gaps resolved (ref: commit 4c1924c):**
+- **`agents/domains/functional/psm/psm-agent.md`**: Added LOTO to Section A Legal Basis (안전보건기준에관한규칙 Article 92, KOSHA GUIDE Z-40-2022), Section B scope (hazardous energy isolation), Section C operational procedures and handoff to ehsconst-agent for joint TBM.
+- **`agents/_shared/contractor-safety-agent.md`**: Added TAR surge management scope — enhanced onboarding, TBM coordination with LOTO, pre-TAR health screening during turnaround periods.
+- **`agents/_shared/occupational-health-agent.md`**: Added Turnaround (TAR) Health Monitoring subsection — pre-TAR/post-TAR enhanced health examinations with reference to `ehschem-turnaround-record.json`.
+- **`AGENTS.md`**: Added `psm-loto` and `tar-planning` skills to Skills Table; added "Lockout/Tagout", "LOTO", "Lockout", "Tagout" to psm-agent dispatch triggers.
+- **`regulations/KR/legal-glossary.yaml`**: Added `안전보건기준에관한규칙` statute entry with Article 92 (Zero Energy State / LOTO); added KOSHA GUIDE Z-40-2022 note to OSHA-KR statute block.
+
+**Risk Assessment (Art 36) cross-reference improvements:**
+- **`agents/domains/industry/ehsconst/ehsconst-agent.md`**: Added OSHA-KR Article 36 (위험성평가 실시) to Section A Legal Basis — mandatory risk assessment for all construction workplace tasks.
+- **`agents/domains/functional/training/training-agent.md`**: Added OSHA-KR Article 36 to Section A; expanded scope to include risk assessment result communication training; expanded Gap Analysis to flag workers missing updated risk assessment training.
+- **`workflows/domains/industry/ehsconst/tbm-tool-box-meeting/schema.yaml`**: Added `산업안전보건법 Article 36` to `legal_basis` — TBM is a primary vehicle for communicating risk assessment findings to workers.
+- **`evidence-models/domains/industry/ehsconst/ehsconst-tbm-record.json`**: Added `risk_assessment_ref` optional field; version bumped 1.0.0 → 1.0.1.
+- **`evidence-models/_shared/base/common.schema.json`**: Fixed `$id` from "gmp-common.schema.json" to "common.schema.json"; added shared `risk_assessment_ref` definition (assessment_id, assessment_date, risk_level, assessor_id); version bumped 1.0.0 → 1.0.1.
+- **`evidence-models/domains/functional/risk-assessment/risk-assessment-record.json`**: NEW — dedicated risk assessment evidence model per OSHA-KR Article 36 with hazard identification, risk scoring (severity × likelihood), hierarchy of controls, worker communication tracking, and `$ref` to common definitions.
+- **`GEMINI.md`**: Added Phase Determination Checklist (Safety OS) table — mirrors CLAUDE.md content for platform parity (SGM → Phase 1-2, SWM → Phase 4, compliance → Phase 4, emergency → Direct, audit → Phase 6).
+- **`docs/_shared/user-scenarios.md`** + **`user-scenarios_ko.md`**: Added Scenario 6 (Workplace Risk Assessment / 작업 위험성평가) — step-by-step dispatch example covering hazard identification, risk scoring, LOTO coordination, and worker communication.
+
 ### Changed (2026-07-03 — kr_safety MCP v2.0.0: Hybrid Search + Rename)
 
 **Hybrid 3-tier search replaces mock-data fallback in `search_osha_regulations`:**

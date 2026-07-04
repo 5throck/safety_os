@@ -60,6 +60,7 @@ statutes:
       - { number: "제130조", topic_en: "Worker Health Examination — Special" }
       - { number: "제155조", topic_en: "MOEL workplace inspection authority" }
       - { number: "제243조", topic_en: "Mandatory GHS classification (GHS 분류 의무화)" }
+    note: "KOSHA GUIDE Z-40-2022 (Lockout/Tagout — 자물쇠와 표지판 작업) supplements OSHA-KR equipment safety provisions."
 
   중대재해처벌법:
     english: Serious Accidents Punishment Act
@@ -81,6 +82,13 @@ statutes:
       - { number: "제14조", topic_en: "Special procedural rules for trials (심리절차에 관한 특례)" }
       - { number: "제15조", topic_en: "Damages liability (손해배상의 책임)" }
       - { number: "제16조", topic_en: "Government support and reporting requirements (정부의 사업주 등에 대한 지원 및 보고)" }
+
+  안전보건기준에관한규칙:
+    english: Occupational Safety and Health Standards Rules
+    abbreviation: OSHA-KR-Rules
+    regulator: MOEL (고용노동부)
+    articles:
+      - { number: "제92조", topic_en: "Zero Energy State — Lockout/Tagout (제로에너지상태 확보)" }
 
   약사법:
     english: Pharmaceutical Affairs Act

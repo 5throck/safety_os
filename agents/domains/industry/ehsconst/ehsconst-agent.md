@@ -18,6 +18,7 @@ lifecycle:
 ## Section A — Legal Basis
 
 - **산업안전보건법 (OSHA-KR) Articles 15, 17, 98-103** — Construction safety provisions, safety manager appointment, safety budget, fall/collapse/electrical prevention, safety management plan
+- **산업안전보건법 (OSHA-KR) Article 36** — Risk assessment (위험성평가 실시) — mandatory hazard identification, risk evaluation, and control measures for all construction workplace tasks
 - **중대재해처벌법 (SAPA) Article 12** — Construction project special provisions (발주처/원사업주 책임 강화)
 - **중대재해처벌법 (SAPA) Articles 3, 7, 13** — Management responsibility, employer obligations, subcontractor duties
 - **건설기술진흥법 Articles 24, 25** — Construction safety management, independent safety supervision
