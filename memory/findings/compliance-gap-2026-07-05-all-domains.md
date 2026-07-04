@@ -135,7 +135,7 @@ All action items from both meetings (`memory/meeting-2026-07-05-legal-citation-a
 
 **Verification**: `bun scripts/safety-audit.ts` re-run after all Batch 2 fixes — **618 files checked, 0 errors**.
 
-**Outstanding**: none from this report. All Critical, Major, and tracked Minor findings are now closed except Gap-16 (PSM citation thinness), which remains an intentional, non-blocking backlog item per `memory/backlog/psm-citation-thinness.md`.
+**Outstanding**: none. Gap-16 (PSM citation thinness) has also now been closed — see `memory/backlog/psm-citation-thinness.md` for the resolution. All 10 thin PSM workflows upgraded to a 3-source `legal_basis`; a bonus finding during this pass also caught and fixed the same SAPA Article 7→4 mis-citation (previously fixed in the emergency cluster) in 3 PSM workflows that had been mis-assessed as "OK" by the original audit (`eap-emergency-planning`, `incident-investigation-psm`, `psm-compliance-audit`). Re-verified via `bun scripts/safety-audit.ts`: 618 files, 0 errors.
 
 ## Approval
 

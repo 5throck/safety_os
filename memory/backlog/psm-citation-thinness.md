@@ -1,9 +1,10 @@
 # Backlog: PSM Single-Source Citation Thinness (Gap-16)
 
-status: open
+status: closed
 priority: low
 blocking: false
 created: 2026-07-05
+closed: 2026-07-05
 source: memory/findings/compliance-gap-2026-07-05-all-domains.md (Gap-16), memory/meeting-2026-07-05-legal-citation-audit-followup.md (B-03)
 
 ## Summary
@@ -42,3 +43,24 @@ Use `workflows/domains/functional/psm/loto-lockout-tagout/schema.yaml` as the te
 ## Owner / next step
 
 Unassigned. When picked up: dispatch `psm-agent` to verify candidates via `legalize_kr`/`mcp_kr_legislation` (same pattern used for the 2026-07-05 remediation), then add to each schema's `legal_basis`.
+
+## Resolution (2026-07-05)
+
+All 10 workflows upgraded to a 3-source `legal_basis` array (OSHA-KR Article 44 + topically-specific OSHA-KR article + 중대재해처벌법 Article 4), using the candidate articles listed above (all already-verified glossary entries — no new statute research needed):
+
+| Workflow | Companion article added |
+|---|---|
+| contractor-management | OSHA-KR Article 61 |
+| mi-inspection | OSHA-KR Article 93 |
+| moc-process | OSHA-KR Article 14 |
+| pha-hazop | OSHA-KR Article 36 |
+| psi-management | OSHA-KR Article 110 |
+| pssr-review | OSHA-KR Article 38 |
+| sop-management | OSHA-KR Article 14 |
+| employee-participation | OSHA-KR Article 24 |
+| hot-work-permit | OSHA-KR Article 98 |
+| psm-worker-training | OSHA-KR Article 29 |
+
+**Bonus finding during this pass**: the three "template" workflows this backlog cited as good examples (`eap-emergency-planning`, `incident-investigation-psm`, `psm-compliance-audit`) turned out to have the same 중대재해처벌법 Article 7→4 mis-citation already fixed elsewhere in the 2026-07-05 remediation — they were mis-assessed as "OK" by the original audit pass. Corrected as part of this batch.
+
+Verified via `bun scripts/safety-audit.ts`: 618 files, 0 errors.

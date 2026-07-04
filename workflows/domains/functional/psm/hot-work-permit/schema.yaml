@@ -4,7 +4,10 @@ title: "Hot Work Permit (Element 10)"
 status: active
 applicability: mandatory
 applicable_industries: [chemical, gas_terminal, power_generation, construction]
-legal_basis: OSHA-KR Article 44
+legal_basis:
+  - OSHA-KR Article 44
+  - OSHA-KR Article 98 (Permit-to-Work / Mechanical Accident Prevention)
+  - 중대재해처벌법 Article 4
 industry_profile: chemical-processing
 agent: psm-agent
 evidence_model: psm-hot-work-permit-record.json
