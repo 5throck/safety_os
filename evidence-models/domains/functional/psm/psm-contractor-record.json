@@ -1,64 +1,70 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "type": "object",
+  "$id": "psm-contractor-record.json",
   "title": "PSM Contractor Safety Record",
+  "description": "Evidence model for PSM Contractor Safety records per OSHA-KR Article 44.",
   "version": "1.0.0",
+  "type": "object",
+  "required": ["version", "record_id", "contractor_id", "evaluation_score", "training_verification", "timestamp", "agent_id", "workflow_id", "legal_basis"],
   "properties": {
-    "contractorId": {
-      "type": "string"
+    "version": {
+      "type": "string",
+      "description": "Schema version.",
+      "default": "1.0.0"
     },
-    "evaluationScore": {
-      "type": "number"
+    "record_id": {
+      "type": "string",
+      "pattern": "^PSM-CTR-[0-9]{4}-[0-9]{4}$",
+      "description": "Unique identifier for the contractor safety record"
     },
-    "trainingVerification": {
+    "contractor_id": {
+      "type": "string",
+      "description": "ID of the contractor"
+    },
+    "evaluation_score": {
+      "type": "number",
+      "description": "Contractor safety evaluation score"
+    },
+    "training_verification": {
       "type": "array",
       "items": {
         "type": "object",
         "properties": {
-          "workerId": {
-            "type": "string"
-          },
-          "trainingDate": {
+          "worker_id": {
             "type": "string",
-            "format": "date-time"
+            "description": "ID of the contractor worker"
+          },
+          "training_date": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date training was completed"
           },
           "verified": {
-            "type": "boolean"
+            "type": "boolean",
+            "description": "Whether training was verified"
           }
         },
-        "required": [
-          "workerId",
-          "trainingDate",
-          "verified"
-        ]
+        "required": ["worker_id", "training_date", "verified"]
       }
     },
     "timestamp": {
       "type": "string",
-      "format": "date-time"
+      "format": "date-time",
+      "description": "Timestamp when the record was created"
     },
-    "agentId": {
-      "type": "string"
+    "agent_id": {
+      "type": "string",
+      "description": "ID of the agent that generated this record"
     },
-    "workflowId": {
-      "type": "string"
+    "workflow_id": {
+      "type": "string",
+      "description": "ID of the workflow execution"
     },
     "legal_basis": {
       "type": "array",
-      "items": {
-        "type": "string"
-      },
-      "minItems": 2,
-      "description": "Multi-source legal basis"
+      "items": { "type": "string" },
+      "minItems": 1,
+      "description": "Legal basis for the contractor safety record (OSHA-KR Article 44)"
     }
-  },
-  "required": [
-    "contractorId",
-    "evaluationScore",
-    "trainingVerification",
-    "timestamp",
-    "agentId",
-    "workflowId",
-    "legal_basis"
-  ]
+  }
 }

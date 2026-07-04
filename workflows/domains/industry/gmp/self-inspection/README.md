@@ -18,7 +18,7 @@ This workflow applies to all GMP-regulated operations at pharmaceutical manufact
 
 ### Step 1: Annual Self-Inspection Plan
 - Define inspection scope, schedule, and team.
-- Risk-based prioritization via `skills/gmp-qrm/`.
+- Risk-based prioritization via `skills/domains/industry/gmp/qrm/`.
 
 ### Step 2: Pre-Inspection Preparation
 - Develop inspection checklist per area.

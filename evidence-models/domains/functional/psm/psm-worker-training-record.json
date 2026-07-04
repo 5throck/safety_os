@@ -1,17 +1,40 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "psm-worker-training-record.json",
   "title": "PSM Worker Training Record",
+  "description": "Evidence model for PSM Worker Training records per OSHA-KR Article 44.",
   "version": "1.0.0",
   "type": "object",
+  "required": ["version", "record_id", "timestamp", "agent_id", "workflow_id", "legal_basis", "worker_id", "training_type", "psm_elements_covered", "trainer_id", "completion_status", "test_score", "retraining_due_date", "acknowledgment_signature"],
   "properties": {
+    "version": {
+      "type": "string",
+      "description": "Schema version.",
+      "default": "1.0.0"
+    },
     "record_id": {
       "type": "string",
-      "description": "Unique identifier for the training record."
+      "pattern": "^PSM-WT-[0-9]{4}-[0-9]{4}$",
+      "description": "Unique identifier for the training record"
     },
-    "date": {
+    "timestamp": {
       "type": "string",
-      "format": "date",
-      "description": "Date the training was conducted."
+      "format": "date-time",
+      "description": "Timestamp when the record was created"
+    },
+    "agent_id": {
+      "type": "string",
+      "description": "ID of the agent that generated this record"
+    },
+    "workflow_id": {
+      "type": "string",
+      "description": "ID of the workflow execution"
+    },
+    "legal_basis": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 1,
+      "description": "Legal basis for the worker training record (OSHA-KR Article 44)"
     },
     "worker_id": {
       "type": "string",
@@ -53,17 +76,5 @@
       "type": "string",
       "description": "Worker's signed acknowledgment of participation and understanding (name or digital signature reference)."
     }
-  },
-  "required": [
-    "record_id",
-    "date",
-    "worker_id",
-    "training_type",
-    "psm_elements_covered",
-    "trainer_id",
-    "completion_status",
-    "test_score",
-    "retraining_due_date",
-    "acknowledgment_signature"
-  ]
+  }
 }

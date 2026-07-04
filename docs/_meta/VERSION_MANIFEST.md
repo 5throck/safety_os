@@ -59,7 +59,7 @@
 | platform-command-lifecycle-manager | 1.0.0 | .claude/skills/platform-command-lifecycle-manager/SKILL.md | both | N/A | pm |
 | platform-skill-lifecycle-manager | 1.0.0 | .claude/skills/platform-skill-lifecycle-manager/SKILL.md | both | N/A | pm |
 | project-review | 1.0.0 | skills/project-review/SKILL.md | workspace | N/A | pm |
-| psm-moc | N/A | skills/psm-moc/SKILL.md | workspace | N/A | psm-agent |
+| psm-moc | 1.0 | skills/domains/functional/psm/moc/SKILL.md | workspace | N/A | psm-agent |
 | research-analysis | 1.0.0 | .claude/skills/research-analysis/SKILL.md | claude | N/A | N/A |
 | risk-assessment | 1.0.0 | skills/daily/risk-assessment/SKILL.md | workspace | N/A | risk-assessment-agent |
 | root-cause-analysis | N/A | skills/investigation/root-cause-analysis/SKILL.md | workspace | N/A | incident-investigation-agent |

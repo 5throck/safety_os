@@ -1,12 +1,33 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "psm-loto-record.json",
   "title": "PSM Lockout/Tagout (LOTO) Record",
+  "description": "Evidence model for Lockout/Tagout (LOTO) records per OSHA-KR Article 38 + 안전보건기준규칙 Article 92 + KOSHA GUIDE Z-40-2022.",
   "version": "1.1.0",
   "type": "object",
   "properties": {
+    "version": {
+      "type": "string",
+      "description": "Schema version.",
+      "default": "1.1.0"
+    },
     "record_id": {
       "type": "string",
+      "pattern": "^PSM-LOTO-[0-9]{4}-[0-9]{4}$",
       "description": "Unique identifier for the LOTO record."
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the record was created"
+    },
+    "agent_id": {
+      "type": "string",
+      "description": "ID of the agent that generated this record"
+    },
+    "workflow_id": {
+      "type": "string",
+      "description": "ID of the workflow execution"
     },
     "date": {
       "type": "string",
@@ -130,8 +151,12 @@
     }
   },
   "required": [
+    "version",
     "record_id",
-    "date",
+    "timestamp",
+    "agent_id",
+    "workflow_id",
+    "permit_number",
     "permit_number",
     "equipment_id",
     "energy_types_isolated",

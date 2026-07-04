@@ -17,9 +17,9 @@ PSM is a **functional (Tier 1) domain** — it supplies PSM methodology to any i
 
 | Component | Count | Notes |
 |-----------|-------|-------|
-| Agent | 1 | `agents/domains/psm/psm-agent.md` |
-| Workflows | 11 | All core (no reference workflows — emergency dispatch via industry domains) |
-| Evidence Models | 11 | One per PSM element |
+| Agent | 1 | `agents/domains/functional/psm/psm-agent.md` |
+| Workflows | 15 | All core (no reference workflows — emergency dispatch via industry domains) |
+| Evidence Models | 15 | One per PSM element |
 | Skills | 1 | `skills/domains/functional/psm/moc/` (Management of Change) |
 | Regulations | 1 | `regulations/KR/Chemical-Plant-Safety.yaml` |
 | Industry Profile | N/A | Cross-industry; referenced by `chemical-processing`, `gas-terminal`, `power-generation` profiles |
@@ -57,7 +57,7 @@ Facilities handling hazardous substances at or above threshold quantities — in
 
 ## 4. Component Inventory
 
-### 4.1 Workflows (11) — OSHA 14 PSM Elements Coverage
+### 4.1 Workflows (15) — OSHA 14 PSM Elements Coverage
 
 | Workflow | PSM Element | Legal Basis |
 |----------|-------------|-------------|
@@ -71,25 +71,33 @@ Facilities handling hazardous substances at or above threshold quantities — in
 | `eap-emergency-planning` | Element 9: Emergency Planning & Response | OSHA-KR Art 44 |
 | `incident-investigation-psm` | Element 11: Incident Investigation | OSHA-KR Art 44 |
 | `psm-compliance-audit` | Element 12: Compliance Audits | OSHA-KR Art 44 |
+| `employee-participation` | Element 4: Employee Participation | OSHA-KR Art 44 |
+| `hot-work-permit` | Element 10: Hot Work Permits | OSHA-KR Art 44 |
+| `loto-lockout-tagout` | — | OSHA-KR Art 38 + 안전보건규칙 Art 92 |
+| `psm-worker-training` | Element 4: Training | OSHA-KR Art 44 |
 | `trade-secrets-management` | Element 14: Trade Secrets | OSHA-KR Art 44 |
 
-> Elements 4 (Training), 10 (Hot Work Permits), 13 (Employee Participation) deferred to v1.1.
+> Elements 4 (Training), 10 (Hot Work Permits), 13 (Employee Participation) were originally planned for v1.1 but have been implemented ahead of schedule.
 
-### 4.2 Evidence Models (11)
+### 4.2 Evidence Models (15)
 
 | Evidence Model | Key Fields |
 |----------------|-----------|
-| `psm-psi-record.json` | `process_description`, `chemical_inventory`, `equipment_specs`, `p_and_id_ref` |
-| `psm-pha-record.json` | `methodology` (HAZOP/FMEA/What-if), `nodes`, `deviations`, `safeguards`, `recommendations` |
-| `psm-sop-record.json` | `operating_phases`, `safety_limits`, `revision_history` |
-| `psm-contractor-record.json` | `contractor_safety_eval`, `site_induction_records` |
-| `psm-mi-record.json` | `equipment_id`, `inspection_results`, `fitness_for_service`, `next_inspection_date` |
-| `psm-moc-record.json` | `change_description`, `hazard_review`, `approvals`, `implementation_verification` |
-| `psm-pssr-record.json` | `checklist_items`, `sign_off_authority`, `outstanding_items` |
-| `psm-eap-record.json` | `emergency_scenarios`, `response_procedures`, `drill_records` |
-| `psm-incident-investigation-record.json` | `immediate_causes`, `root_causes`, `corrective_actions`, `lessons_learned` |
-| `psm-compliance-audit-record.json` | `audit_scope`, `findings`, `corrective_action_plan` |
-| `psm-trade-secrets-record.json` | `protected_information`, `disclosure_controls` |
+| `psm-psi-record.json` | `record_id`, `document_type`, `msds_identifier`, `document_version`, `approval_history` |
+| `psm-pha-record.json` | `record_id`, `node_id`, `deviations`, `risk_grade`, `recommendations` |
+| `psm-sop-record.json` | `sop_id`, `sop_version`, `change_summary`, `acknowledgments` |
+| `psm-contractor-record.json` | `contractor_id`, `evaluation_score`, `training_verification` |
+| `psm-mi-record.json` | `record_id`, `equipment_id`, `inspection_date`, `status`, `maintenance_history` |
+| `psm-moc-record.json` | `record_id`, `change_id`, `title`, `description`, `status`, `legal_basis`, `hazard_review`, `approval_chain` |
+| `psm-pssr-record.json` | `checklist_items`, `startup_approval`, `moc_reference` |
+| `psm-eap-record.json` | `record_id`, `emergency_scenarios`, `response_procedures`, `drill_records` |
+| `psm-incident-investigation-record.json` | `record_id`, `immediate_causes`, `root_causes`, `corrective_actions` |
+| `psm-compliance-audit-record.json` | `record_id`, `audit_scope`, `findings`, `corrective_action_plan` |
+| `psm-trade-secrets-record.json` | `record_id`, `protected_information`, `disclosure_controls` |
+| `psm-employee-participation-record.json` | `record_id`, `activity_type`, `participants`, `implementation_status` |
+| `psm-hot-work-permit-record.json` | `record_id`, `permit_number`, `fire_hazard_assessment`, `closure_signature` |
+| `psm-loto-record.json` | `record_id`, `permit_number`, `energy_types_isolated`, `isolation_points`, `lock_type` |
+| `psm-worker-training-record.json` | `record_id`, `worker_id`, `training_type`, `completion_status`, `test_score` |
 
 ### 4.3 Skills (1)
 

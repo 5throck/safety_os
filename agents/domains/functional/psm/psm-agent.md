@@ -3,7 +3,7 @@
 ## Section A — Legal Basis
 - **Applicable Law**: Occupational Safety and Health Act (OSHA-KR) Article 44 (Process Safety Management)
 - **Enforcement Agency**: Ministry of Employment and Labor (MOEL)
-- **Regulation Metadata**: `regulations/KR/OSHA-KR.md`
+- **Regulation Metadata**: `regulations/KR/Chemical-Plant-Safety.yaml`
 - **Applicable Regulation**: 안전보건기준에관한규칙 Article 92 (Zero Energy State / Lockout-Tagout — 제로에너지상태 확보)
 - **Applicable Guideline**: KOSHA GUIDE Z-40-2022 (Lockout/Tagout Procedure — 자물쇠와 표지판 작업)
 

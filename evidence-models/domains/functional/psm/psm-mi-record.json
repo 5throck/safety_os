@@ -1,36 +1,53 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "psm-mi-record.json",
   "title": "PSM MI Record",
-  "description": "Schema for equipment inspection records, measurements, pass/fail status, and maintenance history.",
+  "description": "Evidence model for Mechanical Integrity (MI) inspection records per OSHA-KR Article 44.",
   "version": "1.0.0",
   "type": "object",
+  "required": ["version", "record_id", "timestamp", "agent_id", "workflow_id", "legal_basis", "equipment_id", "inspection_date", "inspector_name", "status"],
   "properties": {
-    "recordId": {
-      "type": "string"
+    "version": {
+      "type": "string",
+      "description": "Schema version.",
+      "default": "1.0.0"
+    },
+    "record_id": {
+      "type": "string",
+      "pattern": "^PSM-MI-[0-9]{4}-[0-9]{4}$",
+      "description": "Unique identifier for the MI inspection record"
     },
     "timestamp": {
       "type": "string",
-      "format": "date-time"
+      "format": "date-time",
+      "description": "Timestamp when the record was created"
     },
-    "agentId": {
-      "type": "string"
-    },
-    "workflowId": {
-      "type": "string"
-    },
-    "legalBasis": {
+    "agent_id": {
       "type": "string",
-      "enum": ["OSHA-KR Article 44"]
+      "description": "ID of the agent that generated this record"
     },
-    "equipmentId": {
-      "type": "string"
-    },
-    "inspectionDate": {
+    "workflow_id": {
       "type": "string",
-      "format": "date"
+      "description": "ID of the workflow execution"
     },
-    "inspectorName": {
-      "type": "string"
+    "legal_basis": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 1,
+      "description": "Legal basis for the MI record (OSHA-KR Article 44)"
+    },
+    "equipment_id": {
+      "type": "string",
+      "description": "ID of the inspected equipment"
+    },
+    "inspection_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Date of the inspection"
+    },
+    "inspector_name": {
+      "type": "string",
+      "description": "Name of the inspector"
     },
     "measurements": {
       "type": "array",
@@ -38,13 +55,16 @@
         "type": "object",
         "properties": {
           "parameter": {
-            "type": "string"
+            "type": "string",
+            "description": "Measured parameter name"
           },
           "value": {
-            "type": "number"
+            "type": "number",
+            "description": "Measured value"
           },
           "unit": {
-            "type": "string"
+            "type": "string",
+            "description": "Unit of measurement"
           }
         },
         "required": ["parameter", "value", "unit"]
@@ -52,27 +72,30 @@
     },
     "status": {
       "type": "string",
-      "enum": ["Pass", "Fail", "Conditional Pass"]
+      "enum": ["pass", "fail", "conditional_pass"],
+      "description": "Inspection result status"
     },
-    "maintenanceHistory": {
+    "maintenance_history": {
       "type": "array",
       "items": {
         "type": "object",
         "properties": {
-          "maintenanceDate": {
+          "maintenance_date": {
             "type": "string",
-            "format": "date"
+            "format": "date",
+            "description": "Date maintenance was performed"
           },
           "description": {
-            "type": "string"
+            "type": "string",
+            "description": "Description of maintenance performed"
           },
-          "performedBy": {
-            "type": "string"
+          "performed_by": {
+            "type": "string",
+            "description": "Person or team that performed the maintenance"
           }
         },
-        "required": ["maintenanceDate", "description", "performedBy"]
+        "required": ["maintenance_date", "description", "performed_by"]
       }
     }
-  },
-  "required": ["recordId", "timestamp", "agentId", "workflowId", "legalBasis", "equipmentId", "inspectionDate", "inspectorName", "status"]
+  }
 }

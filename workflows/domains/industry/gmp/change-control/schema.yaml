@@ -10,5 +10,5 @@ legal_basis:
 industry_profile: pharma-general
 agent: gmp-agent
 evidence_model: gmp-change-control-record.json
-skill_ref: skills/gmp-change-control/SKILL.md
-psm_equivalent: workflows/psm/moc-process.md
+skill_ref: skills/domains/industry/gmp/change-control/SKILL.md
+psm_equivalent: workflows/domains/functional/psm/moc-process/README.md

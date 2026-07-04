@@ -62,7 +62,7 @@ This skill provides ICH Q9 Quality Risk Management (QRM) methodology for pharmac
    - `mitigation_status`
 
 ## Common Field (qrm_assessment)
-Used in all `gmp-*.json` evidence models via `$ref` to `base/gmp-common.schema.json#/definitions/qrm_assessment`:
+Used in all `gmp-*.json` evidence models via `$ref` to `_shared/base/common.schema.json#/definitions/qrm_assessment`:
 
 ```json
 "qrm_assessment": {

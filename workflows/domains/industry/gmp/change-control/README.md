@@ -12,7 +12,7 @@ This workflow applies to all GMP-regulated changes at pharmaceutical manufacturi
 - Initiator submits change request with description, rationale, technical basis, and scope.
 
 ### Step 2: Impact Assessment (Quality Risk Management)
-- Apply ICH Q9 methodology via `skills/gmp-qrm/` (typically FMEA or cQRM-HAZOP).
+- Apply ICH Q9 methodology via `skills/domains/industry/gmp/qrm/` (typically FMEA or cQRM-HAZOP).
 - Document impact on: product quality, validated state, regulatory filings, stability, supplier qualification.
 
 ### Step 3: Multi-Disciplinary Review
@@ -42,7 +42,7 @@ This workflow applies to all GMP-regulated changes at pharmaceutical manufacturi
 Generate `gmp-change-control-record.json` to `memory/` with required common fields (`e_signature`, `qrm_assessment`, `nomenclature`, `audit_trail`).
 
 ## 5. PSM Equivalent
-This workflow reuses the pattern from `workflows/psm/moc-process.md` (90% reuse per architecture decision). Key difference: GMP change control includes quality impact assessment in addition to safety impact.
+This workflow reuses the pattern from `workflows/domains/functional/psm/moc-process/` (90% reuse per architecture decision). Key difference: GMP change control includes quality impact assessment in addition to safety impact.
 
 ## 6. Legal Disclaimer
 > Workflow automation assistance only. Final change approval and regulatory filing decisions require qualified QA and Regulatory Affairs professionals.

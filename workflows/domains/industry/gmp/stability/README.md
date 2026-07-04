@@ -15,7 +15,7 @@ This workflow applies to all GMP-regulated drug products, APIs, and intermediate
 
 ### Step 2: Sample Selection & Storage
 - Select representative batches per protocol (typically 3 batches for registration).
-- Apply ICH Q9 sampling justification via `skills/gmp-qrm/`.
+- Apply ICH Q9 sampling justification via `skills/domains/industry/gmp/qrm/`.
 - Place samples in qualified stability chambers (calibrated, monitored).
 
 ### 3.3 Timepoint Testing

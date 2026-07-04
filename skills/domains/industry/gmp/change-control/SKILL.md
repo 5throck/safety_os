@@ -12,16 +12,16 @@ last_updated: 2026-06-17
 # GMP Change Control (변경관리) Skill
 
 ## Overview
-This skill oversees the GMP Change Control process to ensure that changes to facilities, equipment, processes, materials, documentation, or organization are properly evaluated, approved, implemented, and documented before execution. It reuses the pattern from `skills/domains/psm/moc/` with extensions for quality impact assessment per ICH Q10.
+This skill oversees the GMP Change Control process to ensure that changes to facilities, equipment, processes, materials, documentation, or organization are properly evaluated, approved, implemented, and documented before execution. It reuses the pattern from `skills/domains/functional/psm/moc/` with extensions for quality impact assessment per ICH Q10.
 
 ## Scope
 - **In scope**: GMP-regulated changes under `pharma-general` profile
-- **Out of scope**: PSM-regulated changes (use `skills/domains/psm/moc/` instead)
+- **Out of scope**: PSM-regulated changes (use `skills/domains/functional/psm/moc/` instead)
 - **Overlap**: For changes affecting both process safety AND product quality, dispatch BOTH skills in parallel
 
 ## Operational Steps
 1. **Initiate Change Request**: Document change description, rationale, technical basis, and classification (minor/major/critical).
-2. **Quality Impact Assessment**: Apply ICH Q9 methodology (typically FMEA) via `skills/domains/gmp/qrm/` to evaluate impact on:
+2. **Quality Impact Assessment**: Apply ICH Q9 methodology (typically FMEA) via `skills/domains/industry/gmp/qrm/` to evaluate impact on:
    - Product quality
    - Validated state (equipment, process, cleaning, CSV)
    - Regulatory filings
@@ -35,7 +35,7 @@ This skill oversees the GMP Change Control process to ensure that changes to fac
 8. **Closure**: Verify effectiveness, archive evidence with multi-source `legal_basis`.
 
 ## Evidence Generation
-Generate evidence to `memory/` using `evidence-models/gmp-change-control-record.json`. Required common fields:
+Generate evidence to `memory/` using `evidence-models/domains/industry/gmp/gmp-change-control-record.json`. Required common fields:
 - `legal_basis`: array with min 2 sources (Korean statutory + international)
 - `e_signature`: schema-only in v1 (cryptographic_hash: null)
 - `qrm_assessment`: link to gmp-qrm assessment
@@ -43,7 +43,7 @@ Generate evidence to `memory/` using `evidence-models/gmp-change-control-record.
 - `audit_trail`: ALCOA+ metadata
 
 ## PSM Pattern Reuse
-90% pattern reuse from `skills/domains/psm/moc/`. Key extensions:
+90% pattern reuse from `skills/domains/functional/psm/moc/`. Key extensions:
 - Quality impact assessment (in addition to safety impact)
 - Multi-source `legal_basis` (vs PSM's single source)
 - ALCOA+ data integrity enforcement

@@ -1,17 +1,40 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "psm-pha-record.json",
   "title": "PSM PHA HAZOP Record",
+  "description": "Evidence model for Process Hazard Analysis (PHA/HAZOP) records per OSHA-KR Article 44.",
   "version": "1.0.0",
   "type": "object",
+  "required": ["version", "record_id", "timestamp", "agent_id", "workflow_id", "legal_basis", "node_id", "node_description", "deviations"],
   "properties": {
+    "version": {
+      "type": "string",
+      "description": "Schema version.",
+      "default": "1.0.0"
+    },
     "record_id": {
       "type": "string",
-      "description": "Unique identifier for the PHA record."
+      "pattern": "^PSM-PHA-[0-9]{4}-[0-9]{4}$",
+      "description": "Unique identifier for the PHA record"
     },
-    "date": {
+    "timestamp": {
       "type": "string",
-      "format": "date",
-      "description": "Date of the analysis."
+      "format": "date-time",
+      "description": "Timestamp when the record was created"
+    },
+    "agent_id": {
+      "type": "string",
+      "description": "ID of the agent that generated this record"
+    },
+    "workflow_id": {
+      "type": "string",
+      "description": "ID of the workflow execution"
+    },
+    "legal_basis": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 1,
+      "description": "Legal basis for the PHA record (OSHA-KR Article 44)"
     },
     "node_id": {
       "type": "string",
@@ -56,7 +79,8 @@
           },
           "risk_grade": {
             "type": "string",
-            "enum": ["Low", "Medium", "High", "Critical"]
+            "enum": ["low", "medium", "high", "critical"],
+            "description": "Risk grade of the deviation"
           },
           "recommendations": {
             "type": "array",
@@ -75,12 +99,5 @@
         ]
       }
     }
-  },
-  "required": [
-    "record_id",
-    "date",
-    "node_id",
-    "node_description",
-    "deviations"
-  ]
+  }
 }
