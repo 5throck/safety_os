@@ -100,7 +100,7 @@ mkdir -p workflows/domains/<name>
 
 ### Step 3: Author the Agent
 Create `agents/domains/<name>/<name>-agent.md` following the template in `_core/` agents. Required sections:
-- Section A — Legal Basis (multi-source; min 2 regulatory references)
+- Section A — Legal Basis (multi-source; min 3 regulatory references with Primary + Adjacent structure)
 - Section B — Role & Responsibilities (with explicit scope limitations)
 - Section C — Operational Protocols & Escalation Rules
 
@@ -119,7 +119,7 @@ For each evidence type, create `evidence-models/domains/<name>/<name>-*-record.j
 - `qrm_assessment` (if domain uses ICH Q9 or equivalent)
 - `nomenclature` (multilingual declaration)
 - `audit_trail` (ALCOA+ metadata)
-- `legal_basis` (multi-source array, min 2 entries)
+- `legal_basis` (multi-source array, min 3 entries with description and examples)
 
 ### Step 7: Author Skills (Optional)
 If the domain has cross-cutting methodology skills (like `gmp-qrm`), create `skills/domains/<name>/<skill>/SKILL.md`.

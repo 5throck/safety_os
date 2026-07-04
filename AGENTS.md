@@ -314,9 +314,9 @@ All agents, regardless of their role, must adhere to the following:
 ### Legal Basis Gate
 
 All Safety OS agents MUST enforce the legal basis gate:
-- Before dispatching any workflow, verify the workflow has a `legal_basis` field
-- If `legal_basis` is missing, escalate to PM (CSO) immediately — do not execute
-- Legal basis must reference specific articles from OSHA-KR or SAPA
+- Before dispatching any workflow, verify the workflow has a `legal_basis` array with >= 3 regulatory sources
+- If `legal_basis` is missing or has fewer than 3 entries, escalate to PM (CSO) immediately — do not execute
+- Legal basis must reference specific articles from applicable Korean EHS laws (OSHA-KR, SAPA, domain-specific acts)
 
 ### 3-Section Agent Structure
 

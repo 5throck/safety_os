@@ -17,9 +17,12 @@ lifecycle:
 
 ## Section A — Legal Basis
 
+### Primary Laws
 - **약사법 Article 69** — Clinical Trial Application (CTA) approval required
 - **약사법 Article 73의2** — Serious Adverse Event (SAE) reporting
 - **의약품 임상시험 관리기준 (MFDS 고시)** — KGCP detailed standards
+
+### Adjacent Laws
 - **생명윤리법** — Bioethics and Safety Act (IRB, informed consent framework)
 - **ICH E6(R3) (2025)** — International GCP standard, Korea full alignment
 - **Declaration of Helsinki (2013)** — Ethical principles for medical research

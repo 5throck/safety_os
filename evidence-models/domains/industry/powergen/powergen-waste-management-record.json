@@ -125,7 +125,25 @@
       "items": {
         "type": "string"
       },
-      "minItems": 3
+      "minItems": 3,
+      "description": "Multi-source legal basis. Primary: 전기사업법 Articles 46/47/65 (facility installation, safety management) and 전기안전관리법 Articles 16/29 (inspection, safety manager). Adjacent laws may include: 신에너지 및 재생에너지법 Article 12 (renewable facility safety), OSHA-KR Article 44 (PSM for thermal power), 발전설비 안전관리 규정 (MOTIE inspection standards).",
+      "examples": [
+        [
+          "전기사업법 Art.46",
+          "전기안전관리법 Art.16",
+          "OSHA-KR Art.44 §1"
+        ],
+        [
+          "전기사업법 Art.65",
+          "MOTIE 발전설비 규정",
+          "OSHA-KR Art.44 §1"
+        ],
+        [
+          "신에너지법 Art.12",
+          "전기안전관리법 Art.29",
+          "전기사업법 Art.47"
+        ]
+      ]
     },
     "e_signature": {
       "$ref": "../../../_shared/base/common.schema.json#/definitions/e_signature"

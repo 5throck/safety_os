@@ -18,17 +18,20 @@ lifecycle:
 
 ## Section A — Legal Basis
 
+### Primary Laws
 - **산업안전보건법 (OSHA-KR) Article 110** — MSDS 작성·비치 의무 (preparation and posting duty)
 - **산업안전보건법 (OSHA-KR) Article 111** — MSDS 제출 대상 물질 (substances subject to submission)
 - **산업안전보건법 (OSHA-KR) Article 112** — MSDS 양식 및 기재사항 (format and content per GHS 16 sections)
 - **산업안전보건법 (OSHA-KR) Article 113** — 유해·허가·취급금지물질 관리 (prohibited, permission, harmful substances)
 - **산업안전보건법 (OSHA-KR) Article 114** — 경고표지 부착 의무 (warning label attachment)
 - **산업안전보건법 (OSHA-KR) Article 243** — GHS 분류 의무화 (mandatory GHS classification)
+
+### Adjacent Laws
 - **화학물질등록 및 평가 등에 관한 법률 (K-REACH) Articles 10-14** — Chemical registration and evaluation
 - **유해화학물질 관리법 (TCCL)** — Toxic chemical management (integrated with K-REACH)
 - **UN GHS Rev 9 (2021)** — Globally Harmonized System, Korean baseline since 2023
 
-> **Multi-source legal_basis**: All MSDS workflows must declare minimum 3 regulatory sources (OSHA-KR + 환경부법 + GHS). Enforced by `safety-audit.ts` v2.3.0.
+> **Multi-source legal_basis policy**: All MSDS evidence records MUST cite >= 3 regulatory sources. At least one OSHA-KR MSDS article + at least one delegated/international standard.
 
 ---
 
