@@ -33,11 +33,11 @@ Invoke this skill when a user reports a new work task, equipment change, workpla
    - **Severity**: 1 (negligible) to 5 (catastrophic)
    - **Risk Level** = Likelihood × Severity (1–25 scale)
 4. **Control Assignment** — For each hazard, assign one or more controls following the hierarchy: Elimination → Substitution → Engineering → Administrative → PPE. Record responsible person and target completion date.
-5. **Documentation** — Save the completed assessment record to `memory/findings/` with the `legal_basis` field populated. Obtain responsible person signature or digital acknowledgment.
+5. **Documentation** — Save the completed assessment record as structured JSON per `evidence-models/domains/functional/risk-assessment/risk-assessment-record.json` schema. Also save a human-readable summary to `memory/findings/` with the `legal_basis` field populated. Obtain responsible person signature or digital acknowledgment.
 
 ## Output Format
 
-Save findings to `memory/findings/risk-assessment-YYYY-MM-DD-<scope>.md` with the following structure:
+Generate a structured JSON evidence record conforming to `risk-assessment-record.json` (OSHA-KR Article 36 evidence model) and save a human-readable summary to `memory/findings/risk-assessment-YYYY-MM-DD-<scope>.md` with the following structure:
 
 ```markdown
 # Risk Assessment Record

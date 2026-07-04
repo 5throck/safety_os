@@ -8,6 +8,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Changed (2026-07-03 — Documentation Gap Fixes: LOTO/TAR Legal Basis + Art 36 Risk Assessment Cross-References)
 
+**Evidence model wiring (follow-up):**
+- **`skills/daily/risk-assessment/SKILL.md`**: Updated output instructions to generate structured JSON evidence records per `risk-assessment-record.json` schema alongside human-readable markdown summaries.
+- **`agents/_shared/risk-assessment-agent.md`**: Updated Section B scope and Section C workflow pattern to reference `evidence-models/domains/functional/risk-assessment/risk-assessment-record.json` as primary output format; updated Tools Used table.
+- **`workflows/daily/manufacturing/risk-assessment/README.md`**: Updated Documentation step, Evidence Requirements, and Completion Criteria to reference structured JSON evidence model.
+- **`workflows/daily/manufacturing/risk-assessment/schema.yaml`**: Added `evidence_model: risk-assessment-record.json` field.
+
+**LOTO+TAR documentation gaps resolved (ref: commit 4c1924c):**
+
 **LOTO+TAR documentation gaps resolved (ref: commit 4c1924c):**
 - **`agents/domains/functional/psm/psm-agent.md`**: Added LOTO to Section A Legal Basis (안전보건기준에관한규칙 Article 92, KOSHA GUIDE Z-40-2022), Section B scope (hazardous energy isolation), Section C operational procedures and handoff to ehsconst-agent for joint TBM.
 - **`agents/_shared/contractor-safety-agent.md`**: Added TAR surge management scope — enhanced onboarding, TBM coordination with LOTO, pre-TAR health screening during turnaround periods.

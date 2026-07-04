@@ -4,3 +4,4 @@ title: "위험성평가 (Risk Assessment)"
 status: "active"
 applicability: "mandatory"
 legal_basis: "산업안전보건법 제36조"
+evidence_model: risk-assessment-record.json
