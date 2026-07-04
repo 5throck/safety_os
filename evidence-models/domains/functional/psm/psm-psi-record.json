@@ -5,7 +5,17 @@
   "description": "Evidence model for Process Safety Information (PSI) records per OSHA-KR Article 44.",
   "version": "1.0.0",
   "type": "object",
-  "required": ["version", "record_id", "timestamp", "agent_id", "workflow_id", "legal_basis", "document_type", "document_version", "approval_history"],
+  "required": [
+    "version",
+    "record_id",
+    "timestamp",
+    "agent_id",
+    "workflow_id",
+    "legal_basis",
+    "document_type",
+    "document_version",
+    "approval_history"
+  ],
   "properties": {
     "version": {
       "type": "string",
@@ -32,13 +42,25 @@
     },
     "legal_basis": {
       "type": "array",
-      "items": { "type": "string" },
+      "items": {
+        "type": "string"
+      },
       "minItems": 2,
-      "description": "Legal basis for the PSI record (OSHA-KR Article 44)"
+      "description": "Multi-source legal basis. Primary: OSHA-KR Article 44 (PSM). Adjacent laws may include: SAPA Article 4 (safety management system obligation), Hazardous Materials Safety Act Article 13 (hazardous material MSDS), OSHA-KR Article 29 (safety and health management system).",
+      "examples": [
+        "산업안전보건법 Article 44 (공정안전관리)",
+        "중대재해처벌법 Article 4 (경영책임자 안전보건확보 의무)"
+      ]
     },
     "document_type": {
       "type": "string",
-      "enum": ["p_and_id", "msds", "process_chemistry", "equipment_design", "other"],
+      "enum": [
+        "p_and_id",
+        "msds",
+        "process_chemistry",
+        "equipment_design",
+        "other"
+      ],
       "description": "Type of PSI document"
     },
     "msds_identifier": {
@@ -65,11 +87,19 @@
           },
           "status": {
             "type": "string",
-            "enum": ["approved", "rejected", "pending"],
+            "enum": [
+              "approved",
+              "rejected",
+              "pending"
+            ],
             "description": "Approval decision status"
           }
         },
-        "required": ["approver_role", "approval_date", "status"]
+        "required": [
+          "approver_role",
+          "approval_date",
+          "status"
+        ]
       }
     }
   }

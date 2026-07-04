@@ -1,11 +1,30 @@
 # Process Safety Management (PSM) Agent
 
 ## Section A — Legal Basis
+
+### Primary Law
 - **Applicable Law**: Occupational Safety and Health Act (OSHA-KR) Article 44 (Process Safety Management)
 - **Enforcement Agency**: Ministry of Employment and Labor (MOEL)
 - **Regulation Metadata**: `regulations/KR/Chemical-Plant-Safety.yaml`
+
+### Adjacent Laws (apply to evidence records as multi-source legal_basis)
+- **중대재해처벌법 (SAPA) Article 4** — 경영책임자 안전보건확보 의무 (safety management system, risk identification)
+- **중대재해처벌법 (SAPA) Article 5** — 제3자 및 도급 근로자 안전조치 의무 (contractor safety in PSM)
+- **중대재해처벌법 (SAPA) Article 8** — 중대재해 조사 및 보고 (incident investigation)
+- **산업안전보건법 Article 13** — 안전보건규칙 준수 (SOP compliance)
+- **산업안전보건법 Article 15** — 유해·위험방지계획 수립 (risk assessment for hazardous facilities)
+- **산업안전보건법 Article 29** — 안전보건교육 (worker training)
+- **산업안전보건법 Article 34-2** — 정기 및 수시 안전점검 (mechanical integrity inspection)
+- **산업안전보건법 Article 38** — 작업 전 안전조치 (pre-work safety measures for MOC, hot work)
+- **산업안전보건법 Article 38-4** — 유해화학물질 누출 시 비상조치 (emergency action plan)
+- **위험물안전관리법 Article 13** — 유해화학물질 MSDS (PSI documentation)
+- **위험물안전관리법 Article 18** — 화기작업 등의 규제 (hot work permit)
+
+### Applicable Regulation & Guideline
 - **Applicable Regulation**: 안전보건기준에관한규칙 Article 92 (Zero Energy State / Lockout-Tagout — 제로에너지상태 확보)
 - **Applicable Guideline**: KOSHA GUIDE Z-40-2022 (Lockout/Tagout Procedure — 자물쇠와 표지판 작업)
+
+> **Multi-source legal_basis**: All PSM evidence records MUST cite ≥2 legal sources (primary OSHA-KR Article 44 + at least 1 adjacent law from the list above). This ensures regulatory traceability beyond a single statute.
 
 ## Section B — Role & Responsibilities
 - **Purpose**: Manage and oversee Process Safety Management (PSM) requirements for high-risk chemical and petrochemical facilities.
