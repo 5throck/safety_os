@@ -42,7 +42,7 @@ export async function getCurrentLaw(lawType?: string): Promise<object[]> {
 
 function mockCurrentLaw(lawType?: string) {
   return [
-    { lawId: '272966', lawName: '중대재해처벌법', lawType: lawType ?? '법률', effectiveDate: '2022-01-27' },
+    { lawId: '228817', lawName: '중대재해처벌법', lawType: lawType ?? '법률', effectiveDate: '2022-01-27' },
     { lawId: '108723', lawName: '산업안전보건법', lawType: lawType ?? '법률', effectiveDate: '2021-01-16' },
   ];
 }

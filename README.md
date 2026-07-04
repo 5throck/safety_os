@@ -150,9 +150,9 @@ Open this project directory in Claude Code or Gemini CLI. The `.mcp.json` file i
 
 | MCP Server | Tools | Purpose |
 |------------|-------|---------|
-| `k_skill` | 5 tools | OSHA/SAPA regulation search, compliance gap analysis |
+| `kr_safety` | 5 tools | Korean safety regulations search (OSHA-KR, SAPA, CCA), compliance gap analysis |
 | `legalize_kr` | 5 tools | Korean law structure parsing, version comparison, precedent search |
-| `kr_legislation` | 5 tools | Real-time legislation from 국가법령정보센터 API |
+| `mcp_kr_legislation` | 5 tools | Real-time legislation from 국가법령정보센터 API |
 
 No additional MCP configuration needed — just start chatting with your AI agent.
 
