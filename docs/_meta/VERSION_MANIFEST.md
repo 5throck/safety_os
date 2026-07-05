@@ -144,7 +144,6 @@
 | validate-agents.ts | N/A | scripts/validate-agents.ts | N/A |
 | validate-doc-folder.ts | N/A | scripts/validate-doc-folder.ts | fs, path |
 | validate-md-language.ts | 1.3.0 | scripts/validate-md-language.ts | fs |
-| validate-model-registry.ts | N/A | scripts/validate-model-registry.ts | N/A |
 | validate-output.ts | N/A | scripts/helpers/validate-output.ts | N/A |
 | validate-platform-parity.ts | N/A | scripts/helpers/validate-platform-parity.ts | fs, path |
 | validate-skills.ts | N/A | scripts/validate-skills.ts | N/A |

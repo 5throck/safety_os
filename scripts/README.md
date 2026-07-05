@@ -103,7 +103,6 @@ All scripts in this workspace follow a Hybrid Scripting Architecture divided int
 | validate-agents.ts | L0 | 1.0.0 | active | — | — | L0+L1 | — |
 | validate-doc-folder.ts | L0 | 1.0.0 | active | — | — | L0+L1 | — |
 | validate-md-language.ts | L0 | 1.0.0 | active | — | — | L0+L1 | — |
-| validate-model-registry.ts | L0 | 1.0.0 | active | — | — | L0+L1 | — |
 | validate-skills.ts | L0 | 1.1.0 | active | — | — | L0+L1 | — |
 | verify-agent-deliverables.ts | L0 | 1.0.0 | active | — | — | L0+L1 | — |
 | verify-memory.ts | L0 | 1.0.0 | active | — | — | L0+L1 | — |
@@ -184,7 +183,6 @@ All scripts in this workspace follow a Hybrid Scripting Architecture divided int
 | `validate-agents.ts` | L0 | 1.0.0 | active | —| —| L0+L1 | —|
 | `validate-doc-folder.ts` | L0 | 1.0.0 | active | —| —| L0+L1 | —|
 | `validate-md-language.ts` | L0 | 1.3.0 | active | —| —| L0+L1 | —|
-| `validate-model-registry.ts` | L0 | 1.0.1 | active | —| —| L0+L1 | —|
 | `validate-skills.ts` | L0 | 1.1.0 | active | —| —| L0+L1 | —|
 | `verify-agent-deliverables.ts` | L0 | 1.0.0 | active | —| —| L0+L1 | —|
 | `verify-memory.ts` | L0 | 1.0.0 | active | —| —| L0+L1 | —|
