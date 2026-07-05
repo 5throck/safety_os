@@ -7,7 +7,7 @@ workflow_type: core
 
 legal_basis:
   - OSHA-KR Article 113
-  - 유해화학물질 관리법 (TCCL)
+  - 화학물질관리법 (CCA) Article 20
   - UN GHS Rev 9 (2021)
 industry_profile: chemical-handling
 agent: msds-agent

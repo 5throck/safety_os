@@ -3,6 +3,7 @@ workflow_id: batch-mfg
 title: "제조 및 포장기록 (Batch Manufacturing Records)"
 status: active
 applicability: mandatory
+workflow_type: core
 legal_basis:
   - 약사법 Article 34
   - 의약품등기준규정 Article 12

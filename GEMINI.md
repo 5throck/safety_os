@@ -130,6 +130,8 @@ Spawn parallel instances to execute dedicated work concurrently. PM MUST explici
 
 > ⚠️ **Subagent commit rule**: Subagents must NOT issue `git commit` or `git push` directly. All commits must be initiated by PM via `/sync` command only. Direct commits are blocked by the pre-commit `SYNC_ACTIVE` gate.
 
+> ⚠️ **Model parameter enforcement**: Writing a model name in the execution plan table's Model column does NOT apply it to the spawned subagent. Whatever model-selection field `invoke_subagent` exposes in your Gemini CLI/Antigravity version MUST be set explicitly, mapped from the dispatched agent's frontmatter tier (High/Medium/Low). Confirm the actual parameter name in your platform's `invoke_subagent` schema before dispatching — do not assume the table value propagates automatically.
+
 #### Communication (`send_message`)
 Interact and exchange contracts with spawned agents via their unique `conversationID`.
 The platform supports **Reactive Wakeup**: you do not need to poll or query tasks in a loop. Simply yield execution, and the platform will wake you up automatically as soon as an agent replies or a background task completes.

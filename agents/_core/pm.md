@@ -108,7 +108,18 @@ These principles supplement the CSO routing rules above and apply to all Safety 
 Every execution plan row MUST declare Platform: `Both` / `Claude` / `Antigravity` / `L0-only`.
 
 ### Tier Ceiling Rule
-Safety OS agent tiers are defined in each agent's frontmatter. No tier elevation is permitted. SGM and SWM are Medium-tier; compliance-agent, risk-assessment-agent, and audit-agent are Low-tier.
+Safety OS agent tiers are defined in each agent's frontmatter — that frontmatter is authoritative, not this table. No tier elevation is permitted. SGM and SWM are Medium-tier; compliance-agent, risk-assessment-agent, and audit-agent are Medium-tier (per their frontmatter `tier.claude` field — corrected 2026-07-05; no agent in `agents/` is currently declared Low-tier).
+
+### Model Parameter Enforcement Rule
+Writing a model name in the execution plan table's Model column does **not** apply it. When calling the `Agent` tool, you MUST pass the `model` parameter explicitly, mapped from the dispatched agent's frontmatter tier:
+
+| Tier | `Agent(model: ...)` value |
+|------|---------------------------|
+| High | `opus` |
+| Medium | `sonnet` |
+| Low | `haiku` |
+
+Omitting `model` causes the subagent to silently inherit the parent session's model regardless of the tier written in the plan table. Verify the `model` argument is present on every `Agent()` call before dispatching — do not rely on `subagent_type` alone.
 
 ### Phase Gate for New File Design
 Any new workflow file, evidence schema, or regulation metadata requires SGM review (equivalent to architect Phase 1-2) before SWM executes.

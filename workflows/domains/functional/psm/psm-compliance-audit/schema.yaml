@@ -8,7 +8,7 @@ applicable_industries: [chemical, gas_terminal, power_generation]
 legal_basis:
   - OSHA-KR Article 44 (PSM Element 13)
   - 산업안전보건법 Article 15
-  - 중대재해처벌법 Article 7
+  - 중대재해처벌법 Article 4
 industry_profile: chemical-processing
 agent: psm-agent
 evidence_model: psm-compliance-audit-record.json

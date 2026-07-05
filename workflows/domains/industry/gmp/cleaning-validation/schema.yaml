@@ -3,6 +3,7 @@ workflow_id: cleaning-validation
 title: "세정 밸리데이션 (Cleaning Validation)"
 status: active
 applicability: mandatory
+workflow_type: core
 legal_basis:
   - 약사법 Article 34
   - 의약품등기준규정 Article 17

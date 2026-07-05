@@ -1,6 +1,6 @@
 # VERSION_MANIFEST.md
 
-**Generated**: 2026-07-04T22:34:42.828Z
+**Generated**: 2026-07-05T03:59:06.302Z
 **Manifest Version**: 1.0
 **Location**: docs\VERSION_MANIFEST.md
 
@@ -10,7 +10,7 @@
 
 - **Agents**: 0
 - **Skills**: 56
-- **Scripts**: 263
+- **Scripts**: 262
 - **Commands**: 6
 
 ---
@@ -339,7 +339,6 @@
 | validate-agents.ts | N/A | scripts/validate-agents.ts | N/A |
 | validate-doc-folder.ts | N/A | scripts/validate-doc-folder.ts | fs, path |
 | validate-md-language.ts | 1.4.1 | scripts/validate-md-language.ts | fs, js-yaml |
-| validate-model-registry.ts | N/A | scripts/validate-model-registry.ts | N/A |
 | validate-skills.ts | N/A | scripts/validate-skills.ts | N/A |
 | verify-agent-deliverables.ts | N/A | scripts/verify-agent-deliverables.ts | fs |
 | verify-memory.ts | N/A | scripts/verify-memory.ts | fs, path |

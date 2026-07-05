@@ -3,6 +3,7 @@ workflow_id: pqr
 title: "제품품질평가 (Product Quality Review)"
 status: active
 applicability: mandatory
+workflow_type: core
 legal_basis:
   - 약사법 Article 34
   - 의약품등기준규정 Article 12 (PQR)

@@ -1,3 +1,15 @@
+---
+name: occupational-health-agent
+role: specialist
+status: active
+tier:
+  claude: medium
+  gemini-cli: medium
+  antigravity: medium
+model: inherit
+description: "Occupational health specialist; worker health examinations and environment monitoring"
+---
+
 # occupational-health-agent
 
 **Phase:** 4

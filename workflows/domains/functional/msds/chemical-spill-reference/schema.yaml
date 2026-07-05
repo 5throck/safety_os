@@ -19,6 +19,7 @@ legal_basis:
   - OSHA-KR Article 110
   - 위험물안전관리법
   - UN GHS Rev 9 (2021)
+  - 화학물질관리법 (CCA) Article 23
 industry_profile: chemical-handling
 agent: msds-agent
 evidence_model: msds-record.json

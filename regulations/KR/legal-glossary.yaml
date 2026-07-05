@@ -9,8 +9,8 @@ source_mcp: mcp-kr-legislation  # curated reference glossary; statute content so
 # (agents/*.md Section A Legal Basis blocks, workflows/**/schema.yaml legal_basis fields,
 # regulations/KR/*.yaml). Articles NOT referenced anywhere in the codebase are omitted;
 # accuracy over completeness. Unverified entries are explicitly commented.
-version: 1.0.0
-last_updated: 2026-06-21
+version: 1.0.2
+last_updated: 2026-07-05
 
 # =============================================================================
 # KOREAN STATUTES (validator allowlist — keys are the exact Korean strings used
@@ -30,7 +30,7 @@ statutes:
       - { number: "제17조",  topic_en: "Safety Manager appointment" }
       - { number: "제24조",  topic_en: "Occupational Safety and Health Committee" }
       - { number: "제29조",  topic_en: "Worker safety and health education (근로자 안전보건교육)" }
-      - { number: "제31조",  topic_en: "Mechanical/equipment safety measures" }
+      - { number: "제31조",  topic_en: "Special safety and health training for hazardous work (특별안전보건교육 위험작업)" }
       - { number: "제32조",  topic_en: "Workplace safety measures" }
       - { number: "제36조",  topic_en: "Risk assessment (위험성평가 실시)" }
       - { number: "제38조",  topic_en: "Safety measures (안전조치)" }
@@ -87,8 +87,11 @@ statutes:
     english: Occupational Safety and Health Standards Rules
     abbreviation: OSHA-KR-Rules
     regulator: MOEL (고용노동부)
+    note: "Also cited in codebase as '산업안전보건기준에 관한 규칙' (OSHSR) — same rule, name-string variant; entries consolidated here rather than duplicated."
     articles:
       - { number: "제92조", topic_en: "Zero Energy State — Lockout/Tagout (제로에너지상태 확보)" }
+      - { number: "제618조", topic_en: "Confined space — definitions" }
+      - { number: "제623조", topic_en: "Confined space — watcher/monitor assignment (감시인의 배치 등)" }
 
   약사법:
     english: Pharmaceutical Affairs Act
@@ -101,6 +104,7 @@ statutes:
       - { number: "제69조",     topic_en: "Clinical Trial Application (CTA) approval required" }
       - { number: "제73조의2",  topic_en: "SAE reporting / ADR reporting (의약품 안전사용 관리)" }
       - { number: "제73조의3",  topic_en: "Pharmaceutical re-evaluation (의약품 재평가)" }
+      - { number: "제34조의3",  topic_en: "Designation of non-clinical test-conducting institutions (비임상시험실시기관 지정)" }
 
   의약품등기준규정:
     english: Standards and Specifications for Pharmaceuticals, etc. (KP-GMP delegated regulation)
@@ -219,8 +223,12 @@ statutes:
     english: Dangerous Substances Safety Management Act
     abbreviation: DSSMA
     regulator: NFA / MOIS
-    note: "Referenced across gasterm and ehschem workflows (위험물 저장/취급, 지정수량 이상) without specific articles."
-    articles: []
+    note: "Referenced across gasterm and ehschem workflows (위험물 저장/취급, 지정수량 이상)."
+    articles:
+      - { number: "제5조",     topic_en: "Storage and handling restrictions and technical standards" }
+      - { number: "제6조",     topic_en: "Installation and modification of hazardous-materials facilities" }
+      - { number: "제22조의2", topic_en: "Accident investigation for leaks/spills" }
+      - { number: "제27조",    topic_en: "Emergency measures, notification, and corrective orders" }
 
   도시가스사업법:
     english: City Gas Business Act
@@ -241,6 +249,45 @@ statutes:
     abbreviation: EHA
     regulator: ME (환경부)
     note: "Verified as active Korean law on law.go.kr (법률 제20384호, 2024.3.19 개정). Covers environmental health impact assessment, environmental health monitoring, and hazardous substance exposure management."
+    articles: []
+
+  생명윤리법:
+    english: Bioethics and Safety Act
+    abbreviation: BSA
+    regulator: MOHW (보건복지부)
+    note: "Cited in GCP workflows (informed-consent, irb-review, sae-reporting-reference) governing IRB/생명윤리심의위원회. No specific article numbers confirmed yet — article-level detail pending future verification."
+    articles: []
+
+  건설산업기본법:
+    english: Construction Industry Basic Act
+    abbreviation: CIBA
+    regulator: MOLIT (국토교통부)
+    note: "Verified as active Korean law via legalize_kr (MST 273435)."
+    articles:
+      - { number: "제29조의2", topic_en: "Management of construction subcontracting (건설공사의 하도급관리)" }
+
+  재난 및 안전관리 기본법:
+    english: Framework Act on the Management of Disasters and Safety
+    abbreviation: FAMDS
+    regulator: MOIS (행정안전부)
+    note: "Verified as active Korean law via legalize_kr (MST 283851). Canonical name for what several workflows informally cited as '재난관리기본법'. Article-level detail pending future verification."
+    articles: []
+
+  독성시험 책임자 규정:
+    english: Toxicity Study Director Regulation
+    note: "Cited in workflows/domains/industry/glp/personnel-qualification/schema.yaml. Appears to be an internal MFDS rule reference (cf. '비임상시험 관리기준 (MFDS 고시)' pattern documented in regulations/KR/MFDS-GLP.yaml) rather than a standalone statute. Abbreviation, regulator, and article-level detail unverified — not fabricated pending confirmation."
+    articles: []
+
+  소방기본법:
+    english: Basic Fire Services Act
+    regulator: NFA (소방청)
+    note: "Cited in emergency workflows (confined-space-rescue, high-angle-rescue) as '소방기본법 (구조)'. Abbreviation and article-level detail unverified."
+    articles: []
+
+  응급의료에 관한 법률:
+    english: Emergency Medical Service Act
+    regulator: MOHW (보건복지부)
+    note: "Cited in workflows/emergency/medical-emergency/schema.yaml. Abbreviation and article-level detail unverified."
     articles: []
 
 # =============================================================================
@@ -295,3 +342,9 @@ international_standards:
     full_name: "21 CFR Part 11 — FDA Electronic Records / Electronic Signatures"
   GAMP_5:
     full_name: "GAMP 5 — Risk-based approach to compliant GxP computerized systems"
+  EU_GDP:
+    full_name: "EU Guidelines on Good Distribution Practice of medicinal products for human use (2013/C 343/01)"
+    note: "Cited across most GDP workflows; documented as international_alignment in regulations/KR/MFDS-GDP.yaml."
+  EU_GVP:
+    full_name: "EU Good Pharmacovigilance Practices — Modules I-XVI"
+    note: "Cited across most GVP workflows; documented as international_alignment in regulations/KR/MFDS-GVP.yaml."

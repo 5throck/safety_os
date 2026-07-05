@@ -7,7 +7,7 @@ workflow_type: core
 
 legal_basis:
   - 고압가스안전관리법 Article 17
-  - 위험물안전관리법
+  - 위험물안전관리법 Article 27
   - 재난관리기본법
 industry_profile: gas-facility
 agent: gasterm-agent

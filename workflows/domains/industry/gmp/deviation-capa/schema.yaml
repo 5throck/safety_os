@@ -3,6 +3,7 @@ workflow_id: deviation-capa
 title: "이상관리 및 시정예방조치 (Deviation Management and CAPA)"
 status: active
 applicability: mandatory
+workflow_type: core
 legal_basis:
   - 약사법 Article 34
   - 의약품등기준규정 Article 19

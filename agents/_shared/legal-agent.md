@@ -1,3 +1,15 @@
+---
+name: legal-agent
+role: specialist
+status: active
+tier:
+  claude: medium
+  gemini-cli: medium
+  antigravity: medium
+model: inherit
+description: "Real-time legal interpretation and compliance advisory based on South Korean EHS laws"
+---
+
 # Legal Agent
 
 > **PM-ONLY INVOCATION**: This agent must only be dispatched by the PM (CSO). Direct user invocation is strictly forbidden.

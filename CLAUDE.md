@@ -222,7 +222,8 @@ Use the native `Agent` tool to spawn sub-agents for parallel or isolated tasks. 
 Agent(
   description   = "Implement automation script",
   prompt        = "You are an automation engineer. [paste agents/automation-engineer.md content here]\n\nTask: Implement the script per the approved plan.",
-  subagent_type = "claude"   // platform agent type; embed the agents/<name>.md role definition in the prompt
+  subagent_type = "claude",  // platform agent type; embed the agents/<name>.md role definition in the prompt
+  model         = "sonnet"  // REQUIRED — map from the dispatched agent's frontmatter tier: High->opus, Medium->sonnet, Low->haiku. Writing a model name in the execution plan table does NOT apply it; omitting this parameter silently inherits the parent session's model regardless of tier.
 )
 ```
 

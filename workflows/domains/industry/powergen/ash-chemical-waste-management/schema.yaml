@@ -8,7 +8,7 @@ workflow_type: core
 legal_basis:
   - 전기사업법 Article 47
   - 폐기물관리법
-  - 환경보전법
+  - 산업안전보건법 Article 125
 industry_profile: power-generation
 agent: powergen-agent
 evidence_model: powergen-waste-management-record.json
