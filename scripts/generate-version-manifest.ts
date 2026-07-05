@@ -1,4 +1,4 @@
-// @version 1.0.1
+// @version 1.0.2
 import * as fs from 'node:fs';
 import * as path from 'node:path';
 import { $ } from 'bun';
@@ -115,14 +115,28 @@ async function collectAgents(): Promise<AgentInfo[]> {
     const agentsDir = 'agents';
     if (!fs.existsSync(agentsDir)) return agents;
 
-    for (const file of fs.readdirSync(agentsDir)) {
-        if (!file.endsWith('.md') || file === '_COMMON.md' || file === 'README.md') continue;
-        const filePath = path.join(agentsDir, file);
+    function walkDir(dir: string, callback: (filePath: string) => void) {
+        for (const item of fs.readdirSync(dir)) {
+            const itemPath = path.join(dir, item);
+            if (fs.statSync(itemPath).isDirectory()) {
+                walkDir(itemPath, callback);
+            } else if (item.endsWith('.md') && item !== '_COMMON.md' && item !== 'README.md') {
+                callback(itemPath);
+            }
+        }
+    }
+
+    const filePaths: string[] = [];
+    walkDir(agentsDir, (p) => filePaths.push(p));
+
+    for (const filePath of filePaths) {
         const content = fs.readFileSync(filePath, 'utf-8');
         const { tier, model } = parseAgentFrontmatter(content);
         const lastModified = await getGitTimestamp(filePath);
+        const relativePath = path.relative(agentsDir, filePath);
+        const agentName = normalizePath(relativePath).replace(/\.md$/, '');
         agents.push({
-            name: path.basename(file, '.md'),
+            name: agentName,
             file: normalizePath(filePath),
             tier: tier || 'N/A',
             model: model || 'N/A',
@@ -172,6 +186,7 @@ async function collectScripts(): Promise<ScriptInfo[]> {
 
     function walkDir(dir: string, callback: (filePath: string) => void) {
         for (const item of fs.readdirSync(dir)) {
+            if (item === 'node_modules' || item === '.git' || item === '.cache') continue;
             const itemPath = path.join(dir, item);
             if (fs.statSync(itemPath).isDirectory()) {
                 walkDir(itemPath, callback);

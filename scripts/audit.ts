@@ -1,4 +1,4 @@
-// @version 2.6.0
+// @version 2.6.1
 import { $ } from 'bun';
 import * as fs from 'node:fs';
 import * as path from 'node:path';
@@ -202,6 +202,7 @@ if (!LIFECYCLE_ONLY) {
 function walkDir(dir: string, callback: (fPath: string) => void) {
     if (!fs.existsSync(dir)) return;
     for (const f of fs.readdirSync(dir)) {
+        if (f === 'node_modules' || f === '.git' || f === '_archive' || f === '.cache') continue;
         const dirPath = path.join(dir, f);
         const isDirectory = fs.statSync(dirPath).isDirectory();
         if (isDirectory) {
