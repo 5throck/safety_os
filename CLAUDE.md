@@ -222,8 +222,8 @@ Use the native `Agent` tool to spawn sub-agents for parallel or isolated tasks. 
 Agent(
   description   = "Implement automation script",
   prompt        = "You are an automation engineer. [paste agents/automation-engineer.md content here]\n\nTask: Implement the script per the approved plan.",
-  subagent_type = "claude",  // platform agent type; embed the agents/<name>.md role definition in the prompt
-  model         = "sonnet"  // REQUIRED — map from the dispatched agent's frontmatter tier: High->opus, Medium->sonnet, Low->haiku. Writing a model name in the execution plan table does NOT apply it; omitting this parameter silently inherits the parent session's model regardless of tier.
+  subagent_type = "general-purpose",  // platform agent type; embed the agents/<name>.md role definition in the prompt
+  model         = "haiku"  // REQUIRED — map from the dispatched agent's frontmatter tier (or the execution plan's Model column) to its short alias. Writing a registry model ID in the execution plan table does NOT apply it; omitting this parameter silently inherits the parent session's model.
 )
 ```
 
@@ -237,9 +237,9 @@ Each implementation task follows the **Phase 4 execution loop** (see [AGENTS.md 
 #### Cost Optimization (3-Tier Strategy)
 The PM agent uses the platform's **native subagent dispatch and plan mode** for multi-agent harness engineering, applying a 3-tier model strategy for cost optimization:
 **Model Selection Overrides** (overridden per agent invocation when appropriate):
-- **High-tier (Design/Planning)** — `claude-opus-4-7`: Complex analysis, architectural refactoring, or PM orchestration.
-- **Medium-tier (Review/QA)** — `claude-sonnet-4.6`: Code review, testing, standard implementation logic, and quality gates. Supervises the Low-tier.
-- **Low-tier (Execution/Coding)** — `claude-haiku-4-5`: Simple transformations, boilerplate generation, or strictly scoped sub-agent tasks.
+- **High-tier (Design/Planning)** — `claude-opus-4-7` (Translate to `model = "opus"` in `Agent()` call): Complex analysis, architectural refactoring, or PM orchestration.
+- **Medium-tier (Review/QA)** — `claude-sonnet-4-6` (Translate to `model = "sonnet"` in `Agent()` call): Code review, testing, standard implementation logic, and quality gates. Supervises the Low-tier.
+- **Low-tier (Execution/Coding)** — `claude-haiku-4-5` (Translate to `model = "haiku"` in `Agent()` call): Simple transformations, boilerplate generation, or strictly scoped sub-agent tasks.
 
 <!-- COMMON-CLAUDE:START -->
 ### 7. Native Plan Mode (`EnterPlanMode`)

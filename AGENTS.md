@@ -320,7 +320,7 @@ All Safety OS agents MUST enforce the legal basis gate:
 
 ### 3-Section Agent Structure
 
-All Safety OS agent files (`agents/safety-*.md`, `agents/compliance-agent.md`, etc.) MUST contain:
+All Safety OS agent files (`agents/safety-*.md`, `agents/_shared/compliance-agent.md`, etc.) MUST contain:
 
 **Section A — Legal Basis**
 - List applicable Korean law articles
