@@ -6,7 +6,7 @@ tier:
   claude: medium
   gemini-cli: medium
   antigravity: medium
-model: inherit
+model: sonnet
 color: magenta
 description: "Good Pharmacovigilance Practice specialist — post-market drug safety surveillance, ICSR management, signal detection, PBRER, RMP per KGVP + ICH E2 series."
 lifecycle:

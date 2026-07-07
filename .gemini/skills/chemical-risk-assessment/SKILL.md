@@ -7,6 +7,16 @@ description: Scenario-based chemical risk assessment combining hazard data (GHS 
 version: "1.0"
 created: 2026-06-17
 last_updated: 2026-06-17
+metadata:
+  triggers:
+    - 화학물질 위험성평가
+    - chemical risk assessment
+    - 노출평가
+    - exposure assessment
+    - RCR
+    - 허용기준 초과
+    - OEL DNEL
+    - 신규화학물질 도입승인
 ---
 
 # Chemical Risk Assessment Skill

@@ -6,7 +6,7 @@ tier:
   claude: medium
   gemini-cli: medium
   antigravity: medium
-model: inherit
+model: sonnet
 color: pink
 description: "Good Clinical Practice specialist — clinical trial management, IRB, informed consent, monitoring, SAE reporting per KGCP + ICH E6(R3)."
 lifecycle:

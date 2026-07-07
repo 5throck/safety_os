@@ -7,6 +7,16 @@ description: Validate ALCOA+ data integrity principles for GLP raw data per OECD
 version: "1.0"
 created: 2026-06-17
 last_updated: 2026-06-17
+metadata:
+  triggers:
+    - ALCOA+
+    - data integrity
+    - 데이터 무결성
+    - GLP 원시자료
+    - raw data
+    - OECD GLP Section 9
+    - 감사증적
+    - audit trail
 ---
 
 # GLP Data Integrity Checker Skill

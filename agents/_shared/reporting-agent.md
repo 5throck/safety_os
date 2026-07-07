@@ -6,7 +6,7 @@ tier:
   claude: medium
   gemini-cli: medium
   antigravity: medium
-model: inherit
+model: sonnet
 description: "Safety KPI reporting specialist; tracks TRIR, LTIR, and near-misses"
 ---
 

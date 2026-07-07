@@ -7,6 +7,16 @@ description: Check environmental discharge compliance for chemical plants. Air (
 version: "1.0"
 created: "2026-06-18"
 last_updated: "2026-06-18"
+metadata:
+  triggers:
+    - 환경 배출 기준
+    - 대기오염물질 배출허용기준
+    - SOx NOx VOC
+    - 수질오염물질
+    - BOD COD
+    - 환경보전법 준수
+    - 배출 규제 준수
+    - environmental discharge compliance
 ---
 
 # Environmental Compliance Checker Skill

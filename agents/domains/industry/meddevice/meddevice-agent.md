@@ -6,7 +6,7 @@ tier:
   claude: medium
   gemini-cli: medium
   antigravity: medium
-model: inherit
+model: sonnet
 color: teal
 description: "Medical Device Safety specialist — KGMP-MD + ISO 13485 + ISO 14971. Industry coordinator for medical device manufacturing."
 lifecycle:

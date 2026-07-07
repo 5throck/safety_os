@@ -5,6 +5,15 @@ owner: incident-investigation-agent
 scope: workspace
 status: active
 description: Conduct Root Cause Analysis (RCA) for safety incidents
+metadata:
+  triggers:
+    - 근본원인분석
+    - root cause analysis
+    - RCA
+    - 5 whys
+    - fishbone diagram
+    - 사고조사
+    - CAPA 수립
 ---
 # Root Cause Analysis (RCA) Skill
 

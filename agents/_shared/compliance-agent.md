@@ -6,7 +6,7 @@ tier:
   claude: medium
   gemini-cli: medium
   antigravity: medium
-model: inherit
+model: sonnet
 color: orange
 description: "Regulatory compliance validation —gap analysis, compliance checklists, and regulatory update impact assessment against Korean EHS law."
 lifecycle:

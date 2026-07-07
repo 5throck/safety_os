@@ -6,7 +6,7 @@ tier:
   claude: medium
   gemini-cli: medium
   antigravity: medium
-model: inherit
+model: sonnet
 color: purple
 description: "Good Laboratory Practice specialist — non-clinical safety studies, MFDS + ME + OECD GLP compliance, QAU inspections, Study Director support."
 lifecycle:

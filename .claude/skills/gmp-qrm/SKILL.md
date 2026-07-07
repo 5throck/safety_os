@@ -7,6 +7,16 @@ description: ICH Q9 Quality Risk Management (품질 위해 관리) skill for pha
 version: "1.0"
 created: 2026-06-17
 last_updated: 2026-06-17
+metadata:
+  triggers:
+    - 품질위해관리
+    - QRM
+    - ICH Q9
+    - FMEA
+    - HACCP
+    - FTA
+    - risk priority number
+    - 품질리스크 평가
 ---
 
 # GMP Quality Risk Management (ICH Q9) Skill

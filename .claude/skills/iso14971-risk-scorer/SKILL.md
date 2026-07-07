@@ -7,6 +7,16 @@ description: ISO 14971 risk estimation and scoring for medical devices. Severity
 version: "1.0"
 created: "2026-06-18"
 last_updated: "2026-06-18"
+metadata:
+  triggers:
+    - ISO 14971
+    - 위해 추정
+    - risk estimation
+    - 심각도 발생확률 매트릭스
+    - severity probability matrix
+    - 잔여위험
+    - residual risk
+    - ALARP
 ---
 
 # ISO 14971 Risk Scorer Skill

@@ -6,7 +6,7 @@ tier:
   claude: medium
   gemini-cli: medium
   antigravity: medium
-model: inherit
+model: sonnet
 color: darkblue
 description: "Gas Terminal Safety specialist (가스터미널 안전) — LNG/LPG/수소 기지 및 충전소 안전 관리 per 고압가스안전관리법 + LPG법 + 수소법 + 위험물안전관리법."
 lifecycle:

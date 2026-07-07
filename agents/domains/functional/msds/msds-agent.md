@@ -6,7 +6,7 @@ tier:
   claude: medium
   gemini-cli: medium
   antigravity: medium
-model: inherit
+model: sonnet
 color: orange
 description: "MSDS / Chemical Safety specialist — manages chemical substance data, GHS classification, MSDS lifecycle, chemical approval per OSHA-KR Articles 110-114 + K-REACH + GHS Rev 9."
 lifecycle:

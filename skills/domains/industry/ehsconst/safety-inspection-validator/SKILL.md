@@ -7,6 +7,15 @@ description: Validate construction safety inspections per OSHA-KR construction p
 version: "1.0"
 created: "2026-06-18"
 last_updated: "2026-06-18"
+metadata:
+  triggers:
+    - 안전점검 결과 검증
+    - safety inspection findings
+    - 지적사항 분류
+    - CAPA
+    - 시정조치
+    - Critical Major Minor 분류
+    - 건설 안전점검
 ---
 
 # Safety Inspection Validator Skill

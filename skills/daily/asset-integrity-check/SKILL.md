@@ -5,6 +5,16 @@ owner: asset-integrity-agent
 scope: workspace
 status: active
 description: Coordinate mechanical integrity and preventative maintenance checks
+metadata:
+  triggers:
+    - 설비무결성
+    - asset integrity
+    - 정기점검 일정
+    - preventive maintenance
+    - 압력용기 검사
+    - NDT 검사
+    - 배관 건전성
+    - mechanical integrity
 ---
 # Asset Integrity Check Skill
 

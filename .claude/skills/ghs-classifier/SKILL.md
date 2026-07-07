@@ -7,6 +7,16 @@ description: Apply GHS Rev 9 (2021) classification rules to chemical substances 
 version: "1.0"
 created: 2026-06-17
 last_updated: 2026-06-17
+metadata:
+  triggers:
+    - GHS 분류
+    - GHS classification
+    - 유해성 분류
+    - H-Statement
+    - 위험문구
+    - 예방조치문구
+    - P-Statement
+    - GHS Rev 9
 ---
 
 # GHS Classifier Skill (Rev 9 Ruleset)

@@ -6,7 +6,7 @@ tier:
   claude: medium
   gemini-cli: medium
   antigravity: medium
-model: inherit
+model: sonnet
 description: "Formats official documentation; enforces English-only policy and specific translation zones"
 ---
 

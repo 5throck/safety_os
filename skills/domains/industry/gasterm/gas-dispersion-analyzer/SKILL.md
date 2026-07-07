@@ -7,6 +7,16 @@ description: Model gas dispersion after leak for emergency response. LNG/LPG/수
 version: "1.0"
 created: "2026-06-18"
 last_updated: "2026-06-18"
+metadata:
+  triggers:
+    - 가스 확산 모델
+    - gas dispersion
+    - 가스 누출 시나리오
+    - LNG LPG 누출
+    - 수소 누출 확산
+    - BLEVE
+    - 대피 반경 산정
+    - Gaussian dispersion model
 ---
 
 # Gas Dispersion Analyzer Skill

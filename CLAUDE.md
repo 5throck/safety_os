@@ -94,7 +94,7 @@ Agent Teams allow multiple Claude Code instances to work in parallel with a shar
 **PM workflow integration**: When using Agent Teams, the PM Gateway still applies. Dispatch specialist agents as teammates using their `agents/<name>.md` definitions:
 
 ```text
-Spawn a teammate using the automation-engineer agent type to implement the script per the approved plan.
+Spawn a teammate using the docs-writer agent type to format the SOP per the approved plan.
 ```
 
 > ⚠️ **Platform support summary**:
@@ -185,19 +185,19 @@ State parallel vs sequential order below the table. The Agent tool must not be c
 |-----------------|-------|----------------|------|
 | Safety policy / KPI / industry profile design | Phase 1-2 | SGM (Safety Governance Manager) | Medium |
 | Workflow execution / risk assessment / compliance check | Phase 4 | SWM (Safety Workflow Manager) | Medium |
-| Compliance gap analysis | Phase 4 | compliance-agent | Low |
+| Compliance gap analysis | Phase 4 | compliance-agent | Medium |
 | Emergency response dispatch | Direct | emergency-agent | Medium |
-| Safety audit / evidence review | Phase 6 | audit-agent | Low |
+| Safety audit / evidence review | Phase 6 | audit-agent | Medium |
 
 **Tier ceiling**: Agents may NOT be elevated beyond their defined tier. Platform column is MANDATORY in every execution plan row.
 
 #### Specialist Agent List
 All agents below require PM dispatch:
-- architect (Phase 1-2)
-- automation-engineer (Phase 4)
-- docs-writer (Phase 4)
-- scaffolding-expert (Phase 0)
-- security-expert (Phase 6)
+- safety-governance-manager (SGM) — Phase 1-2 — High
+- safety-workflow-manager (SWM) — Phase 4 — High
+- docs-writer — Phase 4 — Medium
+- compliance-agent — Phase 4 — Medium
+- audit-agent — Phase 6 — Medium
 
 #### Permission Denial Protocol
 
@@ -220,15 +220,15 @@ Use the native `Agent` tool to spawn sub-agents for parallel or isolated tasks. 
 **Agent Dispatch** - use the `Agent` tool (not a bash CLI command):
 ```
 Agent(
-  description   = "Implement automation script",
-  prompt        = "You are an automation engineer. [paste agents/automation-engineer.md content here]\n\nTask: Implement the script per the approved plan.",
+  description   = "Format official documentation",
+  prompt        = "You are the Technical Documentation Writer. [paste agents/_shared/docs-writer.md content here]\n\nTask: Format the SOP per the approved plan.",
   subagent_type = "general-purpose",  // platform agent type; embed the agents/<name>.md role definition in the prompt
-  model         = "haiku"  // REQUIRED — map from the dispatched agent's frontmatter tier (or the execution plan's Model column) to its short alias. Writing a registry model ID in the execution plan table does NOT apply it; omitting this parameter silently inherits the parent session's model.
+  model         = "sonnet"  // REQUIRED — map from the dispatched agent's frontmatter tier (or the execution plan's Model column) to its short alias: High → opus, Medium → sonnet, Low → haiku. docs-writer's frontmatter declares tier.claude: medium, so it maps to sonnet. Writing a registry model ID in the execution plan table does NOT apply it; omitting this parameter silently inherits the parent session's model.
 )
 ```
 
 Each implementation task follows the **Phase 4 execution loop** (see [AGENTS.md - Subagent Roster](AGENTS.md#subagent-roster)):
-1. **automation-engineer** implements the changes (or code-writer for project-specific agents).
+1. **The dispatched Phase 4 specialist** (e.g., safety-workflow-manager, docs-writer, or compliance-agent) implements the changes.
 2. **PM** verifies against acceptance criteria by running `bun scripts/audit.ts` directly.
 3. **Quality gate (audit script)** validates compliance.
 

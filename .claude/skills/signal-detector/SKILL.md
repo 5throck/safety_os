@@ -7,6 +7,16 @@ description: Statistical signal detection in pharmacovigilance case database. Im
 version: "1.0"
 created: "2026-06-17"
 last_updated: "2026-06-17"
+metadata:
+  triggers:
+    - 시그널 탐지
+    - signal detection
+    - PRR
+    - ROR
+    - BCPNN
+    - EBGM
+    - 부작용 신호
+    - disproportionality analysis
 ---
 
 # Signal Detector Skill

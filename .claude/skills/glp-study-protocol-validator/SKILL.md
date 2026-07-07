@@ -7,6 +7,16 @@ description: Validate study protocol compliance with OECD GLP Section 8 requirem
 version: "1.0"
 created: 2026-06-17
 last_updated: 2026-06-17
+metadata:
+  triggers:
+    - 시험계획서 검증
+    - study protocol validation
+    - GLP protocol
+    - OECD GLP Section 8
+    - 시험책임자
+    - Study Director
+    - 시험물질 특성
+    - 보존기간 10년
 ---
 
 # GLP Study Protocol Validator Skill

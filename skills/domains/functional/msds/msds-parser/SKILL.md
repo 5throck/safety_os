@@ -3,10 +3,19 @@ name: msds-parser
 owner: msds-agent
 scope: workspace
 status: active
-description: Parse MSDS/SDS documents into structured GHS 16-section records. Hybrid: Mode 1 rule-based (top 5 Korean suppliers) + Mode 2 ML fallback (external LLM API) when confidence <80%.
+description: "Parse MSDS/SDS documents into structured GHS 16-section records. Hybrid: Mode 1 rule-based (top 5 Korean suppliers) + Mode 2 ML fallback (external LLM API) when confidence <80%."
 version: "1.0"
 created: 2026-06-17
 last_updated: 2026-06-17
+metadata:
+  triggers:
+    - MSDS 파싱
+    - MSDS parser
+    - SDS 16항목
+    - 물질안전보건자료
+    - GHS 16-section
+    - msds-record.json
+    - 공급자 MSDS 양식
 ---
 
 # MSDS Parser Skill (Hybrid: Rule + ML Fallback)

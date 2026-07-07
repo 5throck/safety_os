@@ -6,7 +6,7 @@ tier:
   claude: high
   gemini-cli: high
   antigravity: high
-model: inherit
+model: opus
 color: yellow
 description: "Chief Safety Officer (CSO) override of standard PM —orchestrates Safety OS workflows, enforces safety governance, and routes decisions through SGM/SWM."
 lifecycle:

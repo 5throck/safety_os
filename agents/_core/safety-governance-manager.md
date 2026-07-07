@@ -7,7 +7,7 @@ tier:
   claude: high
   gemini-cli: high
   antigravity: high
-model: inherit
+model: opus
 color: blue
 description: "Strategic safety governance —selects industry profiles, defines KPIs, approves policies, and monitors regulatory updates."
 lifecycle:

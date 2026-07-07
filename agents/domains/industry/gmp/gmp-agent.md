@@ -6,7 +6,7 @@ tier:
   claude: medium
   gemini-cli: medium
   antigravity: medium
-model: inherit
+model: sonnet
 color: green
 description: "Good Manufacturing Practice (GMP) specialist — manages pharmaceutical quality systems, batch records, validation, change control, deviation/CAPA per KP-GMP and PIC/S."
 lifecycle:

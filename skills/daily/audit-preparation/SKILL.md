@@ -5,6 +5,15 @@ owner: audit-agent
 scope: workspace
 status: active
 description: Prepare documentation and evidence for regulatory EHS audits
+metadata:
+  triggers:
+    - 감사 준비
+    - audit preparation
+    - 규제 감사
+    - OSHA-KR 감사
+    - 중대재해처벌법 감사 대응
+    - 증적자료 취합
+    - regulatory inspection readiness
 ---
 # Audit Preparation Skill
 

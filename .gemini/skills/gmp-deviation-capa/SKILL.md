@@ -7,6 +7,16 @@ description: Manage GMP Deviation (이상관리) and CAPA (시정예방조치) w
 version: "1.0"
 created: 2026-06-17
 last_updated: 2026-06-17
+metadata:
+  triggers:
+    - 이상관리
+    - 시정예방조치
+    - CAPA
+    - deviation
+    - OOS
+    - OOT
+    - KP-GMP Article 19
+    - 일탈 조사
 ---
 
 # GMP Deviation & CAPA (이상관리 및 시정예방조치) Skill

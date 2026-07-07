@@ -6,7 +6,7 @@ tier:
   claude: medium
   gemini-cli: medium
   antigravity: medium
-model: inherit
+model: sonnet
 description: "Real-time legal interpretation and compliance advisory based on South Korean EHS laws"
 ---
 

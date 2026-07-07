@@ -6,7 +6,7 @@ tier:
   claude: medium
   gemini-cli: medium
   antigravity: medium
-model: inherit
+model: sonnet
 color: red
 description: "Workplace risk assessment specialist —hazard identification, risk scoring, control measure recommendations, risk register maintenance per Korean standards."
 lifecycle:

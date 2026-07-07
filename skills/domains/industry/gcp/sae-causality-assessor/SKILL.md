@@ -7,6 +7,16 @@ description: Assess SAE causality using ImPACT criteria. Supports investigator a
 version: "1.0"
 created: 2026-06-17
 last_updated: "2026-06-17"
+metadata:
+  triggers:
+    - SAE 인과성 평가
+    - causality assessment
+    - ImPACT
+    - WHO-UMC
+    - Naranjo algorithm
+    - ICH E2A
+    - 중대이상반응 인과관계
+    - 이상반응 인과성
 ---
 
 # SAE Causality Assessor Skill

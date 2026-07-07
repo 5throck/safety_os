@@ -7,6 +7,16 @@ description: Analyze temperature excursion events in cold chain pharmaceutical d
 version: "1.0"
 created: 2026-06-17
 last_updated: 2026-06-17
+metadata:
+  triggers:
+    - 온도이탈
+    - temperature excursion
+    - 콜드체인
+    - cold chain
+    - GDP 온도관리
+    - 냉장유통
+    - excursion event
+    - 안정성 데이터 검토
 ---
 
 # Temperature Excursion Analyzer Skill
