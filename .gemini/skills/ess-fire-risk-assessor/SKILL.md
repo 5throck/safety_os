@@ -7,6 +7,16 @@ description: Lithium-ion ESS (Energy Storage System) fire risk assessment. Therm
 version: "1.0"
 created: "2026-06-18"
 last_updated: "2026-06-18"
+metadata:
+  triggers:
+    - ESS 화재
+    - 리튬이온 배터리 화재
+    - thermal runaway
+    - 열폭주
+    - BMS 안전
+    - energy storage system fire
+    - MPSL 인증
+    - 에너지저장장치 화재위험
 ---
 
 # ESS Fire Risk Assessor Skill

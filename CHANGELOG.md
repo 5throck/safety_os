@@ -8,6 +8,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Fixed
 
+- **governance**: Replaced `CLAUDE.md`'s Specialist Agent List and `Agent()` dispatch example (which referenced nonexistent `automation-engineer`/`architect`/`scaffolding-expert`/`security-expert` agents and a nonexistent Low tier) with the project's real roster; corrected `compliance-agent`/`audit-agent` tier from Low to Medium to match their frontmatter and `pm.md`'s Tier Ceiling Rule.
+- **agents**: Replaced the hardcoded `model: inherit` frontmatter field (present on all 28 agent files, contradicting `pm.md`'s Model Parameter Enforcement Rule) with the tier-resolved short alias (`opus`/`sonnet`); added missing frontmatter to `psm-agent.md` and `training-agent.md`.
+- **scripts**: Fixed `generate-version-manifest.ts`'s agent tier regex to tolerate CRLF line endings (was silently failing for all 9 domain agents); added support for nested YAML `metadata.triggers` lists (the format most skills actually use) alongside the old flat-array format; removed a false-positive "command not integrated as a skill" drift check that didn't match this project's auto-registration convention.
+- **skills**: Added missing `metadata.triggers` keyword lists to 30 skills that had none, and synced the corrected content into their `.claude/skills/` and `.gemini/skills/` duplicate copies (which were stale relative to the canonical `skills/` tree); fixed an invalid unquoted YAML `description` field in `msds-parser/SKILL.md`. Drift detection now reports 0 issues (down from 75).
 - **audit**: Resolved `agents/` path check in `scripts/audit.ts` to recursively scan subdirectories (supporting nested directories like `agents/_core/`).
 - **audit**: Updated skills check in `scripts/audit.ts` to recursively check skill folders while skipping category folders.
 - **commands**: Added `.gemini/commands/sync.md` matching `.claude/commands/sync.md` for platform command parity.

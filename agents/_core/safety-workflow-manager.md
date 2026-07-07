@@ -7,7 +7,7 @@ tier:
   claude: high
   gemini-cli: high
   antigravity: high
-model: inherit
+model: opus
 color: green
 description: "Harness Prompt agent —operational safety workflow execution, dynamic agent team assembly, evidence collection coordination."
 lifecycle:

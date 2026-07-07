@@ -6,7 +6,7 @@ tier:
   claude: high
   gemini-cli: high
   antigravity: high
-model: inherit
+model: opus
 description: "Disaster response specialist; handles natural disasters like typhoons and earthquakes"
 ---
 

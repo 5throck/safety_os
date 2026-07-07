@@ -10,6 +10,15 @@ status: active
 scope: common
 owner: pm
 prerequisites: none
+metadata:
+  triggers:
+    - 새 팀 구성
+    - 에이전트팀 변경
+    - 신규 도메인 팀 빌딩
+    - build new agent team
+    - agent team benchmarking
+    - team proposal generation
+    - consulting team design
 ---
 
 ## Overview

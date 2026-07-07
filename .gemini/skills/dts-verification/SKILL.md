@@ -7,6 +7,15 @@ description: Verify DTS (Drug Tracking System) barcode/RFID scans against manufa
 version: "1.0"
 created: 2026-06-17
 last_updated: 2026-06-17
+metadata:
+  triggers:
+    - DTS 바코드 검증
+    - DTS verification
+    - 의약품 유통관리
+    - RFID 검증
+    - MFDS DTS센터
+    - 위변조 의약품 조사
+    - GS1 데이터매트릭스
 ---
 
 # DTS Verification Skill

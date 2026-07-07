@@ -6,7 +6,7 @@ tier:
   claude: high
   gemini-cli: high
   antigravity: high
-model: inherit
+model: opus
 color: red
 description: "Emergency response —scenario classification, immediate protocol activation, CSO escalation, and evidence preservation for fire, chemical release, serious accidents, and natural disasters."
 lifecycle:

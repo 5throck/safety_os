@@ -7,6 +7,15 @@ description: Initial hazard screening for chemical plant processes. Identifies P
 version: "1.0"
 created: "2026-06-18"
 last_updated: "2026-06-18"
+metadata:
+  triggers:
+    - PSM 적용대상
+    - process hazard screening
+    - 위해물질 보유량
+    - 공정안전관리
+    - PHA 대상 여부
+    - 사고대비물질
+    - 화학공장 초기 위해평가
 ---
 
 # Process Hazard Screening Skill

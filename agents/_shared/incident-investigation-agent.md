@@ -6,7 +6,7 @@ tier:
   claude: medium
   gemini-cli: medium
   antigravity: medium
-model: inherit
+model: sonnet
 description: "Incident investigation and root cause analysis (RCA) specialist"
 ---
 

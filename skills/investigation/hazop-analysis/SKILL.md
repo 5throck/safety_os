@@ -5,6 +5,15 @@ owner: psm-agent
 scope: workspace
 status: active
 description: Facilitate Hazard and Operability (HAZOP) analysis for process safety management
+metadata:
+  triggers:
+    - HAZOP 분석
+    - HAZOP analysis
+    - 공정위험성평가
+    - guideword 분석
+    - process hazard analysis
+    - PHA
+    - 이상 시나리오 도출
 ---
 # HAZOP Analysis Skill
 

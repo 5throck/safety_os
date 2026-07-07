@@ -6,7 +6,7 @@ tier:
   claude: medium
   gemini-cli: medium
   antigravity: medium
-model: inherit
+model: sonnet
 description: "Asset integrity specialist; preventative maintenance and aging equipment management"
 ---
 

@@ -7,6 +7,16 @@ description: Analyze clinical trial protocol deviations per ICH E6(R3). Classifi
 version: "1.0"
 created: 2026-06-17
 last_updated: "2026-06-17"
+metadata:
+  triggers:
+    - 프로토콜 이탈
+    - protocol deviation
+    - ICH E6(R3)
+    - important deviation
+    - CAPA
+    - IRB 보고
+    - KGCP
+    - 임상시험 이탈
 ---
 
 # Protocol Deviation Analyzer Skill

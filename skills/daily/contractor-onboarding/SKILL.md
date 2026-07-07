@@ -5,6 +5,15 @@ owner: contractor-safety-agent
 scope: workspace
 status: active
 description: Manage EHS onboarding and compliance verification for contractors
+metadata:
+  triggers:
+    - 협력업체 온보딩
+    - contractor onboarding
+    - 도급업체 안전교육
+    - 협력업체 자격심사
+    - site access approval
+    - 안전교육 이수확인
+    - 도급 안전관리
 ---
 # Contractor Onboarding Skill
 

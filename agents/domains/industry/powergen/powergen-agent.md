@@ -6,7 +6,7 @@ tier:
   claude: medium
   gemini-cli: medium
   antigravity: medium
-model: inherit
+model: sonnet
 color: yellow
 description: "Power Generation Safety specialist (발전설비 안전) — 화력/신재생 발전소 안전 관리 per 전기사업법 + 전기안전관리법 + 신재생에너지법. 원자력 제외."
 lifecycle:

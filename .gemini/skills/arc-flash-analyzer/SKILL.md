@@ -7,6 +7,16 @@ description: Arc flash hazard analysis per IEEE 1584. Computes incident energy, 
 version: "1.0"
 created: "2026-06-18"
 last_updated: "2026-06-18"
+metadata:
+  triggers:
+    - 아크 플래시
+    - arc flash
+    - IEEE 1584
+    - 고압 전기 작업
+    - PPE category
+    - incident energy
+    - NFPA 70E
+    - 활선 작업 허가
 ---
 
 # Arc Flash Analyzer Skill

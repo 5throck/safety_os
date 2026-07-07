@@ -1,4 +1,4 @@
-// @version 1.0.2
+// @version 1.0.3
 import * as fs from 'node:fs';
 import * as path from 'node:path';
 import { $ } from 'bun';
@@ -55,7 +55,7 @@ function normalizePath(p: string): string {
 }
 
 function parseAgentFrontmatter(content: string): { tier?: string; model?: string } {
-    const tierMatch = /^tier:[ \t]*\n[ \t]+claude:[ \t]+(.+)$/m.exec(content);
+    const tierMatch = /^tier:[ \t]*\r?\n[ \t]+claude:[ \t]+(.+)$/m.exec(content);
     const modelMatch = /^model:[ \t]+(.+)$/m.exec(content);
     return {
         tier: tierMatch ? tierMatch[1].trim() : 'N/A',
@@ -63,15 +63,32 @@ function parseAgentFrontmatter(content: string): { tier?: string; model?: string
     };
 }
 
+function parseTriggersBlock(content: string): string[] {
+    // Flat single-line form: triggers: [a, b, c]
+    const bracket = /^[ \t]*triggers:\s*\[(.*?)\]\s*$/m.exec(content);
+    if (bracket) {
+        return bracket[1].split(',').map(t => t.trim().replace(/^['"]|['"]$/g, '')).filter(Boolean);
+    }
+    // Nested YAML list form used by most skills:
+    //   metadata:
+    //     triggers:
+    //       - foo
+    //       - bar
+    const block = /^[ \t]*triggers:[ \t]*\r?\n((?:[ \t]*-[ \t]+.+\r?\n?)+)/m.exec(content);
+    if (block) {
+        return block[1]
+            .split(/\r?\n/)
+            .map(line => line.replace(/^[ \t]*-[ \t]*/, '').trim().replace(/^['"]|['"]$/g, ''))
+            .filter(Boolean);
+    }
+    return [];
+}
+
 function parseSkillFrontmatter(content: string): { version?: string; triggers?: string[]; owner?: string } {
     const versionMatch = /^version:\s*['"]?([\d.]+)['"]?$/m.exec(content);
-    const triggersMatch = /^triggers:\s*\[(.*?)\]$/m.exec(content);
     const ownerMatch = /^owner:\s*(.+)$/m.exec(content);
 
-    let triggers: string[] = [];
-    if (triggersMatch) {
-        triggers = triggersMatch[1].split(',').map(t => t.trim().replace(/^['"]|['"]$/g, '')).filter(Boolean);
-    }
+    let triggers: string[] = parseTriggersBlock(content);
 
     return {
         version: versionMatch ? versionMatch[1].trim() : undefined,
@@ -223,12 +240,15 @@ async function collectCommands(): Promise<CommandInfo[]> {
         let platform = 'claude';
         if (hasGemini) platform = 'both';
 
+        // Per CLAUDE.md §2, a command file is auto-registered as a same-named Skill by convention —
+        // there is no per-file "> Skill: ..." annotation to look for. Only surface an explicit override.
         const skillMatch = /^>.*?Skill:\s*(.+?)$/m.exec(content);
+        const commandName = file.replace('.md', '');
         commands.push({
-            name: file.replace('.md', ''),
+            name: commandName,
             file: normalizePath(filePath),
             platform,
-            skill_integration: skillMatch ? skillMatch[1].trim() : 'N/A',
+            skill_integration: skillMatch ? skillMatch[1].trim() : `auto (${commandName})`,
         });
     }
     return commands.sort((a, b) => a.name.localeCompare(b.name));
@@ -251,13 +271,6 @@ function detectDrift(agents: AgentInfo[], skills: SkillInfo[], commands: Command
         }
         if (skill.triggers.length === 0) {
             issues.push(`Skill ${skill.name} has no triggers defined`);
-        }
-    }
-
-    // Check for command-skill integration drift
-    for (const cmd of commands) {
-        if (cmd.skill_integration === 'N/A') {
-            issues.push(`Command ${cmd.name} not integrated as a skill`);
         }
     }
 

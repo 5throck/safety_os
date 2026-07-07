@@ -7,6 +7,16 @@ description: Assess fall hazards at construction sites. Leading edge identificat
 version: "1.0"
 created: "2026-06-18"
 last_updated: "2026-06-18"
+metadata:
+  triggers:
+    - 추락 위해평가
+    - fall hazard
+    - leading edge
+    - 안전대 활동제한장치
+    - 방호 계층
+    - fall protection hierarchy
+    - 추락방지망
+    - rescue plan 구조 계획
 ---
 
 # Fall Hazard Assessor Skill

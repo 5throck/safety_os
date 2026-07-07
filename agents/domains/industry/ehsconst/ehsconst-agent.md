@@ -6,7 +6,7 @@ tier:
   claude: medium
   gemini-cli: medium
   antigravity: medium
-model: inherit
+model: sonnet
 color: brown
 description: "Construction Safety specialist (건설안전) — Korean construction industry safety management per OSHA-KR construction provisions, SAPA Article 12, Construction Technology Promotion Act."
 lifecycle:

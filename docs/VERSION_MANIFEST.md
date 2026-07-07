@@ -1,6 +1,6 @@
 # VERSION_MANIFEST.md
 
-**Generated**: 2026-07-05T04:26:30.096Z
+**Generated**: 2026-07-07T22:56:15.942Z
 **Manifest Version**: 1.0
 **Location**: docs\VERSION_MANIFEST.md
 
@@ -19,34 +19,34 @@
 
 | Name | File | Tier | Model | Last Modified |
 |------|------|------|-------|---------------|
-| _core/pm | agents/_core/pm.md | high | inherit | 2026-07-04 |
-| _core/safety-governance-manager | agents/_core/safety-governance-manager.md | high | inherit | 2026-06-17 |
-| _core/safety-workflow-manager | agents/_core/safety-workflow-manager.md | high | inherit | 2026-06-17 |
-| _shared/asset-integrity-agent | agents/_shared/asset-integrity-agent.md | medium | inherit | 2026-07-05 |
-| _shared/audit-agent | agents/_shared/audit-agent.md | medium | inherit | 2026-06-21 |
-| _shared/compliance-agent | agents/_shared/compliance-agent.md | medium | inherit | 2026-06-17 |
-| _shared/contractor-safety-agent | agents/_shared/contractor-safety-agent.md | medium | inherit | 2026-07-05 |
-| _shared/disaster-response-agent | agents/_shared/disaster-response-agent.md | high | inherit | 2026-07-05 |
-| _shared/docs-writer | agents/_shared/docs-writer.md | medium | inherit | 2026-07-05 |
-| _shared/emergency-agent | agents/_shared/emergency-agent.md | high | inherit | 2026-06-17 |
-| _shared/incident-investigation-agent | agents/_shared/incident-investigation-agent.md | medium | inherit | 2026-07-05 |
-| _shared/legal-agent | agents/_shared/legal-agent.md | medium | inherit | 2026-07-05 |
-| _shared/occupational-health-agent | agents/_shared/occupational-health-agent.md | medium | inherit | 2026-07-05 |
-| _shared/reporting-agent | agents/_shared/reporting-agent.md | medium | inherit | 2026-07-05 |
-| _shared/risk-assessment-agent | agents/_shared/risk-assessment-agent.md | medium | inherit | 2026-07-04 |
-| domains/functional/msds/msds-agent | agents/domains/functional/msds/msds-agent.md | N/A | inherit | 2026-07-04 |
-| domains/functional/psm/psm-agent | agents/domains/functional/psm/psm-agent.md | N/A | N/A | 2026-07-04 |
-| domains/functional/training/training-agent | agents/domains/functional/training/training-agent.md | N/A | N/A | 2026-07-04 |
-| domains/industry/ehschem/ehschem-agent | agents/domains/industry/ehschem/ehschem-agent.md | N/A | inherit | 2026-07-04 |
-| domains/industry/ehsconst/ehsconst-agent | agents/domains/industry/ehsconst/ehsconst-agent.md | N/A | inherit | 2026-07-04 |
-| domains/industry/gasterm/gasterm-agent | agents/domains/industry/gasterm/gasterm-agent.md | N/A | inherit | 2026-07-04 |
-| domains/industry/gcp/gcp-agent | agents/domains/industry/gcp/gcp-agent.md | N/A | inherit | 2026-07-04 |
-| domains/industry/gdp/gdp-agent | agents/domains/industry/gdp/gdp-agent.md | N/A | inherit | 2026-07-04 |
-| domains/industry/glp/glp-agent | agents/domains/industry/glp/glp-agent.md | N/A | inherit | 2026-07-04 |
-| domains/industry/gmp/gmp-agent | agents/domains/industry/gmp/gmp-agent.md | N/A | inherit | 2026-07-04 |
-| domains/industry/gvp/gvp-agent | agents/domains/industry/gvp/gvp-agent.md | N/A | inherit | 2026-07-04 |
-| domains/industry/meddevice/meddevice-agent | agents/domains/industry/meddevice/meddevice-agent.md | N/A | inherit | 2026-07-04 |
-| domains/industry/powergen/powergen-agent | agents/domains/industry/powergen/powergen-agent.md | N/A | inherit | 2026-07-04 |
+| _core/pm | agents/_core/pm.md | high | opus | 2026-07-05 |
+| _core/safety-governance-manager | agents/_core/safety-governance-manager.md | high | opus | 2026-06-17 |
+| _core/safety-workflow-manager | agents/_core/safety-workflow-manager.md | high | opus | 2026-06-17 |
+| _shared/asset-integrity-agent | agents/_shared/asset-integrity-agent.md | medium | sonnet | 2026-07-05 |
+| _shared/audit-agent | agents/_shared/audit-agent.md | medium | sonnet | 2026-06-21 |
+| _shared/compliance-agent | agents/_shared/compliance-agent.md | medium | sonnet | 2026-06-17 |
+| _shared/contractor-safety-agent | agents/_shared/contractor-safety-agent.md | medium | sonnet | 2026-07-05 |
+| _shared/disaster-response-agent | agents/_shared/disaster-response-agent.md | high | opus | 2026-07-05 |
+| _shared/docs-writer | agents/_shared/docs-writer.md | medium | sonnet | 2026-07-05 |
+| _shared/emergency-agent | agents/_shared/emergency-agent.md | high | opus | 2026-06-17 |
+| _shared/incident-investigation-agent | agents/_shared/incident-investigation-agent.md | medium | sonnet | 2026-07-05 |
+| _shared/legal-agent | agents/_shared/legal-agent.md | medium | sonnet | 2026-07-05 |
+| _shared/occupational-health-agent | agents/_shared/occupational-health-agent.md | medium | sonnet | 2026-07-05 |
+| _shared/reporting-agent | agents/_shared/reporting-agent.md | medium | sonnet | 2026-07-05 |
+| _shared/risk-assessment-agent | agents/_shared/risk-assessment-agent.md | medium | sonnet | 2026-07-04 |
+| domains/functional/msds/msds-agent | agents/domains/functional/msds/msds-agent.md | medium | sonnet | 2026-07-04 |
+| domains/functional/psm/psm-agent | agents/domains/functional/psm/psm-agent.md | medium | sonnet | 2026-07-04 |
+| domains/functional/training/training-agent | agents/domains/functional/training/training-agent.md | medium | sonnet | 2026-07-04 |
+| domains/industry/ehschem/ehschem-agent | agents/domains/industry/ehschem/ehschem-agent.md | medium | sonnet | 2026-07-04 |
+| domains/industry/ehsconst/ehsconst-agent | agents/domains/industry/ehsconst/ehsconst-agent.md | medium | sonnet | 2026-07-04 |
+| domains/industry/gasterm/gasterm-agent | agents/domains/industry/gasterm/gasterm-agent.md | medium | sonnet | 2026-07-04 |
+| domains/industry/gcp/gcp-agent | agents/domains/industry/gcp/gcp-agent.md | medium | sonnet | 2026-07-04 |
+| domains/industry/gdp/gdp-agent | agents/domains/industry/gdp/gdp-agent.md | medium | sonnet | 2026-07-04 |
+| domains/industry/glp/glp-agent | agents/domains/industry/glp/glp-agent.md | medium | sonnet | 2026-07-04 |
+| domains/industry/gmp/gmp-agent | agents/domains/industry/gmp/gmp-agent.md | medium | sonnet | 2026-07-04 |
+| domains/industry/gvp/gvp-agent | agents/domains/industry/gvp/gvp-agent.md | medium | sonnet | 2026-07-04 |
+| domains/industry/meddevice/meddevice-agent | agents/domains/industry/meddevice/meddevice-agent.md | medium | sonnet | 2026-07-04 |
+| domains/industry/powergen/powergen-agent | agents/domains/industry/powergen/powergen-agent.md | medium | sonnet | 2026-07-04 |
 
 ---
 
@@ -54,62 +54,62 @@
 
 | Name | Version | Location | Platform | Triggers | Owner |
 |------|---------|----------|----------|----------|-------|
-| agent-lifecycle-manager | 1.0.0 | skills/agent-lifecycle-manager/SKILL.md | workspace | N/A | pm |
-| agent-lifecycle-manager | 1.0.0 | .claude/skills/agent-lifecycle-manager/SKILL.md | both | N/A | pm |
-| api-documentation | 1.0.0 | .claude/skills/api-documentation/SKILL.md | claude | N/A | N/A |
-| arc-flash-analyzer | 1.0 | .claude/skills/arc-flash-analyzer/SKILL.md | both | N/A | powergen-agent |
-| asset-integrity-check | 1.0.0 | .claude/skills/asset-integrity-check/SKILL.md | both | N/A | asset-integrity-agent |
-| audit-preparation | 1.0.0 | .claude/skills/audit-preparation/SKILL.md | both | N/A | audit-agent |
-| benefit-risk-assessor | 1.0 | .claude/skills/benefit-risk-assessor/SKILL.md | both | N/A | gvp-agent |
-| chemical-risk-assessment | 1.0 | .claude/skills/chemical-risk-assessment/SKILL.md | both | N/A | msds-agent |
-| compliance-gap | 1.0.0 | .claude/skills/compliance-gap/SKILL.md | both | N/A | compliance-agent |
-| contractor-onboarding | 1.0.0 | .claude/skills/contractor-onboarding/SKILL.md | both | N/A | contractor-safety-agent |
-| documentation-writing | 1.0.0 | .claude/skills/documentation-writing/SKILL.md | claude | N/A | N/A |
-| dts-verification | 1.0 | .claude/skills/dts-verification/SKILL.md | both | N/A | gdp-agent |
-| emergency-response | 1.0.0 | .claude/skills/emergency-response/SKILL.md | both | N/A | emergency-agent |
-| environmental-compliance-checker | 1.0 | .claude/skills/environmental-compliance-checker/SKILL.md | both | N/A | ehschem-agent |
-| ess-fire-risk-assessor | 1.0 | .claude/skills/ess-fire-risk-assessor/SKILL.md | both | N/A | powergen-agent |
-| fall-hazard-assessor | 1.0 | .claude/skills/fall-hazard-assessor/SKILL.md | both | N/A | ehsconst-agent |
-| finishing-a-development-branch | 1.0.0 | .claude/skills/finishing-a-development-branch/SKILL.md | both | N/A | N/A |
-| gas-dispersion-analyzer | 1.0 | .claude/skills/gas-dispersion-analyzer/SKILL.md | both | N/A | gasterm-agent |
-| ghs-classifier | 1.0 | .claude/skills/ghs-classifier/SKILL.md | both | N/A | msds-agent |
-| glp-data-integrity-checker | 1.0 | .claude/skills/glp-data-integrity-checker/SKILL.md | both | N/A | glp-agent |
-| glp-study-protocol-validator | 1.0 | .claude/skills/glp-study-protocol-validator/SKILL.md | both | N/A | glp-agent |
-| gmp-change-control | 1.0 | .claude/skills/gmp-change-control/SKILL.md | both | N/A | gmp-agent |
-| gmp-deviation-capa | 1.0 | .claude/skills/gmp-deviation-capa/SKILL.md | both | N/A | gmp-agent |
-| gmp-qrm | 1.0 | .claude/skills/gmp-qrm/SKILL.md | both | N/A | gmp-agent |
-| hazop-analysis | 1.0.0 | .claude/skills/hazop-analysis/SKILL.md | both | N/A | psm-agent |
-| iso14971-risk-scorer | 1.0 | .claude/skills/iso14971-risk-scorer/SKILL.md | both | N/A | meddevice-agent |
-| legalize-kr-sync | 1.0.0 | skills/legalize-kr-sync/SKILL.md | workspace | N/A | safety-workflow-manager |
-| legalize-kr-sync | 1.0.0 | .claude/skills/legalize-kr-sync/SKILL.md | both | N/A | safety-workflow-manager |
-| meeting-facilitation | 1.4.0 | skills/meeting-facilitation/SKILL.md | workspace | N/A | pm |
-| meeting-facilitation | 1.4.0 | .claude/skills/meeting-facilitation/SKILL.md | both | N/A | pm |
-| msds-parser | 1.0 | .claude/skills/msds-parser/SKILL.md | both | N/A | msds-agent |
-| permit-to-work | 1.0.0 | .claude/skills/permit-to-work/SKILL.md | both | N/A | safety-workflow-manager |
-| platform-command-lifecycle-manager | 1.0.0 | .claude/skills/platform-command-lifecycle-manager/SKILL.md | both | N/A | pm |
-| platform-skill-lifecycle-manager | 1.0.0 | .claude/skills/platform-skill-lifecycle-manager/SKILL.md | both | N/A | pm |
-| process-hazard-screening | 1.0 | .claude/skills/process-hazard-screening/SKILL.md | both | N/A | ehschem-agent |
-| project-review | 1.0.0 | skills/project-review/SKILL.md | workspace | N/A | pm |
-| project-review | 1.0.0 | .claude/skills/project-review/SKILL.md | both | N/A | pm |
-| protocol-deviation-analyzer | 1.0 | .claude/skills/protocol-deviation-analyzer/SKILL.md | both | N/A | gcp-agent |
-| psm-moc | 1.0 | .claude/skills/psm-moc/SKILL.md | both | N/A | psm-agent |
-| research-analysis | 1.0.0 | .claude/skills/research-analysis/SKILL.md | claude | N/A | N/A |
-| risk-assessment | 1.0.0 | .claude/skills/risk-assessment/SKILL.md | both | N/A | risk-assessment-agent |
-| root-cause-analysis | 1.0.0 | .claude/skills/root-cause-analysis/SKILL.md | both | N/A | incident-investigation-agent |
-| sae-causality-assessor | 1.0 | .claude/skills/sae-causality-assessor/SKILL.md | both | N/A | gcp-agent |
-| safety-inspection-validator | 1.0 | .claude/skills/safety-inspection-validator/SKILL.md | both | N/A | ehsconst-agent |
-| script-lifecycle-manager | 1.2.0 | skills/script-lifecycle-manager/SKILL.md | workspace | N/A | pm |
-| script-lifecycle-manager | 1.2.0 | .claude/skills/script-lifecycle-manager/SKILL.md | both | N/A | pm |
-| signal-detector | 1.0 | .claude/skills/signal-detector/SKILL.md | both | N/A | gvp-agent |
-| simulate-project-creation | 1.0.0 | .claude/skills/simulate-project-creation/SKILL.md | both | N/A | scaffolding-expert |
-| skill-lifecycle-manager | 1.2.0 | skills/skill-lifecycle-manager/SKILL.md | workspace | N/A | pm |
-| skill-lifecycle-manager | 1.2.0 | .claude/skills/skill-lifecycle-manager/SKILL.md | both | N/A | pm |
-| tank-integrity-validator | 1.0 | .claude/skills/tank-integrity-validator/SKILL.md | both | N/A | gasterm-agent |
-| team-builder | 1.1.0 | skills/team-builder/SKILL.md | workspace | N/A | pm |
-| team-builder | 1.1.0 | .claude/skills/team-builder/SKILL.md | both | N/A | pm |
-| temperature-excursion-analyzer | 1.0 | .claude/skills/temperature-excursion-analyzer/SKILL.md | both | N/A | gdp-agent |
-| translate | 1.0.0 | skills/translate/SKILL.md | workspace | N/A | pm |
-| translate | 1.0.0 | .claude/skills/translate/SKILL.md | both | N/A | pm |
+| agent-lifecycle-manager | 1.0.0 | skills/agent-lifecycle-manager/SKILL.md | workspace | create agent, new agent, validate agents, agent lifecycle, manage agents | pm |
+| agent-lifecycle-manager | 1.0.0 | .claude/skills/agent-lifecycle-manager/SKILL.md | both | create agent, new agent, validate agents, agent lifecycle, manage agents | pm |
+| api-documentation | 1.0.0 | .claude/skills/api-documentation/SKILL.md | claude | api documentation, document api, api reference, developer documentation, rest api docs, graphql docs, sdk documentation | N/A |
+| arc-flash-analyzer | 1.0 | .claude/skills/arc-flash-analyzer/SKILL.md | both | 아크 플래시, arc flash, IEEE 1584, 고압 전기 작업, PPE category, incident energy, NFPA 70E, 활선 작업 허가 | powergen-agent |
+| asset-integrity-check | 1.0.0 | .claude/skills/asset-integrity-check/SKILL.md | both | 설비무결성, asset integrity, 정기점검 일정, preventive maintenance, 압력용기 검사, NDT 검사, 배관 건전성, mechanical integrity | asset-integrity-agent |
+| audit-preparation | 1.0.0 | .claude/skills/audit-preparation/SKILL.md | both | 감사 준비, audit preparation, 규제 감사, OSHA-KR 감사, 중대재해처벌법 감사 대응, 증적자료 취합, regulatory inspection readiness | audit-agent |
+| benefit-risk-assessor | 1.0 | .claude/skills/benefit-risk-assessor/SKILL.md | both | 편익위해평가, benefit-risk assessment, PrOACT-URL, BRAT, MCDA, 위해편익 균형, PBRER 재평가, RMP 재평가 | gvp-agent |
+| chemical-risk-assessment | 1.0 | .claude/skills/chemical-risk-assessment/SKILL.md | both | 화학물질 위험성평가, chemical risk assessment, 노출평가, exposure assessment, RCR, 허용기준 초과, OEL DNEL, 신규화학물질 도입승인 | msds-agent |
+| compliance-gap | 1.0.0 | .claude/skills/compliance-gap/SKILL.md | both | 컴플라이언스 갭, compliance gap, 준법 감시, 법률 검토, regulatory compliance, 규제 준수, 법적 요건, legal requirement review | compliance-agent |
+| contractor-onboarding | 1.0.0 | .claude/skills/contractor-onboarding/SKILL.md | both | 협력업체 온보딩, contractor onboarding, 도급업체 안전교육, 협력업체 자격심사, site access approval, 안전교육 이수확인, 도급 안전관리 | contractor-safety-agent |
+| documentation-writing | 1.0.0 | .claude/skills/documentation-writing/SKILL.md | claude | write documentation, create guide, draft communication, write manual, create tutorial, documentation, technical writing | N/A |
+| dts-verification | 1.0 | .claude/skills/dts-verification/SKILL.md | both | DTS 바코드 검증, DTS verification, 의약품 유통관리, RFID 검증, MFDS DTS센터, 위변조 의약품 조사, GS1 데이터매트릭스 | gdp-agent |
+| emergency-response | 1.0.0 | .claude/skills/emergency-response/SKILL.md | both | 비상사태, emergency, 사고 발생, 화재, 폭발, 누출, 중대재해, serious accident, 폭발, explosion | emergency-agent |
+| environmental-compliance-checker | 1.0 | .claude/skills/environmental-compliance-checker/SKILL.md | both | 환경 배출 기준, 대기오염물질 배출허용기준, SOx NOx VOC, 수질오염물질, BOD COD, 환경보전법 준수, 배출 규제 준수, environmental discharge compliance | ehschem-agent |
+| ess-fire-risk-assessor | 1.0 | .claude/skills/ess-fire-risk-assessor/SKILL.md | both | ESS 화재, 리튬이온 배터리 화재, thermal runaway, 열폭주, BMS 안전, energy storage system fire, MPSL 인증, 에너지저장장치 화재위험 | powergen-agent |
+| fall-hazard-assessor | 1.0 | .claude/skills/fall-hazard-assessor/SKILL.md | both | 추락 위해평가, fall hazard, leading edge, 안전대 활동제한장치, 방호 계층, fall protection hierarchy, 추락방지망, rescue plan 구조 계획 | ehsconst-agent |
+| finishing-a-development-branch | 1.0.0 | .claude/skills/finishing-a-development-branch/SKILL.md | both | finish branch, complete work, wrap up, finishing a development branch, merge branch, create PR, push and PR | N/A |
+| gas-dispersion-analyzer | 1.0 | .claude/skills/gas-dispersion-analyzer/SKILL.md | both | 가스 확산 모델, gas dispersion, 가스 누출 시나리오, LNG LPG 누출, 수소 누출 확산, BLEVE, 대피 반경 산정, Gaussian dispersion model | gasterm-agent |
+| ghs-classifier | 1.0 | .claude/skills/ghs-classifier/SKILL.md | both | GHS 분류, GHS classification, 유해성 분류, H-Statement, 위험문구, 예방조치문구, P-Statement, GHS Rev 9 | msds-agent |
+| glp-data-integrity-checker | 1.0 | .claude/skills/glp-data-integrity-checker/SKILL.md | both | ALCOA+, data integrity, 데이터 무결성, GLP 원시자료, raw data, OECD GLP Section 9, 감사증적, audit trail | glp-agent |
+| glp-study-protocol-validator | 1.0 | .claude/skills/glp-study-protocol-validator/SKILL.md | both | 시험계획서 검증, study protocol validation, GLP protocol, OECD GLP Section 8, 시험책임자, Study Director, 시험물질 특성, 보존기간 10년 | glp-agent |
+| gmp-change-control | 1.0 | .claude/skills/gmp-change-control/SKILL.md | both | 변경관리, change control, KP-GMP, ICH Q10, 변경요청, effectiveness check, 품질영향평가, 밸리데이션 재검증 | gmp-agent |
+| gmp-deviation-capa | 1.0 | .claude/skills/gmp-deviation-capa/SKILL.md | both | 이상관리, 시정예방조치, CAPA, deviation, OOS, OOT, KP-GMP Article 19, 일탈 조사 | gmp-agent |
+| gmp-qrm | 1.0 | .claude/skills/gmp-qrm/SKILL.md | both | 품질위해관리, QRM, ICH Q9, FMEA, HACCP, FTA, risk priority number, 품질리스크 평가 | gmp-agent |
+| hazop-analysis | 1.0.0 | .claude/skills/hazop-analysis/SKILL.md | both | HAZOP 분석, HAZOP analysis, 공정위험성평가, guideword 분석, process hazard analysis, PHA, 이상 시나리오 도출 | psm-agent |
+| iso14971-risk-scorer | 1.0 | .claude/skills/iso14971-risk-scorer/SKILL.md | both | ISO 14971, 위해 추정, risk estimation, 심각도 발생확률 매트릭스, severity probability matrix, 잔여위험, residual risk, ALARP | meddevice-agent |
+| legalize-kr-sync | 1.0.0 | skills/legalize-kr-sync/SKILL.md | workspace | clone legalize-kr, fetch laws, sync korean laws | safety-workflow-manager |
+| legalize-kr-sync | 1.0.0 | .claude/skills/legalize-kr-sync/SKILL.md | both | clone legalize-kr, fetch laws, sync korean laws | safety-workflow-manager |
+| meeting-facilitation | 1.4.0 | skills/meeting-facilitation/SKILL.md | workspace | meeting, agent discussion, collaborative decision, multi-agent coordination, facilitate meeting | pm |
+| meeting-facilitation | 1.4.0 | .claude/skills/meeting-facilitation/SKILL.md | both | meeting, agent discussion, collaborative decision, multi-agent coordination, facilitate meeting | pm |
+| msds-parser | 1.0 | .claude/skills/msds-parser/SKILL.md | both | MSDS 파싱, MSDS parser, SDS 16항목, 물질안전보건자료, GHS 16-section, msds-record.json, 공급자 MSDS 양식 | msds-agent |
+| permit-to-work | 1.0.0 | .claude/skills/permit-to-work/SKILL.md | both | 작업허가서, permit to work, PTW, hot work permit, 화기작업, 밀폐공간작업, confined space | safety-workflow-manager |
+| platform-command-lifecycle-manager | 1.0.0 | .claude/skills/platform-command-lifecycle-manager/SKILL.md | both | create platform command, new .claude command, new .gemini command, platform command lifecycle, command parity, propagate command | pm |
+| platform-skill-lifecycle-manager | 1.0.0 | .claude/skills/platform-skill-lifecycle-manager/SKILL.md | both | create platform skill, new .claude skill, new .gemini skill, platform skill version, platform skill lifecycle, update platform skill | pm |
+| process-hazard-screening | 1.0 | .claude/skills/process-hazard-screening/SKILL.md | both | PSM 적용대상, process hazard screening, 위해물질 보유량, 공정안전관리, PHA 대상 여부, 사고대비물질, 화학공장 초기 위해평가 | ehschem-agent |
+| project-review | 1.0.0 | skills/project-review/SKILL.md | workspace | project review, review project, audit project, quality review | pm |
+| project-review | 1.0.0 | .claude/skills/project-review/SKILL.md | both | project review, review project, audit project, quality review | pm |
+| protocol-deviation-analyzer | 1.0 | .claude/skills/protocol-deviation-analyzer/SKILL.md | both | 프로토콜 이탈, protocol deviation, ICH E6(R3), important deviation, CAPA, IRB 보고, KGCP, 임상시험 이탈 | gcp-agent |
+| psm-moc | 1.0 | .claude/skills/psm-moc/SKILL.md | both | 변경관리, management of change, MOC, PSSR 검토, pre-startup safety review, 공정안전관리 변경, 안전성영향평가 | psm-agent |
+| research-analysis | 1.0.0 | .claude/skills/research-analysis/SKILL.md | claude | research, analyze, investigate, synthesize, evidence gathering, data analysis, literature review | N/A |
+| risk-assessment | 1.0.0 | .claude/skills/risk-assessment/SKILL.md | both | 위험성평가, risk assessment, hazard identification, 위험 평가, 작업위험성분석 | risk-assessment-agent |
+| root-cause-analysis | 1.0.0 | .claude/skills/root-cause-analysis/SKILL.md | both | 근본원인분석, root cause analysis, RCA, 5 whys, fishbone diagram, 사고조사, CAPA 수립 | incident-investigation-agent |
+| sae-causality-assessor | 1.0 | .claude/skills/sae-causality-assessor/SKILL.md | both | SAE 인과성 평가, causality assessment, ImPACT, WHO-UMC, Naranjo algorithm, ICH E2A, 중대이상반응 인과관계, 이상반응 인과성 | gcp-agent |
+| safety-inspection-validator | 1.0 | .claude/skills/safety-inspection-validator/SKILL.md | both | 안전점검 결과 검증, safety inspection findings, 지적사항 분류, CAPA, 시정조치, Critical Major Minor 분류, 건설 안전점검 | ehsconst-agent |
+| script-lifecycle-manager | 1.2.0 | skills/script-lifecycle-manager/SKILL.md | workspace | create script, update script, deprecate script, script lifecycle, manage scripts | pm |
+| script-lifecycle-manager | 1.2.0 | .claude/skills/script-lifecycle-manager/SKILL.md | both | create script, update script, deprecate script, script lifecycle, manage scripts | pm |
+| signal-detector | 1.0 | .claude/skills/signal-detector/SKILL.md | both | 시그널 탐지, signal detection, PRR, ROR, BCPNN, EBGM, 부작용 신호, disproportionality analysis | gvp-agent |
+| simulate-project-creation | 1.0.0 | .claude/skills/simulate-project-creation/SKILL.md | both | simulate project, test scaffolding, dry run project creation | scaffolding-expert |
+| skill-lifecycle-manager | 1.2.0 | skills/skill-lifecycle-manager/SKILL.md | workspace | create skill, new skill, validate skills, skill lifecycle, manage skills | pm |
+| skill-lifecycle-manager | 1.2.0 | .claude/skills/skill-lifecycle-manager/SKILL.md | both | create skill, new skill, validate skills, skill lifecycle, manage skills | pm |
+| tank-integrity-validator | 1.0 | .claude/skills/tank-integrity-validator/SKILL.md | both | 저장탱크 건전성, tank integrity, LNG 탱크 검사, 수소 취성, hydrogen embrittlement, KGS 코드, 압력용기 검사, 부식 피로 검증 | gasterm-agent |
+| team-builder | 1.1.0 | skills/team-builder/SKILL.md | workspace | 새 팀 구성, 에이전트팀 변경, 신규 도메인 팀 빌딩, build new agent team, agent team benchmarking, team proposal generation, consulting team design | pm |
+| team-builder | 1.1.0 | .claude/skills/team-builder/SKILL.md | both | 새 팀 구성, 에이전트팀 변경, 신규 도메인 팀 빌딩, build new agent team, agent team benchmarking, team proposal generation, consulting team design | pm |
+| temperature-excursion-analyzer | 1.0 | .claude/skills/temperature-excursion-analyzer/SKILL.md | both | 온도이탈, temperature excursion, 콜드체인, cold chain, GDP 온도관리, 냉장유통, excursion event, 안정성 데이터 검토 | gdp-agent |
+| translate | 1.0.0 | skills/translate/SKILL.md | workspace | translate, translation, localize, Korean translation | pm |
+| translate | 1.0.0 | .claude/skills/translate/SKILL.md | both | translate, translation, localize, Korean translation | pm |
 
 ---
 
@@ -139,7 +139,7 @@
 | fetch-legalize.ts | N/A | scripts/fetch-legalize.ts | child_process, fs, path |
 | gen-pr-body.ts | N/A | scripts/gen-pr-body.ts | bun |
 | generate-scripts-readme.ts | N/A | scripts/generate-scripts-readme.ts | N/A |
-| generate-version-manifest.ts | 1.0.2 | scripts/generate-version-manifest.ts | bun |
+| generate-version-manifest.ts | 1.0.3 | scripts/generate-version-manifest.ts | bun |
 | mcp-cache.ts | N/A | scripts/lib/mcp-cache.ts | N/A |
 | new-domain.ts | N/A | scripts/new-domain.ts | N/A |
 | pipeline-state.ts | N/A | scripts/lib/pipeline-state.ts | fs, path |
@@ -179,12 +179,12 @@
 
 | Name | File | Platform | Skill Integration |
 |------|------|----------|-------------------|
-| changelog | .claude/commands/changelog.md | both | N/A |
-| commit-push-pr | .claude/commands/commit-push-pr.md | both | N/A |
-| meeting | .claude/commands/meeting.md | both | N/A |
-| memlog | .claude/commands/memlog.md | both | N/A |
-| new-task | .claude/commands/new-task.md | both | N/A |
-| sync | .claude/commands/sync.md | both | N/A |
+| changelog | .claude/commands/changelog.md | both | auto (changelog) |
+| commit-push-pr | .claude/commands/commit-push-pr.md | both | auto (commit-push-pr) |
+| meeting | .claude/commands/meeting.md | both | auto (meeting) |
+| memlog | .claude/commands/memlog.md | both | auto (memlog) |
+| new-task | .claude/commands/new-task.md | both | auto (new-task) |
+| sync | .claude/commands/sync.md | both | auto (sync) |
 
 ---
 
@@ -199,80 +199,4 @@
 
 ## Drift Detection
 
-⚠️ **Drift detected**:
-
-- Agent domains/functional/msds/msds-agent missing tier or model metadata
-- Agent domains/functional/psm/psm-agent missing tier or model metadata
-- Agent domains/functional/training/training-agent missing tier or model metadata
-- Agent domains/industry/ehschem/ehschem-agent missing tier or model metadata
-- Agent domains/industry/ehsconst/ehsconst-agent missing tier or model metadata
-- Agent domains/industry/gasterm/gasterm-agent missing tier or model metadata
-- Agent domains/industry/gcp/gcp-agent missing tier or model metadata
-- Agent domains/industry/gdp/gdp-agent missing tier or model metadata
-- Agent domains/industry/glp/glp-agent missing tier or model metadata
-- Agent domains/industry/gmp/gmp-agent missing tier or model metadata
-- Agent domains/industry/gvp/gvp-agent missing tier or model metadata
-- Agent domains/industry/meddevice/meddevice-agent missing tier or model metadata
-- Agent domains/industry/powergen/powergen-agent missing tier or model metadata
-- Skill agent-lifecycle-manager has no triggers defined
-- Skill agent-lifecycle-manager has no triggers defined
-- Skill api-documentation has no triggers defined
-- Skill arc-flash-analyzer has no triggers defined
-- Skill asset-integrity-check has no triggers defined
-- Skill audit-preparation has no triggers defined
-- Skill benefit-risk-assessor has no triggers defined
-- Skill chemical-risk-assessment has no triggers defined
-- Skill compliance-gap has no triggers defined
-- Skill contractor-onboarding has no triggers defined
-- Skill documentation-writing has no triggers defined
-- Skill dts-verification has no triggers defined
-- Skill emergency-response has no triggers defined
-- Skill environmental-compliance-checker has no triggers defined
-- Skill ess-fire-risk-assessor has no triggers defined
-- Skill fall-hazard-assessor has no triggers defined
-- Skill finishing-a-development-branch has no triggers defined
-- Skill gas-dispersion-analyzer has no triggers defined
-- Skill ghs-classifier has no triggers defined
-- Skill glp-data-integrity-checker has no triggers defined
-- Skill glp-study-protocol-validator has no triggers defined
-- Skill gmp-change-control has no triggers defined
-- Skill gmp-deviation-capa has no triggers defined
-- Skill gmp-qrm has no triggers defined
-- Skill hazop-analysis has no triggers defined
-- Skill iso14971-risk-scorer has no triggers defined
-- Skill legalize-kr-sync has no triggers defined
-- Skill legalize-kr-sync has no triggers defined
-- Skill meeting-facilitation has no triggers defined
-- Skill meeting-facilitation has no triggers defined
-- Skill msds-parser has no triggers defined
-- Skill permit-to-work has no triggers defined
-- Skill platform-command-lifecycle-manager has no triggers defined
-- Skill platform-skill-lifecycle-manager has no triggers defined
-- Skill process-hazard-screening has no triggers defined
-- Skill project-review has no triggers defined
-- Skill project-review has no triggers defined
-- Skill protocol-deviation-analyzer has no triggers defined
-- Skill psm-moc has no triggers defined
-- Skill research-analysis has no triggers defined
-- Skill risk-assessment has no triggers defined
-- Skill root-cause-analysis has no triggers defined
-- Skill sae-causality-assessor has no triggers defined
-- Skill safety-inspection-validator has no triggers defined
-- Skill script-lifecycle-manager has no triggers defined
-- Skill script-lifecycle-manager has no triggers defined
-- Skill signal-detector has no triggers defined
-- Skill simulate-project-creation has no triggers defined
-- Skill skill-lifecycle-manager has no triggers defined
-- Skill skill-lifecycle-manager has no triggers defined
-- Skill tank-integrity-validator has no triggers defined
-- Skill team-builder has no triggers defined
-- Skill team-builder has no triggers defined
-- Skill temperature-excursion-analyzer has no triggers defined
-- Skill translate has no triggers defined
-- Skill translate has no triggers defined
-- Command changelog not integrated as a skill
-- Command commit-push-pr not integrated as a skill
-- Command meeting not integrated as a skill
-- Command memlog not integrated as a skill
-- Command new-task not integrated as a skill
-- Command sync not integrated as a skill
+✅ No drift detected. All components are properly versioned and integrated.

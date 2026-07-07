@@ -7,6 +7,16 @@ description: Integrated benefit-risk assessment per EU GVP Module 12. Supports P
 version: "1.0"
 created: "2026-06-17"
 last_updated: "2026-06-17"
+metadata:
+  triggers:
+    - 편익위해평가
+    - benefit-risk assessment
+    - PrOACT-URL
+    - BRAT
+    - MCDA
+    - 위해편익 균형
+    - PBRER 재평가
+    - RMP 재평가
 ---
 
 # Benefit-Risk Assessor Skill

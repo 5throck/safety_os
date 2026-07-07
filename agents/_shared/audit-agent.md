@@ -6,7 +6,7 @@ tier:
   claude: medium
   gemini-cli: medium
   antigravity: medium
-model: inherit
+model: sonnet
 color: purple
 description: "Safety audit and evidence traceability —finding documentation, corrective action tracking, evidence traceability chain maintenance, audit report generation."
 lifecycle:

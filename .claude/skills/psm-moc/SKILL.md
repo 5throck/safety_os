@@ -7,6 +7,15 @@ description: Manage Process Safety Management (PSM) Management of Change (MOC) w
 version: "1.0"
 created: 2026-06-15
 last_updated: 2026-07-04
+metadata:
+  triggers:
+    - 변경관리
+    - management of change
+    - MOC
+    - PSSR 검토
+    - pre-startup safety review
+    - 공정안전관리 변경
+    - 안전성영향평가
 ---
 # PSM Management of Change (MOC) Skill
 
