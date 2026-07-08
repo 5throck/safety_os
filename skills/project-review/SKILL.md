@@ -9,11 +9,11 @@ description: >
   a prioritized improvement plan (Critical/High/Medium/Low).
   Use when: user requests a full project review ("/project-review" or
   "do a full project review"); PM detects structural changes (3+ agent files modified,
-  phase schema changes, workspace-schema.json modified, new variant added);
-  QA escalation from auditor (audit.ts ERROR >= 3 or security Critical finding).
+  phase schema changes, variant.json modified, new domain added);
+  QA escalation from auditor (safety-audit.ts ERROR >= 3 or Critical finding).
 owner: pm
-version: 1.0.0
-last_reviewed: 2026-05-30
+version: 1.1.0
+last_reviewed: 2026-07-08
 metadata:
   type: process
   triggers:
@@ -31,17 +31,17 @@ Comprehensive parallel review of the current project by all available specialist
 
 - User explicitly requests a full project review
 - PM detects structural changes requiring cross-domain validation
-- QA escalation: `audit.ts` exits with 3+ ERRORs, or security-expert finds a Critical issue
+- QA escalation: `safety-audit.ts` exits with 3+ ERRORs, or audit-agent finds a Critical issue
 
 ## Step 1 — Detect Project Context
 
 Before dispatching agents, determine the execution context:
 
-1. **List available agents**: scan `agents/` directory for `*.md` files (excluding README)
-2. **Determine project type**: check for `docs/context.md` (variant project) or `CONSTITUTION.md` (workspace root)
+1. **List available agents**: scan `agents/` directory recursively for `*.md` files (excluding README)
+2. **Determine project type**: check for `variant.json` (variant project like Safety OS) or workspace root indicators
 3. **Announce context**:
    ```
-   Project type: [workspace-root | co-develop | co-design | co-work | co-security | custom]
+   Project type: [variant: co-safety | workspace-root | custom]
    Available agents: [list]
    Review domains: [mapped domains]
    ```
@@ -52,13 +52,13 @@ Map available agents to review domains. Present the plan table and wait for user
 
 | # | Domain | Agent | Tier | Focus |
 |---|--------|-------|------|-------|
-| 1 | Architecture | architect (if available, else PM) | High | Structure, phase consistency, variant contracts |
-| 2 | Standards compliance | auditor (if available, else PM) | Medium | audit.ts, validate-templates.ts, SCRIPTS.md |
-| 3 | Automation | automation-engineer (if available, else PM) | Medium | Hooks, scripts, package.json, CI |
-| 4 | Documentation | docs-writer (if available, else PM) | Medium | References, language policy, cross-links |
-| 5 | Security | security-expert or security-monitor | Medium | Secrets, CI permissions, injection risks |
-| 6 | Lifecycle | lifecycle-manager | Medium | Agent/skill/script health, sync parity |
-| 7 | Scaffolding | scaffolding-expert (workspace only) | Medium | Template structure, variant contract |
+| 1 | Safety Governance | safety-governance-manager | High | Strategy, KPIs, SAPA compliance objectives |
+| 2 | Regulatory Compliance | compliance-agent | Medium | OSHA-KR/SAPA validation, legal_basis gate |
+| 3 | Risk Management | risk-assessment-agent | Medium | Risk register, hazard identification |
+| 4 | Process Safety | psm-agent | Medium | OSHA-KR Article 44, PHA, MOC, LOTO |
+| 5 | Emergency Preparedness | emergency-agent | High | Emergency protocols, incident escalation |
+| 6 | Documentation & Audit | audit-agent | Medium | Evidence traceability, audit readiness |
+| 7 | Training & Operations | training-agent | Medium | Training records, compliance tracking |
 
 > If an agent is not available for a domain, PM covers that domain directly with a lightweight check.
 
@@ -149,5 +149,5 @@ Create a prioritized action item table:
 | Trigger | Invoker | Condition |
 |---------|---------|-----------|
 | T-01: User request | User | `/project-review` or natural language equivalent |
-| T-02: PM autonomous | PM agent | 3+ agent files modified; phase schema changed; `workspace-schema.json` modified; new variant added |
-| T-03: QA escalation | auditor / security-monitor | `audit.ts` ERROR ≥ 3; or security-expert Critical finding |
+| T-02: PM autonomous | PM agent | 3+ agent files modified; domain/workflow changes; `variant.json` modified; new domain added |
+| T-03: QA escalation | audit-agent / compliance-agent | `safety-audit.ts` ERROR ≥ 3; or Critical finding in domain review |
