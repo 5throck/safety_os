@@ -1,5 +1,5 @@
 #!/usr/bin/env bun
-// @version 1.3.0
+// @version 1.3.1
 // sync-md.ts - Update memory/MEMORY.md index
 // Usage:
 //   bun run scripts/sync-md.ts "YYYY-MM-DD" "summary"              # session entry
@@ -8,7 +8,10 @@
 
 const args = process.argv.slice(2);
 
-const date: string = args[0] ?? new Date().toISOString().split('T')[0];
+const date: string = args[0] ?? (() => {
+  const now = new Date();
+  return `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')}`;
+})();
 const summary: string = args[1] ?? 'update';
 
 let type: 'session' | 'meeting' | 'adr' = 'session';
@@ -107,8 +110,8 @@ if (type === 'meeting') {
     await Bun.write(MEMORY_FILE, content);
   }
 } else {
-  // Session: dedup by date
-  if (!content.includes(`[${date}]`)) {
+  // Session: dedup by date (scoped to Sessions table to avoid false positives)
+  if (!new RegExp(`\\| \\[${escapeRegex(date)}\\]`).test(content)) {
     content = content.replace(
       /(## Sessions\r?\n\r?\n\| Date \|[^\n]+\r?\n\|[-| ]+\|)/,
       `$1\n| [${date}](${date}.md) | ${summary} |`

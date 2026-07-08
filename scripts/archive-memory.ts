@@ -1,6 +1,6 @@
 /**
  * Archives memory markdown files older than 7 days.
- * @version 1.1.0
+ * @version 1.1.1
  */
 import * as fs from 'node:fs';
 import * as path from 'node:path';
@@ -8,9 +8,7 @@ import * as path from 'node:path';
 const memoryDir = 'memory';
 const archiveDir = path.join(memoryDir, 'archive');
 
-if (!fs.existsSync(archiveDir)) {
-    fs.mkdirSync(archiveDir, { recursive: true });
-}
+fs.mkdirSync(archiveDir, { recursive: true });
 
 const files = fs.readdirSync(memoryDir);
 const today = new Date();
@@ -35,7 +33,12 @@ for (const file of files) {
     const diffDays = diffTime / (1000 * 3600 * 24);
     
     if (diffDays > 7) {
-        fs.renameSync(fullPath, path.join(archiveDir, file));
+        const dest = path.join(archiveDir, file);
+        if (fs.existsSync(dest)) {
+            console.error(`ERROR: ${file} already exists in archive — not overwriting.`);
+            process.exit(1);
+        }
+        fs.renameSync(fullPath, dest);
         console.log(`Archived ${file}`);
     }
 }

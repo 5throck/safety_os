@@ -3,7 +3,7 @@
  * gen-pr-body.ts - Generate a structured PR body from commit message + diff
  * Usage: bun run scripts/gen-pr-body.ts "<commit message>"
  * Output: PR body markdown (stdout)
- * @version 1.1.5
+ * @version 1.1.6
  *
  * Behaviour:
  *   1. If `claude` CLI is available → ask Claude to write the PR body (AI mode)
@@ -90,7 +90,8 @@ function sanitizeForPrompt(text: string): string {
       // Drop instruction-injection patterns (e.g., "ignore previous instructions")
       if (/ignore\s+(all\s+)?(previous|prior|above)\s+(instructions?|context|prompts?)/i.test(trimmed)) return false;
       // Drop XML-style role tags that Claude XML-tag parsers may interpret
-      if (/^<\s*(system|human|assistant|instruction)\s*[\/>]/i.test(trimmed)) return false;
+      // Use word boundary to catch <instruction foo> (attribute-bearing tags)
+      if (/^<\s*(system|human|assistant|instruction)\b/i.test(trimmed)) return false;
       return true;
     })
     .map(line =>

@@ -1,6 +1,6 @@
 # VERSION_MANIFEST.md
 
-**Generated**: 2026-07-08T12:14:11.326Z
+**Generated**: 2026-07-08T21:26:04.038Z
 **Manifest Version**: 1.0
 **Location**: docs\VERSION_MANIFEST.md
 
@@ -123,7 +123,7 @@
 | agent-list.ts | 1.0.0 | scripts/agent-list.ts | N/A |
 | agent-verify.ts | 1.0.2 | scripts/agent-verify.ts | N/A |
 | analyze-git-history.ts | 1.0.0 | scripts/analyze-git-history.ts | child_process |
-| archive-memory.ts | 1.1.0 | scripts/archive-memory.ts | N/A |
+| archive-memory.ts | 1.1.1 | scripts/archive-memory.ts | N/A |
 | audit.ts | 2.6.1 | scripts/audit.ts | bun |
 | auto-executor.ts | 1.0.0 | scripts/lib/auto-executor.ts | N/A |
 | check-pm-approval.ts | 1.0.1 | scripts/check-pm-approval.ts | N/A |
@@ -137,9 +137,9 @@
 | encoding-utils.ts | 1.0.0 | scripts/lib/encoding-utils.ts | fs, path |
 | error-handling.ts | 1.1.0 | scripts/lib/error-handling.ts | N/A |
 | fetch-legalize.ts | 1.0.0 | scripts/fetch-legalize.ts | child_process, fs, path |
-| gen-pr-body.ts | 1.1.5 | scripts/gen-pr-body.ts | bun |
+| gen-pr-body.ts | 1.1.6 | scripts/gen-pr-body.ts | bun |
 | generate-scripts-readme.ts | 1.1.0 | scripts/generate-scripts-readme.ts | N/A |
-| generate-version-manifest.ts | 1.0.6 | scripts/generate-version-manifest.ts | bun |
+| generate-version-manifest.ts | 1.0.7 | scripts/generate-version-manifest.ts | bun |
 | mcp-cache.ts | 1.0.0 | scripts/lib/mcp-cache.ts | N/A |
 | new-domain.ts | 1.0.0 | scripts/new-domain.ts | N/A |
 | pipeline-state.ts | 1.1.0 | scripts/lib/pipeline-state.ts | fs, path |
@@ -149,12 +149,12 @@
 | qa-gate.ts | N/A | scripts/qa-gate.ts | bun |
 | readme-lifecycle-audit.ts | 1.0.2 | scripts/readme-lifecycle-audit.ts | N/A |
 | retry-handler.ts | 1.0.2 | scripts/retry-handler.ts | N/A |
-| safety-audit.ts | 4.2.0 | scripts/safety-audit.ts | js-yaml |
+| safety-audit.ts | 4.2.1 | scripts/safety-audit.ts | js-yaml |
 | skill-dependency-analysis.ts | 1.0.0 | scripts/skill-dependency-analysis.ts | N/A |
 | skill-lifecycle-audit.ts | 1.1.4 | scripts/skill-lifecycle-audit.ts | N/A |
 | start-mcp.ts | 1.0.0 | scripts/start-mcp.ts | child_process, path |
 | sync-agent-status.ts | 1.0.0 | scripts/sync-agent-status.ts | N/A |
-| sync-md.ts | 1.3.0 | scripts/sync-md.ts | N/A |
+| sync-md.ts | 1.3.1 | scripts/sync-md.ts | N/A |
 | sync-skill-status.ts | 1.0.0 | scripts/sync-skill-status.ts | N/A |
 | sync-skills.ts | 1.1.0 | scripts/sync-skills.ts | N/A |
 | team-builder.ts | 1.2.0 | scripts/team-builder.ts | fs, path |

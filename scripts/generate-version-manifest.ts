@@ -1,4 +1,4 @@
-// @version 1.0.6
+// @version 1.0.7
 import * as fs from 'node:fs';
 import * as path from 'node:path';
 import { $ } from 'bun';
@@ -315,8 +315,12 @@ async function generateManifest() {
 |------|------|------|-------|---------------|
 `;
 
+function sanitizeCell(s: string): string {
+    return s.replace(/\|/g, '\\|').replace(/\n/g, ' ').trim();
+}
+
     for (const agent of agents) {
-        markdown += `| ${agent.name} | ${agent.file} | ${agent.tier} | ${agent.model} | ${agent.last_modified} |\n`;
+        markdown += `| ${sanitizeCell(agent.name)} | ${sanitizeCell(agent.file)} | ${sanitizeCell(agent.tier)} | ${sanitizeCell(agent.model)} | ${sanitizeCell(agent.last_modified)} |\n`;
     }
 
     markdown += `
@@ -329,7 +333,7 @@ async function generateManifest() {
 `;
 
     for (const skill of skills) {
-        markdown += `| ${skill.name} | ${skill.version} | ${skill.location} | ${skill.platform} | ${skill.triggers.join(', ') || 'N/A'} | ${skill.owner} |\n`;
+        markdown += `| ${sanitizeCell(skill.name)} | ${sanitizeCell(skill.version)} | ${sanitizeCell(skill.location)} | ${sanitizeCell(skill.platform)} | ${sanitizeCell(skill.triggers.join(', ') || 'N/A')} | ${sanitizeCell(skill.owner)} |\n`;
     }
 
     markdown += `
@@ -342,7 +346,7 @@ async function generateManifest() {
 `;
 
     for (const script of scripts) {
-        markdown += `| ${script.name} | ${script.version} | ${script.location} | ${script.dependencies.join(', ') || 'N/A'} |\n`;
+        markdown += `| ${sanitizeCell(script.name)} | ${sanitizeCell(script.version)} | ${sanitizeCell(script.location)} | ${sanitizeCell(script.dependencies.join(', ') || 'N/A')} |\n`;
     }
 
     markdown += `
@@ -355,7 +359,7 @@ async function generateManifest() {
 `;
 
     for (const cmd of commands) {
-        markdown += `| ${cmd.name} | ${cmd.file} | ${cmd.platform} | ${cmd.skill_integration} |\n`;
+        markdown += `| ${sanitizeCell(cmd.name)} | ${sanitizeCell(cmd.file)} | ${sanitizeCell(cmd.platform)} | ${sanitizeCell(cmd.skill_integration)} |\n`;
     }
 
     markdown += `

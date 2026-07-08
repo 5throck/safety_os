@@ -10,7 +10,18 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 - **license**: Added root `LICENSE` file (GNU Affero General Public License v3.0). Added License sections to `README.md`/`README_ko.md` and a `license` field to `scripts/package.json`.
 
-### Fixed (2026-07-08 — Round 2: Infrastructure, Governance, Security Hardening)
+### Fixed (2026-07-09 — Round 3: Pipeline Robustness, Hook Hardening, Cross-Platform Fixes)
+
+- **dev-sync.ts** (v1.4.3): Fixed silent failure on `git rev-parse` — empty `currentBranch` now exits with error instead of pushing to undefined ref; added explicit `process.exit(1)` on `git status` failure; added `.nothrow()` + error handling for `sync-md.ts` call; removed duplicate `resolve` import.
+- **sync-md.ts** (v1.3.1): Fixed UTC date bug — replaced `toISOString().split('T')[0]` with local date construction to prevent off-by-one-day in non-UTC timezones; fixed session dedup check to use scoped table-cell regex (`\| [date]`) instead of scanning entire file content.
+- **archive-memory.ts** (v1.1.1): Prevented silent data loss — `renameSync` now checks for existing archive file before overwriting; removed redundant `existsSync` before `mkdirSync({ recursive: true })`.
+- **gen-pr-body.ts** (v1.1.6): Fixed XML tag filter — changed `[\/>]` to `\b` word boundary so tags with attributes like `<instruction foo>` are properly caught.
+- **safety-audit.ts** (v4.2.1): Fixed `validateDomainEvidence` path filter to use `relPath()` (forward-slash normalized) instead of `path.dirname().includes(path.join(...))` which breaks on Windows mixed separators; fixed shebang from `tsx` to `bun` for consistency.
+- **generate-version-manifest.ts** (v1.0.7): Added `sanitizeCell()` helper to escape pipe characters and newlines in all markdown table cells, preventing table structure injection from malformed frontmatter.
+- **pre-commit hook**: Added `R` to `--diff-filter` so renamed files are scanned; expanded secret scanning regex with AWS Key (`AKIA`), Google API Key (`AIza`), Stripe keys, JWT tokens, SendGrid keys; tightened `.env` allowlist to anchor explicit extensions (`.sample`, `.example`, `.template`); fixed word splitting on filenames with spaces by using `while IFS= read -r`; strictened conflict marker regex to require trailing space (`<{7} `, `>{7} `); added `tr -d '\n'` for robust UUID context comparison.
+- **commands/sync.md** (both platforms): Added undocumented pipeline steps 4.7 (L0→L1 publish) and 6 (sensitive file guard) to the pipeline description.
+
+### Fixed (2026-07-08 — Documentation + Skill Parity)
 
 - **githooks**: Restored `.githooks/pre-commit` and `.githooks/commit-msg` (removed in commit `8a8fd01` but `.git/config` still referenced them). Pre-commit enforces SYNC_ACTIVE gate, .env blocking, merge conflict marker detection, and regex secret scanning. Commit-msg enforces English-only messages.
 - **generate-version-manifest.ts** (v1.0.5): Fixed silent failure — replaced `generateManifest().catch(console.error)` with explicit `process.exit(1)` on error so CI properly fails.

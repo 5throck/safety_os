@@ -17,6 +17,8 @@ The pipeline will:
 3.8. Archive memory files older than 7 days
 4. Run domain audit (`safety-audit.ts` for variants, `audit.ts` for workspace root) — must exit 0 before proceeding
 4.5. Generate `docs/VERSION_MANIFEST.md`
+4.7. Propagate L0→L1 changes (workspace root only; skipped for standalone variants)
+6. Guard against sensitive untracked files (blocks `.pem`, `.key`, `.env`, SSH keys, credentials, secrets)
 5. Create a new PR branch, commit all staged changes, push, and open a GitHub PR
 
 If audit fails, fix the reported issue before re-running `/sync`.

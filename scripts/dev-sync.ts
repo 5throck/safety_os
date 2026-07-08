@@ -1,8 +1,7 @@
-// @version 1.4.2 — variant-aware: runs safety-audit.ts for safety-os, workspace audit.ts for workspace root
+// @version 1.4.3 — variant-aware: runs safety-audit.ts for safety-os, workspace audit.ts for workspace root
 import { $ } from 'bun';
 import * as fs from 'node:fs';
 import * as path from 'node:path';
-import { resolve } from 'node:path';
 import { withRetry, DEFAULT_CONFIG } from './retry-handler.ts';
 
 const GREEN = '\x1b[32m';
@@ -22,7 +21,7 @@ if (isVariant) {
 
 // Workspace root guard — dev-sync must run from the project root it belongs to.
 // Using import.meta.dir (script location) prevents CWD mismatches when two clones exist.
-const expectedRoot = resolve(import.meta.dir, '..');
+const expectedRoot = path.resolve(import.meta.dir, '..');
 const actualCwd = process.cwd();
 if (path.resolve(actualCwd) !== expectedRoot) {
     console.error(`${RED}❌ dev-sync: CWD mismatch.${RESET}`);
@@ -42,7 +41,10 @@ let gitStatus = "";
 try {
     const { stdout } = await $`git status --short`.quiet().nothrow();
     gitStatus = stdout.toString().trim();
-} catch {}
+} catch (e) {
+    console.log(`${RED}❌ git status failed — are you in a git repository?${RESET}`);
+    process.exit(1);
+}
 
 let fileLines = "- N/A";
 if (gitStatus) {
@@ -72,7 +74,11 @@ ${fileLines}
 fs.appendFileSync(memoryFile, template, 'utf8');
 
 // 2. Update MEMORY.md index
-await $`bun run scripts/sync-md.ts ${date} "${msg}"`;
+const syncRes = await $`bun run scripts/sync-md.ts ${date} ${msg}`.quiet().nothrow();
+if (syncRes.exitCode !== 0) {
+    console.log(`${RED}❌ sync-md.ts failed: ${syncRes.stderr.toString().trim()}${RESET}`);
+    process.exit(1);
+}
 
 
 // 2.5 Generate scripts/README.md
@@ -211,7 +217,15 @@ let currentBranch = "";
 try {
     const { stdout } = await $`git rev-parse --abbrev-ref HEAD`.quiet().nothrow();
     currentBranch = stdout.toString().trim();
-} catch {}
+} catch (e) {
+    console.log(`${RED}❌ Failed to determine current branch: ${e}${RESET}`);
+    process.exit(1);
+}
+
+if (!currentBranch) {
+    console.log(`${RED}❌ Could not determine current branch (detached HEAD?)${RESET}`);
+    process.exit(1);
+}
 
 let branch = currentBranch;
 if (currentBranch === "main" || currentBranch === "master") {

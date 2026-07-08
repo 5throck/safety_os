@@ -1,4 +1,4 @@
-#!/usr/bin/env tsx
+#!/usr/bin/env bun
 /**
  * Safety OS Audit Script
  * Validates schema.yaml files in workflows,
@@ -34,7 +34,7 @@
  *   enforces the <name>.md (EN canonical) + <name>_ko.md (KO mirror) convention.
  *   Every markdown file in docs/_shared/ must have its language partner.
  *
- * @version 4.2.0
+ * @version 4.2.1
  */
 
 import * as fs from 'node:fs';
@@ -240,7 +240,8 @@ function validateDomainWorkflow(domainName: string, requiredMin: number = 3, tie
 
 function validateDomainEvidence(domainName: string, requiredFields: string[], minLegalBasis: number = 3): { files: string[], errs: string[] } {
     const domainEvidence = evidenceFiles.filter(f => {
-        return path.dirname(f).includes(path.join('domains', 'functional', domainName)) || path.dirname(f).includes(path.join('domains', 'industry', domainName));
+        const rp = relPath(f);
+        return rp.includes(`domains/functional/${domainName}`) || rp.includes(`domains/industry/${domainName}`);
     });
     const errs: string[] = [];
     for (const file of domainEvidence) {
