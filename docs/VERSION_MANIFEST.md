@@ -1,6 +1,6 @@
 # VERSION_MANIFEST.md
 
-**Generated**: 2026-07-07T22:56:15.942Z
+**Generated**: 2026-07-08T04:18:25.006Z
 **Manifest Version**: 1.0
 **Location**: docs\VERSION_MANIFEST.md
 
@@ -10,7 +10,7 @@
 
 - **Agents**: 28
 - **Skills**: 56
-- **Scripts**: 55
+- **Scripts**: 56
 - **Commands**: 6
 
 ---
@@ -19,34 +19,34 @@
 
 | Name | File | Tier | Model | Last Modified |
 |------|------|------|-------|---------------|
-| _core/pm | agents/_core/pm.md | high | opus | 2026-07-05 |
-| _core/safety-governance-manager | agents/_core/safety-governance-manager.md | high | opus | 2026-06-17 |
-| _core/safety-workflow-manager | agents/_core/safety-workflow-manager.md | high | opus | 2026-06-17 |
-| _shared/asset-integrity-agent | agents/_shared/asset-integrity-agent.md | medium | sonnet | 2026-07-05 |
-| _shared/audit-agent | agents/_shared/audit-agent.md | medium | sonnet | 2026-06-21 |
-| _shared/compliance-agent | agents/_shared/compliance-agent.md | medium | sonnet | 2026-06-17 |
-| _shared/contractor-safety-agent | agents/_shared/contractor-safety-agent.md | medium | sonnet | 2026-07-05 |
-| _shared/disaster-response-agent | agents/_shared/disaster-response-agent.md | high | opus | 2026-07-05 |
-| _shared/docs-writer | agents/_shared/docs-writer.md | medium | sonnet | 2026-07-05 |
-| _shared/emergency-agent | agents/_shared/emergency-agent.md | high | opus | 2026-06-17 |
-| _shared/incident-investigation-agent | agents/_shared/incident-investigation-agent.md | medium | sonnet | 2026-07-05 |
-| _shared/legal-agent | agents/_shared/legal-agent.md | medium | sonnet | 2026-07-05 |
-| _shared/occupational-health-agent | agents/_shared/occupational-health-agent.md | medium | sonnet | 2026-07-05 |
-| _shared/reporting-agent | agents/_shared/reporting-agent.md | medium | sonnet | 2026-07-05 |
-| _shared/risk-assessment-agent | agents/_shared/risk-assessment-agent.md | medium | sonnet | 2026-07-04 |
-| domains/functional/msds/msds-agent | agents/domains/functional/msds/msds-agent.md | medium | sonnet | 2026-07-04 |
-| domains/functional/psm/psm-agent | agents/domains/functional/psm/psm-agent.md | medium | sonnet | 2026-07-04 |
-| domains/functional/training/training-agent | agents/domains/functional/training/training-agent.md | medium | sonnet | 2026-07-04 |
-| domains/industry/ehschem/ehschem-agent | agents/domains/industry/ehschem/ehschem-agent.md | medium | sonnet | 2026-07-04 |
-| domains/industry/ehsconst/ehsconst-agent | agents/domains/industry/ehsconst/ehsconst-agent.md | medium | sonnet | 2026-07-04 |
-| domains/industry/gasterm/gasterm-agent | agents/domains/industry/gasterm/gasterm-agent.md | medium | sonnet | 2026-07-04 |
-| domains/industry/gcp/gcp-agent | agents/domains/industry/gcp/gcp-agent.md | medium | sonnet | 2026-07-04 |
-| domains/industry/gdp/gdp-agent | agents/domains/industry/gdp/gdp-agent.md | medium | sonnet | 2026-07-04 |
-| domains/industry/glp/glp-agent | agents/domains/industry/glp/glp-agent.md | medium | sonnet | 2026-07-04 |
-| domains/industry/gmp/gmp-agent | agents/domains/industry/gmp/gmp-agent.md | medium | sonnet | 2026-07-04 |
-| domains/industry/gvp/gvp-agent | agents/domains/industry/gvp/gvp-agent.md | medium | sonnet | 2026-07-04 |
-| domains/industry/meddevice/meddevice-agent | agents/domains/industry/meddevice/meddevice-agent.md | medium | sonnet | 2026-07-04 |
-| domains/industry/powergen/powergen-agent | agents/domains/industry/powergen/powergen-agent.md | medium | sonnet | 2026-07-04 |
+| _core/pm | agents/_core/pm.md | high | opus | 2026-07-07 |
+| _core/safety-governance-manager | agents/_core/safety-governance-manager.md | high | opus | 2026-07-07 |
+| _core/safety-workflow-manager | agents/_core/safety-workflow-manager.md | high | opus | 2026-07-07 |
+| _shared/asset-integrity-agent | agents/_shared/asset-integrity-agent.md | medium | sonnet | 2026-07-07 |
+| _shared/audit-agent | agents/_shared/audit-agent.md | medium | sonnet | 2026-07-07 |
+| _shared/compliance-agent | agents/_shared/compliance-agent.md | medium | sonnet | 2026-07-07 |
+| _shared/contractor-safety-agent | agents/_shared/contractor-safety-agent.md | medium | sonnet | 2026-07-07 |
+| _shared/disaster-response-agent | agents/_shared/disaster-response-agent.md | high | opus | 2026-07-07 |
+| _shared/docs-writer | agents/_shared/docs-writer.md | medium | sonnet | 2026-07-07 |
+| _shared/emergency-agent | agents/_shared/emergency-agent.md | high | opus | 2026-07-07 |
+| _shared/incident-investigation-agent | agents/_shared/incident-investigation-agent.md | medium | sonnet | 2026-07-07 |
+| _shared/legal-agent | agents/_shared/legal-agent.md | medium | sonnet | 2026-07-07 |
+| _shared/occupational-health-agent | agents/_shared/occupational-health-agent.md | medium | sonnet | 2026-07-07 |
+| _shared/reporting-agent | agents/_shared/reporting-agent.md | medium | sonnet | 2026-07-07 |
+| _shared/risk-assessment-agent | agents/_shared/risk-assessment-agent.md | medium | sonnet | 2026-07-07 |
+| domains/functional/msds/msds-agent | agents/domains/functional/msds/msds-agent.md | medium | sonnet | 2026-07-07 |
+| domains/functional/psm/psm-agent | agents/domains/functional/psm/psm-agent.md | medium | sonnet | 2026-07-07 |
+| domains/functional/training/training-agent | agents/domains/functional/training/training-agent.md | medium | sonnet | 2026-07-07 |
+| domains/industry/ehschem/ehschem-agent | agents/domains/industry/ehschem/ehschem-agent.md | medium | sonnet | 2026-07-07 |
+| domains/industry/ehsconst/ehsconst-agent | agents/domains/industry/ehsconst/ehsconst-agent.md | medium | sonnet | 2026-07-07 |
+| domains/industry/gasterm/gasterm-agent | agents/domains/industry/gasterm/gasterm-agent.md | medium | sonnet | 2026-07-07 |
+| domains/industry/gcp/gcp-agent | agents/domains/industry/gcp/gcp-agent.md | medium | sonnet | 2026-07-07 |
+| domains/industry/gdp/gdp-agent | agents/domains/industry/gdp/gdp-agent.md | medium | sonnet | 2026-07-07 |
+| domains/industry/glp/glp-agent | agents/domains/industry/glp/glp-agent.md | medium | sonnet | 2026-07-07 |
+| domains/industry/gmp/gmp-agent | agents/domains/industry/gmp/gmp-agent.md | medium | sonnet | 2026-07-07 |
+| domains/industry/gvp/gvp-agent | agents/domains/industry/gvp/gvp-agent.md | medium | sonnet | 2026-07-07 |
+| domains/industry/meddevice/meddevice-agent | agents/domains/industry/meddevice/meddevice-agent.md | medium | sonnet | 2026-07-07 |
+| domains/industry/powergen/powergen-agent | agents/domains/industry/powergen/powergen-agent.md | medium | sonnet | 2026-07-07 |
 
 ---
 
@@ -139,7 +139,7 @@
 | fetch-legalize.ts | N/A | scripts/fetch-legalize.ts | child_process, fs, path |
 | gen-pr-body.ts | N/A | scripts/gen-pr-body.ts | bun |
 | generate-scripts-readme.ts | N/A | scripts/generate-scripts-readme.ts | N/A |
-| generate-version-manifest.ts | 1.0.3 | scripts/generate-version-manifest.ts | bun |
+| generate-version-manifest.ts | 1.0.4 | scripts/generate-version-manifest.ts | bun |
 | mcp-cache.ts | N/A | scripts/lib/mcp-cache.ts | N/A |
 | new-domain.ts | N/A | scripts/new-domain.ts | N/A |
 | pipeline-state.ts | N/A | scripts/lib/pipeline-state.ts | fs, path |
@@ -154,7 +154,7 @@
 | skill-lifecycle-audit.ts | N/A | scripts/skill-lifecycle-audit.ts | N/A |
 | start-mcp.ts | N/A | scripts/start-mcp.ts | child_process, path |
 | sync-agent-status.ts | N/A | scripts/sync-agent-status.ts | N/A |
-| sync-md.ts | 1.2.0 | scripts/sync-md.ts | N/A |
+| sync-md.ts | 1.3.0 | scripts/sync-md.ts | N/A |
 | sync-skill-status.ts | N/A | scripts/sync-skill-status.ts | N/A |
 | sync-skills.ts | N/A | scripts/sync-skills.ts | N/A |
 | team-builder.ts | N/A | scripts/team-builder.ts | fs, path |
@@ -171,6 +171,7 @@
 | verify-agent-deliverables.ts | N/A | scripts/verify-agent-deliverables.ts | fs |
 | verify-memory.ts | N/A | scripts/verify-memory.ts | fs, path |
 | verify-readme-sync.ts | 1.1.1 | scripts/verify-readme-sync.ts | bun, fs, path |
+| verify-scripts.ts | N/A | scripts/verify-scripts.ts | fs, path |
 | verify-skills.ts | N/A | scripts/verify-skills.ts | N/A |
 
 ---

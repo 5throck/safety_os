@@ -1,4 +1,4 @@
-// @version 1.0.3
+// @version 1.0.4
 import * as fs from 'node:fs';
 import * as path from 'node:path';
 import { $ } from 'bun';
@@ -8,7 +8,7 @@ const MANIFEST_VERSION = '1.0';
 
 const GREEN = '\x1b[32m';
 const CYAN = '\x1b[36m';
-const RESET = '\x1b[0b';
+const RESET = '\x1b[0m';
 
 interface AgentInfo {
     name: string;

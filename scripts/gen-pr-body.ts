@@ -3,7 +3,7 @@
  * gen-pr-body.ts - Generate a structured PR body from commit message + diff
  * Usage: bun run scripts/gen-pr-body.ts "<commit message>"
  * Output: PR body markdown (stdout)
- * @version 1.1.3
+ * @version 1.1.4
  *
  * Behaviour:
  *   1. If `claude` CLI is available → ask Claude to write the PR body (AI mode)
@@ -67,9 +67,12 @@ const diffStat = await getDiffStat();
 const fileList = filesRaw
   .split('\n')
   .filter(Boolean)
-  .slice(0, 30)
+  .slice(0, 50)
   .map(f => `- ${f}`)
   .join('\n') || '';
+const truncationNote = filesRaw.split('\n').filter(Boolean).length > 50
+  ? `\n> (${filesRaw.split('\n').filter(Boolean).length - 50} more files omitted — see full diff in the PR)`
+  : '';
 
 // ── Prompt injection sanitizer ────────────────────────────────────────────────
 // Strips content that could hijack the Claude prompt when git output is embedded.
@@ -99,7 +102,8 @@ function sanitizeForPrompt(text: string): string {
 // ── AI mode: generate body via Claude CLI ────────────────────────────────────
 const hasClaudeRes = await $`claude --version`.quiet().nothrow();
 if (hasClaudeRes.exitCode === 0) {
-  const safeFiles = sanitizeForPrompt(filesRaw);
+  const filesForPrompt = filesRaw.split('\n').filter(Boolean).slice(0, 50).join('\n');
+  const safeFiles = sanitizeForPrompt(filesForPrompt);
   const safeDiffStat = sanitizeForPrompt(diffStat);
   const safeCommitMsg = sanitizeForPrompt(commitMsg);
 
@@ -163,7 +167,7 @@ const fallback = `## Why
 ${commitMsg}
 
 ## What Changed
-${fileList}
+${fileList}${truncationNote}
 
 ## Test Plan
 - [ ] \`bash scripts/audit.sh\` passes

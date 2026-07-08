@@ -1,4 +1,4 @@
-// @version 1.3.0 — variant-aware: runs safety-audit.ts for safety-os, workspace audit.ts for workspace root
+// @version 1.4.0 — variant-aware: runs safety-audit.ts for safety-os, workspace audit.ts for workspace root
 import { $ } from 'bun';
 import * as fs from 'node:fs';
 import * as path from 'node:path';
@@ -259,6 +259,8 @@ try {
 const syncContext = crypto.randomUUID();
 process.env.SYNC_ACTIVE = "1";
 process.env.DEV_SYNC_CONTEXT = syncContext;
+// Clean up stale temp file from any previous crashed run before writing new one
+try { if (fs.existsSync('.sync_context.tmp')) fs.unlinkSync('.sync_context.tmp'); } catch {}
 fs.writeFileSync('.sync_context.tmp', syncContext);
 
 const cleanupTmp = () => { try { if (fs.existsSync('.sync_context.tmp')) fs.unlinkSync('.sync_context.tmp'); } catch {} };

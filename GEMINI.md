@@ -72,10 +72,10 @@ When entering Planning Mode, Gemini **MUST** leverage the following three precis
     #### [NEW] [file basename](file:///absolute/path/to/newfile)
 
     ## Execution Task Plan (Agent Dispatch Rules)
-    | Step | Task | Agent | Tier | Model |
-    |:---:|---|:---:|:---:|---|
-    | 1 | [Task Description] | [agent-name] | [High/Medium/Low] | [Model String] |
-    | N | `/sync "type(scope): message"` — lifecycle + audit + commit + push + PR | pm | Medium | [Model String] |
+    | Step | Task | Agent | Tier | Model | Platform |
+    |:---:|---|:---:|:---:|---|:---:|
+    | 1 | [Task Description] | [agent-name] | [High/Medium/Low] | [Model String] | Both/Claude/Antigravity |
+    | N | `/sync "type(scope): message"` — lifecycle + audit + commit + push + PR | pm | Medium | [Model String] | Both |
 
     *Execution Order: [Parallel/Sequential]*
     *Rule: Every execution plan MUST end with `/sync` — it handles lifecycle update, full audit, commit, push, and PR creation. No separate Lifecycle Update or Final QA Audit rows are needed.*
@@ -174,10 +174,10 @@ See [Agent Dispatch Rules (§5)](#5-agent-dispatch-rules) for the 4-level enforc
 #### Mandatory Execution Plan Display
 Before any multi-agent dispatch (2+ agents), PM **must** output an execution plan table in the user's active language prior to invoking the Agent tool:
 
-| # | Task | Agent | Tier | Model |
-|---|------|-------|------|-------|
-| 1 | [task] | [agent] | High/Medium/Low | high/medium/low |
-| N | `/sync "type(scope): message"` — lifecycle + audit + commit + push + PR | pm | Medium | gemini-3.5-flash |
+| # | Task | Agent | Tier | Model | Platform |
+|---|------|-------|------|-------|----------|
+| 1 | [task] | [agent] | High/Medium/Low | high/medium/low | Both/Claude/Antigravity |
+| N | `/sync "type(scope): message"` — lifecycle + audit + commit + push + PR | pm | Medium | gemini-3.5-flash | Both |
 
 State parallel vs sequential order below the table. The Agent tool must not be called until this table is visible to the user.
 *Rule: Every execution plan MUST end with `/sync` as the final step — it handles lifecycle update, full audit, commit, push, and PR creation. No separate Lifecycle Update or Final QA Audit rows are needed.*

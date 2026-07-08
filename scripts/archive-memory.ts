@@ -1,6 +1,6 @@
 /**
  * Archives memory markdown files older than 7 days.
- * @version 1.0.0
+ * @version 1.1.0
  */
 import * as fs from 'node:fs';
 import * as path from 'node:path';
@@ -26,7 +26,7 @@ for (const file of files) {
     const dateMatch = file.match(/^(\d{4}-\d{2}-\d{2})\.md$/);
     let fileDate: Date;
     if (dateMatch) {
-        fileDate = new Date(dateMatch[1]);
+        fileDate = new Date(dateMatch[1] + 'T00:00:00');
     } else {
         fileDate = fs.statSync(fullPath).mtime;
     }
