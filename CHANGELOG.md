@@ -10,8 +10,33 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 - **license**: Added root `LICENSE` file (GNU Affero General Public License v3.0). Added License sections to `README.md`/`README_ko.md` and a `license` field to `scripts/package.json`.
 
+### Fixed (2026-07-09 — Round 3: Pipeline Robustness, Hook Hardening, Cross-Platform Fixes)
+
+- **dev-sync.ts** (v1.4.3): Fixed silent failure on `git rev-parse` — empty `currentBranch` now exits with error instead of pushing to undefined ref; added explicit `process.exit(1)` on `git status` failure; added `.nothrow()` + error handling for `sync-md.ts` call; removed duplicate `resolve` import.
+- **sync-md.ts** (v1.3.1): Fixed UTC date bug — replaced `toISOString().split('T')[0]` with local date construction to prevent off-by-one-day in non-UTC timezones; fixed session dedup check to use scoped table-cell regex (`\| [date]`) instead of scanning entire file content.
+- **archive-memory.ts** (v1.1.1): Prevented silent data loss — `renameSync` now checks for existing archive file before overwriting; removed redundant `existsSync` before `mkdirSync({ recursive: true })`.
+- **gen-pr-body.ts** (v1.1.6): Fixed XML tag filter — changed `[\/>]` to `\b` word boundary so tags with attributes like `<instruction foo>` are properly caught.
+- **safety-audit.ts** (v4.2.1): Fixed `validateDomainEvidence` path filter to use `relPath()` (forward-slash normalized) instead of `path.dirname().includes(path.join(...))` which breaks on Windows mixed separators; fixed shebang from `tsx` to `bun` for consistency.
+- **generate-version-manifest.ts** (v1.0.7): Added `sanitizeCell()` helper to escape pipe characters and newlines in all markdown table cells, preventing table structure injection from malformed frontmatter.
+- **pre-commit hook**: Added `R` to `--diff-filter` so renamed files are scanned; expanded secret scanning regex with AWS Key (`AKIA`), Google API Key (`AIza`), Stripe keys, JWT tokens, SendGrid keys; tightened `.env` allowlist to anchor explicit extensions (`.sample`, `.example`, `.template`); fixed word splitting on filenames with spaces by using `while IFS= read -r`; strictened conflict marker regex to require trailing space (`<{7} `, `>{7} `); added `tr -d '\n'` for robust UUID context comparison.
+- **commands/sync.md** (both platforms): Added undocumented pipeline steps 4.7 (L0→L1 publish) and 6 (sensitive file guard) to the pipeline description.
+
+### Fixed (2026-07-08 — Documentation + Skill Parity)
+
+- **githooks**: Restored `.githooks/pre-commit` and `.githooks/commit-msg` (removed in commit `8a8fd01` but `.git/config` still referenced them). Pre-commit enforces SYNC_ACTIVE gate, .env blocking, merge conflict marker detection, and regex secret scanning. Commit-msg enforces English-only messages.
+- **generate-version-manifest.ts** (v1.0.5): Fixed silent failure — replaced `generateManifest().catch(console.error)` with explicit `process.exit(1)` on error so CI properly fails.
+- **dev-sync.ts** (v1.4.2): Expanded sensitive file detection regex to cover `ppk`, `id_rsa`/`id_ed25519`/`id_ecdsa`/`id_dsa` SSH keys (with path prefix), and `.htpasswd` files.
+- **GEMINI.md**: Synchronized governance with `CLAUDE.md` — added "platform" to governance enforcement description, corrected `compliance-agent`/`audit-agent` tier from Low to Medium, added tier ceiling rule, replaced workspace-root specialist agent list with Safety OS roster (SGM, SWM, docs-writer, compliance-agent, audit-agent).
+- **gen-pr-body.ts** (v1.1.5): Hardened prompt injection sanitizer against cross-line XML tag attacks (e.g. `<instruct\nion>`) by adding pre-normalization step before per-line filter.
+- **verify-scripts.ts** (v1.0.1): Fixed architecture violation check to use filename-only matching (via `split(/[\\/]/).pop()`) instead of full-path `includes()`, preventing false positives from directory names.
+- **generate-version-manifest.ts** (v1.0.6): Fixed version extraction regex to handle both `// @version` (single-line JS) and ` * @version` (JSDoc block) comment styles — 3 scripts were reporting `N/A` in VERSION_MANIFEST.md.
+- **GEMINI.md**: Fixed Phase 4 Execution Loop — replaced `automation-engineer` (workspace-root only) with Safety OS specialists; fixed audit script reference to `safety-audit.ts`.
+- **AGENTS.md**: Removed 5 nonexistent workspace-root agents (`scaffolding-expert`, `architect`, `automation-engineer`, `security-expert`, plus `lifecycle-manager`/`auditor` already annotated workspace-only) from the PM-ONLY INVOCATION dispatch table, retaining only Safety OS agents.
+- **skills**: Copied 3 Claude-only skills (`api-documentation`, `documentation-writing`, `research-analysis`) to `.gemini/skills/` for Gemini/Antigravity parity; removed `gemini-parity: skip` frontmatter from all 6 files.
+
 ### Fixed
 
+- **sync**: Resolved 12 issues across the `/sync` pipeline — ANSI reset code bug in `generate-version-manifest.ts`, created missing `verify-scripts.ts` (drift check was dead code), fixed `sync.md` command description to match actual `dev-sync.ts` behavior, replaced silent `catch` blocks in `safety-audit.ts` with error reporting, fixed typo in role-separation error message, hardened dedup logic in `sync-md.ts`, fixed timezone mismatch in `archive-memory.ts`, added Platform column to GEMINI.md execution plan templates, documented Bun-only dependency in `retry-handler.ts`, increased file list cap in `gen-pr-body.ts`, removed isSuccess gate on auth error short-circuit in `retry-handler.ts`, added stale `.sync_context.tmp` cleanup in `dev-sync.ts`.
 - **governance**: Replaced `CLAUDE.md`'s Specialist Agent List and `Agent()` dispatch example (which referenced nonexistent `automation-engineer`/`architect`/`scaffolding-expert`/`security-expert` agents and a nonexistent Low tier) with the project's real roster; corrected `compliance-agent`/`audit-agent` tier from Low to Medium to match their frontmatter and `pm.md`'s Tier Ceiling Rule.
 - **agents**: Replaced the hardcoded `model: inherit` frontmatter field (present on all 28 agent files, contradicting `pm.md`'s Model Parameter Enforcement Rule) with the tier-resolved short alias (`opus`/`sonnet`); added missing frontmatter to `psm-agent.md` and `training-agent.md`.
 - **scripts**: Fixed `generate-version-manifest.ts`'s agent tier regex to tolerate CRLF line endings (was silently failing for all 9 domain agents); added support for nested YAML `metadata.triggers` lists (the format most skills actually use) alongside the old flat-array format; removed a false-positive "command not integrated as a skill" drift check that didn't match this project's auto-registration convention.

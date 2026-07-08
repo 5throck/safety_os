@@ -126,13 +126,6 @@ All specialist agents below are dispatched ONLY through PM:
 
 | Agent | Phase | Dispatch Trigger |
 |-------|-------|-------------------|
-| **scaffolding-expert** | 0 | "Creating new projects", "Template validation", "Scaffolding tasks" |
-| **architect** | 1-2 | "Architecture design needed", "Project structure planning", "Technical decision making" |
-| **automation-engineer** | 4 | "Creating scripts", "Cross-platform automation", "Implementation tasks" |
-| **docs-writer** | 4 | "Updating documentation", "README creation", "CHANGELOG updates" |
-| **security-expert** | 6 | "Security review", "Hook configuration", "Secret detection" |
-| **lifecycle-manager** | 5 | "Lifecycle finalization", "Governance record sync", "N-1 step after any agent/skill/script/variant change" (Workspace root only) |
-| **auditor** | 6 | "Quality verification", "Documentation consistency check", "QA gate required" (Workspace root only) |
 | **safety-governance-manager** | 1-2 | "EHS strategy", "Compliance objectives", "KPI definition" |
 | **safety-workflow-manager** | 3-4 | "Daily workflow dispatch", "Manufacturing operations", "Agent team coordination" |
 | **legal-agent** | 1-2 | "Legal interpretation", "Regulatory tracking", "Law analysis" |

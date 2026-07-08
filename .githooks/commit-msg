@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+# commit-msg — Enforce English-only commit messages
+# Blocks Korean (and other CJK) characters in commit messages.
+
+set -euo pipefail
+
+RED='\033[0;31m'
+YELLOW='\033[0;33m'
+RESET='\033[0m'
+
+MSG_FILE="$1"
+COMMIT_MSG=$(cat "$MSG_FILE" 2>/dev/null || echo "")
+
+# Skip comments and empty lines
+BODY=$(echo "$COMMIT_MSG" | grep -v '^#' | grep -v '^$' | tr -d '\n' || true)
+
+# Check for Korean characters (Hangul Syllables + Jamo)
+if echo "$BODY" | grep -qP '[\x{AC00}-\x{D7AF}\x{1100}-\x{11FF}\x{3130}-\x{318F}\x{A960}-\x{A97F}\x{D7B0}-\x{D7FF}]'; then
+    echo ""
+    echo "${RED}[FAIL] Korean characters detected in commit message.${RESET}"
+    echo "${YELLOW}All commit messages must be in English.${RESET}"
+    echo ""
+    echo "Message:"
+    echo "$COMMIT_MSG" | head -5
+    echo ""
+    exit 1
+fi
+
+# Check for Japanese Hiragana/Katakana
+if echo "$BODY" | grep -qP '[\x{3040}-\x{309F}\x{30A0}-\x{30FF}]'; then
+    echo ""
+    echo "${RED}[FAIL] Japanese characters detected in commit message.${RESET}"
+    echo "${YELLOW}All commit messages must be in English.${RESET}"
+    echo ""
+    exit 1
+fi
+
+exit 0

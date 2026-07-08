@@ -9,7 +9,7 @@
 You ARE the PM agent for this session. Load and follow [`agents/pm.md`](agents/pm.md) at all times.
 
 **Governance Enforcement**: All multi-step tasks (2+ files or 2+ sequential steps) must strictly adhere to the PM Gateway workflow:
-1. Display execution plan table first (task | agent | tier | model)
+1. Display execution plan table first (task | agent | tier | model | platform)
 2. Only then use `invoke_subagent` to dispatch specialist agents
 3. Never bypass PM workflow — direct specialist invocation is forbidden
 
@@ -72,10 +72,10 @@ When entering Planning Mode, Gemini **MUST** leverage the following three precis
     #### [NEW] [file basename](file:///absolute/path/to/newfile)
 
     ## Execution Task Plan (Agent Dispatch Rules)
-    | Step | Task | Agent | Tier | Model |
-    |:---:|---|:---:|:---:|---|
-    | 1 | [Task Description] | [agent-name] | [High/Medium/Low] | [Model String] |
-    | N | `/sync "type(scope): message"` — lifecycle + audit + commit + push + PR | pm | Medium | [Model String] |
+    | Step | Task | Agent | Tier | Model | Platform |
+    |:---:|---|:---:|:---:|---|:---:|
+    | 1 | [Task Description] | [agent-name] | [High/Medium/Low] | [Model String] | Both/Claude/Antigravity |
+    | N | `/sync "type(scope): message"` — lifecycle + audit + commit + push + PR | pm | Medium | [Model String] | Both |
 
     *Execution Order: [Parallel/Sequential]*
     *Rule: Every execution plan MUST end with `/sync` — it handles lifecycle update, full audit, commit, push, and PR creation. No separate Lifecycle Update or Final QA Audit rows are needed.*
@@ -138,8 +138,8 @@ The platform supports **Reactive Wakeup**: you do not need to poll or query task
 
 #### Phase 4 Execution Loop
 See [AGENTS.md - Subagent Roster](AGENTS.md#subagent-roster) for the complete agent list:
-1.  **automation-engineer** implements the changes.
-2.  **PM** verifies against acceptance criteria by running `bun scripts/audit.ts` directly.
+1.  The dispatched Phase 4 specialist (e.g., safety-workflow-manager, docs-writer, or compliance-agent) implements the changes.
+2.  **PM** verifies against acceptance criteria by running `bun scripts/safety-audit.ts` directly.
 3.  **Quality gate (audit script)** validates compliance.
 
 > Loop and correct if review errors are flagged - maximum **3 iterations** before escalating to the user.
@@ -174,10 +174,10 @@ See [Agent Dispatch Rules (§5)](#5-agent-dispatch-rules) for the 4-level enforc
 #### Mandatory Execution Plan Display
 Before any multi-agent dispatch (2+ agents), PM **must** output an execution plan table in the user's active language prior to invoking the Agent tool:
 
-| # | Task | Agent | Tier | Model |
-|---|------|-------|------|-------|
-| 1 | [task] | [agent] | High/Medium/Low | high/medium/low |
-| N | `/sync "type(scope): message"` — lifecycle + audit + commit + push + PR | pm | Medium | gemini-3.5-flash |
+| # | Task | Agent | Tier | Model | Platform |
+|---|------|-------|------|-------|----------|
+| 1 | [task] | [agent] | High/Medium/Low | high/medium/low | Both/Claude/Antigravity |
+| N | `/sync "type(scope): message"` — lifecycle + audit + commit + push + PR | pm | Medium | gemini-3.5-flash | Both |
 
 State parallel vs sequential order below the table. The Agent tool must not be called until this table is visible to the user.
 *Rule: Every execution plan MUST end with `/sync` as the final step — it handles lifecycle update, full audit, commit, push, and PR creation. No separate Lifecycle Update or Final QA Audit rows are needed.*
@@ -188,17 +188,19 @@ State parallel vs sequential order below the table. The Agent tool must not be c
 |-----------------|-------|----------------|------|
 | Safety policy / KPI / industry profile design | Phase 1-2 | SGM (Safety Governance Manager) | Medium |
 | Workflow execution / risk assessment / compliance check | Phase 4 | SWM (Safety Workflow Manager) | Medium |
-| Compliance gap analysis | Phase 4 | compliance-agent | Low |
+| Compliance gap analysis | Phase 4 | compliance-agent | Medium |
 | Emergency response dispatch | Direct | emergency-agent | Medium |
-| Safety audit / evidence review | Phase 6 | audit-agent | Low |
+| Safety audit / evidence review | Phase 6 | audit-agent | Medium |
+
+**Tier ceiling**: Agents may NOT be elevated beyond their defined tier. Platform column is MANDATORY in every execution plan row.
 
 #### Specialist Agent List
 All agents below require PM dispatch:
-- architect (Phase 1-2)
-- automation-engineer (Phase 4)
-- docs-writer (Phase 4)
-- scaffolding-expert (Phase 0)
-- security-expert (Phase 6)
+- safety-governance-manager (SGM) — Phase 1-2 — High
+- safety-workflow-manager (SWM) — Phase 4 — High
+- docs-writer — Phase 4 — Medium
+- compliance-agent — Phase 4 — Medium
+- audit-agent — Phase 6 — Medium
 
 #### Permission Denial Protocol
 

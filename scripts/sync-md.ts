@@ -1,5 +1,5 @@
 #!/usr/bin/env bun
-// @version 1.2.0
+// @version 1.3.1
 // sync-md.ts - Update memory/MEMORY.md index
 // Usage:
 //   bun run scripts/sync-md.ts "YYYY-MM-DD" "summary"              # session entry
@@ -8,7 +8,10 @@
 
 const args = process.argv.slice(2);
 
-const date: string = args[0] ?? new Date().toISOString().split('T')[0];
+const date: string = args[0] ?? (() => {
+  const now = new Date();
+  return `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')}`;
+})();
 const summary: string = args[1] ?? 'update';
 
 let type: 'session' | 'meeting' | 'adr' = 'session';
@@ -78,11 +81,15 @@ function makeSlug(str: string, maxLen: number): string {
     .substring(0, maxLen);
 }
 
+function escapeRegex(str: string): string {
+  return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
 if (type === 'meeting') {
   const slug = makeSlug(summary, 40);
   const meetingFile = `meeting-${date}-${slug}.md`;
-  // Only insert if not already present (dedup by date + summary)
-  if (!content.includes(date) && !content.includes(summary)) {
+  // Only insert if not already present (dedup by date + summary in same table row)
+  if (!new RegExp(`\\| ${escapeRegex(date)} \\| ${escapeRegex(summary)} \\|`).test(content)) {
     // Insert row after the separator line of the ## Meetings table
     content = content.replace(
       /(## Meetings\r?\n\r?\n\| Date \|[^\n]+\r?\n\|[-| ]+\|)/,
@@ -94,8 +101,8 @@ if (type === 'meeting') {
   const slug = makeSlug(summary, 50);
   const id = adrId || 'ADR-XXXX';
   const adrFile = `${id}-${slug}.md`;
-  // Only insert if not already present
-  if (!content.includes(id) && !content.includes(summary)) {
+  // Only insert if not already present (dedup by id + summary in same table row)
+  if (!new RegExp(`\\| ${escapeRegex(id)} \\| ${escapeRegex(summary)} \\|`).test(content)) {
     content = content.replace(
       /(## ADRs\r?\n\r?\n\| ID \|[^\n]+\r?\n\|[-| ]+\|)/,
       `$1\n| ${id} | ${summary} | Accepted | [${adrFile}](${adrFile}) |`
@@ -103,8 +110,8 @@ if (type === 'meeting') {
     await Bun.write(MEMORY_FILE, content);
   }
 } else {
-  // Session: dedup by date
-  if (!content.includes(`[${date}]`)) {
+  // Session: dedup by date (scoped to Sessions table to avoid false positives)
+  if (!new RegExp(`\\| \\[${escapeRegex(date)}\\]`).test(content)) {
     content = content.replace(
       /(## Sessions\r?\n\r?\n\| Date \|[^\n]+\r?\n\|[-| ]+\|)/,
       `$1\n| [${date}](${date}.md) | ${summary} |`

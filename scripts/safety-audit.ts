@@ -1,4 +1,4 @@
-#!/usr/bin/env tsx
+#!/usr/bin/env bun
 /**
  * Safety OS Audit Script
  * Validates schema.yaml files in workflows,
@@ -34,7 +34,7 @@
  *   enforces the <name>.md (EN canonical) + <name>_ko.md (KO mirror) convention.
  *   Every markdown file in docs/_shared/ must have its language partner.
  *
- * @version 4.1.0
+ * @version 4.2.1
  */
 
 import * as fs from 'node:fs';
@@ -197,7 +197,7 @@ if (fs.existsSync(riskAgentPath)) {
     // Accept either legacy `gmp-qrm` or new `gmp/qrm` path reference
     const hasQrmRef = content.includes('gmp-qrm') || content.includes('gmp/qrm');
     if (!hasQrmRef || !content.toLowerCase().includes('product quality')) {
-        errors.push('agents/_shared/risk-assessment-agent.md: missing gmp-qrm/gmp-qrm scope separation reference (required per meeting 2026-06-17)');
+        errors.push('agents/_shared/risk-assessment-agent.md: missing gmp-qrm/gmp/qrm scope separation reference (required per meeting 2026-06-17)');
     }
 }
 
@@ -240,7 +240,8 @@ function validateDomainWorkflow(domainName: string, requiredMin: number = 3, tie
 
 function validateDomainEvidence(domainName: string, requiredFields: string[], minLegalBasis: number = 3): { files: string[], errs: string[] } {
     const domainEvidence = evidenceFiles.filter(f => {
-        return path.dirname(f).includes(path.join('domains', 'functional', domainName)) || path.dirname(f).includes(path.join('domains', 'industry', domainName));
+        const rp = relPath(f);
+        return rp.includes(`domains/functional/${domainName}`) || rp.includes(`domains/industry/${domainName}`);
     });
     const errs: string[] = [];
     for (const file of domainEvidence) {
@@ -308,7 +309,10 @@ if (fs.existsSync(psmWfDir)) {
                     }
                 }
             }
-        } catch { /* skip */ }
+        } catch (e: any) {
+            const rel = path.relative(ROOT, schemaPath).replace(/\\/g, '/');
+            errors.push(`${rel}: YAML parsing error in PSM applicable_industries - ${e.message}`);
+        }
     }
 }
 
@@ -358,7 +362,10 @@ if (fs.existsSync(industryWorkflowDir)) {
                         }
                     }
                 }
-            } catch { /* skip */ }
+            } catch (e: any) {
+                const rel = path.relative(ROOT, schemaPath).replace(/\\/g, '/');
+                errors.push(`${rel}: YAML parsing error in uses_functional_services - ${e.message}`);
+            }
         }
     }
 }

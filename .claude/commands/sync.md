@@ -10,8 +10,15 @@ bun scripts/dev-sync.ts "$ARGUMENTS"
 The pipeline will:
 1. Append a session entry to `memory/YYYY-MM-DD.md`
 2. Update `memory/MEMORY.md` index via `sync-md.ts`
-3. Auto-add `$ARGUMENTS` to `CHANGELOG.md [Unreleased]` if the section has no entries yet
-4. Run `audit.ts` - must exit 0 before proceeding
+2.5. Generate `scripts/README.md` from registry
+3. Verify `CHANGELOG.md [Unreleased]` has entries (pipeline blocks if empty)
+3.6. Warn about deprecated scripts in SCRIPTS.md
+3.7. Run L0/L1 script drift check (if available)
+3.8. Archive memory files older than 7 days
+4. Run domain audit (`safety-audit.ts` for variants, `audit.ts` for workspace root) — must exit 0 before proceeding
+4.5. Generate `docs/VERSION_MANIFEST.md`
+4.7. Propagate L0→L1 changes (workspace root only; skipped for standalone variants)
+6. Guard against sensitive untracked files (blocks `.pem`, `.key`, `.env`, SSH keys, credentials, secrets)
 5. Create a new PR branch, commit all staged changes, push, and open a GitHub PR
 
 If audit fails, fix the reported issue before re-running `/sync`.

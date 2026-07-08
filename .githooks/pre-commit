@@ -1,0 +1,105 @@
+#!/usr/bin/env bash
+# pre-commit — Lightweight quality gate for standalone variant
+# Enforces: SYNC_ACTIVE, .env blocking, merge conflicts, secret scanning
+#
+# All commits must go through /sync (dev-sync.ts) which sets SYNC_ACTIVE=1
+# and writes a UUID context to .sync_context.tmp for verification.
+
+set -euo pipefail
+
+RED='\033[0;31m'
+YELLOW='\033[0;33m'
+RESET='\033[0m'
+
+# ── Gate 0: SYNC_ACTIVE enforcement ──────────────────────────────────────────
+# Block direct commits unless executed through /sync pipeline.
+if [ "${SYNC_ACTIVE:-}" != "1" ]; then
+    echo ""
+    echo "${RED}[FAIL] Direct git commits are restricted.${RESET}"
+    echo "${YELLOW}All commits must go through the approved /sync pipeline.${RESET}"
+    echo "${YELLOW}Run: /sync \"type: description\" instead.${RESET}"
+    echo ""
+    exit 1
+fi
+
+# Verify context file contains a valid UUID matching DEV_SYNC_CONTEXT
+CONTEXT_FILE=".sync_context.tmp"
+if [ ! -f "$CONTEXT_FILE" ]; then
+    echo "${RED}[FAIL] Missing .sync_context.tmp — cannot verify sync context.${RESET}"
+    exit 1
+fi
+
+# Strip trailing whitespace/newlines for robust comparison
+CONTEXT=$(cat "$CONTEXT_FILE" 2>/dev/null | tr -d '\n' || echo "")
+if [ -z "$CONTEXT" ] || [ "$CONTEXT" != "${DEV_SYNC_CONTEXT:-}" ]; then
+    echo "${RED}[FAIL] Invalid sync context — SYNC_ACTIVE is set but context file does not match.${RESET}"
+    exit 1
+fi
+
+# ── Gate 1: .env file blocking ────────────────────────────────────────────────
+# Include renamed files (R) in the diff filter
+STAGED=$(git diff --cached --name-only --diff-filter=ACMR 2>/dev/null || true)
+if echo "$STAGED" | grep -qE '(^|/)\.env'; then
+    ENV_FILES=$(echo "$STAGED" | grep -E '(^|/)\.env' || true)
+    # Block all .env files except explicitly safe templates
+    if echo "$ENV_FILES" | grep -qvE '\.env\.(sample|example|template)$'; then
+        echo ""
+        echo "${RED}[FAIL] .env files detected in staged changes:${RESET}"
+        echo "$ENV_FILES" | while read -r f; do
+            [ -n "$f" ] && echo "   $f"
+        done
+        echo "${YELLOW}Use .env.sample, .env.example, or .env.template for templates.${RESET}"
+        echo ""
+        exit 1
+    fi
+fi
+
+# ── Gate 2: Merge conflict marker detection ──────────────────────────────────
+# Check staged text files for conflict markers (use strict 7-char markers)
+CONFLICTS=0
+while IFS= read -r FILE; do
+    [ -z "$FILE" ] && continue
+    # Skip binary files
+    case "$FILE" in
+        *.png|*.jpg|*.jpeg|*.gif|*.ico|*.svg|*.woff|*.woff2|*.ttf|*.eot|*.pdf|*.zip|*.tar|*.gz) continue ;;
+    esac
+    if [ -f "$FILE" ] && grep -qE '^(<{7} |>{7} |={7} )' "$FILE" 2>/dev/null; then
+        if [ "$CONFLICTS" -eq 0 ]; then
+            echo ""
+            echo "${RED}[FAIL] Merge conflict markers found:${RESET}"
+        fi
+        echo "   $FILE"
+        CONFLICTS=1
+    fi
+done <<< "$STAGED"
+if [ "$CONFLICTS" -ne 0 ]; then
+    echo ""
+    echo "${YELLOW}Resolve all conflicts before committing.${RESET}"
+    echo ""
+    exit 1
+fi
+
+# ── Gate 3: Secret scanning (regex-based) ────────────────────────────────────
+SECRETS=0
+while IFS= read -r FILE; do
+    [ -z "$FILE" ] && continue
+    case "$FILE" in
+        *.png|*.jpg|*.jpeg|*.gif|*.ico|*.svg|*.woff|*.woff2|*.ttf|*.eot|*.pdf|*.zip|*.tar|*.gz) continue ;;
+    esac
+    if [ -f "$FILE" ] && grep -qE '(-----BEGIN (RSA |EC |DSA |OPENSSH )?PRIVATE KEY-----|password\s*=\s*["\x27][^"\x27]{8,}|api[_-]?key\s*=\s*["\x27][^"\x27]{20,}|(ghp|github_pat)_[A-Za-z0-9]{36,}|sk-[A-Za-z0-9]{48,}|xox[baprs]-[A-Za-z0-9\-_]{100,}|AKIA[0-9A-Z]{16}|AIza[0-9A-Za-z\-_]{35}|(sk|pk)_(test|live)_[A-Za-z0-9]{24,}|eyJ[A-Za-z0-9\-._]{20,}\.eyJ|SG\.[A-Za-z0-9\-_]{22}\.[A-Za-z0-9\-_]{43})' "$FILE" 2>/dev/null; then
+        if [ "$SECRETS" -eq 0 ]; then
+            echo ""
+            echo "${RED}[FAIL] Potential secrets detected:${RESET}"
+        fi
+        echo "   $FILE"
+        SECRETS=1
+    fi
+done <<< "$STAGED"
+if [ "$SECRETS" -ne 0 ]; then
+    echo ""
+    echo "${YELLOW}Remove secrets before committing. Use .env.sample for templates.${RESET}"
+    echo ""
+    exit 1
+fi
+
+exit 0

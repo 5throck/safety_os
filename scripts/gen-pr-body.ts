@@ -3,7 +3,7 @@
  * gen-pr-body.ts - Generate a structured PR body from commit message + diff
  * Usage: bun run scripts/gen-pr-body.ts "<commit message>"
  * Output: PR body markdown (stdout)
- * @version 1.1.3
+ * @version 1.1.6
  *
  * Behaviour:
  *   1. If `claude` CLI is available → ask Claude to write the PR body (AI mode)
@@ -67,14 +67,21 @@ const diffStat = await getDiffStat();
 const fileList = filesRaw
   .split('\n')
   .filter(Boolean)
-  .slice(0, 30)
+  .slice(0, 50)
   .map(f => `- ${f}`)
   .join('\n') || '';
+const truncationNote = filesRaw.split('\n').filter(Boolean).length > 50
+  ? `\n> (${filesRaw.split('\n').filter(Boolean).length - 50} more files omitted — see full diff in the PR)`
+  : '';
 
 // ── Prompt injection sanitizer ────────────────────────────────────────────────
 // Strips content that could hijack the Claude prompt when git output is embedded.
 function sanitizeForPrompt(text: string): string {
-  return text
+  // Pre-normalize: collapse multi-line XML tags so per-line regex catches them.
+  // e.g. "<instruct\nion>" → "<instruction>" before the line-by-line filter runs.
+  const normalized = text.replace(/<([a-zA-Z][a-zA-Z0-9]*)\n\s*/g, '<$1');
+
+  return normalized
     .split('\n')
     .filter(line => {
       const trimmed = line.trimStart();
@@ -83,7 +90,8 @@ function sanitizeForPrompt(text: string): string {
       // Drop instruction-injection patterns (e.g., "ignore previous instructions")
       if (/ignore\s+(all\s+)?(previous|prior|above)\s+(instructions?|context|prompts?)/i.test(trimmed)) return false;
       // Drop XML-style role tags that Claude XML-tag parsers may interpret
-      if (/^<\s*(system|human|assistant|instruction)\s*[\/>]/i.test(trimmed)) return false;
+      // Use word boundary to catch <instruction foo> (attribute-bearing tags)
+      if (/^<\s*(system|human|assistant|instruction)\b/i.test(trimmed)) return false;
       return true;
     })
     .map(line =>
@@ -99,7 +107,8 @@ function sanitizeForPrompt(text: string): string {
 // ── AI mode: generate body via Claude CLI ────────────────────────────────────
 const hasClaudeRes = await $`claude --version`.quiet().nothrow();
 if (hasClaudeRes.exitCode === 0) {
-  const safeFiles = sanitizeForPrompt(filesRaw);
+  const filesForPrompt = filesRaw.split('\n').filter(Boolean).slice(0, 50).join('\n');
+  const safeFiles = sanitizeForPrompt(filesForPrompt);
   const safeDiffStat = sanitizeForPrompt(diffStat);
   const safeCommitMsg = sanitizeForPrompt(commitMsg);
 
@@ -163,7 +172,7 @@ const fallback = `## Why
 ${commitMsg}
 
 ## What Changed
-${fileList}
+${fileList}${truncationNote}
 
 ## Test Plan
 - [ ] \`bash scripts/audit.sh\` passes

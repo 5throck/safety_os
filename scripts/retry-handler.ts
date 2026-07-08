@@ -1,8 +1,11 @@
 #!/usr/bin/env bun
 /**
  * Error Recovery Handler
- * @version 1.0.1
+ * @version 1.0.2
  * Implements retry logic with exponential backoff for subagent failures
+ *
+ * ⚠️ Bun-only dependency: This module uses `import.meta.path` (line 10) which is a
+ * Bun-specific API not available in Node.js or tsx. All callers must run via `bun`.
  */
 
 import path from "node:path";
@@ -73,9 +76,11 @@ async function withRetry<T>(
       lastError = error as Error;
       console.error(`${context ? `[${context}] ` : ''}Attempt ${attempt} failed: ${lastError.message}`);
 
-      if (config.isSuccess && classifyError(lastError) === 'tool') {
-        // Non-retryable (e.g. permission/access-denied) — fail immediately without
-        // consuming remaining attempts or entering the backoff delay.
+      // Non-retryable (e.g. permission/access-denied) — fail immediately without
+      // consuming remaining attempts or entering the backoff delay.
+      // Short-circuits regardless of whether isSuccess predicate is provided,
+      // because auth/permission errors are never resolved by retrying.
+      if (classifyError(lastError) === 'tool') {
         const totalTime = Date.now() - startTime;
         return {
           success: false,
