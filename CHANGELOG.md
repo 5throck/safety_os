@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+### Added
+
+- **license**: Added root `LICENSE` file (GNU Affero General Public License v3.0). Added License sections to `README.md`/`README_ko.md` and a `license` field to `scripts/package.json`.
+
 ### Fixed
 
 - **governance**: Replaced `CLAUDE.md`'s Specialist Agent List and `Agent()` dispatch example (which referenced nonexistent `automation-engineer`/`architect`/`scaffolding-expert`/`security-expert` agents and a nonexistent Low tier) with the project's real roster; corrected `compliance-agent`/`audit-agent` tier from Low to Medium to match their frontmatter and `pm.md`'s Tier Ceiling Rule.

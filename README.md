@@ -204,8 +204,12 @@ regulations/international/     ← ICH, OECD, GHS
 
 Pharmaceutical Affairs Act, Occupational Safety and Health Act (OSHA-KR), Serious Accidents Punishment Act (SAPA), K-REACH (ARECS), GHS Rev 9, ICH E6(R3)/E2 series, OECD GLP (MAD), PIC/S GDP, Construction Technology Promotion Act, High-Pressure Gas Safety Control Act, Electric Utility Act, Chemicals Control Act (CCA), Clean Air & Water Quality Conservation Acts, Medical Device Act.
 
+## License
+
+Safety OS is licensed under the [GNU Affero General Public License v3.0](LICENSE) (AGPL-3.0). If you run a modified version of this software as a network service, you must make the complete corresponding source code available to users of that service.
+
 ## Disclaimer
 
 This system provides workflow automation assistance only. Regulatory interpretation and final compliance decisions are the responsibility of qualified legal/EHS/GxP professionals.
 
-*Last Updated: 2026-06-29*
+*Last Updated: 2026-07-08*
