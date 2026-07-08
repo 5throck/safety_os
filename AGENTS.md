@@ -192,6 +192,9 @@ All specialist agents below are dispatched ONLY through PM:
 
 | Skill | Owner | Description |
 |-------|-------|-------------|
+| sync | pm | Runs full project sync pipeline — memory log, CHANGELOG verification, safety audit, commit, push, and PR creation |
+| meeting | pm | Structured multi-agent meeting facilitation — dialogue, synthesis, transcript archival |
+| project-review | pm | Comprehensive parallel review by specialist agents — produces prioritized improvement plan |
 | compliance-gap | compliance-agent | Trigger compliance gap analysis against applicable EHS regulations |
 | emergency-response | emergency-agent | Trigger emergency response protocol on incident, fire, spill, or injury report |
 | legalize-kr-sync | safety-workflow-manager | Fetches the legalize-kr repository into a local cache directory for accessing Korean law data |

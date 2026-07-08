@@ -7,8 +7,8 @@ description: >
   decision-making and problem resolution. Use when: running agent meetings, coordinating
   multi-agent discussions, or facilitating collaborative problem-solving sessions.
 owner: pm
-version: 1.4.0
-last_reviewed: 2026-06-05
+version: 1.5.0
+last_reviewed: 2026-07-08
 metadata:
   type: process
   triggers:
@@ -19,4 +19,25 @@ metadata:
     - facilitate meeting
 ---
 
-This is merely a registration stub. The actual implementation resides in `.claude/commands/meeting.md` and `.gemini/commands/meeting.md`.
+This is a registration stub. The full implementation resides in `.claude/commands/meeting.md` and `.gemini/commands/meeting.md`.
+
+## When to Use
+
+Use `/meeting "topic"` to run a structured multi-agent meeting for collaborative decision-making and problem resolution.
+
+## Usage
+
+```
+/meeting "Comprehensive project review" --agents [comma-separated agent list] --rounds 2 --dialogue
+```
+
+## Pipeline
+
+1. Define meeting parameters (topic, agents, rounds, mode)
+2. Detect available agents from `agents/` directory
+3. Open meeting structure
+4. Conduct discussion rounds (inline role-play)
+5. Synthesize discussion with platform parity check
+6. Archive transcript to `memory/meeting-YYYY-MM-DD-[slug].md` (MANDATORY)
+7. Close meeting
+8. Optional: Convert action items to tasks with `--tasks` flag
