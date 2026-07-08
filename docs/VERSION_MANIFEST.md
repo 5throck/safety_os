@@ -1,6 +1,6 @@
 # VERSION_MANIFEST.md
 
-**Generated**: 2026-07-08T11:59:11.762Z
+**Generated**: 2026-07-08T12:14:11.326Z
 **Manifest Version**: 1.0
 **Location**: docs\VERSION_MANIFEST.md
 
@@ -56,7 +56,7 @@
 |------|---------|----------|----------|----------|-------|
 | agent-lifecycle-manager | 1.0.0 | skills/agent-lifecycle-manager/SKILL.md | workspace | create agent, new agent, validate agents, agent lifecycle, manage agents | pm |
 | agent-lifecycle-manager | 1.0.0 | .claude/skills/agent-lifecycle-manager/SKILL.md | both | create agent, new agent, validate agents, agent lifecycle, manage agents | pm |
-| api-documentation | 1.0.0 | .claude/skills/api-documentation/SKILL.md | claude | api documentation, document api, api reference, developer documentation, rest api docs, graphql docs, sdk documentation | N/A |
+| api-documentation | 1.0.0 | .claude/skills/api-documentation/SKILL.md | both | api documentation, document api, api reference, developer documentation, rest api docs, graphql docs, sdk documentation | N/A |
 | arc-flash-analyzer | 1.0 | .claude/skills/arc-flash-analyzer/SKILL.md | both | 아크 플래시, arc flash, IEEE 1584, 고압 전기 작업, PPE category, incident energy, NFPA 70E, 활선 작업 허가 | powergen-agent |
 | asset-integrity-check | 1.0.0 | .claude/skills/asset-integrity-check/SKILL.md | both | 설비무결성, asset integrity, 정기점검 일정, preventive maintenance, 압력용기 검사, NDT 검사, 배관 건전성, mechanical integrity | asset-integrity-agent |
 | audit-preparation | 1.0.0 | .claude/skills/audit-preparation/SKILL.md | both | 감사 준비, audit preparation, 규제 감사, OSHA-KR 감사, 중대재해처벌법 감사 대응, 증적자료 취합, regulatory inspection readiness | audit-agent |
@@ -64,7 +64,7 @@
 | chemical-risk-assessment | 1.0 | .claude/skills/chemical-risk-assessment/SKILL.md | both | 화학물질 위험성평가, chemical risk assessment, 노출평가, exposure assessment, RCR, 허용기준 초과, OEL DNEL, 신규화학물질 도입승인 | msds-agent |
 | compliance-gap | 1.0.0 | .claude/skills/compliance-gap/SKILL.md | both | 컴플라이언스 갭, compliance gap, 준법 감시, 법률 검토, regulatory compliance, 규제 준수, 법적 요건, legal requirement review | compliance-agent |
 | contractor-onboarding | 1.0.0 | .claude/skills/contractor-onboarding/SKILL.md | both | 협력업체 온보딩, contractor onboarding, 도급업체 안전교육, 협력업체 자격심사, site access approval, 안전교육 이수확인, 도급 안전관리 | contractor-safety-agent |
-| documentation-writing | 1.0.0 | .claude/skills/documentation-writing/SKILL.md | claude | write documentation, create guide, draft communication, write manual, create tutorial, documentation, technical writing | N/A |
+| documentation-writing | 1.0.0 | .claude/skills/documentation-writing/SKILL.md | both | write documentation, create guide, draft communication, write manual, create tutorial, documentation, technical writing | N/A |
 | dts-verification | 1.0 | .claude/skills/dts-verification/SKILL.md | both | DTS 바코드 검증, DTS verification, 의약품 유통관리, RFID 검증, MFDS DTS센터, 위변조 의약품 조사, GS1 데이터매트릭스 | gdp-agent |
 | emergency-response | 1.0.0 | .claude/skills/emergency-response/SKILL.md | both | 비상사태, emergency, 사고 발생, 화재, 폭발, 누출, 중대재해, serious accident, 폭발, explosion | emergency-agent |
 | environmental-compliance-checker | 1.0 | .claude/skills/environmental-compliance-checker/SKILL.md | both | 환경 배출 기준, 대기오염물질 배출허용기준, SOx NOx VOC, 수질오염물질, BOD COD, 환경보전법 준수, 배출 규제 준수, environmental discharge compliance | ehschem-agent |
@@ -93,7 +93,7 @@
 | project-review | 1.0.0 | .claude/skills/project-review/SKILL.md | both | project review, review project, audit project, quality review | pm |
 | protocol-deviation-analyzer | 1.0 | .claude/skills/protocol-deviation-analyzer/SKILL.md | both | 프로토콜 이탈, protocol deviation, ICH E6(R3), important deviation, CAPA, IRB 보고, KGCP, 임상시험 이탈 | gcp-agent |
 | psm-moc | 1.0 | .claude/skills/psm-moc/SKILL.md | both | 변경관리, management of change, MOC, PSSR 검토, pre-startup safety review, 공정안전관리 변경, 안전성영향평가 | psm-agent |
-| research-analysis | 1.0.0 | .claude/skills/research-analysis/SKILL.md | claude | research, analyze, investigate, synthesize, evidence gathering, data analysis, literature review | N/A |
+| research-analysis | 1.0.0 | .claude/skills/research-analysis/SKILL.md | both | research, analyze, investigate, synthesize, evidence gathering, data analysis, literature review | N/A |
 | risk-assessment | 1.0.0 | .claude/skills/risk-assessment/SKILL.md | both | 위험성평가, risk assessment, hazard identification, 위험 평가, 작업위험성분석 | risk-assessment-agent |
 | root-cause-analysis | 1.0.0 | .claude/skills/root-cause-analysis/SKILL.md | both | 근본원인분석, root cause analysis, RCA, 5 whys, fishbone diagram, 사고조사, CAPA 수립 | incident-investigation-agent |
 | sae-causality-assessor | 1.0 | .claude/skills/sae-causality-assessor/SKILL.md | both | SAE 인과성 평가, causality assessment, ImPACT, WHO-UMC, Naranjo algorithm, ICH E2A, 중대이상반응 인과관계, 이상반응 인과성 | gcp-agent |
@@ -194,7 +194,7 @@
 **Checked**: Claude (.claude/) vs Gemini (.gemini/)
 
 - **Commands with parity**: 6 / 6
-- **Skills with parity**: 45 / 56
+- **Skills with parity**: 48 / 56
 
 ---
 

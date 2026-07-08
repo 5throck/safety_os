@@ -21,6 +21,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **generate-version-manifest.ts** (v1.0.6): Fixed version extraction regex to handle both `// @version` (single-line JS) and ` * @version` (JSDoc block) comment styles — 3 scripts were reporting `N/A` in VERSION_MANIFEST.md.
 - **GEMINI.md**: Fixed Phase 4 Execution Loop — replaced `automation-engineer` (workspace-root only) with Safety OS specialists; fixed audit script reference to `safety-audit.ts`.
 - **AGENTS.md**: Removed 5 nonexistent workspace-root agents (`scaffolding-expert`, `architect`, `automation-engineer`, `security-expert`, plus `lifecycle-manager`/`auditor` already annotated workspace-only) from the PM-ONLY INVOCATION dispatch table, retaining only Safety OS agents.
+- **skills**: Copied 3 Claude-only skills (`api-documentation`, `documentation-writing`, `research-analysis`) to `.gemini/skills/` for Gemini/Antigravity parity; removed `gemini-parity: skip` frontmatter from all 6 files.
 
 ### Fixed
 
