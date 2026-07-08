@@ -204,8 +204,12 @@ regulations/international/     ← ICH, OECD, GHS
 
 약사법, 산업안전보건법 (OSHA-KR), 중대재해처벌법 (SAPA), K-REACH, GHS Rev 9, ICH E6(R3)/E2 series, OECD GLP (MAD), PIC/S GDP, 건설기술진혁법, 고압가스법, 전기사업법, 화학물질관리법, 대기/수질환경보전법, 의료기기법.
 
+## 라이선스
+
+Safety OS는 [GNU Affero General Public License v3.0](LICENSE) (AGPL-3.0)에 따라 배포됩니다. 이 소프트웨어를 수정하여 네트워크 서비스로 제공하는 경우, 해당 서비스 이용자에게 수정본의 전체 소스코드를 제공해야 합니다.
+
 ## 면책 조항
 
 본 시스템은 워크플로우 자동화 지원만 제공합니다. 규제 해석 및 최종 컴플라이언스 판단은 자격을 갖춘 법률/EHS/GxP 전문가의 책임입니다.
 
-*Last Updated: 2026-06-29*
+*Last Updated: 2026-07-08*
