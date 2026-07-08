@@ -1,4 +1,4 @@
-// @version 1.0.5
+// @version 1.0.6
 import * as fs from 'node:fs';
 import * as path from 'node:path';
 import { $ } from 'bun';
@@ -98,8 +98,11 @@ function parseSkillFrontmatter(content: string): { version?: string; triggers?: 
 }
 
 function extractScriptVersion(content: string): string {
-    const match = /^\/\/ @version\s*([\d.]+)$/m.exec(content);
-    return match ? match[1].trim() : 'N/A';
+    // Match both single-line JS comment (// @version) and JSDoc block comment ( * @version)
+    const jsMatch = /^\/\/ @version\s*([\d.]+)$/m.exec(content);
+    if (jsMatch) return jsMatch[1].trim();
+    const jsdocMatch = /^[ \t]*\*\s*@version\s*([\d.]+)$/m.exec(content);
+    return jsdocMatch ? jsdocMatch[1].trim() : 'N/A';
 }
 
 function extractScriptDependencies(content: string): string[] {

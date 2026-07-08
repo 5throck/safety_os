@@ -138,8 +138,8 @@ The platform supports **Reactive Wakeup**: you do not need to poll or query task
 
 #### Phase 4 Execution Loop
 See [AGENTS.md - Subagent Roster](AGENTS.md#subagent-roster) for the complete agent list:
-1.  **automation-engineer** implements the changes.
-2.  **PM** verifies against acceptance criteria by running `bun scripts/audit.ts` directly.
+1.  The dispatched Phase 4 specialist (e.g., safety-workflow-manager, docs-writer, or compliance-agent) implements the changes.
+2.  **PM** verifies against acceptance criteria by running `bun scripts/safety-audit.ts` directly.
 3.  **Quality gate (audit script)** validates compliance.
 
 > Loop and correct if review errors are flagged - maximum **3 iterations** before escalating to the user.

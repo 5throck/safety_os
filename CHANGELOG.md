@@ -18,6 +18,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **GEMINI.md**: Synchronized governance with `CLAUDE.md` — added "platform" to governance enforcement description, corrected `compliance-agent`/`audit-agent` tier from Low to Medium, added tier ceiling rule, replaced workspace-root specialist agent list with Safety OS roster (SGM, SWM, docs-writer, compliance-agent, audit-agent).
 - **gen-pr-body.ts** (v1.1.5): Hardened prompt injection sanitizer against cross-line XML tag attacks (e.g. `<instruct\nion>`) by adding pre-normalization step before per-line filter.
 - **verify-scripts.ts** (v1.0.1): Fixed architecture violation check to use filename-only matching (via `split(/[\\/]/).pop()`) instead of full-path `includes()`, preventing false positives from directory names.
+- **generate-version-manifest.ts** (v1.0.6): Fixed version extraction regex to handle both `// @version` (single-line JS) and ` * @version` (JSDoc block) comment styles — 3 scripts were reporting `N/A` in VERSION_MANIFEST.md.
+- **GEMINI.md**: Fixed Phase 4 Execution Loop — replaced `automation-engineer` (workspace-root only) with Safety OS specialists; fixed audit script reference to `safety-audit.ts`.
+- **AGENTS.md**: Removed 5 nonexistent workspace-root agents (`scaffolding-expert`, `architect`, `automation-engineer`, `security-expert`, plus `lifecycle-manager`/`auditor` already annotated workspace-only) from the PM-ONLY INVOCATION dispatch table, retaining only Safety OS agents.
 
 ### Fixed
 

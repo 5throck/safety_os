@@ -1,6 +1,6 @@
 # VERSION_MANIFEST.md
 
-**Generated**: 2026-07-08T11:49:50.579Z
+**Generated**: 2026-07-08T11:59:11.762Z
 **Manifest Version**: 1.0
 **Location**: docs\VERSION_MANIFEST.md
 
@@ -117,62 +117,62 @@
 
 | Name | Version | Location | Dependencies |
 |------|---------|----------|--------------|
-| agent-create.ts | N/A | scripts/agent-create.ts | N/A |
-| agent-delete.ts | N/A | scripts/agent-delete.ts | N/A |
-| agent-lifecycle-audit.ts | N/A | scripts/agent-lifecycle-audit.ts | N/A |
-| agent-list.ts | N/A | scripts/agent-list.ts | N/A |
-| agent-verify.ts | N/A | scripts/agent-verify.ts | N/A |
+| agent-create.ts | 1.0.0 | scripts/agent-create.ts | N/A |
+| agent-delete.ts | 1.0.0 | scripts/agent-delete.ts | N/A |
+| agent-lifecycle-audit.ts | 1.1.2 | scripts/agent-lifecycle-audit.ts | N/A |
+| agent-list.ts | 1.0.0 | scripts/agent-list.ts | N/A |
+| agent-verify.ts | 1.0.2 | scripts/agent-verify.ts | N/A |
 | analyze-git-history.ts | 1.0.0 | scripts/analyze-git-history.ts | child_process |
-| archive-memory.ts | N/A | scripts/archive-memory.ts | N/A |
+| archive-memory.ts | 1.1.0 | scripts/archive-memory.ts | N/A |
 | audit.ts | 2.6.1 | scripts/audit.ts | bun |
-| auto-executor.ts | N/A | scripts/lib/auto-executor.ts | N/A |
-| check-pm-approval.ts | N/A | scripts/check-pm-approval.ts | N/A |
-| checkpoint-manager.ts | N/A | scripts/lib/checkpoint-manager.ts | N/A |
-| clear-pm-approval.ts | N/A | scripts/clear-pm-approval.ts | N/A |
+| auto-executor.ts | 1.0.0 | scripts/lib/auto-executor.ts | N/A |
+| check-pm-approval.ts | 1.0.1 | scripts/check-pm-approval.ts | N/A |
+| checkpoint-manager.ts | 1.0.0 | scripts/lib/checkpoint-manager.ts | N/A |
+| clear-pm-approval.ts | 1.0.0 | scripts/clear-pm-approval.ts | N/A |
 | dev-sync.ts | N/A | scripts/dev-sync.ts | bun |
-| dispatch-parallel.ts | N/A | scripts/dispatch-parallel.ts | N/A |
-| dispatch-serial.ts | N/A | scripts/dispatch-serial.ts | N/A |
-| dispatch.ts | N/A | scripts/dispatch.ts | N/A |
-| domain-config.ts | N/A | scripts/domain-config.ts | N/A |
-| encoding-utils.ts | N/A | scripts/lib/encoding-utils.ts | fs, path |
-| error-handling.ts | N/A | scripts/lib/error-handling.ts | N/A |
-| fetch-legalize.ts | N/A | scripts/fetch-legalize.ts | child_process, fs, path |
-| gen-pr-body.ts | N/A | scripts/gen-pr-body.ts | bun |
-| generate-scripts-readme.ts | N/A | scripts/generate-scripts-readme.ts | N/A |
-| generate-version-manifest.ts | 1.0.5 | scripts/generate-version-manifest.ts | bun |
-| mcp-cache.ts | N/A | scripts/lib/mcp-cache.ts | N/A |
-| new-domain.ts | N/A | scripts/new-domain.ts | N/A |
-| pipeline-state.ts | N/A | scripts/lib/pipeline-state.ts | fs, path |
-| plan-parser.ts | N/A | scripts/lib/plan-parser.ts | fs, js-yaml |
-| platform-context.ts | N/A | scripts/lib/platform-context.ts | bun, os |
-| platform-dispatcher.ts | N/A | scripts/lib/platform-dispatcher.ts | N/A |
+| dispatch-parallel.ts | 1.0.1 | scripts/dispatch-parallel.ts | N/A |
+| dispatch-serial.ts | 1.0.0 | scripts/dispatch-serial.ts | N/A |
+| dispatch.ts | 1.0.0 | scripts/dispatch.ts | N/A |
+| domain-config.ts | 1.3.0 | scripts/domain-config.ts | N/A |
+| encoding-utils.ts | 1.0.0 | scripts/lib/encoding-utils.ts | fs, path |
+| error-handling.ts | 1.1.0 | scripts/lib/error-handling.ts | N/A |
+| fetch-legalize.ts | 1.0.0 | scripts/fetch-legalize.ts | child_process, fs, path |
+| gen-pr-body.ts | 1.1.5 | scripts/gen-pr-body.ts | bun |
+| generate-scripts-readme.ts | 1.1.0 | scripts/generate-scripts-readme.ts | N/A |
+| generate-version-manifest.ts | 1.0.6 | scripts/generate-version-manifest.ts | bun |
+| mcp-cache.ts | 1.0.0 | scripts/lib/mcp-cache.ts | N/A |
+| new-domain.ts | 1.0.0 | scripts/new-domain.ts | N/A |
+| pipeline-state.ts | 1.1.0 | scripts/lib/pipeline-state.ts | fs, path |
+| plan-parser.ts | 1.0.0 | scripts/lib/plan-parser.ts | fs, js-yaml |
+| platform-context.ts | 1.0.0 | scripts/lib/platform-context.ts | bun, os |
+| platform-dispatcher.ts | 1.0.0 | scripts/lib/platform-dispatcher.ts | N/A |
 | qa-gate.ts | N/A | scripts/qa-gate.ts | bun |
-| readme-lifecycle-audit.ts | N/A | scripts/readme-lifecycle-audit.ts | N/A |
-| retry-handler.ts | N/A | scripts/retry-handler.ts | N/A |
-| safety-audit.ts | N/A | scripts/safety-audit.ts | js-yaml |
-| skill-dependency-analysis.ts | N/A | scripts/skill-dependency-analysis.ts | N/A |
-| skill-lifecycle-audit.ts | N/A | scripts/skill-lifecycle-audit.ts | N/A |
-| start-mcp.ts | N/A | scripts/start-mcp.ts | child_process, path |
-| sync-agent-status.ts | N/A | scripts/sync-agent-status.ts | N/A |
+| readme-lifecycle-audit.ts | 1.0.2 | scripts/readme-lifecycle-audit.ts | N/A |
+| retry-handler.ts | 1.0.2 | scripts/retry-handler.ts | N/A |
+| safety-audit.ts | 4.2.0 | scripts/safety-audit.ts | js-yaml |
+| skill-dependency-analysis.ts | 1.0.0 | scripts/skill-dependency-analysis.ts | N/A |
+| skill-lifecycle-audit.ts | 1.1.4 | scripts/skill-lifecycle-audit.ts | N/A |
+| start-mcp.ts | 1.0.0 | scripts/start-mcp.ts | child_process, path |
+| sync-agent-status.ts | 1.0.0 | scripts/sync-agent-status.ts | N/A |
 | sync-md.ts | 1.3.0 | scripts/sync-md.ts | N/A |
-| sync-skill-status.ts | N/A | scripts/sync-skill-status.ts | N/A |
-| sync-skills.ts | N/A | scripts/sync-skills.ts | N/A |
-| team-builder.ts | N/A | scripts/team-builder.ts | fs, path |
-| test-chemical-handling-profile.ts | N/A | scripts/test-chemical-handling-profile.ts | js-yaml |
-| test-cross-domain-integration.ts | N/A | scripts/test-cross-domain-integration.ts | js-yaml |
-| test-domain-scenarios.ts | N/A | scripts/test-domain-scenarios.ts | N/A |
-| test-pharma-general-profile.ts | N/A | scripts/test-pharma-general-profile.ts | js-yaml |
-| test-runner.ts | N/A | scripts/test-runner.ts | child_process, fs, path |
-| translate-readme.ts | N/A | scripts/translate-readme.ts | bun, fs, path |
-| validate-agents.ts | N/A | scripts/validate-agents.ts | N/A |
-| validate-doc-folder.ts | N/A | scripts/validate-doc-folder.ts | fs, path |
+| sync-skill-status.ts | 1.0.0 | scripts/sync-skill-status.ts | N/A |
+| sync-skills.ts | 1.1.0 | scripts/sync-skills.ts | N/A |
+| team-builder.ts | 1.2.0 | scripts/team-builder.ts | fs, path |
+| test-chemical-handling-profile.ts | 1.0.0 | scripts/test-chemical-handling-profile.ts | js-yaml |
+| test-cross-domain-integration.ts | 1.0.0 | scripts/test-cross-domain-integration.ts | js-yaml |
+| test-domain-scenarios.ts | 1.1.0 | scripts/test-domain-scenarios.ts | N/A |
+| test-pharma-general-profile.ts | 1.0.0 | scripts/test-pharma-general-profile.ts | js-yaml |
+| test-runner.ts | 1.0.0 | scripts/test-runner.ts | child_process, fs, path |
+| translate-readme.ts | 1.0.0 | scripts/translate-readme.ts | bun, fs, path |
+| validate-agents.ts | 1.0.0 | scripts/validate-agents.ts | N/A |
+| validate-doc-folder.ts | 1.0.1 | scripts/validate-doc-folder.ts | fs, path |
 | validate-md-language.ts | 1.4.1 | scripts/validate-md-language.ts | fs, js-yaml |
-| validate-skills.ts | N/A | scripts/validate-skills.ts | N/A |
-| verify-agent-deliverables.ts | N/A | scripts/verify-agent-deliverables.ts | fs |
-| verify-memory.ts | N/A | scripts/verify-memory.ts | fs, path |
+| validate-skills.ts | 1.1.0 | scripts/validate-skills.ts | N/A |
+| verify-agent-deliverables.ts | 1.0.0 | scripts/verify-agent-deliverables.ts | fs |
+| verify-memory.ts | 1.0.0 | scripts/verify-memory.ts | fs, path |
 | verify-readme-sync.ts | 1.1.1 | scripts/verify-readme-sync.ts | bun, fs, path |
-| verify-scripts.ts | N/A | scripts/verify-scripts.ts | fs, path |
-| verify-skills.ts | N/A | scripts/verify-skills.ts | N/A |
+| verify-scripts.ts | 1.0.1 | scripts/verify-scripts.ts | fs, path |
+| verify-skills.ts | 1.1.0 | scripts/verify-skills.ts | N/A |
 
 ---
 
