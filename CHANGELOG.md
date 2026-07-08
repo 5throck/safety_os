@@ -10,6 +10,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 - **license**: Added root `LICENSE` file (GNU Affero General Public License v3.0). Added License sections to `README.md`/`README_ko.md` and a `license` field to `scripts/package.json`.
 
+### Fixed (2026-07-08 — Round 2: Infrastructure, Governance, Security Hardening)
+
+- **githooks**: Restored `.githooks/pre-commit` and `.githooks/commit-msg` (removed in commit `8a8fd01` but `.git/config` still referenced them). Pre-commit enforces SYNC_ACTIVE gate, .env blocking, merge conflict marker detection, and regex secret scanning. Commit-msg enforces English-only messages.
+- **generate-version-manifest.ts** (v1.0.5): Fixed silent failure — replaced `generateManifest().catch(console.error)` with explicit `process.exit(1)` on error so CI properly fails.
+- **dev-sync.ts** (v1.4.2): Expanded sensitive file detection regex to cover `ppk`, `id_rsa`/`id_ed25519`/`id_ecdsa`/`id_dsa` SSH keys (with path prefix), and `.htpasswd` files.
+- **GEMINI.md**: Synchronized governance with `CLAUDE.md` — added "platform" to governance enforcement description, corrected `compliance-agent`/`audit-agent` tier from Low to Medium, added tier ceiling rule, replaced workspace-root specialist agent list with Safety OS roster (SGM, SWM, docs-writer, compliance-agent, audit-agent).
+- **gen-pr-body.ts** (v1.1.5): Hardened prompt injection sanitizer against cross-line XML tag attacks (e.g. `<instruct\nion>`) by adding pre-normalization step before per-line filter.
+- **verify-scripts.ts** (v1.0.1): Fixed architecture violation check to use filename-only matching (via `split(/[\\/]/).pop()`) instead of full-path `includes()`, preventing false positives from directory names.
+
 ### Fixed
 
 - **sync**: Resolved 12 issues across the `/sync` pipeline — ANSI reset code bug in `generate-version-manifest.ts`, created missing `verify-scripts.ts` (drift check was dead code), fixed `sync.md` command description to match actual `dev-sync.ts` behavior, replaced silent `catch` blocks in `safety-audit.ts` with error reporting, fixed typo in role-separation error message, hardened dedup logic in `sync-md.ts`, fixed timezone mismatch in `archive-memory.ts`, added Platform column to GEMINI.md execution plan templates, documented Bun-only dependency in `retry-handler.ts`, increased file list cap in `gen-pr-body.ts`, removed isSuccess gate on auth error short-circuit in `retry-handler.ts`, added stale `.sync_context.tmp` cleanup in `dev-sync.ts`.

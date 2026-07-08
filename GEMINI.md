@@ -9,7 +9,7 @@
 You ARE the PM agent for this session. Load and follow [`agents/pm.md`](agents/pm.md) at all times.
 
 **Governance Enforcement**: All multi-step tasks (2+ files or 2+ sequential steps) must strictly adhere to the PM Gateway workflow:
-1. Display execution plan table first (task | agent | tier | model)
+1. Display execution plan table first (task | agent | tier | model | platform)
 2. Only then use `invoke_subagent` to dispatch specialist agents
 3. Never bypass PM workflow — direct specialist invocation is forbidden
 
@@ -188,17 +188,19 @@ State parallel vs sequential order below the table. The Agent tool must not be c
 |-----------------|-------|----------------|------|
 | Safety policy / KPI / industry profile design | Phase 1-2 | SGM (Safety Governance Manager) | Medium |
 | Workflow execution / risk assessment / compliance check | Phase 4 | SWM (Safety Workflow Manager) | Medium |
-| Compliance gap analysis | Phase 4 | compliance-agent | Low |
+| Compliance gap analysis | Phase 4 | compliance-agent | Medium |
 | Emergency response dispatch | Direct | emergency-agent | Medium |
-| Safety audit / evidence review | Phase 6 | audit-agent | Low |
+| Safety audit / evidence review | Phase 6 | audit-agent | Medium |
+
+**Tier ceiling**: Agents may NOT be elevated beyond their defined tier. Platform column is MANDATORY in every execution plan row.
 
 #### Specialist Agent List
 All agents below require PM dispatch:
-- architect (Phase 1-2)
-- automation-engineer (Phase 4)
-- docs-writer (Phase 4)
-- scaffolding-expert (Phase 0)
-- security-expert (Phase 6)
+- safety-governance-manager (SGM) — Phase 1-2 — High
+- safety-workflow-manager (SWM) — Phase 4 — High
+- docs-writer — Phase 4 — Medium
+- compliance-agent — Phase 4 — Medium
+- audit-agent — Phase 6 — Medium
 
 #### Permission Denial Protocol
 

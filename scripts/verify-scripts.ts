@@ -1,7 +1,7 @@
 #!/usr/bin/env bun
 /**
  * verify-scripts.ts — Script Lifecycle Registry Verifier (Standalone Variant)
- * @version 1.0.0
+ * @version 1.0.1
  *
  * Validates that scripts/SCRIPTS.md Registry is in sync with actual script files,
  * enforces deprecation removal dates, and blocks on security advisories.
@@ -187,7 +187,8 @@ function verify(): boolean {
   }
   for (const script of actualScripts) {
     const baseName = script.replace(/\.(sh|ps1)$/, '');
-    const isOrchestrationKeyword = script.includes('lifecycle') || script.includes('verify') || script.includes('validate') || script.includes('agent-') || script.includes('dispatch');
+    const fileName = script.split(/[\\/]/).pop() || script;
+    const isOrchestrationKeyword = fileName.includes('lifecycle') || fileName.includes('verify') || fileName.includes('validate') || fileName.includes('agent-') || fileName.includes('dispatch');
     const isTsWrapper = !script.endsWith('.ts') && tsBaseNames.has(baseName);
     if (isOrchestrationKeyword && !script.endsWith('.ts') && !script.endsWith('.md') && !isTsWrapper) {
       errors.push(`Architecture violation: Orchestration script \`${script}\` must use Bun (.ts)`);

@@ -1,4 +1,4 @@
-// @version 1.0.4
+// @version 1.0.5
 import * as fs from 'node:fs';
 import * as path from 'node:path';
 import { $ } from 'bun';
@@ -399,4 +399,7 @@ async function generateManifest() {
     }
 }
 
-generateManifest().catch(console.error);
+generateManifest().then(() => process.exit(0)).catch((e) => {
+    console.error(e);
+    process.exit(1);
+});

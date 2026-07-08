@@ -3,7 +3,7 @@
  * gen-pr-body.ts - Generate a structured PR body from commit message + diff
  * Usage: bun run scripts/gen-pr-body.ts "<commit message>"
  * Output: PR body markdown (stdout)
- * @version 1.1.4
+ * @version 1.1.5
  *
  * Behaviour:
  *   1. If `claude` CLI is available → ask Claude to write the PR body (AI mode)
@@ -77,7 +77,11 @@ const truncationNote = filesRaw.split('\n').filter(Boolean).length > 50
 // ── Prompt injection sanitizer ────────────────────────────────────────────────
 // Strips content that could hijack the Claude prompt when git output is embedded.
 function sanitizeForPrompt(text: string): string {
-  return text
+  // Pre-normalize: collapse multi-line XML tags so per-line regex catches them.
+  // e.g. "<instruct\nion>" → "<instruction>" before the line-by-line filter runs.
+  const normalized = text.replace(/<([a-zA-Z][a-zA-Z0-9]*)\n\s*/g, '<$1');
+
+  return normalized
     .split('\n')
     .filter(line => {
       const trimmed = line.trimStart();

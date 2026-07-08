@@ -1,6 +1,6 @@
 # VERSION_MANIFEST.md
 
-**Generated**: 2026-07-08T04:18:25.006Z
+**Generated**: 2026-07-08T11:49:50.579Z
 **Manifest Version**: 1.0
 **Location**: docs\VERSION_MANIFEST.md
 
@@ -139,7 +139,7 @@
 | fetch-legalize.ts | N/A | scripts/fetch-legalize.ts | child_process, fs, path |
 | gen-pr-body.ts | N/A | scripts/gen-pr-body.ts | bun |
 | generate-scripts-readme.ts | N/A | scripts/generate-scripts-readme.ts | N/A |
-| generate-version-manifest.ts | 1.0.4 | scripts/generate-version-manifest.ts | bun |
+| generate-version-manifest.ts | 1.0.5 | scripts/generate-version-manifest.ts | bun |
 | mcp-cache.ts | N/A | scripts/lib/mcp-cache.ts | N/A |
 | new-domain.ts | N/A | scripts/new-domain.ts | N/A |
 | pipeline-state.ts | N/A | scripts/lib/pipeline-state.ts | fs, path |

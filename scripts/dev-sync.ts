@@ -1,4 +1,4 @@
-// @version 1.4.0 — variant-aware: runs safety-audit.ts for safety-os, workspace audit.ts for workspace root
+// @version 1.4.2 — variant-aware: runs safety-audit.ts for safety-os, workspace audit.ts for workspace root
 import { $ } from 'bun';
 import * as fs from 'node:fs';
 import * as path from 'node:path';
@@ -223,7 +223,8 @@ if (currentBranch === "main" || currentBranch === "master") {
     const d = new Date();
     const timestamp = `${d.getFullYear()}${pad(d.getMonth()+1)}${pad(d.getDate())}-${pad(d.getHours())}${pad(d.getMinutes())}${pad(d.getSeconds())}`;
     
-    branch = `pr/${timestamp}-${slug}`;
+    branch = `pr/${timestamp}-${slug}`.replace(/-+$/, '');
+    if (!slug) branch += 'auto';
     try {
         await $`git checkout -b ${branch}`.nothrow();
     } catch {
@@ -238,7 +239,7 @@ if (currentBranch === "main" || currentBranch === "master") {
 try {
     const { stdout } = await $`git ls-files --others --exclude-standard`.quiet().nothrow();
     const untracked = stdout.toString().trim().split('\n').filter(Boolean);
-    const sensitive = untracked.filter(f => /\.(pem|key|p12|pfx|jks|keystore)$|^\.env(\.[^sa]|$)|credentials\.json|service.?account\.json|secrets\.ya?ml/.test(f));
+    const sensitive = untracked.filter(f => /\.(pem|key|p12|pfx|jks|keystore|ppk)$|(^|\/)\.env(\.[^sa]|$)|(^|\/)id_(rsa|ed25519|ecdsa|dsa)$|credentials\.json|service.?account\.json|secrets\.ya?ml|\.htpasswd/.test(f));
     
     if (sensitive.length > 0) {
         console.log(`${RED}❌ Potentially sensitive untracked files detected - refusing git add -A:${RESET}`);
