@@ -9,6 +9,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### Added
 
 - **project-review command files**: Created `.claude/commands/project-review.md` and `.gemini/commands/project-review.md` — platform-native slash command entry points for `/project-review` on Claude Code and Gemini/Antigravity. Claude version dispatches via `Agent` tool in parallel; Gemini version dispatches via `/meeting --dialogue`.
+- **.gemini/skills.json**: Created Gemini CLI skill directory registry — required for Antigravity to discover and load project skills. Without this file, Antigravity could not resolve any skill triggers (sync, meeting, project-review, or domain skills). Modeled after co-architect's `.gemini/skills.json` with project-specific paths.
 
 - **skill stubs**: Created 6 stub SKILL.md files for skills registered in AGENTS.md but missing implementations: `psm-loto` (Lockout/Tagout), `tar-planning` (Turnaround planning), `construction-permit-overview`, `pre-construction-technical-review`, `mid-construction-inspection`, `completion-inspection` (3-phase KGS Code inspection). All stubs include proper metadata blocks with `type`, `triggers`, and `legal_basis`.
 - **.codex/config.toml**: Created Codex/OpenAI platform configuration with SAP_ALLOWED_PACKAGES parity to Claude/Gemini configs, MCP server definitions, and deny list restrictions.
