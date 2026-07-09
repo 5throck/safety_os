@@ -8,8 +8,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Added
 
+- **project-review command files**: Created `.claude/commands/project-review.md` and `.gemini/commands/project-review.md` — platform-native slash command entry points for `/project-review` on Claude Code and Gemini/Antigravity. Claude version dispatches via `Agent` tool in parallel; Gemini version dispatches via `/meeting --dialogue`.
+
 - **skill stubs**: Created 6 stub SKILL.md files for skills registered in AGENTS.md but missing implementations: `psm-loto` (Lockout/Tagout), `tar-planning` (Turnaround planning), `construction-permit-overview`, `pre-construction-technical-review`, `mid-construction-inspection`, `completion-inspection` (3-phase KGS Code inspection). All stubs include proper metadata blocks with `type`, `triggers`, and `legal_basis`.
 - **.codex/config.toml**: Created Codex/OpenAI platform configuration with SAP_ALLOWED_PACKAGES parity to Claude/Gemini configs, MCP server definitions, and deny list restrictions.
+
+### Changed
+
+- **GEMINI.md**: Expanded Antigravity Command Intercept Rules to cover `/sync` and `/project-review` in addition to `/meeting`. Previously only `/meeting` had an intercept rule, causing Gemini/Antigravity to not recognize `/sync` and `/project-review` as executable commands.
+- **sync-skills.ts** (v1.2.0): Refactored command-file generation from hardcoded `meeting-facilitation` block to a configurable `commandMap`. Added `project-review` to the map. Command files are now created from SSOT stubs only if they don't already exist — hand-maintained implementations take precedence over SSOT copies.
 
 ### Fixed (2026-07-09 — Project Review P1/P2 Fixes)
 

@@ -2,7 +2,8 @@
 /**
  * sync-skills.ts
  * Distributes skills from the SSOT (skills/) to .claude/skills/ and .gemini/skills/
- * @version 1.1.0
+ * Also creates platform command files from SSOT stubs if not already present.
+ * @version 1.2.0
  */
 
 import * as fs from 'node:fs';
@@ -107,17 +108,35 @@ for (const skillMdPath of skillFiles) {
   console.log(`  -> Synced ${skillName} to .gemini/skills/`);
 
   // Special logic for commands derived from skills
-  if (skillName === 'meeting-facilitation') {
+  // Only create command files if they don't already exist — hand-maintained
+  // command implementations take precedence over SSOT stub copies.
+  const commandMap: Record<string, string> = {
+    'meeting-facilitation': 'meeting',
+    'project-review': 'project-review',
+  };
+  if (commandMap[skillName]) {
     const claudeCmdDir = path.join(workspaceRoot, '.claude', 'commands');
     const geminiCmdDir = path.join(workspaceRoot, '.gemini', 'commands');
     fs.mkdirSync(claudeCmdDir, { recursive: true });
     fs.mkdirSync(geminiCmdDir, { recursive: true });
 
-    fs.copyFileSync(skillMdPath, path.join(claudeCmdDir, 'meeting.md'));
-    console.log(`  -> Synced SKILL.md to .claude/commands/meeting.md`);
-    
-    fs.copyFileSync(skillMdPath, path.join(geminiCmdDir, 'meeting.md'));
-    console.log(`  -> Synced SKILL.md to .gemini/commands/meeting.md`);
+    const cmdFileName = commandMap[skillName];
+    const claudeCmdPath = path.join(claudeCmdDir, cmdFileName + '.md');
+    const geminiCmdPath = path.join(geminiCmdDir, cmdFileName + '.md');
+
+    if (!fs.existsSync(claudeCmdPath)) {
+      fs.copyFileSync(skillMdPath, claudeCmdPath);
+      console.log(`  -> Created .claude/commands/${cmdFileName}.md from SSOT`);
+    } else {
+      console.log(`  -> Skipped .claude/commands/${cmdFileName}.md (already exists — hand-maintained)`);
+    }
+
+    if (!fs.existsSync(geminiCmdPath)) {
+      fs.copyFileSync(skillMdPath, geminiCmdPath);
+      console.log(`  -> Created .gemini/commands/${cmdFileName}.md from SSOT`);
+    } else {
+      console.log(`  -> Skipped .gemini/commands/${cmdFileName}.md (already exists — hand-maintained)`);
+    }
   }
 }
 
