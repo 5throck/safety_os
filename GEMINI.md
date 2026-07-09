@@ -237,7 +237,13 @@ When a user request matches a skill trigger, apply this priority order — **enf
 When ambiguous, prefer the local skill and confirm intent with the user.
 Explicit invocation: `/meeting "topic" [--agents a,b] [--rounds N] [--dialogue]`
 
-> **Antigravity Command Intercept Rule**: `/meeting` is not a native Antigravity UI slash command. If the user input begins with `/meeting`, you (the Agent) MUST immediately intercept this text pattern and seamlessly execute the `.gemini/commands/meeting.md` process using the provided arguments, exactly as if the user had explicitly requested the skill by name.
+> **Antigravity Command Intercept Rules**: The following slash commands are not native Antigravity UI commands. If user input begins with any of these patterns, you (the Agent) MUST immediately intercept the text pattern and seamlessly execute the corresponding `.gemini/commands/` process using the provided arguments, exactly as if the user had explicitly requested the skill by name.
+>
+> | User input starts with | Execute |
+>|------------------------|---------|
+> | `/meeting` | `.gemini/commands/meeting.md` |
+> | `/sync` | `.gemini/commands/sync.md` |
+> | `/project-review` | `.gemini/commands/project-review.md` |
 
 ---
 

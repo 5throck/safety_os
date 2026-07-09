@@ -1,6 +1,6 @@
 # VERSION_MANIFEST.md
 
-**Generated**: 2026-07-09T11:35:27.152Z
+**Generated**: 2026-07-09T11:49:02.700Z
 **Manifest Version**: 1.0
 **Location**: docs\VERSION_MANIFEST.md
 
@@ -11,7 +11,7 @@
 - **Agents**: 28
 - **Skills**: 58
 - **Scripts**: 56
-- **Commands**: 6
+- **Commands**: 7
 
 ---
 
@@ -158,7 +158,7 @@
 | sync-agent-status.ts | 1.0.0 | scripts/sync-agent-status.ts | N/A |
 | sync-md.ts | 1.3.1 | scripts/sync-md.ts | N/A |
 | sync-skill-status.ts | 1.0.0 | scripts/sync-skill-status.ts | N/A |
-| sync-skills.ts | 1.1.0 | scripts/sync-skills.ts | N/A |
+| sync-skills.ts | 1.2.0 | scripts/sync-skills.ts | N/A |
 | team-builder.ts | 1.2.0 | scripts/team-builder.ts | fs, path |
 | test-chemical-handling-profile.ts | 1.0.0 | scripts/test-chemical-handling-profile.ts | js-yaml |
 | test-cross-domain-integration.ts | 1.0.0 | scripts/test-cross-domain-integration.ts | js-yaml |
@@ -187,6 +187,7 @@
 | meeting | .claude/commands/meeting.md | both | auto (meeting) |
 | memlog | .claude/commands/memlog.md | both | auto (memlog) |
 | new-task | .claude/commands/new-task.md | both | auto (new-task) |
+| project-review | .claude/commands/project-review.md | both | auto (project-review) |
 | sync | .claude/commands/sync.md | both | auto (sync) |
 
 ---
@@ -195,7 +196,7 @@
 
 **Checked**: Claude (.claude/) vs Gemini (.gemini/)
 
-- **Commands with parity**: 6 / 6
+- **Commands with parity**: 7 / 7
 - **Skills with parity**: 49 / 58
 
 ---
