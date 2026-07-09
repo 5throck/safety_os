@@ -8,6 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Added
 
+- **`.agents/` skill layer**: Created `.agents/skills.json` and `.agents/skills/{sync,meeting,project-review}/SKILL.md` — the shortcut skill layer required by Antigravity for skill discovery. Modeled after co-architect's `.agents/` pattern. This provides Antigravity with a dedicated skill directory that the Gemini CLI scans via `skills.json`.
 - **project-review command files**: Created `.claude/commands/project-review.md` and `.gemini/commands/project-review.md` — platform-native slash command entry points for `/project-review` on Claude Code and Gemini/Antigravity. Claude version dispatches via `Agent` tool in parallel; Gemini version dispatches via `/meeting --dialogue`.
 - **.gemini/skills.json**: Created Gemini CLI skill directory registry — required for Antigravity to discover and load project skills. Without this file, Antigravity could not resolve any skill triggers (sync, meeting, project-review, or domain skills). Modeled after co-architect's `.gemini/skills.json` with project-specific paths.
 
@@ -17,7 +18,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### Changed
 
 - **GEMINI.md**: Expanded Antigravity Command Intercept Rules to cover `/sync` and `/project-review` in addition to `/meeting`. Previously only `/meeting` had an intercept rule, causing Gemini/Antigravity to not recognize `/sync` and `/project-review` as executable commands.
-- **sync-skills.ts** (v1.2.0): Refactored command-file generation from hardcoded `meeting-facilitation` block to a configurable `commandMap`. Added `project-review` to the map. Command files are now created from SSOT stubs only if they don't already exist — hand-maintained implementations take precedence over SSOT copies.
+- **sync-skills.ts** (v1.3.0): Added Phase 2 distribution — syncs `.agents/skills/` shortcuts to `.claude/skills/` and `.gemini/skills/` (hand-maintained copies take precedence). Phase 1 now also distributes SSOT skills to `.agents/skills/`. Modeled after co-architect's `sync-skills.ts` v1.1.0 two-phase architecture.
 
 ### Fixed (2026-07-09 — Project Review P1/P2 Fixes)
 

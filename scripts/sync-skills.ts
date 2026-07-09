@@ -1,9 +1,10 @@
 #!/usr/bin/env bun
 /**
  * sync-skills.ts
- * Distributes skills from the SSOT (skills/) to .claude/skills/ and .gemini/skills/
+ * Distributes skills from the SSOT (skills/) to .claude/skills/, .gemini/skills/, and .agents/skills/
+ * Phase 2: Syncs shortcut skills from .agents/skills/ back to .claude/skills/ and .gemini/skills/
  * Also creates platform command files from SSOT stubs if not already present.
- * @version 1.2.0
+ * @version 1.3.0
  */
 
 import * as fs from 'node:fs';
@@ -15,10 +16,12 @@ const workspaceRoot = path.resolve(scriptDir, '..');
 const ssotSkills   = path.join(workspaceRoot, 'skills');
 const claudeSkills = path.join(workspaceRoot, '.claude', 'skills');
 const geminiSkills = path.join(workspaceRoot, '.gemini', 'skills');
+const agentsSkills = path.join(workspaceRoot, '.agents', 'skills');
 
 // Create target directories if they don't exist
 fs.mkdirSync(claudeSkills, { recursive: true });
 fs.mkdirSync(geminiSkills, { recursive: true });
+fs.mkdirSync(agentsSkills, { recursive: true });
 
 console.log(`Syncing skills from SSOT (${ssotSkills})...`);
 
@@ -107,6 +110,14 @@ for (const skillMdPath of skillFiles) {
   fs.cpSync(skillDir, geminiTarget, { recursive: true });
   console.log(`  -> Synced ${skillName} to .gemini/skills/`);
 
+  // Copy to .agents/skills/ (shortcut skill layer for Antigravity)
+  const agentsTarget = path.join(agentsSkills, skillName);
+  if (fs.existsSync(agentsTarget)) {
+    fs.rmSync(agentsTarget, { recursive: true, force: true });
+  }
+  fs.cpSync(skillDir, agentsTarget, { recursive: true });
+  console.log(`  -> Synced ${skillName} to .agents/skills/`);
+
   // Special logic for commands derived from skills
   // Only create command files if they don't already exist — hand-maintained
   // command implementations take precedence over SSOT stub copies.
@@ -141,3 +152,32 @@ for (const skillMdPath of skillFiles) {
 }
 
 console.log('Skill synchronization complete!');
+
+// --- Phase 2: Sync .agents/skills/ shortcut skills to .claude/skills/ and .gemini/skills/ ---
+// These are skills that only exist in .agents/skills/ (not in SSOT) but should be
+// available on Claude Code and Gemini CLI as well. Hand-maintained copies in
+// .claude/skills/ or .gemini/skills/ take precedence — skip if already present.
+console.log(`\nPhase 2: Syncing shortcut skills from .agents/skills/...`);
+
+const SHORTCUT_SKILLS = ['sync', 'meeting', 'project-review'];
+
+for (const shortcutName of SHORTCUT_SKILLS) {
+  const source = path.join(agentsSkills, shortcutName);
+  if (!fs.existsSync(source) || !fs.existsSync(path.join(source, 'SKILL.md'))) continue;
+
+  // Extract name from frontmatter for proper naming
+  const skillMdPath = path.join(source, 'SKILL.md');
+  const name = extractSkillName(skillMdPath) || shortcutName;
+
+  for (const targetDir of [claudeSkills, geminiSkills]) {
+    const target = path.join(targetDir, name);
+    if (fs.existsSync(target)) {
+      console.log(`  -> Skipped ${name} to ${path.relative(workspaceRoot, targetDir)}/ (already exists)`);
+    } else {
+      fs.cpSync(source, target, { recursive: true, force: true });
+      console.log(`  -> Synced shortcut ${name} to ${path.relative(workspaceRoot, targetDir)}/`);
+    }
+  }
+}
+
+console.log('Phase 2 complete!');
