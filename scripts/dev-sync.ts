@@ -320,7 +320,19 @@ const ghEnv = { ...process.env };
 delete ghEnv.GITHUB_TOKEN;
 delete ghEnv.GH_TOKEN;
 
-const prBase = 'master';
+// Detect the actual default branch dynamically via git symbolic-ref.
+// Falls back to 'master' if detection fails (e.g., no remote configured).
+let prBase = 'master';
+try {
+    const { stdout: defaultRef } = await $`git symbolic-ref refs/remotes/origin/HEAD`.quiet().nothrow();
+    const match = defaultRef.toString().trim().match(/refs\/heads\/(.+)$/);
+    if (match) {
+        prBase = match[1];
+    }
+} catch {
+    // Could not detect default branch — fall back to 'master'
+}
+
 let prBody = "";
 try {
     const { stdout } = await $`bun run scripts/gen-pr-body.ts "${msg}"`.quiet().nothrow();

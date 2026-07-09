@@ -333,7 +333,7 @@ All shared Git/PR rules are in [Git & PR Additions](#git--pr-additions-claude-co
 
 - **PR Language**: Governed by [Git & PR Additions - PR Language](#git--pr-additions-claude-code). All PR titles, bodies, and review comments must be written in English - no exceptions.
 
-*Last Updated: 2026-06-05 — added §5 Skill Resolution Priority; added §6 CLAUDE.md/GEMINI.md lifecycle row; added lifecycle-manager and auditor sequence to boilerplate; removed obsolete physical pm approval hooks*
+*Last Updated: 2026-07-09 — project review P1/P2 fixes: CLAUDE.md/GEMINI.md date sync, skill registry alignment, metadata block standardization, sync pipeline hardening*
 <!-- COMMON-CLAUDE:END -->
 
 ---

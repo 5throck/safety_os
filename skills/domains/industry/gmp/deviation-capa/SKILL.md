@@ -6,7 +6,21 @@ status: active
 description: Manage GMP Deviation (이상관리) and CAPA (시정예방조치) workflows per KP-GMP 의약품등기준규정 Article 19 + ICH Q10.
 version: "1.0"
 created: 2026-06-17
-last_updated: 2026-06-17
+last_updated: 2026-07-09
+metadata:
+  type: domain
+  triggers:
+    - gmp deviation
+    - gmp capa
+    - deviation
+    - 이상관리
+    - 시정예방조치
+    - oos
+    - out of specification
+  legal_basis:
+    - 의약품등기준규정 Article 19 (이상 및 시정예방조치)
+    - ICH Q10 Section 2 (Quality System - Corrective and Preventive Action)
+    - KP-GMP 시행규칙 제62조 (이상조사)
 ---
 
 # GMP Deviation & CAPA (이상관리 및 시정예방조치) Skill

@@ -2,16 +2,9 @@
 
 ## Sessions
 
-
-## Safety OS Project
-
-- This is the Safety OS Phase A prototype project
-- Domain: South Korea EHS (Environmental Health & Safety)
-- Laws: Occupational Safety and Health Act (OSHA-KR), Serious Accidents Punishment Act (SAPA)
-
-## Session Logs
-
-(Session logs will be appended here by /memlog)
+| Date | Summary |
+|------|---------|
+| [2026-07-09](2026-07-09.md) | feat(skills): add sync skill, standardize metadata, harden sync pipeline, and align platform parity |
 | [2026-06-05](2026-06-05.md) | chore: initial scaffold |
 
 ## Meetings

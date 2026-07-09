@@ -5,10 +5,12 @@ owner: safety-workflow-manager
 scope: workspace
 status: active
 description: Fetches the legalize-kr repository into a local cache directory to ensure up-to-date access to Korean law data.
-triggers:
-  - "clone legalize-kr"
-  - "fetch laws"
-  - "sync korean laws"
+metadata:
+  type: domain
+  triggers:
+    - clone legalize-kr
+    - fetch laws
+    - sync korean laws
 ---
 
 # Legalize-KR Sync Skill
