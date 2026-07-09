@@ -1,6 +1,6 @@
 # VERSION_MANIFEST.md
 
-**Generated**: 2026-07-09T11:55:56.669Z
+**Generated**: 2026-07-09T20:00:23.129Z
 **Manifest Version**: 1.0
 **Location**: docs\VERSION_MANIFEST.md
 
@@ -158,7 +158,7 @@
 | sync-agent-status.ts | 1.0.0 | scripts/sync-agent-status.ts | N/A |
 | sync-md.ts | 1.3.1 | scripts/sync-md.ts | N/A |
 | sync-skill-status.ts | 1.0.0 | scripts/sync-skill-status.ts | N/A |
-| sync-skills.ts | 1.2.0 | scripts/sync-skills.ts | N/A |
+| sync-skills.ts | 1.3.0 | scripts/sync-skills.ts | N/A |
 | team-builder.ts | 1.2.0 | scripts/team-builder.ts | fs, path |
 | test-chemical-handling-profile.ts | 1.0.0 | scripts/test-chemical-handling-profile.ts | js-yaml |
 | test-cross-domain-integration.ts | 1.0.0 | scripts/test-cross-domain-integration.ts | js-yaml |
