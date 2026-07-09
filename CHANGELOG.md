@@ -8,6 +8,25 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Added
 
+- **skill stubs**: Created 6 stub SKILL.md files for skills registered in AGENTS.md but missing implementations: `psm-loto` (Lockout/Tagout), `tar-planning` (Turnaround planning), `construction-permit-overview`, `pre-construction-technical-review`, `mid-construction-inspection`, `completion-inspection` (3-phase KGS Code inspection). All stubs include proper metadata blocks with `type`, `triggers`, and `legal_basis`.
+- **.codex/config.toml**: Created Codex/OpenAI platform configuration with SAP_ALLOWED_PACKAGES parity to Claude/Gemini configs, MCP server definitions, and deny list restrictions.
+
+### Fixed (2026-07-09 — Project Review P1/P2 Fixes)
+
+- **skills/SKILLS.md**: Added missing `sync` entry to Process section (was on disk but not indexed).
+- **CLAUDE.md / GEMINI.md**: Updated "Last Updated" from 2026-06-05 to 2026-07-09 (was 34 days stale despite substantial changes).
+- **skills/legalize-kr-sync/SKILL.md**: Moved `triggers:` from top-level frontmatter to nested `metadata.triggers:`; added `metadata.type: domain`.
+- **skills/domains/functional/psm/moc/SKILL.md**: Added `metadata:` block with `type: domain`, `triggers`, and `legal_basis`.
+- **skills/domains/industry/gmp/change-control/SKILL.md**: Added `metadata:` block with `type: domain`, `triggers`, and `legal_basis`.
+- **skills/domains/industry/gmp/deviation-capa/SKILL.md**: Added `metadata:` block with `type: domain`, `triggers`, and `legal_basis`.
+- **skills/domains/industry/gmp/qrm/SKILL.md**: Added `metadata:` block with `type: domain`, `triggers`, and `legal_basis`.
+- **.gemini/skills/platform-command-lifecycle-manager/SKILL.md**: Synced missing "Propagation Rule" section from Claude version.
+- **scripts/dev-sync.ts**: Replaced hardcoded `prBase = 'master'` with dynamic default branch detection via `git symbolic-ref refs/remotes/origin/HEAD` (falls back to 'master' if detection fails).
+- **memory/MEMORY.md**: Rebuilt with proper 3-section table structure (Sessions/Meetings/ADRs). Removed stale "Safety OS Project" and legacy "Session Logs" sections that prevented `sync-md.ts` table insertion.
+- **scripts/sync-md.ts** (v1.3.2): Added self-healing logic to repair `## Sessions`, `## Meetings`, and `## ADRs` tables if header/separator rows are missing. Prevents silent insertion failures when MEMORY.md structure is corrupted.
+
+### Added
+
 - **license**: Added root `LICENSE` file (GNU Affero General Public License v3.0). Added License sections to `README.md`/`README_ko.md` and a `license` field to `scripts/package.json`.
 
 ### Fixed (2026-07-09 — Round 3: Pipeline Robustness, Hook Hardening, Cross-Platform Fixes)

@@ -71,6 +71,40 @@ if (!content.includes('## Sessions')) {
   content = await Bun.file(MEMORY_FILE).text();
 }
 
+// ── Self-heal: repair table structures if headers/separators are missing ──────
+// All repairs operate on the in-memory content to avoid redundant I/O.
+// Single write at the end of the self-heal block.
+let healed = false;
+
+if (!/\n## Sessions\r?\n\r?\n\| Date \|/.test(content)) {
+  content = content.replace(
+    /(## Sessions\r?\n)([\s\S]*?)(\n## Meetings)/,
+    `$1\n| Date | Summary |\n|------|---------|\n$3`
+  );
+  healed = true;
+}
+
+if (!/\n## Meetings\r?\n\r?\n\| Date \|/.test(content)) {
+  content = content.replace(
+    /(## Meetings\r?\n)([\s\S]*?)(\n## ADRs)/,
+    `$1\n| Date | Topic | File |\n|------|-------|------|\n$3`
+  );
+  healed = true;
+}
+
+if (!/\n## ADRs\r?\n\r?\n\| ID \|/.test(content)) {
+  content = content.replace(
+    /(## ADRs\r?\n)([\s\S]*?)$/,
+    `$1\n| ID | Title | Status | File |\n|----|-------|--------|------|`
+  );
+  healed = true;
+}
+
+if (healed) {
+  await Bun.write(MEMORY_FILE, content);
+  content = await Bun.file(MEMORY_FILE).text();
+}
+
 // ── Append to appropriate section ────────────────────────────────────────────
 function makeSlug(str: string, maxLen: number): string {
   return str

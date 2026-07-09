@@ -42,6 +42,15 @@ Use this skill when:
 
 4. **Run verification**: `bun scripts/verify-platform-lifecycle.ts` must pass Check G
 
+## Propagation Rule
+
+```
+.claude/commands/<name>.md                    <- Claude Code source
+.gemini/commands/<name>.md                    <- Gemini/Antigravity (if not skip)
+templates/common/.claude/commands/<name>.md   <- Template propagation (Claude)
+templates/common/.gemini/commands/<name>.md   <- Template propagation (if not skip)
+```
+
 ## Verification
 
 ```bash

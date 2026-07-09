@@ -1,0 +1,33 @@
+# Codex (OpenAI) Configuration for Safety OS
+# Maintains parity with .claude/settings.json and .gemini/settings.json
+
+# Packages that are safe to install without explicit user confirmation
+# MUST be kept identical to SAP_ALLOWED_PACKAGES in Claude and Gemini configs
+sap_allowed_packages = [
+    "bun",
+    "typescript",
+    "@types/node",
+]
+
+# MCP servers — mirrors .gemini/settings.json MCP configuration
+[mcp_servers.kr_safety]
+command = "bun"
+args = ["run", "--env-file", ".env", "./mcp/kr-safety-regs/index.ts"]
+
+[mcp_servers.legalize_kr]
+command = "bun"
+args = ["run", "--env-file", ".env", "./mcp/legalize-kr/index.ts"]
+
+[mcp_servers.mcp_kr_legislation]
+command = "bun"
+args = ["run", "--env-file", ".env", "./mcp/kr-legislation/index.ts"]
+
+# Safety restrictions
+[restrictions]
+deny_commands = [
+    "rm -rf",
+    "rm -r /",
+    "chmod -R 777",
+    "git push --force",
+    "git reset --hard",
+]

@@ -6,7 +6,20 @@ status: active
 description: ICH Q9 Quality Risk Management (품질 위해 관리) skill for pharmaceutical manufacturing. Cross-cutting methodology applied to all GMP workflows. Scope limited to product quality + patient safety risks.
 version: "1.0"
 created: 2026-06-17
-last_updated: 2026-06-17
+last_updated: 2026-07-09
+metadata:
+  type: domain
+  triggers:
+    - quality risk management
+    - qrm
+    - fmea
+    - risk assessment
+    - 품질위해관리
+    - 위해관리
+  legal_basis:
+    - 의약품등기준규정 Article 16 (품질관리)
+    - ICH Q9 (Quality Risk Management)
+    - KP-GMP 시행규칙 제16조 (품질위해관리)
 ---
 
 # GMP Quality Risk Management (ICH Q9) Skill

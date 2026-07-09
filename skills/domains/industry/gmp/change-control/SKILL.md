@@ -6,7 +6,19 @@ status: active
 description: Manage GMP Change Control (변경관리) workflows per KP-GMP 의약품등기준규정 Article 18 + ICH Q10. Pattern reused from psm-moc with quality impact assessment extension.
 version: "1.0"
 created: 2026-06-17
-last_updated: 2026-06-17
+last_updated: 2026-07-09
+metadata:
+  type: domain
+  triggers:
+    - gmp change control
+    - change control
+    - 변경관리
+    - 품질변경
+    - gmp change
+  legal_basis:
+    - 의약품등기준규정 Article 18 (변경관리)
+    - ICH Q10 Section 3 (Quality Management System - Change Management)
+    - KP-GMP 시행규칙 제58조 (변경관리)
 ---
 
 # GMP Change Control (변경관리) Skill
