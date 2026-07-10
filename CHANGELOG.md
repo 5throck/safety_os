@@ -6,6 +6,19 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+### Fixed (2026-07-10 — Project Review R2 Backlog Clearance)
+
+- **agents/_shared/audit-agent.md**: Updated `lifecycle.last_updated` to 2026-07-10; added explicit escalation thresholds table (Critical ≥ 1 → immediate, Major ≥ 3 → 24h, Minor ≥ 10 → flag, CA overdue → SWM, Critical CA > 7 days → PM).
+- **agents/_shared/risk-assessment-agent.md**: Fixed escalation syntax — "Scores —12" (corrupted) → "Scores ≥ 12".
+- **agents/_shared/reporting-agent.md**: Added lifecycle metadata block (phase, created, last_updated, color).
+- **skills/domains/functional/psm/moc/SKILL.md**: Added SAPA Article 4 as 4th legal_basis source for multi-source traceability.
+- **skills/investigation/hazop-analysis/SKILL.md**: Added `created` and `last_updated` frontmatter fields (synced across all 3 copies).
+
+### Added (2026-07-10 — Project Review R2 Backlog Clearance)
+
+- **evidence-models/domains/industry/powergen/powergen-emergency-power-record.json**: Created missing evidence model schema for emergency power events (outage, partial failure, load shedding, grid instability).
+- **evidence-models/migrations/README.md**: Created migration conventions document for evidence model schema versioning.
+
 ### Fixed (2026-07-10 — Project Review R2 Remediation)
 
 - **agents/_core/pm.md**: Fixed tier contradiction — SGM and SWM are High-tier (per frontmatter), not Medium-tier as text stated.

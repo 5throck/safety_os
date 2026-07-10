@@ -19,6 +19,7 @@ metadata:
   legal_basis:
     - 산업안전보건법 제44조 (공정안전관리)
     - PSM고시 제4항 (변경관리)
+    - 중대재해처벌법 제4조 (안전·보건 확보 의무)
     - OSHA 1910.119(l) (PSM - Management of Change)
 ---
 # PSM Management of Change (MOC) Skill
