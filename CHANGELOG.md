@@ -6,6 +6,28 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+### Fixed (2026-07-10 — Design Doc Alignment)
+
+- **CLAUDE.md**: Fixed SGM/SWM tier Medium→High in Phase Determination checklist (per agent frontmatter); removed stale `TaskCreated` hook reference from lifecycle propagation table.
+- **GEMINI.md**: Fixed SGM/SWM tier Medium→High in Phase Determination checklist (per agent frontmatter).
+- **AGENTS.md**: Fixed SWM tier Medium→High in Agent Roster table (per `safety-workflow-manager.md` frontmatter).
+- **docs/architecture-overview.md**: Updated safety-audit.ts version v3.0.0→v4.2.1; updated counts to 134 workflows, 119 evidence models, 29 regulations; fixed powergen evidence model count 7→8.
+- **scripts/SCRIPTS.md**: Fixed `sync-md.ts` version 1.3.1→1.3.3 and `archive-memory.ts` version 1.1.1→1.1.2 (parity with actual script headers).
+- **.claude/skills/psm-moc/SKILL.md, .gemini/skills/psm-moc/SKILL.md**: Synced platform copies with canonical source — added `legal_basis` (SAPA Art.4), `type: domain` metadata, expanded triggers, updated `last_updated` to 2026-07-09.
+
+### Fixed (2026-07-10 — Project Review R2 Backlog Clearance)
+
+- **agents/_shared/audit-agent.md**: Updated `lifecycle.last_updated` to 2026-07-10; added explicit escalation thresholds table (Critical ≥ 1 → immediate, Major ≥ 3 → 24h, Minor ≥ 10 → flag, CA overdue → SWM, Critical CA > 7 days → PM).
+- **agents/_shared/risk-assessment-agent.md**: Fixed escalation syntax — "Scores —12" (corrupted) → "Scores ≥ 12".
+- **agents/_shared/reporting-agent.md**: Added lifecycle metadata block (phase, created, last_updated, color).
+- **skills/domains/functional/psm/moc/SKILL.md**: Added SAPA Article 4 as 4th legal_basis source for multi-source traceability.
+- **skills/investigation/hazop-analysis/SKILL.md**: Added `created` and `last_updated` frontmatter fields (synced across all 3 copies).
+
+### Added (2026-07-10 — Project Review R2 Backlog Clearance)
+
+- **evidence-models/domains/industry/powergen/powergen-emergency-power-record.json**: Created missing evidence model schema for emergency power events (outage, partial failure, load shedding, grid instability).
+- **evidence-models/migrations/README.md**: Created migration conventions document for evidence model schema versioning.
+
 ### Fixed (2026-07-10 — Project Review R2 Remediation)
 
 - **agents/_core/pm.md**: Fixed tier contradiction — SGM and SWM are High-tier (per frontmatter), not Medium-tier as text stated.

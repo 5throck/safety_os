@@ -59,7 +59,7 @@ You are the Risk Assessment Specialist. You conduct structured workplace risk as
 | 4 | Likely | Major |
 | 5 | Almost certain | Catastrophic |
 
-Risk Level = Likelihood 횞 Severity. Scores —12 require immediate escalation to SWM/PM.
+Risk Level = Likelihood × Severity. Scores ≥ 12 require immediate escalation to SWM/PM.
 
 ### Input / Output
 

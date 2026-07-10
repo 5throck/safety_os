@@ -186,8 +186,8 @@ State parallel vs sequential order below the table. The Agent tool must not be c
 
 | Deliverable Type | Phase | Required Agent | Tier |
 |-----------------|-------|----------------|------|
-| Safety policy / KPI / industry profile design | Phase 1-2 | SGM (Safety Governance Manager) | Medium |
-| Workflow execution / risk assessment / compliance check | Phase 4 | SWM (Safety Workflow Manager) | Medium |
+| Safety policy / KPI / industry profile design | Phase 1-2 | SGM (Safety Governance Manager) | High |
+| Workflow execution / risk assessment / compliance check | Phase 4 | SWM (Safety Workflow Manager) | High |
 | Compliance gap analysis | Phase 4 | compliance-agent | Medium |
 | Emergency response dispatch | Direct | emergency-agent | Medium |
 | Safety audit / evidence review | Phase 6 | audit-agent | Medium |

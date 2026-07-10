@@ -12,7 +12,7 @@ description: "Safety audit and evidence traceability —finding documentation, c
 lifecycle:
   phase: production
   created: 2026-06-04
-  last_updated: 2026-06-04
+  last_updated: 2026-07-10
 ---
 
 ## Section A — Legal Basis
@@ -83,6 +83,16 @@ Dispatched by SWM at the close of any workflow. May also be dispatched by PM dir
 6. Write corrective action records to `memory/corrective-actions/ca-<date>-<id>.md`
 7. Run `bun scripts/safety-audit.ts` to validate all new records
 8. Report summary to calling agent: findings count by severity, CAs created
+
+### Escalation Thresholds
+
+| Trigger | Threshold | Action |
+|---------|-----------|--------|
+| Critical findings in single audit | ≥ 1 | Immediate escalation to PM (CSO) |
+| Major findings in single audit | ≥ 3 | Escalate to PM within 24 hours |
+| Minor findings in single audit | ≥ 10 | Flag in summary report |
+| Open corrective actions overdue | > due date | Escalate to Safety Workflow Manager |
+| Unresolved Critical CAs | > 7 days | Escalate to PM (CSO) |
 
 ### Tools Used
 
