@@ -1,5 +1,5 @@
 #!/usr/bin/env bun
-// @version 1.3.1
+// @version 1.3.3
 // sync-md.ts - Update memory/MEMORY.md index
 // Usage:
 //   bun run scripts/sync-md.ts "YYYY-MM-DD" "summary"              # session entry
@@ -126,7 +126,7 @@ if (type === 'meeting') {
   if (!new RegExp(`\\| ${escapeRegex(date)} \\| ${escapeRegex(summary)} \\|`).test(content)) {
     // Insert row after the separator line of the ## Meetings table
     content = content.replace(
-      /(## Meetings\r?\n\r?\n\| Date \|[^\n]+\r?\n\|[-| ]+\|)/,
+      /(## Meetings\r?\n\r?\n\| Date \|[^\n]+\r?\n\|[-: |]+\|)/,
       `$1\n| ${date} | ${summary} | [${meetingFile}](${meetingFile}) |`
     );
     await Bun.write(MEMORY_FILE, content);
@@ -138,7 +138,7 @@ if (type === 'meeting') {
   // Only insert if not already present (dedup by id + summary in same table row)
   if (!new RegExp(`\\| ${escapeRegex(id)} \\| ${escapeRegex(summary)} \\|`).test(content)) {
     content = content.replace(
-      /(## ADRs\r?\n\r?\n\| ID \|[^\n]+\r?\n\|[-| ]+\|)/,
+      /(## ADRs\r?\n\r?\n\| ID \|[^\n]+\r?\n\|[-: |]+\|)/,
       `$1\n| ${id} | ${summary} | Accepted | [${adrFile}](${adrFile}) |`
     );
     await Bun.write(MEMORY_FILE, content);
@@ -147,7 +147,7 @@ if (type === 'meeting') {
   // Session: dedup by date (scoped to Sessions table to avoid false positives)
   if (!new RegExp(`\\| \\[${escapeRegex(date)}\\]`).test(content)) {
     content = content.replace(
-      /(## Sessions\r?\n\r?\n\| Date \|[^\n]+\r?\n\|[-| ]+\|)/,
+      /(## Sessions\r?\n\r?\n\| Date \|[^\n]+\r?\n\|[-: |]+\|)/,
       `$1\n| [${date}](${date}.md) | ${summary} |`
     );
     await Bun.write(MEMORY_FILE, content);

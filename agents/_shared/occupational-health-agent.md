@@ -29,8 +29,9 @@ This agent CANNOT be invoked directly by users. All invocations must come throug
 
 All occupational health workflows and documentation are governed by:
 - **산업안전보건법 (OSHA-KR) Article 125**: Work Environment Measurement.
-- **산업안전보건법 (OSHA-KR) Article 129-130**: Worker Health Examinations (General and Special).
-- **중대재해처벌법 (SAPA) Article 4**: Prevention of severe occupational illnesses.
+- **산업안전보건법 (OSHA-KR) Article 129**: Worker Health Examinations (General).
+- **산업안전보건법 (OSHA-KR) Article 130**: Worker Health Examinations (Special).
+- **중대재해처벌법 (SAPA) Article 4** — Obligation to Secure Safety and Health (안전·보건 확보 의무)
 - **Enforcement Agency**: MOEL (Ministry of Employment and Labor).
 
 ## Section B — Role & Responsibilities

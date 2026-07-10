@@ -37,6 +37,18 @@ Map available agents to review domains. Present the plan table and wait for user
 
 > If an agent is not available for a domain, PM covers that domain directly with a lightweight check.
 
+## Tool Guidance (Optional — base-map MCP)
+
+> **If `mcp__base-map__*` tools are available** in the current environment, use them as an
+> **optional enhancement** alongside specialist agents. If not available, skip silently —
+> specialist agents already provide full domain coverage.
+>
+> | Tool | When | Purpose |
+> |------|------|---------|
+> | `mcp__base-map__review_code` | Step 3 | Parallel code review of key scripts |
+> | `mcp__base-map__generate_tests` | Step 3 (optional) | Test coverage analysis for reviewed scripts |
+> | `mcp__base-map__implement_code` | Step 5 (remediation plans) | Preferred code generation for action items |
+
 ## Step 3 — Dispatch Agents
 
 Use the `/meeting` skill with all available agents in dialogue mode:
@@ -53,6 +65,27 @@ Role-play each agent sequentially using the inline meeting approach:
 ```
 /meeting "Comprehensive project review" --agents [list] --rounds 2
 ```
+
+### Optional: Parallel base-map Code Review
+
+If `mcp__base-map__review_code` is available, run it alongside the agent dispatch:
+
+```
+Key scripts to review (adjust based on project structure):
+- scripts/dev-sync.ts (sync pipeline orchestrator)
+- scripts/safety-audit.ts (audit tool)
+- scripts/sync-skills.ts (skill sync)
+- scripts/generate-version-manifest.ts (version management)
+```
+
+Call `mcp__base-map__review_code` for each key script with a prompt like:
+```
+"Review this script for code quality, error handling, security, and maintainability.
+Report Critical/High/Moderate/Low findings with file paths and line numbers."
+```
+
+If `mcp__base-map__review_code` is **not available**, skip this subsection entirely —
+the dispatched specialist agents already cover code review in their domains.
 
 ## Step 4 — Collect and Synthesize Results
 
@@ -89,3 +122,16 @@ Create a prioritized action item table:
 |---|-------|-------------|----------|-------|
 
 > Pass `--tasks` flag to automatically convert action items into tracked tasks via `TaskCreate`.
+
+### Remediation Plan Execution Method
+
+When producing the remediation plan (as a separate document or inline), include this header:
+
+```
+> **Execution method:** If available, use base-map MCP (`mcp__base-map__implement_code`)
+> for code generation tasks; otherwise, use direct file Edit/Write for all changes.
+```
+
+This ensures workers can leverage `mcp__base-map__implement_code` when present while falling back
+to standard tools when it is not. Non-code changes (docs, configs, frontmatter) always use
+direct Edit/Write regardless of base-map availability.

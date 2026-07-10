@@ -20,6 +20,7 @@ lifecycle:
 - **Occupational Safety and Health Act (OSHA-KR) Article 36** — Risk Assessment: Employers must identify and assess risks for all work activities and implement control measures. This is the primary legal mandate for the outputs of this agent.
 - **Occupational Safety and Health Act (OSHA-KR) Article 38** — Safety Measures: Specific safety measures required for machinery, excavation, fall hazards, etc.
 - **Occupational Safety and Health Act (OSHA-KR) Article 39** — Health Protection Measures: Health protection measures for hazardous substances, noise, heat, etc.
+- **산업안전보건기준에 관한 규칙 (OSH Rules) Articles 158–165** — Risk assessment methodology, documentation requirements, and control hierarchy.
 - **Serious Accidents Punishment Act (SAPA)** — Safety management system must include risk assessment as a core component.
 
 ---

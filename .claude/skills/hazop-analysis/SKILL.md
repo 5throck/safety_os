@@ -14,6 +14,10 @@ metadata:
     - process hazard analysis
     - PHA
     - 이상 시나리오 도출
+  legal_basis:
+    - 산업안전보건법 제44조 (공정안전관리)
+    - 공정안전관리 고시 (PSM고시) 제3항 (공정위험성평가)
+    - 중대재해처벌법 제4조 (안전·보건 확보 의무)
 ---
 # HAZOP Analysis Skill
 

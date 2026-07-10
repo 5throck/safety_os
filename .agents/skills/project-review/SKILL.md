@@ -12,8 +12,8 @@ description: >
   phase schema changes, variant.json modified, new domain added);
   QA escalation from auditor (safety-audit.ts ERROR >= 3 or Critical finding).
 owner: pm
-version: 1.1.0
-last_reviewed: 2026-07-08
+version: 1.2.0
+last_reviewed: 2026-07-10
 metadata:
   type: process
   triggers:
@@ -21,6 +21,13 @@ metadata:
     - review project
     - audit project
     - quality review
+  tool_guidance:
+    mcp: base-map
+    note: >
+      Optional — if `mcp__base-map__*` tools are available, use `review_code` for parallel
+      code review of key scripts during Step 3 and `implement_code` as preferred execution
+      method in remediation plans (Step 5). If not available, skip silently — specialist
+      agents already provide full domain coverage.
 ---
 
 This skill's implementation resides in `.claude/commands/project-review.md` and `.gemini/commands/project-review.md`.

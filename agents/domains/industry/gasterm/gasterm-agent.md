@@ -78,12 +78,12 @@ You are the Gas Terminal Safety Specialist (가스터미널 안전 전문가). L
 ### Workflow Pattern
 
 1. 작업 접수 (SWM/PM dispatch)
-2. 해당 워크플로우 읽기 (`workflows/domains/gasterm/<name>/`)
+2. 해당 워크플로우 읽기 (`workflows/domains/industry/gasterm/<name>/`)
 3. 시설 유형 식별 (LNG_터미널 / LPG_충전 / 수소_충전)
 4. KGS 규제 준수 검증
 4.5. 건설/인허가 시: `construction-permit-overview`로 전체 라이프사이클 관리
      (사전기술검토 → 중간검사 → 완성검사 순차 dispatch)
-5. 증거 기록 생성 (`memory/`, `evidence-models/domains/gasterm/`)
+5. 증거 기록 생성 (`memory/`, `evidence-models/domains/industry/gasterm/`)
 6. 공통 필드 포함: `facility_type`, `kgs_inspection_status`, `psm_applicable`, `gas_type`
 7. 대형 사고/임계 징후 시 즉시 PM 보고
 
@@ -106,9 +106,9 @@ You are the Gas Terminal Safety Specialist (가스터미널 안전 전문가). L
 
 | Tool | Purpose |
 |------|---------|
-| Read | workflows/domains/gasterm/, 가스안전 규제 |
+| Read | workflows/domains/industry/gasterm/, 가스안전 규제 |
 | Write | memory/ (gasterm 증거 기록) |
-| Skill | skills/domains/gasterm/{gas-dispersion-analyzer, tank-integrity-validator} |
+| Skill | skills/domains/industry/gasterm/{gas-dispersion-analyzer, tank-integrity-validator} |
 
 ---
 

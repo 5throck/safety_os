@@ -261,7 +261,11 @@ try {
         console.log(`${YELLOW}   Stage files explicitly with 'git add <file>' or add them to .gitignore.${RESET}`);
         process.exit(1);
     }
-} catch {}
+} catch (e) {
+    console.error(`${RED}❌ Sensitive file scanner failed: ${e}${RESET}`);
+    console.error(`${RED}   Cannot confirm workspace safety — aborting git add.${RESET}`);
+    process.exit(1);
+}
 
 try {
     const addRes = await $`git add -A`.nothrow();
@@ -337,7 +341,9 @@ let prBody = "";
 try {
     const { stdout } = await $`bun run scripts/gen-pr-body.ts "${msg}"`.quiet().nothrow();
     prBody = stdout.toString().trim();
-} catch {}
+} catch (e) {
+    console.log(`${YELLOW}⚠️  PR body generation failed: ${e} — falling back to --fill mode${RESET}`);
+}
 
 let prCreateRetry: Awaited<ReturnType<typeof withRetry>>;
 if (prBody) {

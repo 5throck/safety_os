@@ -23,7 +23,7 @@ metadata:
     - 로크아웃
     - 태그아웃
   legal_basis:
-    - 산업안전보건법 제33조 (위험방지시스템)
+    - 산업안전보건법 제38조 (작업 전 안전조치 — Pre-work Safety Measures)
     - 산업안전보건기준에 관한 규칙 제92조 (위험에너지에 의한 위험방지)
     - KOSHA GUIDE Z-40-2022
 ---
@@ -48,7 +48,7 @@ Execute Lockout/Tagout (LOTO) procedure verification for hazardous energy source
 
 | Law | Article | Requirement |
 |-----|---------|-------------|
-| 산업안전보건법 | Article 33 | 위험방지시스템 (Hazard Prevention System) |
+| 산업안전보건법 | Article 38 | 작업 전 안전조치 (Pre-work Safety Measures) |
 | 안전보건규칙 | Article 92 | 위험에너지에 의한 위험방지 (Prevention of Hazardous Energy) |
 | KOSHA GUIDE Z-40-2022 | — | LOTO procedure guidelines |
 

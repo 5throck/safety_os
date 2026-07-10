@@ -53,7 +53,7 @@ To disable the PostToolUse hook, remove the following block from `.claude/settin
 | SessionStart (git hooks) | Claude Code Desktop App | ✅ | hooks don't fire; run manually |
 | PostToolUse (audit) | Claude Code CLI | ✅ | Runs `bun scripts/audit.ts` async after every Write/Edit |
 | PostToolUse (audit) | Claude Code Desktop App | ✅ | Hooks don't fire; run `bun scripts/audit.ts` manually |
-| TeammateIdle (lifecycle) | Claude Code CLI | ✅ | Runs `bun scripts/hooks/post-write-lifecycle-check.ts` async when teammate becomes idle |
+| TeammateIdle (lifecycle) | Claude Code CLI | ✅ | Runs `bun scripts/skill-lifecycle-audit.ts` async when teammate becomes idle |
 | TeammateIdle (lifecycle) | Claude Code Desktop App | ✅ | Hooks don't fire; run manually |
 | TaskCompleted (QA gate) | Claude Code CLI | ✅ | Runs `bun scripts/audit.ts` async when a task is marked complete |
 | TaskCompleted (QA gate) | Claude Code Desktop App | ✅ | Hooks don't fire; run manually |
@@ -77,7 +77,7 @@ Agent Teams allow multiple Claude Code instances to work in parallel with a shar
 
 | Hook | Trigger | Action |
 |------|---------|--------|
-| `TeammateIdle` | Teammate finishes work | Runs `post-write-lifecycle-check.ts` — validates lifecycle state |
+| `TeammateIdle` | Teammate finishes work | Runs `skill-lifecycle-audit.ts` — validates lifecycle state |
 | `TaskCompleted` | Task marked complete | Runs `audit.ts` — full QA gate |
 
 **Desktop App limitations** — Agent Teams in the Desktop App have significant restrictions:

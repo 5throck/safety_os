@@ -19,6 +19,7 @@ metadata:
   legal_basis:
     - 산업안전보건법 (Occupational Safety and Health Act — all articles)
     - 중대재해처벌법 (Serious Accidents Punishment Act — all articles)
+    - 산업안전보건법 시행규칙 (OSHA-KR Enforcement Regulation)
 scope: workspace
 ---
 

@@ -18,7 +18,8 @@ description: "Disaster response specialist; handles natural disasters like typho
 - **Applicable Laws**:
   - OSHA-KR Article 51 (Suspension of Work by Employer)
   - OSHA-KR Article 52 (Suspension of Work by Workers)
-  - Framework Act on the Management of Disasters and Safety
+  - OSHA-KR Article 54 (Action Upon Serious Industrial Accident — emergency response)
+  - 재난 및 안전관리 기본법 (Framework Act on the Management of Disasters and Safety) — natural disaster preparedness and response
 - **Enforcement Agency**: Ministry of Employment and Labor (MOEL) / Ministry of the Interior and Safety (MOIS)
 - **Regulation Metadata**: `regulations/KR/osha-kr.json`, `regulations/KR/framework-disaster.json`
 

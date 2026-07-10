@@ -15,6 +15,8 @@ metadata:
     - risk-assessment-agent
   legal_basis:
     - 산업안전보건법 제36조 (위험성평가 의무)
+    - 중대재해처벌법 제4조 (안전·보건 확보 의무)
+    - 산업안전보건기준에 관한 규칙 제158조~제165조 (위험성평가 방법 등)
 scope: workspace
 ---
 
@@ -43,7 +45,7 @@ Generate a structured JSON evidence record conforming to `risk-assessment-record
 # Risk Assessment Record
 date: YYYY-MM-DD
 assessor: <name>
-legal_basis: 산업안전보건법 제36조
+legal_basis: 산업안전보건법 제36조 (위험성평가 의무), 중대재해처벌법 제4조 (안전·보건 확보 의무), 산업안전보건기준에 관한 규칙 제158조~제165조 (위험성평가 방법 등)
 status: draft | approved
 
 ## Hazards
@@ -59,6 +61,8 @@ Date: YYYY-MM-DD
 ## Legal Notes
 
 - 산업안전보건법 제36조 requires employers to conduct risk assessments and implement control measures for all identified hazards.
+- 중대재해처벌법 제4조 imposes enterprise-level obligation to establish and maintain safety management systems including risk assessment.
+- 산업안전보건기준에 관한 규칙 제158조~제165조 defines the risk assessment methodology, documentation requirements, and control hierarchy.
 - Assessments must be reviewed when work methods change, after incidents, or at a minimum annually.
 - Records must be retained for a minimum of 3 years per enforcement guidelines.
 - This skill provides workflow assistance only and does not constitute legal advice.

@@ -6,6 +6,26 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+### Fixed (2026-07-10 — Project Review R2 Remediation)
+
+- **agents/_core/pm.md**: Fixed tier contradiction — SGM and SWM are High-tier (per frontmatter), not Medium-tier as text stated.
+- **agents/_shared/asset-integrity-agent.md, occupational-health-agent.md**: Standardized SAPA Article 4 English title to "Obligation to Secure Safety and Health (안전·보건 확보 의무)" across all agent files.
+- **agents/_shared/disaster-response-agent.md**: Fixed Framework Act official Korean name to "재난 및 안전관리 기본법" (was missing 기본법).
+- **agents/_shared/risk-assessment-agent.md**: Added 산업안전보건기준에 관한 규칙 Articles 158–165 as implementing regulation for risk assessment methodology.
+- **agents/_shared/audit-agent.md**: Fixed stale evidence-model path `evidence-models/base/` → `evidence-models/_shared/base/` (post-restructure path).
+- **agents/_shared/reporting-agent.md**: Added explicit TRIR, LTIR, and Near-Miss Rate formulas; added near-miss tracking to operational procedures; added LTIR escalation threshold (default: > 1.0); fixed stale regulation metadata paths.
+- **agents/_shared/compliance-agent.md, legal-agent.md, incident-investigation-agent.md, reporting-agent.md**: Verified legal_basis ≥ 3 sources (Round 1 fixes confirmed correct).
+- **agents/domains/functional/psm/psm-agent.md**: Verified MSDS citation (OSHA-KR Art.110-114) and policy ≥ 3 (Round 1 fixes confirmed correct).
+- **agents/domains/industry/**: Fixed evidence-model, skill, and workflow paths in 8 agents (ehsconst, ehschem, gasterm, powergen, glp, gdp, gcp, gvp, meddevice) — added missing `industry/` directory segment (31 path references total).
+- **agents/domains/industry/ehschem/ehschem-agent.md**: Declared 3 undeclared skills (environmental-compliance-checker, process-hazard-screening, tar-planning) in Tools Used section.
+- **agents/domains/industry/meddevice/meddevice-agent.md**: Expanded Section B with KPIs, Input/Output, Scope Limitation; added Tools Used section declaring iso14971-risk-scorer skill.
+- **skills/investigation/hazop-analysis/SKILL.md**: Added legal_basis (≥3): OSHA-KR Art.44, PSM고시 제3항, SAPA Art.4 — synced across all 3 copies (skills/, .claude/, .gemini/).
+- **skills/daily/risk-assessment/SKILL.md**: Fixed output template to show all 3 legal_basis sources (was showing only Art.36); expanded Legal Notes to cover all 3 sources.
+- **CLAUDE.md**: Fixed 2 dead hook references — `post-write-lifecycle-check.ts` → `skill-lifecycle-audit.ts` (nonexistent script).
+- **AGENTS.md**: Updated Language Policy from blanket English-only to 3-layer (A/B/C) policy matching CLAUDE.md/GEMINI.md.
+- **skills/domains/functional/msds/ghs-classifier/ghs-classifier.ts**: Added dermal and inhalation acute toxicity classification (was oral-only); fixed falsy truthiness check on `acute_toxicity_oral_mgkg` to use `!== undefined`.
+- **scripts/sync-md.ts** (v1.3.3): Fixed MEMORY.md table insertion regex — added colon (`:`) to separator character class to support GFM alignment syntax (`| :--- |`).
+
 ### Added
 
 - **`.agents/` skill layer**: Created `.agents/skills.json` and `.agents/skills/{sync,meeting,project-review}/SKILL.md` — the shortcut skill layer required by Antigravity for skill discovery. Modeled after co-architect's `.agents/` pattern. This provides Antigravity with a dedicated skill directory that the Gemini CLI scans via `skills.json`.

@@ -84,10 +84,10 @@ You are the GVP Specialist (Drug Safety Officer support). You operate at the **o
 ### Workflow Pattern
 
 1. Receive GVP task via SWM/PM dispatch
-2. Read applicable workflow from `workflows/domains/gvp/<workflow-name>/`
+2. Read applicable workflow from `workflows/domains/industry/gvp/<workflow-name>/`
 3. Identify product lifecycle stage (pre-marketing / post-marketing / re-evaluation)
 4. Apply ICH E2 series and KGVP compliance verification
-5. Generate evidence record to `memory/` using corresponding `evidence-models/domains/gvp/` schema
+5. Generate evidence record to `memory/` using corresponding `evidence-models/domains/industry/gvp/` schema
 6. Include required common fields: `ich_e2_compliance`, `pbrer_cycle_ref`, `product_id`, `rmp_version_ref`
 7. Escalate urgent safety signals, regulatory findings, recall triggers to PM immediately
 
@@ -112,9 +112,9 @@ You are the GVP Specialist (Drug Safety Officer support). You operate at the **o
 
 | Tool | Purpose |
 |------|---------|
-| Read | `workflows/domains/gvp/`, `regulations/KR/MFDS-GVP.yaml`, `regulations/international/ICH-E2.yaml` |
+| Read | `workflows/domains/industry/gvp/`, `regulations/KR/MFDS-GVP.yaml`, `regulations/international/ICH-E2.yaml` |
 | Write | `memory/` (GVP evidence records) |
-| Skill | `skills/domains/gvp/{signal-detector, benefit-risk-assessor}/` |
+| Skill | `skills/domains/industry/gvp/{signal-detector, benefit-risk-assessor}/` |
 
 ---
 

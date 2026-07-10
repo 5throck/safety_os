@@ -108,7 +108,7 @@ These principles supplement the CSO routing rules above and apply to all Safety 
 Every execution plan row MUST declare Platform: `Both` / `Claude` / `Antigravity` / `L0-only`.
 
 ### Tier Ceiling Rule
-Safety OS agent tiers are defined in each agent's frontmatter — that frontmatter is authoritative, not this table. No tier elevation is permitted. SGM and SWM are Medium-tier; compliance-agent, risk-assessment-agent, and audit-agent are Medium-tier (per their frontmatter `tier.claude` field — corrected 2026-07-05; no agent in `agents/` is currently declared Low-tier).
+Safety OS agent tiers are defined in each agent's frontmatter — that frontmatter is authoritative, not this table. No tier elevation is permitted. SGM and SWM are High-tier (per their frontmatter `tier.claude: high`); compliance-agent, risk-assessment-agent, and audit-agent are Medium-tier (no agent in `agents/` is currently declared Low-tier).
 
 ### Model Parameter Enforcement Rule
 Writing a model name in the execution plan table's Model column does **not** apply it. When calling the `Agent` tool, you MUST pass the `model` parameter explicitly as a short alias, mapped from the Registry Model ID in the execution plan:
