@@ -1,6 +1,6 @@
 # VERSION_MANIFEST.md
 
-**Generated**: 2026-07-10T14:25:45.080Z
+**Generated**: 2026-07-10T14:55:39.005Z
 **Manifest Version**: 1.0
 **Location**: docs\VERSION_MANIFEST.md
 
@@ -92,7 +92,7 @@
 | project-review | 1.1.0 | skills/project-review/SKILL.md | workspace | project review, review project, audit project, quality review | pm |
 | project-review | 1.1.0 | .claude/skills/project-review/SKILL.md | both | project review, review project, audit project, quality review | pm |
 | protocol-deviation-analyzer | 1.0 | .claude/skills/protocol-deviation-analyzer/SKILL.md | both | 프로토콜 이탈, protocol deviation, ICH E6(R3), important deviation, CAPA, IRB 보고, KGCP, 임상시험 이탈 | gcp-agent |
-| psm-moc | 1.0 | .claude/skills/psm-moc/SKILL.md | both | 변경관리, management of change, MOC, PSSR 검토, pre-startup safety review, 공정안전관리 변경, 안전성영향평가 | psm-agent |
+| psm-moc | 1.0 | .claude/skills/psm-moc/SKILL.md | both | management of change, moc, change management, process change, 변경관리, 공정변경 | psm-agent |
 | research-analysis | 1.0.0 | .claude/skills/research-analysis/SKILL.md | both | research, analyze, investigate, synthesize, evidence gathering, data analysis, literature review | N/A |
 | risk-assessment | 1.0.0 | .claude/skills/risk-assessment/SKILL.md | both | 위험성평가, risk assessment, hazard identification, 위험 평가, 작업위험성분석 | risk-assessment-agent |
 | root-cause-analysis | 1.0.0 | .claude/skills/root-cause-analysis/SKILL.md | both | 근본원인분석, root cause analysis, RCA, 5 whys, fishbone diagram, 사고조사, CAPA 수립 | incident-investigation-agent |

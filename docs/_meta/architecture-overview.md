@@ -65,7 +65,7 @@ meddevice (ind)                                                                 
 | ehsconst | 9 | 9 | OSHA-KR + SAPA Art 12 |
 | ehschem | 8 | 6 | CCA + K-REACH + 환경법 |
 | gasterm | 8 | 7 | 고압가스법 + LPG법 + 수소법 |
-| powergen | 8 | 7 | 전기사업법 + 전기안전법 |
+| powergen | 8 | 8 | 전기사업법 + 전기안전법 |
 | meddevice | 8 | 7 | KGMP-MD + ISO 13485 + ISO 14971 |
 
 ### Cross-Cutting Services
@@ -97,10 +97,10 @@ Industry Domain Agent (coordinator)
 
 ## 5. Audit System
 
-`safety-audit.ts` v3.0.0 validates:
-- **116 workflow schema.yaml** files (legal_basis ≥2/3, status, applicability)
-- **103 evidence models** ($ref resolution, domain-specific common fields)
-- **25 regulations** (source_mcp validation)
+`safety-audit.ts` v4.2.1 validates:
+- **134 workflow schema.yaml** files (legal_basis ≥2/3, status, applicability)
+- **119 evidence models** ($ref resolution, domain-specific common fields)
+- **29 regulations** (source_mcp validation)
 - **Role separation** (risk-assessment-agent ↔ gmp-qrm)
 - **12 domain-specific validations** (functional + industry)
 
