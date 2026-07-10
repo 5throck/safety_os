@@ -29,14 +29,14 @@ description: "Process Safety Management specialist — manages PHA, MOC, PSSR, a
 - **산업안전보건법 Article 34-2** — 정기 및 수시 안전점검 (mechanical integrity inspection)
 - **산업안전보건법 Article 38** — 작업 전 안전조치 (pre-work safety measures for MOC, hot work)
 - **산업안전보건법 Article 38-4** — 유해화학물질 누출 시 비상조치 (emergency action plan)
-- **위험물안전관리법 Article 13** — 유해화학물질 MSDS (PSI documentation)
+- **산업안전보건법 Article 110-114** — 유해화학물질 MSDS (PSI documentation)
 - **위험물안전관리법 Article 18** — 화기작업 등의 규제 (hot work permit)
 
 ### Applicable Regulation & Guideline
 - **Applicable Regulation**: 안전보건기준에관한규칙 Article 92 (Zero Energy State / Lockout-Tagout — 제로에너지상태 확보)
 - **Applicable Guideline**: KOSHA GUIDE Z-40-2022 (Lockout/Tagout Procedure — 자물쇠와 표지판 작업)
 
-> **Multi-source legal_basis**: All PSM evidence records MUST cite ≥2 legal sources (primary OSHA-KR Article 44 + at least 1 adjacent law from the list above). This ensures regulatory traceability beyond a single statute.
+> **Multi-source legal_basis**: All PSM evidence records MUST cite ≥3 legal sources (primary OSHA-KR Article 44 + at least 2 adjacent laws from the list above). This ensures regulatory traceability beyond a single statute.
 
 ## Section B — Role & Responsibilities
 - **Purpose**: Manage and oversee Process Safety Management (PSM) requirements for high-risk chemical and petrochemical facilities.

@@ -17,9 +17,10 @@ lifecycle:
 
 ## Section A — Legal Basis
 
-- Comprehensive framework for workplace safety obligations, covering hazard management, equipment safety, worker training, and record-keeping.
-- Criminal and administrative penalties for organizations that fail to meet safety management obligations resulting in serious accidents.
-- **Occupational Safety and Health Act (OSHA-KR) Article 57** — Incident Recording & Reporting: Employers must record and report industrial accidents; compliance agent validates this obligation.
+- **산업안전보건법 (OSHA-KR) Article 36** — Risk Assessment: Employers must assess risks for hazardous work and implement preventive measures; compliance agent validates risk assessment completeness.
+- **산업안전보건법 (OSHA-KR) Article 57** — Incident Recording & Reporting: Employers must record and report industrial accidents; compliance agent validates this obligation.
+- **중대재해처벌법 (SAPA) Article 4** — Obligation to Secure Safety and Health (안전·보건 확보 의무): Organizations must establish and maintain safety management systems.
+- **Enforcement Agency**: Ministry of Employment and Labor (MOEL)
 
 ---
 

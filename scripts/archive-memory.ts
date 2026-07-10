@@ -1,6 +1,6 @@
 /**
  * Archives memory markdown files older than 7 days.
- * @version 1.1.1
+ * @version 1.1.2
  */
 import * as fs from 'node:fs';
 import * as path from 'node:path';
@@ -38,7 +38,16 @@ for (const file of files) {
             console.error(`ERROR: ${file} already exists in archive — not overwriting.`);
             process.exit(1);
         }
-        fs.renameSync(fullPath, dest);
-        console.log(`Archived ${file}`);
+        // Use copyFileSync + unlinkSync instead of renameSync to avoid
+        // EXDEV cross-device link errors on Windows (SMB mounts, WSL, etc.)
+        try {
+            fs.copyFileSync(fullPath, dest);
+            fs.unlinkSync(fullPath);
+            console.log(`Archived ${file}`);
+        } catch (e) {
+            console.error(`ERROR: Failed to archive ${file}: ${e}`);
+            // If copy succeeded but unlink failed, the file exists in both locations.
+            // Do not exit — the archive copy is preserved; the original can be cleaned up manually.
+        }
     }
 }

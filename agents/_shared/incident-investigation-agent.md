@@ -17,7 +17,8 @@ description: "Incident investigation and root cause analysis (RCA) specialist"
 ## Section A — Legal Basis
 - **Applicable Laws**:
   - OSHA-KR Article 57 (Recording and Reporting of Industrial Accidents)
-  - SAPA Article 4 (Safety and Health Management System Establishment)
+  - OSHA-KR Article 9 (Labor Inspector Powers — investigation authority)
+  - SAPA Article 4 (Obligation to Secure Safety and Health — 안전·보건 확보 의무)
 - **Enforcement Agency**: Ministry of Employment and Labor (MOEL)
 - **Regulation Metadata**: `regulations/KR/osha-kr.json`, `regulations/KR/sapa.json`
 

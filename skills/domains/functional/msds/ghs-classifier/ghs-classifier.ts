@@ -17,6 +17,7 @@ export interface SubstanceProperty {
   // Physical hazards
   flammable?: boolean;
   flash_point_c?: number;
+  initial_boiling_point_c?: number;
   // Health hazards
   acute_toxicity_oral_mgkg?: number;
   acute_toxicity_dermal_mgkg?: number;
@@ -32,6 +33,7 @@ export interface SubstanceProperty {
   reproductive_toxin?: boolean;
   // Environmental hazards
   aquatic_toxicity_mgl?: number;
+  aquatic_toxicity_chronic_mgl?: number;
 }
 
 export interface GHSClassification {
@@ -53,40 +55,91 @@ export function classifySubstance(prop: SubstanceProperty): GHSClassification {
   const pictograms: string[] = [];
   let maxSeverity: 'Danger' | 'Warning' | 'None' = 'None';
 
-  // ── Flammability (GHS Chapter 2.3) ──────────────────────────────────
-  if (prop.flammable || (prop.flash_point_c !== undefined && prop.flash_point_c < 60)) {
+  // ── Flammability (GHS Chapter 2.6 — Flammable Liquids) ──────────────────
+  if (prop.flammable || (prop.flash_point_c !== undefined && prop.flash_point_c < 93)) {
     if (prop.flash_point_c !== undefined && prop.flash_point_c < 23) {
-      hazardClasses.push('Flammable Liquids Category 2');
-      hStatements.push('H225: Highly flammable liquid and vapour');
+      // Cat 1: flash point < 23°C AND initial boiling point ≤ 35°C
+      // Cat 2: flash point < 23°C AND initial boiling point > 35°C
+      if (prop.initial_boiling_point_c !== undefined && prop.initial_boiling_point_c <= 35) {
+        hazardClasses.push('Flammable Liquids Category 1');
+        hStatements.push('H224: Extremely flammable liquid and vapour');
+      } else {
+        hazardClasses.push('Flammable Liquids Category 2');
+        hStatements.push('H225: Highly flammable liquid and vapour');
+      }
       pictograms.push('GHS02');
       maxSeverity = 'Danger';
-    } else {
+    } else if (prop.flash_point_c !== undefined && prop.flash_point_c <= 60) {
       hazardClasses.push('Flammable Liquids Category 3');
       hStatements.push('H226: Flammable liquid and vapour');
       pictograms.push('GHS02');
+      if (maxSeverity !== 'Danger') maxSeverity = 'Warning';
+    } else if (prop.flash_point_c !== undefined && prop.flash_point_c <= 93) {
+      // Category 4 added in GHS Rev 9
+      hazardClasses.push('Flammable Liquids Category 4');
+      hStatements.push('H227: Combustible liquid');
       if (maxSeverity !== 'Danger') maxSeverity = 'Warning';
     }
   }
 
   // ── Acute Toxicity (GHS Chapter 3.1) ────────────────────────────────
-  if (prop.acute_toxicity_oral_mgkg !== undefined) {
-    if (prop.acute_toxicity_oral_mgkg <= 5) {
-      hazardClasses.push('Acute Toxicity (Oral) Category 1');
+  // Classify each route independently, then use the most severe category
+  // for the combined H-statement, pictogram, and signal word.
+  let acuteToxOverallCat: number | undefined;
+
+  function classifyAcuteRoute(
+    value: number | undefined,
+    routeLabel: string,
+    thresholds: number[],
+  ): number | undefined {
+    if (value === undefined || value === 0) return undefined;
+    for (let i = 0; i < thresholds.length; i++) {
+      if (value <= thresholds[i]) {
+        hazardClasses.push(`Acute Toxicity (${routeLabel}) Category ${i + 1}`);
+        return i + 1; // category number (1 = most severe)
+      }
+    }
+    return undefined; // above Cat 4 threshold — not classified
+  }
+
+  const oralCat = classifyAcuteRoute(
+    prop.acute_toxicity_oral_mgkg,
+    'Oral',
+    [5, 50, 300, 2000],
+  );
+
+  const dermalCat = classifyAcuteRoute(
+    prop.acute_toxicity_dermal_mgkg,
+    'Dermal',
+    [50, 200, 1000, 2000],
+  );
+
+  // Inhalation: treat ppm value as gas/vapor, use vapor thresholds
+  const inhalationCat = classifyAcuteRoute(
+    prop.acute_toxicity_inhalation_ppm,
+    'Inhalation',
+    [0.5, 2.0, 10, 20], // mg/L vapor thresholds — input assumed mg/L
+  );
+
+  // Determine the most severe (lowest category number) across all routes
+  const acuteToxCats = [oralCat, dermalCat, inhalationCat].filter(
+    (c): c is number => c !== undefined,
+  );
+  if (acuteToxCats.length > 0) {
+    acuteToxOverallCat = Math.min(...acuteToxCats);
+  }
+
+  // Emit combined H-statement, pictogram, signal word based on most severe category
+  if (acuteToxOverallCat !== undefined) {
+    if (acuteToxOverallCat <= 2) {
       hStatements.push('H300: Fatal if swallowed');
       pictograms.push('GHS06');
       maxSeverity = 'Danger';
-    } else if (prop.acute_toxicity_oral_mgkg <= 50) {
-      hazardClasses.push('Acute Toxicity (Oral) Category 2');
-      hStatements.push('H300: Fatal if swallowed');
-      pictograms.push('GHS06');
-      maxSeverity = 'Danger';
-    } else if (prop.acute_toxicity_oral_mgkg <= 300) {
-      hazardClasses.push('Acute Toxicity (Oral) Category 3');
+    } else if (acuteToxOverallCat === 3) {
       hStatements.push('H301: Toxic if swallowed');
       pictograms.push('GHS06');
       maxSeverity = 'Danger';
-    } else if (prop.acute_toxicity_oral_mgkg <= 2000) {
-      hazardClasses.push('Acute Toxicity (Oral) Category 4');
+    } else if (acuteToxOverallCat === 4) {
       hStatements.push('H302: Harmful if swallowed');
       if (maxSeverity !== 'Danger') maxSeverity = 'Warning';
     }
@@ -126,6 +179,7 @@ export function classifySubstance(prop: SubstanceProperty): GHSClassification {
   if (prop.skin_sensitizer) {
     hazardClasses.push('Skin Sensitization Category 1');
     hStatements.push('H317: May cause an allergic skin reaction');
+    pictograms.push('GHS07'); // Exclamation mark — required for skin sensitizers per GHS Rev 9
     if (maxSeverity !== 'Danger') maxSeverity = 'Warning';
   }
 
@@ -149,7 +203,7 @@ export function classifySubstance(prop: SubstanceProperty): GHSClassification {
     maxSeverity = 'Danger';
   }
 
-  // ── Aquatic Toxicity (GHS Chapter 4.1) ─────────────────────────────
+  // ── Aquatic Toxicity (GHS Chapter 4.1 — Acute + Chronic) ─────────────
   if (prop.aquatic_toxicity_mgl !== undefined && prop.aquatic_toxicity_mgl <= 1) {
     hazardClasses.push('Aquatic Toxicity (Acute) Category 1');
     hStatements.push('H400: Very toxic to aquatic life');
@@ -157,6 +211,19 @@ export function classifySubstance(prop: SubstanceProperty): GHSClassification {
   } else if (prop.aquatic_toxicity_mgl !== undefined && prop.aquatic_toxicity_mgl <= 10) {
     hazardClasses.push('Aquatic Toxicity (Acute) Category 2');
     hStatements.push('H401: Toxic to aquatic life');
+  }
+  // Chronic aquatic toxicity (GHS Rev 9)
+  if (prop.aquatic_toxicity_chronic_mgl !== undefined && prop.aquatic_toxicity_chronic_mgl <= 0.1) {
+    hazardClasses.push('Aquatic Toxicity (Chronic) Category 1');
+    hStatements.push('H410: Very toxic to aquatic life with long lasting effects');
+    pictograms.push('GHS09');
+  } else if (prop.aquatic_toxicity_chronic_mgl !== undefined && prop.aquatic_toxicity_chronic_mgl <= 1) {
+    hazardClasses.push('Aquatic Toxicity (Chronic) Category 2');
+    hStatements.push('H411: Toxic to aquatic life with long lasting effects');
+    pictograms.push('GHS09');
+  } else if (prop.aquatic_toxicity_chronic_mgl !== undefined && prop.aquatic_toxicity_chronic_mgl <= 10) {
+    hazardClasses.push('Aquatic Toxicity (Chronic) Category 3');
+    hStatements.push('H412: Harmful to aquatic life with long lasting effects');
   }
 
   // ── Generate P-statements based on hazard classes ───────────────────
@@ -169,7 +236,7 @@ export function classifySubstance(prop: SubstanceProperty): GHSClassification {
     pStatements.push('P210: Keep away from heat/sparks/open flames — No smoking');
     pStatements.push('P233: Keep container tightly closed');
   }
-  if (prop.skin_corrosion || prop.acute_toxicity_oral_mgkg) {
+  if (prop.skin_corrosion || acuteToxOverallCat !== undefined) {
     pStatements.push('P301+P330+P331: IF SWALLOWED — rinse mouth, do NOT induce vomiting');
     pStatements.push('P303+P361+P353: IF ON SKIN — remove contaminated clothing, rinse skin');
   }

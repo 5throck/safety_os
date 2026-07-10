@@ -183,10 +183,12 @@ if (fs.existsSync('CHANGELOG.md')) {
 // 3.5. UTF-8 BOM check for Markdown files
 if (!LIFECYCLE_ONLY) {
     let bomErrors = 0;
-    let searchDirs = ['.'];
-    if (!fs.existsSync(projectCtxPath) && fs.existsSync('templates')) {
-    searchDirs = ['agents', 'docs', 'memory', 'scripts', 'skills', 'templates', '.claude'];
-    if (fs.existsSync('.')) {
+    const searchDirs = fs.existsSync(projectCtxPath)
+        ? ['.']
+        : ['agents', 'docs', 'memory', 'scripts', 'skills', 'templates', '.claude'];
+
+    // Scan root-level .md files only when projectCtxPath exists (single-dir mode)
+    if (fs.existsSync(projectCtxPath) || fs.existsSync('.')) {
         for (const file of fs.readdirSync('.')) {
             if (file.endsWith('.md')) {
                 const buf = fs.readFileSync(file);
@@ -197,38 +199,37 @@ if (!LIFECYCLE_ONLY) {
             }
         }
     }
-}
 
-function walkDir(dir: string, callback: (fPath: string) => void) {
-    if (!fs.existsSync(dir)) return;
-    for (const f of fs.readdirSync(dir)) {
-        if (f === 'node_modules' || f === '.git' || f === '_archive' || f === '.cache') continue;
-        const dirPath = path.join(dir, f);
-        const isDirectory = fs.statSync(dirPath).isDirectory();
-        if (isDirectory) {
-            walkDir(dirPath, callback);
-        } else {
-            callback(dirPath);
+    function walkDir(dir: string, callback: (fPath: string) => void) {
+        if (!fs.existsSync(dir)) return;
+        for (const f of fs.readdirSync(dir)) {
+            if (f === 'node_modules' || f === '.git' || f === '_archive' || f === '.cache') continue;
+            const dirPath = path.join(dir, f);
+            const isDirectory = fs.statSync(dirPath).isDirectory();
+            if (isDirectory) {
+                walkDir(dirPath, callback);
+            } else {
+                callback(dirPath);
+            }
         }
     }
-}
 
-for (const dir of searchDirs) {
-    if (fs.existsSync(dir)) {
-        walkDir(dir, (filePath) => {
-            if (filePath.replace(/\\/g, '/').includes('memory/archive/')) return;
-            if (filePath.endsWith('.md') && !filePath.includes('node_modules') && !filePath.includes('.git')) {
-                const buf = fs.readFileSync(filePath);
-                if (buf.length >= 3 && buf[0] === 0xEF && buf[1] === 0xBB && buf[2] === 0xBF) {
-                    Fail(`UTF-8 BOM found in ${filePath} - files must be UTF-8 without BOM`);
-                    bomErrors++;
+    for (const dir of searchDirs) {
+        if (fs.existsSync(dir)) {
+            walkDir(dir, (filePath) => {
+                if (filePath.replace(/\\/g, '/').includes('memory/archive/')) return;
+                if (filePath.endsWith('.md') && !filePath.includes('node_modules') && !filePath.includes('.git')) {
+                    const buf = fs.readFileSync(filePath);
+                    if (buf.length >= 3 && buf[0] === 0xEF && buf[1] === 0xBB && buf[2] === 0xBF) {
+                        Fail(`UTF-8 BOM found in ${filePath} - files must be UTF-8 without BOM`);
+                        bomErrors++;
+                    }
                 }
-            }
-        });
+            });
+        }
     }
-}
-if (bomErrors === 0) { Pass('UTF-8 BOM check: all markdown files are clean'); }
-else { errors += bomErrors; }
+    if (bomErrors === 0) { Pass('UTF-8 BOM check: all markdown files are clean'); }
+    else { errors += bomErrors; }
 }
 
 // 4. AGENTS.md must exist

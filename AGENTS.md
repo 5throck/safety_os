@@ -59,7 +59,7 @@
 | Agent | File | Tier | Role |
 |-------|------|------|------|
 | EHSChem Agent | [`agents/domains/industry/ehschem/ehschem-agent.md`](agents/domains/industry/ehschem/ehschem-agent.md) | Medium | Chemical Plant Safety specialist (정유/석유화학/정밀화학); industry coordinator dispatching to PSM/MSDS/Emergency services |
-| EHSConst Agent | [`agents/domains/industry/ehsconst/ehsconst-agent.md`](agents/domains/industry/ehsconst/ehsconst-agent.md) | Medium | Construction Safety specialist; manages safety plans, fall/collapse prevention, and SAPA Article 12 compliance per OSHA-KR construction provisions |
+| EHSConst Agent | [`agents/domains/industry/ehsconst/ehsconst-agent.md`](agents/domains/industry/ehsconst/ehsconst-agent.md) | Medium | Construction Safety specialist; manages safety plans, fall/collapse prevention, and SAPA Article 12 (건설업 특례) compliance per OSHA-KR construction provisions |
 | GasTerm Agent | [`agents/domains/industry/gasterm/gasterm-agent.md`](agents/domains/industry/gasterm/gasterm-agent.md) | Medium | Gas Terminal Safety specialist (LNG/LPG/수소 기지 및 충전소); KGS compliance, leak detection, and emergency preparedness |
 | PowerGen Agent | [`agents/domains/industry/powergen/powergen-agent.md`](agents/domains/industry/powergen/powergen-agent.md) | Medium | Power Generation Safety specialist (화력/신재생 발전설비); boiler/turbine, high-voltage electrical, and ESS fire safety (원자력 제외) |
 
@@ -160,22 +160,25 @@ All specialist agents below are dispatched ONLY through PM:
 <!-- COMMON-AGENTS:START -->
 ## Language Policy
 
-**English-Only Documentation Rule**: All workspace documentation files (.md) must be written in English, with explicit exceptions for recognized locale translation zones (see Translation Zones below).
+**Safety OS is a Korea-only EHS/GxP compliance platform.** Korean is the default documentation language. English is used ONLY where a specific justification applies.
 
-### English Documentation Requirement
-- All `.md` files outside `ko/` and `locales/ko/` directories MUST be in English
-- Applies to: README.md, CLAUDE.md, GEMINI.md, AGENTS.md, CONSTITUTION.md, CHANGELOG.md, all documentation in docs/, agents/, skills/
-- Rationale: English documentation ensures global accessibility and cross-team collaboration
+### Layer A — English required (internationalization)
+Governance/system/agent files consumed by cross-platform AI agents and tooling — `CLAUDE.md`, `GEMINI.md`, `AGENTS.md`, `CONSTITUTION.md`, `README.md`, `agents/*.md`, `SKILL.md`, command files, code/scripts/code comments, schema keys, evidence-model JSON keys, `CHANGELOG.md`, and git artifacts (commit messages, PR titles/descriptions, branch names).
+
+### Layer B — International-regulation content (English-preferred)
+Documentation whose source is an international standard — ICH (E6/E2), OECD GLP (MAD), GHS Rev 9, PIC/S GDP, ISO 13485/14971. Applies to domains `gcp`, `gvp`, `glp`, `meddevice`, and the GHS portions of `msds`.
+
+### Layer C — Korean canonical (default)
+Human operational documentation for Korean EHS/GxP practitioners — workflow READMEs, domain scope documents, user guides, tutorials, scenario walkthroughs.
 
 ### Translation Zones (Locale Exceptions)
 - `<lang-code>/` directories — language-specific documentation (e.g. `ko/`, `ja/`)
-- `locales/<lang-code>/` — locale translation files for internationalization (e.g. `locales/ko/`, `locales/zh-CN/`)
-- These are the ONLY locations where non-English `.md` files are permitted
-- Recognized locale codes: `ko`, `ja`, `zh-CN`, `zh-TW`, `de`, `es`, `fr`, `pt`, `vi`, `ms`, `id`, `th`, `ru`, `it`, `ar`
+- `locales/<lang-code>/` — locale translation files for internationalization
+- Bilingual zones: `docs/_shared/` paired convention (`<name>.md` English + `<name>_ko.md` Korean)
 
 ### Enforcement
-- Pre-commit audit checks for Korean content outside ko/ and locales/ko/
-- PR reviews reject non-English documentation outside translation zones
+- Pre-commit audit checks for language policy compliance
+- PR reviews validate Layer A/B/C classification
 - Auditor validates compliance during Phase 6 QA gate
 
 ### Git/PR Artifacts Language Rule

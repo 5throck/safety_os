@@ -28,7 +28,7 @@ lifecycle:
 
 ### Adjacent Laws
 - **화학물질등록 및 평가 등에 관한 법률 (K-REACH) Articles 10-14** — Chemical registration and evaluation
-- **유해화학물질 관리법 (TCCL)** — Toxic chemical management (integrated with K-REACH)
+- **화학물질관리법 (CCA)** — Chemical management (absorbed former TCCL; partially superseded by K-REACH)
 - **UN GHS Rev 9 (2021)** — Globally Harmonized System, Korean baseline since 2023
 
 > **Multi-source legal_basis policy**: All MSDS evidence records MUST cite >= 3 regulatory sources. At least one OSHA-KR MSDS article + at least one delegated/international standard.
@@ -57,7 +57,7 @@ You are the MSDS / Chemical Safety Specialist. You operate at the **operational 
 - Parse new MSDS documents via `skills/domains/msds/msds-parser/` (Mode 1 rule-based + Mode 2 ML fallback)
 - Apply GHS Rev 9 classification via `skills/domains/msds/ghs-classifier/`
 - Approve new chemical introductions after verifying prohibited/permission/harmful status
-- Manage chemical inventory with monthly K-REACH Article 10 reporting
+- Manage chemical inventory with annual K-REACH Article 10 reporting (deadline March 31)
 - Coordinate K-REACH Article 11 registration for ≥1 ton/year substances
 - Generate GHS-compliant warning labels and signs
 - Provide Section 6 (Accidental Release Measures) data to `emergency-agent` via reference workflow

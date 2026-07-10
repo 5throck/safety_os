@@ -78,10 +78,10 @@ You are the Power Generation Safety Specialist (발전설비 안전 전문가). 
 ### Workflow Pattern
 
 1. 작업 접수 (SWM/PM dispatch)
-2. 해당 워크플로우 읽기 (`workflows/domains/powergen/<name>/`)
+2. 해당 워크플로우 읽기 (`workflows/domains/industry/powergen/<name>/`)
 3. 발전소 유형 식별 (화력/신재생)
 4. 전기안전/발전설비 규제 검증 (전기사업법 + 전기안전관리법)
-5. 증거 기록 생성 (`memory/`, `evidence-models/domains/powergen/`)
+5. 증거 기록 생성 (`memory/`, `evidence-models/domains/industry/powergen/`)
 6. 공통 필드 포함: `plant_type`, `kesa_inspection_status`, `voltage_class`, `renewable_category`
 7. 고압 전기 사고, ESS 화재, 터빈 사고 시 즉시 PM 보고
 
@@ -105,9 +105,9 @@ You are the Power Generation Safety Specialist (발전설비 안전 전문가). 
 
 | Tool | Purpose |
 |------|---------|
-| Read | workflows/domains/powergen/, 발전설비 규제 |
+| Read | workflows/domains/industry/powergen/, 발전설비 규제 |
 | Write | memory/ (powergen 증거 기록) |
-| Skill | skills/domains/powergen/{arc-flash-analyzer, ess-fire-risk-assessor} |
+| Skill | skills/domains/industry/powergen/{arc-flash-analyzer, ess-fire-risk-assessor} |
 
 ---
 

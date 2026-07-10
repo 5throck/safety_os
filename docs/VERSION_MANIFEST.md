@@ -1,6 +1,6 @@
 # VERSION_MANIFEST.md
 
-**Generated**: 2026-07-09T20:00:23.129Z
+**Generated**: 2026-07-10T09:17:51.583Z
 **Manifest Version**: 1.0
 **Location**: docs\VERSION_MANIFEST.md
 
@@ -125,7 +125,7 @@
 | agent-list.ts | 1.0.0 | scripts/agent-list.ts | N/A |
 | agent-verify.ts | 1.0.2 | scripts/agent-verify.ts | N/A |
 | analyze-git-history.ts | 1.0.0 | scripts/analyze-git-history.ts | child_process |
-| archive-memory.ts | 1.1.1 | scripts/archive-memory.ts | N/A |
+| archive-memory.ts | 1.1.2 | scripts/archive-memory.ts | N/A |
 | audit.ts | 2.6.1 | scripts/audit.ts | bun |
 | auto-executor.ts | 1.0.0 | scripts/lib/auto-executor.ts | N/A |
 | check-pm-approval.ts | 1.0.1 | scripts/check-pm-approval.ts | N/A |
@@ -156,7 +156,7 @@
 | skill-lifecycle-audit.ts | 1.1.4 | scripts/skill-lifecycle-audit.ts | N/A |
 | start-mcp.ts | 1.0.0 | scripts/start-mcp.ts | child_process, path |
 | sync-agent-status.ts | 1.0.0 | scripts/sync-agent-status.ts | N/A |
-| sync-md.ts | 1.3.1 | scripts/sync-md.ts | N/A |
+| sync-md.ts | 1.3.3 | scripts/sync-md.ts | N/A |
 | sync-skill-status.ts | 1.0.0 | scripts/sync-skill-status.ts | N/A |
 | sync-skills.ts | 1.3.0 | scripts/sync-skills.ts | N/A |
 | team-builder.ts | 1.2.0 | scripts/team-builder.ts | fs, path |

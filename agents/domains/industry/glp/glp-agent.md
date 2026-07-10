@@ -90,10 +90,10 @@ GLP agent is dispatched by SWM/PM as part of non-clinical study workflows. May b
 ### Workflow Pattern
 
 1. Receive GLP task via SWM/PM dispatch
-2. Read applicable workflow from `workflows/domains/glp/<workflow-name>/`
+2. Read applicable workflow from `workflows/domains/industry/glp/<workflow-name>/`
 3. Identify certification authority (MFDS / ME / both) for context
 4. Apply OECD GLP principle mapping per workflow
-5. Generate evidence record to `memory/` using corresponding `evidence-models/domains/glp/` schema
+5. Generate evidence record to `memory/` using corresponding `evidence-models/domains/industry/glp/` schema
 6. Include required common fields: `glp_certification_authority`, `oecd_mad_applicable`, `study_director_id`, `msds_record_ref`
 7. Escalate data integrity violations, QAU critical findings to PM immediately
 
@@ -117,9 +117,9 @@ GLP agent is dispatched by SWM/PM as part of non-clinical study workflows. May b
 
 | Tool | Purpose |
 |------|---------|
-| Read | `workflows/domains/glp/`, `regulations/KR/MFDS-GLP.yaml`, `regulations/KR/ME-KREACH-GLP.yaml`, `regulations/international/OECD-GLP.yaml` |
+| Read | `workflows/domains/industry/glp/`, `regulations/KR/MFDS-GLP.yaml`, `regulations/KR/ME-KREACH-GLP.yaml`, `regulations/international/OECD-GLP.yaml` |
 | Write | `memory/` (GLP evidence records) |
-| Skill | `skills/domains/glp/{glp-data-integrity-checker, glp-study-protocol-validator}/` |
+| Skill | `skills/domains/industry/glp/{glp-data-integrity-checker, glp-study-protocol-validator}/` |
 
 ---
 

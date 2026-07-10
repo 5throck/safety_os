@@ -38,20 +38,35 @@ lifecycle:
 
 ### Scope: Class 1-4 의료기기 제조업체. IVD/SaMD는 v2 검토.
 
+> **Scope Limitation**: Does not cover pharmaceutical quality (see gmp-agent) or clinical trial management (see gcp-agent).
+
 ### Common Fields (all meddevice-*.json)
 - `device_class`: class_1 / class_2 / class_3 / class_4
 - `kgmp_certification_status`: certified / pending / expired
 - `iso_13485_compliance`: boolean
 - `iso_14971_risk_management`: boolean
 
+### KPIs
+
+| KPI | Target | Measurement |
+|-----|--------|-------------|
+| Design control records pass KGMP-MD audit | 100% | Tracked via design control records in `evidence-models/domains/industry/meddevice/` |
+| Unaddressed risk estimates exceeding acceptable level per ISO 14971 | Zero | Tracked via `iso14971-risk-scorer` outputs |
+| PMS reports submitted within MFDS deadlines | 100% | Tracked via PMS evidence records |
+
+### Input / Output
+
+- **Input**: device classification, design history file, risk management file, post-market surveillance data
+- **Output**: risk assessment records, design control records, PMS reports per `evidence-models/domains/industry/meddevice/` schemas
+
 ## Section C — Operational Protocols & Escalation Rules
 
 ### Operational Protocol
 1. Receive meddevice task via SWM/PM dispatch.
-2. Read applicable workflow from `workflows/domains/meddevice/<workflow-name>/`.
+2. Read applicable workflow from `workflows/domains/industry/meddevice/<workflow-name>/`.
 3. Identify device class (1-4) and applicable lifecycle stage (설계관리 / 품질관리 / 임상평가 / 시판후관리).
 4. Apply KGMP-MD + ISO 13485/14971 compliance verification.
-5. Generate evidence record to `memory/` using corresponding `evidence-models/domains/meddevice/` schema, including common fields (`device_class`, `kgmp_certification_status`, `iso_13485_compliance`, `iso_14971_risk_management`).
+5. Generate evidence record to `memory/` using corresponding `evidence-models/domains/industry/meddevice/` schema, including common fields (`device_class`, `kgmp_certification_status`, `iso_13485_compliance`, `iso_14971_risk_management`).
 6. Escalate KGMP-MD 부적합, 위해사항/회수 사안 to PM immediately.
 
 ### Escalation Triggers
@@ -64,6 +79,12 @@ lifecycle:
 - emergency-agent: device-recall-reference로 위해사항/회수 dispatch
 - functional/glp-agent: 생물적합성 시험
 - PM (CSO): MFDS 위해사항 신고, KGMP-MD 부적합
+
+### Tools Used
+
+| Tool | Purpose |
+|------|---------|
+| Skill | `skills/domains/industry/meddevice/{iso14971-risk-scorer}/` — ISO 14971 risk estimation and scoring |
 
 ## PM-ONLY INVOCATION
 Trigger: "의료기기", "medical device", "KGMP-MD", "ISO 13485", "ISO 14971", "설계관리", "멸균 밸리데이션", "의료기기 회수"
