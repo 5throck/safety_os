@@ -9,8 +9,8 @@ Safety OS는 3개의 한국 규제 MCP 서버를 포함합니다:
 | 서버 | 위치 | 도구 | 목적 |
 |--------|----------|-------|---------|
 | `kr_safety` | `mcp/kr-safety-regs/` | 5개 도구 | 한국 안전 규제 검색 (OSHA-KR, SAPA, CCA), 컴플라이언스 갭 분석 |
-| `legalize_kr` | `mcp/legalize-kr/` | 5개 도구 | 한국 법령 구조 파싱, 버전 비교 |
-| `kr_legislation` | `mcp/kr-legislation/` | 5개 도구 | 실시간 법령 API (국가법령정보센터) |
+| `legalize_kr` | `mcp/legalize-kr/` | 6개 도구 | 한국 법령 구조 파싱, 버전 비교, 판례 검색 |
+| `mcp_kr_legislation` | `mcp/kr-legislation/` | 5개 도구 | 실시간 법령 API (국가법령정보센터) |
 
 ## 2. 설정
 
@@ -21,15 +21,15 @@ MCP 서버는 `.mcp.json`에 설정됩니다:
   "mcpServers": {
     "kr_safety": {
       "command": "bun",
-      "args": ["run", "--env-file", ".env", "mcp/kr-safety-regs/index.ts"]
+      "args": ["run", "--env-file", ".env", "./mcp/kr-safety-regs/index.ts"]
     },
     "legalize_kr": {
       "command": "bun",
-      "args": ["run", "--env-file", ".env", "mcp/legalize-kr/index.ts"]
+      "args": ["run", "--env-file", ".env", "./mcp/legalize-kr/index.ts"]
     },
-    "kr_legislation": {
+    "mcp_kr_legislation": {
       "command": "bun",
-      "args": ["run", "--env-file", ".env", "mcp/kr-legislation/index.ts"]
+      "args": ["run", "--env-file", ".env", "./mcp/kr-legislation/index.ts"]
     }
   }
 }
@@ -45,6 +45,12 @@ MCP 서버는 `.mcp.json`에 설정됩니다:
 - `regulations/KR/OSHA-KR-MSDS.yaml` — kr_legislation 참조
 - `regulations/KR/K-REACH.yaml` — kr_legislation 참조
 - 컴플라이언스 갭 분석을 위한 kr_safety 도구 (OSHA-KR, SAPA 조항)
+
+### 컴플라이언스 에이전트 (도메인 공통)
+`agents/_shared/compliance-agent.md` (2026-07-11 갱신)는 실시간 법령 검증을 임시 활동이 아닌 표준 절차로 명문화했습니다:
+- `mcp__kr_safety__search_osha_regulations`, `mcp__kr_safety__check_compliance_gaps` — 실시간 OSHA-KR 규정 조회 및 갭 체크
+- `mcp__legalize_kr__*` — 실시간 한국 법령 검증 (조문 번호, 개정 이력)
+- `legal_basis` 필드에 인용하기 전 조문 번호 정확성을 검증하는 데 사용됨 — 이 프로젝트는 오인용 이력이 문서화되어 있으며(`memory/findings/compliance-gap-2026-07-05-all-domains.md` 참조), 실시간 검증이 이를 방지합니다.
 
 ### GMP 도메인
 - `regulations/KR/MFDS-GDP.yaml` — kr_legislation 참조

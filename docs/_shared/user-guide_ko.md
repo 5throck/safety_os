@@ -44,8 +44,22 @@ bun scripts/test-cross-domain-integration.ts        # 크로스 도메인
 
 ```
 사용자 → 산업 에이전트 → (직접 처리 또는 기능 에이전트로 dispatch)
-                     → (비상 시 → 비상 에이전트)
+                     → (비상 시 → 비상 에이전트, SGM 우회 — 아래 참조)
 ```
+
+### 비상 대응 Dispatch
+
+`emergency-agent`는 신속성을 위해 일반적인 SGM/SWM 체인을 우회하여 PM이 직접 dispatch합니다. 10개 시나리오 코드(E-01~E-10)로 분류하여 `workflows/emergency/` 하위의 해당 프로토콜을 활성화합니다:
+
+| 코드 | 시나리오 | 코드 | 시나리오 |
+|------|----------|------|----------|
+| E-01 | 화재/폭발 | E-06 | 고소 구조 |
+| E-02 | 중대재해 (심각도 오버레이, 독립 프로토콜 아님) | E-07 | 전기 비상 |
+| E-03 | 유해화학물질 누출 | E-08 | 기계 사고 |
+| E-04 | 자연재해 (`disaster-response-agent`로 라우팅) | E-09 | 가스 누출/폭발 (가스터미널) |
+| E-05 | 밀폐공간 구조 | E-10 | 의료 응급 |
+
+사고가 `response_status: contained`/`resolved`에 도달하면 `emergency-agent`는 근본원인분석을 위해 `incident-investigation-agent`로 인계합니다 — `agents/_shared/emergency-agent.md` §Handoff Protocols 참조.
 
 ### 예시: 화학공장 근로자 안전 평가
 
@@ -102,6 +116,14 @@ workflows/domains/industry/ehschem/plant-operation-safety/
 | major-chemical-incident-reference (ehschem) | emergency-agent | 주요 화학 사고 |
 | device-recall-reference (meddevice) | emergency-agent | 기기 회수/FSCA |
 
-## 7. 법적 고지사항
+## 7. 거버넌스 및 KPI
+
+안전거버넌스관리자(SGM)는 전략 계층에서 운영되며, SWM과 전문 에이전트가 실행할 정책과 KPI 목표를 정의합니다:
+
+- **`policies/`** — 승인된 안전 정책 문서(조직 전체 표준, 산업 프로파일 연계 약속). 명명 규칙과 구조는 `policies/README.md` 참조.
+- **`docs/governance/kpi-definitions.md`** — 현재 KPI 세트: **LTIFR** (휴업재해율), **감사 통과율** (`bun scripts/safety-audit.ts` 출력 기반), **시정조치 완료율** (`memory/corrective-actions/*.json` 레코드 기반). 각 KPI 정의에는 산식, 데이터 소스, 목표 임계값, 에스컬레이션 트리거가 포함됩니다.
+- **추적성 체인**: `memory/findings/FIND-YYYY-NNNN.json` → `memory/corrective-actions/CA-YYYY-NNNN.json`, `evidence-models/_shared/base/finding.schema.json` 및 `corrective-action.schema.json` 준수.
+
+## 8. 법적 고지사항
 
 > Safety OS는 워크플로우 자동화 지원 기능만 제공하며, 법률 자문이 아닙니다. 모든 규제 참조 사항은 자격을 갖춘 EHS/GxP/법무 전문가가 검증해야 합니다. 본 시스템은 컴플라이언스 결정을 내리지 않으며, 문서화 및 프로세스 관리를 지원합니다.

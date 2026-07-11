@@ -249,7 +249,7 @@ ls workflows/domains/industry/     # Industry operations (construction, gas, pow
      - Confined space (oxygen deficiency, toxic atmosphere)
      - Hazardous energy (LOTO required for conveyor)
      - Mechanical (pinch points, rotating parts)
-   → legal_basis: 산업안전보건법 제36조
+   → legal_basis: 산업안전보건법 제36조 (위험성평가 실시), 산업안전보건법 제38조 (안전조치), 중대재해처벌법 제4조 (안전보건관리체계 구축 의무)
    ```
 
 3. **Risk Scoring & Control Measures**

@@ -44,8 +44,22 @@ bun scripts/test-cross-domain-integration.ts        # Cross-domain
 
 ```
 You → Industry Agent → (directly handles OR dispatches to Functional Agent)
-                     → (if emergency → Emergency Agent)
+                     → (if emergency → Emergency Agent, bypassing SGM — see below)
 ```
+
+### Emergency Dispatch
+
+`emergency-agent` is dispatched directly by PM, bypassing the normal SGM/SWM chain, for speed. It classifies the report against 10 scenario codes (E-01–E-10) and activates the matching protocol under `workflows/emergency/`:
+
+| Code | Scenario | Code | Scenario |
+|------|----------|------|----------|
+| E-01 | Fire / Explosion | E-06 | High-Angle Rescue |
+| E-02 | Serious Accident (severity overlay, not a standalone protocol) | E-07 | Electrical Emergency |
+| E-03 | Hazardous Chemical Release | E-08 | Mechanical Accident |
+| E-04 | Natural Disaster (routed to `disaster-response-agent`) | E-09 | Gas Leak / Explosion (gas terminal) |
+| E-05 | Confined Space Rescue | E-10 | Medical Emergency |
+
+Once the incident reaches `response_status: contained`/`resolved`, `emergency-agent` hands off to `incident-investigation-agent` for root-cause analysis — see `agents/_shared/emergency-agent.md` §Handoff Protocols.
 
 ### Example: Chemical Plant Worker Safety Assessment
 
@@ -102,6 +116,14 @@ Some workflows don't execute directly — they **dispatch** to another agent:
 | major-chemical-incident-reference (ehschem) | emergency-agent | Major chemical incident |
 | device-recall-reference (meddevice) | emergency-agent | Device recall/FSCA |
 
-## 7. Legal Disclaimer
+## 7. Governance & KPIs
+
+The Safety Governance Manager (SGM) operates at the strategic layer — it defines policy and KPI targets that operational agents (SWM and specialist agents) execute against:
+
+- **`policies/`** — approved safety policy documents (organization-wide standards, industry-profile-linked commitments). See `policies/README.md` for the naming convention and structure.
+- **`docs/governance/kpi-definitions.md`** — current KPI set: **LTIFR** (Lost Time Injury Frequency Rate), **Audit Pass Rate** (from `bun scripts/safety-audit.ts` output), and **Corrective Action Closure Rate** (from `memory/corrective-actions/*.json` records). Each KPI definition includes its formula, data source, target threshold, and escalation trigger.
+- **Traceability chain**: `memory/findings/FIND-YYYY-NNNN.json` → `memory/corrective-actions/CA-YYYY-NNNN.json`, conforming to `evidence-models/_shared/base/finding.schema.json` and `corrective-action.schema.json`.
+
+## 8. Legal Disclaimer
 
 > Safety OS provides workflow automation assistance only, not legal advice. All regulatory references must be verified by qualified EHS/GxP/legal professionals. The system does NOT make compliance decisions — it supports documentation and process management.

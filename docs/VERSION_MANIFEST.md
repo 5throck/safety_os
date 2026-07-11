@@ -1,6 +1,6 @@
 # VERSION_MANIFEST.md
 
-**Generated**: 2026-07-11T01:14:38.192Z
+**Generated**: 2026-07-11T01:42:12.648Z
 **Manifest Version**: 1.0
 **Location**: docs\VERSION_MANIFEST.md
 
@@ -24,18 +24,18 @@
 | _core/safety-workflow-manager | agents/_core/safety-workflow-manager.md | high | opus | 2026-07-07 |
 | _shared/asset-integrity-agent | agents/_shared/asset-integrity-agent.md | medium | sonnet | 2026-07-10 |
 | _shared/audit-agent | agents/_shared/audit-agent.md | medium | sonnet | 2026-07-10 |
-| _shared/compliance-agent | agents/_shared/compliance-agent.md | medium | sonnet | 2026-07-10 |
+| _shared/compliance-agent | agents/_shared/compliance-agent.md | medium | sonnet | 2026-07-11 |
 | _shared/contractor-safety-agent | agents/_shared/contractor-safety-agent.md | medium | sonnet | 2026-07-07 |
 | _shared/disaster-response-agent | agents/_shared/disaster-response-agent.md | high | opus | 2026-07-10 |
 | _shared/docs-writer | agents/_shared/docs-writer.md | medium | sonnet | 2026-07-07 |
-| _shared/emergency-agent | agents/_shared/emergency-agent.md | high | opus | 2026-07-07 |
+| _shared/emergency-agent | agents/_shared/emergency-agent.md | high | opus | 2026-07-11 |
 | _shared/incident-investigation-agent | agents/_shared/incident-investigation-agent.md | medium | sonnet | 2026-07-10 |
 | _shared/legal-agent | agents/_shared/legal-agent.md | medium | sonnet | 2026-07-10 |
 | _shared/occupational-health-agent | agents/_shared/occupational-health-agent.md | medium | sonnet | 2026-07-10 |
 | _shared/reporting-agent | agents/_shared/reporting-agent.md | medium | sonnet | 2026-07-10 |
 | _shared/risk-assessment-agent | agents/_shared/risk-assessment-agent.md | medium | sonnet | 2026-07-10 |
 | domains/functional/msds/msds-agent | agents/domains/functional/msds/msds-agent.md | medium | sonnet | 2026-07-10 |
-| domains/functional/psm/psm-agent | agents/domains/functional/psm/psm-agent.md | medium | sonnet | 2026-07-10 |
+| domains/functional/psm/psm-agent | agents/domains/functional/psm/psm-agent.md | medium | sonnet | 2026-07-11 |
 | domains/functional/training/training-agent | agents/domains/functional/training/training-agent.md | medium | sonnet | 2026-07-07 |
 | domains/industry/ehschem/ehschem-agent | agents/domains/industry/ehschem/ehschem-agent.md | medium | sonnet | 2026-07-10 |
 | domains/industry/ehsconst/ehsconst-agent | agents/domains/industry/ehsconst/ehsconst-agent.md | medium | sonnet | 2026-07-10 |
@@ -143,7 +143,7 @@
 | generate-scripts-readme.ts | 1.1.0 | scripts/generate-scripts-readme.ts | N/A |
 | generate-version-manifest.ts | 1.0.7 | scripts/generate-version-manifest.ts | bun |
 | mcp-cache.ts | 1.0.0 | scripts/lib/mcp-cache.ts | N/A |
-| new-domain.ts | 1.0.0 | scripts/new-domain.ts | N/A |
+| new-domain.ts | 1.0.1 | scripts/new-domain.ts | N/A |
 | pipeline-state.ts | 1.1.0 | scripts/lib/pipeline-state.ts | fs, path |
 | plan-parser.ts | 1.0.0 | scripts/lib/plan-parser.ts | fs, js-yaml |
 | platform-context.ts | 1.0.0 | scripts/lib/platform-context.ts | bun, os |
