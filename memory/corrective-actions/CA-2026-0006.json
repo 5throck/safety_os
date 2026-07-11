@@ -1,0 +1,11 @@
+{
+  "id": "CA-2026-0006",
+  "finding_id": "FIND-2026-0006",
+  "date_assigned": "2026-07-05",
+  "description": "Researched and confirmed the correct confined-space provision via direct law.go.kr search after legalize_kr/kr_safety both failed to index this 규칙-level rule; fixed confined-space-rescue to cite 산업안전보건기준에 관한 규칙 Article 623 (감시인의 배치 등).",
+  "responsible_party": "legal-agent",
+  "due_date": "2026-07-05",
+  "completed_date": "2026-07-05",
+  "status": "verified",
+  "verification_note": "bun scripts/safety-audit.ts re-run after fix — 618 files checked, 0 errors."
+}

@@ -1,33 +1,13 @@
-name: Fire Response
-description: Cross-Industry Scenario Library structure for Fire Response
-version: 1.0.0
+schema_version: "1.0"
+workflow_id: fire-response
+title: "화재 대응 (Fire Response)"
 status: active
 applicability: mandatory
+
 legal_basis:
-  - OSHA-KR Article 51
-  - OSHA-KR Article 52
-agents:
-  - emergency-agent
-  - compliance-agent
-  - audit-agent
-steps:
-  - step: 1
-    name: Discovery
-    description: Initial detection and reporting of the fire incident.
-    primary_agent: emergency-agent
-  - step: 2
-    name: Evacuation
-    description: Safe evacuation of all personnel from the affected area.
-    primary_agent: emergency-agent
-  - step: 3
-    name: Initial Suppression
-    description: Attempt to extinguish the fire using local fire extinguishers if safe to do so.
-    primary_agent: emergency-agent
-  - step: 4
-    name: Professional Team Support
-    description: Coordination with local fire departments and emergency services, ensuring compliance with external reporting requirements.
-    primary_agent: compliance-agent
-  - step: 5
-    name: Scene Preservation
-    description: Securing the incident scene for post-incident investigation, evidence traceability, and auditing.
-    primary_agent: audit-agent
+  - "산업안전보건법 제51조 (Suspension of Work by Employer)"
+  - "산업안전보건법 제52조 (Suspension of Work by Workers)"
+  - "산업안전보건법 제54조 (Action upon Serious Accidents — stop work, evacuate, prevent recurrence)"
+industry_profile: all
+agent: emergency-agent
+evidence_model: emergency-fire-response-record.json

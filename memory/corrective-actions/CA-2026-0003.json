@@ -1,0 +1,11 @@
+{
+  "id": "CA-2026-0003",
+  "finding_id": "FIND-2026-0003",
+  "date_assigned": "2026-07-05",
+  "description": "subcontractor-management now cites 건설산업기본법 Article 29-2 (하도급관리); daily-safety-inspection and tbm-tool-box-meeting now cite 건설기술진흥법 Article 24 (건설산업기본법 has no safety-titled article at all, confirmed via full structure scan).",
+  "responsible_party": "legal-agent",
+  "due_date": "2026-07-05",
+  "completed_date": "2026-07-05",
+  "status": "verified",
+  "verification_note": "bun scripts/safety-audit.ts re-run after fix — 618 files checked, 0 errors."
+}

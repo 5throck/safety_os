@@ -1,0 +1,11 @@
+{
+  "id": "CA-2026-0005",
+  "finding_id": "FIND-2026-0005",
+  "date_assigned": "2026-07-05",
+  "description": "Added 화학물질관리법 (CCA) Article 23 to both chemical-spill-reference and chemical-release workflows.",
+  "responsible_party": "msds-agent, emergency workflow owner",
+  "due_date": "2026-07-05",
+  "completed_date": "2026-07-05",
+  "status": "verified",
+  "verification_note": "bun scripts/safety-audit.ts re-run after fix — 618 files checked, 0 errors."
+}

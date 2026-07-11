@@ -1,0 +1,12 @@
+{
+  "id": "FIND-2026-0004",
+  "date": "2026-07-05",
+  "type": "non-conformance",
+  "description": "psm/trade-secrets-management/schema.yaml cited '영업비밀보호법', not a canonical statute name (actual: 부정경쟁방지 및 영업비밀보호에 관한 법률, which could not be verified against legalize_kr). K-REACH Art 13 (CBI protection) was already tracked in the glossary and directly on-topic but unused.",
+  "legal_basis": "K-REACH (화학물질등록 및 평가 등에 관한 법률) 제13조",
+  "severity": "major",
+  "location": "workflows/domains/functional/psm/trade-secrets-management/schema.yaml",
+  "responsible_party": "psm-agent",
+  "status": "verified",
+  "corrective_action_id": "CA-2026-0004"
+}

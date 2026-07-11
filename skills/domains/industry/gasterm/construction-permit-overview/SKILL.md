@@ -2,7 +2,7 @@
 name: construction-permit-overview
 owner: gasterm-agent
 scope: workspace
-status: stub
+status: experimental
 description: >
   Orchestrate full construction/permit lifecycle for gas terminal facilities
   (LNG/LPG/수소) under 3-phase KGS Code inspection: pre-construction technical

@@ -12,7 +12,7 @@ description: "Emergency response —scenario classification, immediate protocol 
 lifecycle:
   phase: production
   created: 2026-06-04
-  last_updated: 2026-06-04
+  last_updated: 2026-07-11
 ---
 
 ## Section A — Legal Basis
@@ -53,9 +53,31 @@ All emergency dispatches must be logged with timestamp and emergency type in `me
 | Code | Scenario | Primary Regulation |
 |---|---|---|
 | E-01 | Fire / Explosion | OSHA-KR Article 54 |
-| E-02 | Serious Accident (fatality/serious injury) | SAPA |
+| E-02 | Serious Accident (fatality/serious injury) — severity overlay applied to any scenario below, not a standalone protocol | SAPA |
 | E-03 | Hazardous Chemical Release | OSHA-KR Article 54 |
-| E-04 | Natural Disaster | OSHA-KR Article 54 |
+| E-04 | Natural Disaster | 재난 및 안전관리 기본법 (dispatched to `disaster-response-agent`, see Boundaries below) |
+| E-05 | Confined Space Rescue | 산업안전보건기준에 관한 규칙 Article 623 |
+| E-06 | High-Angle Rescue | OSHA-KR Article 99 (추락방지) |
+| E-07 | Electrical Emergency | 전기안전관리법 |
+| E-08 | Mechanical Accident | OSHA-KR Article 32 |
+| E-09 | Gas Leak / Explosion (gas terminal) | 고압가스 안전관리법 |
+| E-10 | Medical Emergency | 응급의료에 관한 법률 |
+
+### Scenario Code → Workflow Directory Mapping
+
+| Code | `workflows/emergency/` directory |
+|---|---|
+| E-01 | `fire-response/` |
+| E-03 | `chemical-release/` |
+| E-04 | `disaster-response/` |
+| E-05 | `confined-space-rescue/` |
+| E-06 | `high-angle-rescue/` |
+| E-07 | `electrical-emergency/` |
+| E-08 | `mechanical-accident/` |
+| E-09 | `explosion-gas-response/` |
+| E-10 | `medical-emergency/` |
+
+> E-04 (Natural Disaster) is owned by `disaster-response-agent`, not emergency-agent directly — PM should route natural-disaster reports there per that agent's README ownership note. All other codes are handled directly by emergency-agent.
 
 ### Input / Output
 
@@ -66,6 +88,12 @@ All emergency dispatches must be logged with timestamp and emergency type in `me
 ### Disclaimer
 
 Emergency response protocols provided by this agent are workflow guidance only. Actual emergency response decisions must be made by qualified on-site personnel and responsible officers. This agent does not replace emergency services (119, 112) or regulatory notification obligations.
+
+### Handoff Protocols
+
+- **Handoff to `incident-investigation-agent`** once `response_status` reaches `contained` or `resolved`: emergency-agent owns immediate response (discovery through scene preservation) only. Root cause analysis and the 30-day full investigation report are `incident-investigation-agent`'s responsibility, not emergency-agent's — dispatch it as soon as the scene is stabilized rather than emergency-agent attempting RCA itself.
+- **Handoff to `disaster-response-agent`** for E-04 (Natural Disaster) reports — see Scenario Code → Workflow Directory Mapping above.
+- **Handoff to `audit-agent`** for evidence-chain validation of the incident record written to `memory/incidents/`.
 
 ---
 

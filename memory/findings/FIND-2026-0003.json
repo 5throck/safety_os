@@ -1,0 +1,12 @@
+{
+  "id": "FIND-2026-0003",
+  "date": "2026-07-05",
+  "type": "non-conformance",
+  "description": "ehsconst/subcontractor-management cited 건설산업기본법 Article 45, verified via legalize_kr (MST 273435) to mean '경영합리화 등의 노력' (business-management-rationalization duty), unrelated to subcontractor safety. ehsconst/daily-safety-inspection and ehsconst/tbm-tool-box-meeting both cited Article 83, verified to mean '건설업의 등록말소 등' (business-registration cancellation), unrelated to daily inspection or TBM content. Confirmed wrong-article citations, not merely unverified statutes.",
+  "legal_basis": "건설산업기본법 제29조의2; 건설기술진흥법 제24조",
+  "severity": "critical",
+  "location": "workflows/domains/industry/ehsconst/{subcontractor-management,daily-safety-inspection,tbm-tool-box-meeting}/schema.yaml",
+  "responsible_party": "legal-agent (via legalize_kr)",
+  "status": "verified",
+  "corrective_action_id": "CA-2026-0003"
+}

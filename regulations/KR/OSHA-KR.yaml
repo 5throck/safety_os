@@ -1,0 +1,152 @@
+source_mcp: mcp-kr-legislation
+jurisdiction: KR
+regulator: MOEL / KOSHA
+framework: OSHA-KR
+title_ko: 산업안전보건법 (전체 조항 정본)
+title_en: Occupational Safety and Health Act (OSHA-KR) — Canonical Base
+description: >
+  Canonical, cross-domain base regulation file consolidating every 산업안전보건법 article
+  cited anywhere in the Safety OS codebase (workflows/**/schema.yaml legal_basis fields,
+  agents/*.md Section A Legal Basis blocks). Domain-specific sub-variant files
+  (OSHA-KR-Construction.yaml, OSHA-KR-MSDS.yaml, OSHA-KR-Training.yaml) narrow this list
+  to the articles relevant to their domain — this file is the single source of truth for
+  the full set. See regulations/KR/legal-glossary.yaml for the underlying provenance data
+  this file is generated from.
+primary_law:
+  name_ko: 산업안전보건법
+  name_en: Occupational Safety and Health Act
+  abbreviation: OSHA-KR
+  articles:
+    - article: "13"
+      topic_ko: 구급설비/구급조치
+      topic_en: First-aid equipment and measures
+    - article: "14"
+      topic_ko: 안전보건관리규정 작성 (이사회 승인)
+      topic_en: Safety and Health Management Regulations (rules creation / BoD approval of safety plan)
+    - article: "15"
+      topic_ko: 안전보건관리책임자 직무
+      topic_en: Safety and Health Management Supervisor duties
+    - article: "16"
+      topic_ko: 관리감독자 직무
+      topic_en: Management Supervisor duties
+    - article: "17"
+      topic_ko: 안전관리자 선임
+      topic_en: Safety Manager appointment
+    - article: "24"
+      topic_ko: 산업안전보건위원회
+      topic_en: Occupational Safety and Health Committee
+    - article: "29"
+      topic_ko: 근로자 안전보건교육
+      topic_en: Worker safety and health education
+    - article: "31"
+      topic_ko: 특별안전보건교육 (위험작업)
+      topic_en: Special safety and health training for hazardous work
+    - article: "32"
+      topic_ko: 관리감독자 교육 / 작업장 안전조치
+      topic_en: Workplace safety measures
+    - article: "36"
+      topic_ko: 위험성평가 실시
+      topic_en: Risk assessment
+    - article: "38"
+      topic_ko: 안전조치
+      topic_en: Safety measures
+    - article: "39"
+      topic_ko: 보건조치
+      topic_en: Health measures
+    - article: "44"
+      topic_ko: 공정안전관리 (PSM 대상 공정)
+      topic_en: Process Safety Management (PSM) for covered processes
+    - article: "51"
+      topic_ko: 사업주에 의한 작업중지
+      topic_en: Suspension of Work by Employer
+    - article: "52"
+      topic_ko: 근로자에 의한 작업중지
+      topic_en: Suspension of Work by Workers
+    - article: "54"
+      topic_ko: 중대재해 발생 시 조치 (작업중지, 대피, 재발방지)
+      topic_en: Action upon Serious Accidents (stop work, evacuate, prevent recurrence)
+    - article: "57"
+      topic_ko: 산업재해 기록·보고 (3년 보존)
+      topic_en: Incident Recording & Reporting (retain 3 years)
+    - article: "61"
+      topic_ko: 도급 사업 안전보건 조치
+      topic_en: Safety and Health Measures in Contracted Projects
+    - article: "62"
+      topic_ko: 안전보건 협조 의무
+      topic_en: Safety/health cooperation obligations
+    - article: "63"
+      topic_ko: 도급인의 안전보건조치
+      topic_en: Ordering party's safety and health measures
+    - article: "93"
+      topic_ko: 안전검사
+      topic_en: Safety inspection
+    - article: "98"
+      topic_ko: 허가대상작업 (기계사고 예방)
+      topic_en: Permit-to-work / mechanical accident prevention
+    - article: "99"
+      topic_ko: 추락방지
+      topic_en: Fall prevention
+    - article: "100"
+      topic_ko: 붕괴방지
+      topic_en: Collapse prevention
+    - article: "101"
+      topic_ko: 전기위해 방지
+      topic_en: Electrical hazard prevention
+    - article: "103"
+      topic_ko: 안전보건관리계획
+      topic_en: Safety and Health Management Plan
+    - article: "108"
+      topic_ko: 자율안전확인
+      topic_en: Voluntary safety confirmation
+    - article: "110"
+      topic_ko: MSDS 작성·비치 의무
+      topic_en: MSDS preparation and posting duty
+    - article: "111"
+      topic_ko: MSDS 제출대상 물질
+      topic_en: Substances subject to MSDS submission
+    - article: "112"
+      topic_ko: MSDS 형식 및 필수 기재사항 (GHS 16 항목)
+      topic_en: MSDS format and required content (GHS 16 sections)
+    - article: "113"
+      topic_ko: 유해·위험물질 (제조등금지/허가/유해물질)
+      topic_en: Prohibited, permission-required, and harmful substances
+    - article: "114"
+      topic_ko: 경고표지 부착 의무
+      topic_en: Warning label attachment duty
+    - article: "125"
+      topic_ko: 작업환경측정
+      topic_en: Work Environment Measurement
+    - article: "129"
+      topic_ko: 일반건강진단
+      topic_en: Worker Health Examination — General
+    - article: "130"
+      topic_ko: 특수건강진단
+      topic_en: Worker Health Examination — Special
+    - article: "155"
+      topic_ko: 고용노동부 작업장 감독 권한
+      topic_en: MOEL workplace inspection authority
+    - article: "243"
+      topic_ko: GHS 분류 의무화
+      topic_en: Mandatory GHS classification
+related_rule:
+  name_ko: 안전보건기준에관한규칙
+  abbreviation: OSHA-KR-Rules
+  note: >
+    Also cited in codebase as '산업안전보건기준에 관한 규칙' (OSHSR) — same rule, name-string
+    variant; entries consolidated in regulations/KR/legal-glossary.yaml rather than duplicated
+    here.
+  articles:
+    - article: "92"
+      topic_ko: 제로에너지상태 확보 (LOTO)
+      topic_en: Zero Energy State — Lockout/Tagout
+    - article: "618"
+      topic_ko: 밀폐공간 정의
+      topic_en: Confined space — definitions
+    - article: "623"
+      topic_ko: 감시인의 배치 등
+      topic_en: Confined space — watcher/monitor assignment
+domain_sub_variants:
+  - regulations/KR/OSHA-KR-Construction.yaml
+  - regulations/KR/OSHA-KR-MSDS.yaml
+  - regulations/KR/OSHA-KR-Training.yaml
+last_updated: "2026-07-11"

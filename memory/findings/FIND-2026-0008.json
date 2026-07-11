@@ -1,0 +1,12 @@
+{
+  "id": "FIND-2026-0008",
+  "date": "2026-07-05",
+  "type": "non-conformance",
+  "description": "Documentation/glossary hygiene gaps: legal-glossary.yaml Art 31 entry disagreed with OSHA-KR-Training.yaml's topic mapping; 6 statutes (생명윤리법, EU GDP, EU GVP, 독성시험 책임자 규정, 소방기본법, 응급의료에 관한 법률) cited across workflows but not indexed in the glossary; all 10 GMP schemas omitted the workflow_type field present in sibling pharma domains; glp/study-protocol cited bare '약사법' with no article; equipment-inspection/permit-to-work/safety-patrol schema legal_basis strings did not match their own README's stated basis.",
+  "legal_basis": "산업안전보건법 제31조; 약사법 제34조의3",
+  "severity": "minor",
+  "location": "regulations/KR/legal-glossary.yaml; workflows/domains/industry/gmp/**; workflows/domains/industry/glp/study-protocol/schema.yaml; workflows/daily/manufacturing/{equipment-inspection,permit-to-work,safety-patrol}",
+  "responsible_party": "docs-writer",
+  "status": "verified",
+  "corrective_action_id": "CA-2026-0008"
+}

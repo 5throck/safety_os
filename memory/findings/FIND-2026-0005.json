@@ -1,0 +1,12 @@
+{
+  "id": "FIND-2026-0005",
+  "date": "2026-07-05",
+  "type": "non-conformance",
+  "description": "msds/chemical-spill-reference and workflows/emergency/chemical-release both lacked 화학물질관리법 (CCA) Article 23 (사고대비물질/accident-preparedness substances), the most substantively relevant source for spill/release response, despite citing adjacent but less-fitting sources.",
+  "legal_basis": "화학물질관리법 (CCA) 제23조; 산업안전보건법 제54조",
+  "severity": "major",
+  "location": "workflows/domains/functional/msds/chemical-spill-reference/schema.yaml; workflows/emergency/chemical-release/schema.yaml",
+  "responsible_party": "msds-agent, emergency workflow owner",
+  "status": "verified",
+  "corrective_action_id": "CA-2026-0005"
+}

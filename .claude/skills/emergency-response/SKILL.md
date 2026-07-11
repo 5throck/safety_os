@@ -3,7 +3,7 @@ name: emergency-response
 description: Trigger emergency response protocol on incident, fire, spill, or injury report
 owner: emergency-agent
 status: active
-version: 1.0.0
+version: 1.0.1
 metadata:
   triggers:
     - 비상사태
@@ -52,7 +52,7 @@ Invoke this skill immediately upon any report of an emergency event including: f
 
 4. **Evidence Preservation** — Do not alter the incident scene except to provide emergency care or prevent further harm. Document: photographs, witness statements, equipment state, environmental conditions, timeline of events.
 
-5. **Post-Incident Report** — Within 24 hours of stabilization, create a preliminary incident record. Within 30 days, produce a full investigation report with root cause analysis and corrective actions.
+5. **Post-Incident Report** — Within 24 hours of stabilization, create a preliminary incident record. Once `response_status` reaches `contained`/`resolved`, hand off to `incident-investigation-agent` (per `agents/_shared/emergency-agent.md` §Handoff Protocols) — root cause analysis and the 30-day full investigation report are that agent's responsibility, not emergency-agent's.
 
 ## Output Format
 

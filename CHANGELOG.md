@@ -6,6 +6,31 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+### Fixed (2026-07-11 — Project Review R3 Remediation)
+
+- **scripts/domain-config.ts, scripts/safety-audit.ts**: Closed systemic audit-coverage gap — `workflows/daily/**`, `workflows/emergency/**`, and `workflows/compliance/**` now get the same `legal_basis` array + `minItems≥3` validation as registered domains (previously only a truthy check applied). Removed PSM's blanket `skip_workflow_validation` exemption. Added a `risk-assessment-agent` ↔ `psm-agent` role-separation check mirroring the existing `risk-assessment-agent` ↔ `gmp-qrm` check.
+- **workflows/daily/manufacturing/{risk-assessment,permit-to-work,contractor-management,equipment-inspection,safety-patrol,safety-training}/schema.yaml, workflows/domains/functional/psm/loto-lockout-tagout/schema.yaml**: Converted single-statute `legal_basis` strings to compliant 3-source arrays.
+- **workflows/emergency/fire-response/**: Added missing OSHA-KR Article 54, `agent`/`industry_profile`/`evidence_model` fields, and a `README.md` to match sibling emergency workflows; created the previously-missing `emergency-fire-response-record.json` evidence model.
+- **evidence-models/emergency/emergency-*-record.json (7 files)**: Bumped `legal_basis.minItems` from 2 to 3 for CSO-mandate consistency (v1.0.0→1.1.0).
+- **agents/_shared/emergency-agent.md**: Added a Handoff Protocols section (→ `incident-investigation-agent` on containment, → `disaster-response-agent` for E-04, → `audit-agent` for evidence validation) and a scenario-code → workflow-directory mapping table (E-01–E-10).
+- **skills/domains/functional/psm/loto/SKILL.md**: Implemented the previously-stub LOTO skill for real, aligned to `psm-loto-record.json` and KOSHA GUIDE Z-40-2022.
+- **agents/domains/functional/psm/psm-agent.md**: Added an explicit boundary note vs. `tank-integrity-validator` (gasterm) for LNG/LPG tank mechanical integrity.
+- **skills/daily/permit-to-work/SKILL.md** (+ `.claude`/`.gemini` mirrors): Added LOTO co-issuance cross-reference.
+- **.claude/skills/{risk-assessment,compliance-gap}/SKILL.md, .gemini/skills/{risk-assessment,compliance-gap}/SKILL.md**: Fixed drift from canonical `skills/daily/` copies (missing legal_basis sources).
+- **agents/_shared/compliance-agent.md**: Corrected the `workflows/compliance/` checklist claim (directory is empty; now points to `regulations/KR/legal-glossary.yaml`) and added `kr_safety`/`legalize_kr` MCP tools to its Tools Used table.
+- **regulations/KR/OSHA-KR.yaml, regulations/KR/SAPA.yaml**: Added canonical base regulation files consolidating all articles cited across the codebase.
+- **policies/README.md, docs/governance/kpi-definitions.md**: Created the previously-missing SGM policy output directory and KPI definitions (LTIFR, Audit Pass Rate, Corrective Action Closure Rate).
+- **docs/_meta/co-safety.context.md**: Fixed stale `evidence-models/base/` path references and outdated single-source legal_basis examples.
+- **docs/_meta/blueprint/03-governance.md**: Status Draft→Active now that KPI/policy gaps are closed.
+- **evidence-models/domains/functional/risk-assessment/risk-assessment-record.json**: Added optional `risk_score_before`/`risk_score_after` (numeric 1-25), `incident_ref`, and `related_assessment_ref` fields (v1.0.0→1.1.0; additive-only, no migration required per `evidence-models/migrations/README.md`).
+- **scripts/verify-scripts.ts**: Fixed `walkScripts()` to exclude `node_modules/`/`.git/` — it was reporting `scripts/node_modules/`'s bundled `.d.ts` files as unregistered scripts.
+- **scripts/SCRIPTS.md**: Fixed `sync-skills.ts` version drift (1.1.0→1.3.0, matching its actual header).
+- **skills/domains/industry/{ehschem/tar-planning,gasterm/completion-inspection,gasterm/construction-permit-overview,gasterm/mid-construction-inspection,gasterm/pre-construction-technical-review}/SKILL.md**: Fixed invalid `status: stub` (not a valid skill-lifecycle-audit.ts status) → `status: experimental`.
+
+### Added (2026-07-11 — Project Review R3 Remediation)
+
+- **memory/findings/FIND-2026-0001.json .. FIND-2026-0009.json, memory/corrective-actions/CA-2026-0001.json .. CA-2026-0009.json**: Converted the 2026-07-05 legal-citation audit's narrative findings/corrective-action plan into schema-conformant records, seeding the previously-unused finding→corrective-action traceability chain.
+
 ### Fixed (2026-07-10 — Design Doc Alignment)
 
 - **CLAUDE.md**: Fixed SGM/SWM tier Medium→High in Phase Determination checklist (per agent frontmatter); removed stale `TaskCreated` hook reference from lifecycle propagation table.

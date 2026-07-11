@@ -2,7 +2,7 @@
 name: completion-inspection
 owner: gasterm-agent
 scope: workspace
-status: stub
+status: experimental
 description: >
   Execute KGS on-site completion inspection and permit issuance for gas terminal
   facilities (LNG/LPG/수소). Final verification of all safety systems, pressure

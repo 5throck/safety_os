@@ -1,6 +1,6 @@
 # VERSION_MANIFEST.md
 
-**Generated**: 2026-07-10T14:55:39.005Z
+**Generated**: 2026-07-11T01:14:38.192Z
 **Manifest Version**: 1.0
 **Location**: docs\VERSION_MANIFEST.md
 
@@ -66,7 +66,7 @@
 | contractor-onboarding | 1.0.0 | .claude/skills/contractor-onboarding/SKILL.md | both | 협력업체 온보딩, contractor onboarding, 도급업체 안전교육, 협력업체 자격심사, site access approval, 안전교육 이수확인, 도급 안전관리 | contractor-safety-agent |
 | documentation-writing | 1.0.0 | .claude/skills/documentation-writing/SKILL.md | both | write documentation, create guide, draft communication, write manual, create tutorial, documentation, technical writing | N/A |
 | dts-verification | 1.0 | .claude/skills/dts-verification/SKILL.md | both | DTS 바코드 검증, DTS verification, 의약품 유통관리, RFID 검증, MFDS DTS센터, 위변조 의약품 조사, GS1 데이터매트릭스 | gdp-agent |
-| emergency-response | 1.0.0 | .claude/skills/emergency-response/SKILL.md | both | 비상사태, emergency, 사고 발생, 화재, 폭발, 누출, 중대재해, serious accident, 폭발, explosion | emergency-agent |
+| emergency-response | 1.0.1 | .claude/skills/emergency-response/SKILL.md | both | 비상사태, emergency, 사고 발생, 화재, 폭발, 누출, 중대재해, serious accident, 폭발, explosion | emergency-agent |
 | environmental-compliance-checker | 1.0 | .claude/skills/environmental-compliance-checker/SKILL.md | both | 환경 배출 기준, 대기오염물질 배출허용기준, SOx NOx VOC, 수질오염물질, BOD COD, 환경보전법 준수, 배출 규제 준수, environmental discharge compliance | ehschem-agent |
 | ess-fire-risk-assessor | 1.0 | .claude/skills/ess-fire-risk-assessor/SKILL.md | both | ESS 화재, 리튬이온 배터리 화재, thermal runaway, 열폭주, BMS 안전, energy storage system fire, MPSL 인증, 에너지저장장치 화재위험 | powergen-agent |
 | fall-hazard-assessor | 1.0 | .claude/skills/fall-hazard-assessor/SKILL.md | both | 추락 위해평가, fall hazard, leading edge, 안전대 활동제한장치, 방호 계층, fall protection hierarchy, 추락방지망, rescue plan 구조 계획 | ehsconst-agent |
@@ -85,7 +85,7 @@
 | meeting-facilitation | 1.5.0 | skills/meeting-facilitation/SKILL.md | workspace | meeting, agent discussion, collaborative decision, multi-agent coordination, facilitate meeting | pm |
 | meeting-facilitation | 1.5.0 | .claude/skills/meeting-facilitation/SKILL.md | both | meeting, agent discussion, collaborative decision, multi-agent coordination, facilitate meeting | pm |
 | msds-parser | 1.0 | .claude/skills/msds-parser/SKILL.md | both | MSDS 파싱, MSDS parser, SDS 16항목, 물질안전보건자료, GHS 16-section, msds-record.json, 공급자 MSDS 양식 | msds-agent |
-| permit-to-work | 1.0.0 | .claude/skills/permit-to-work/SKILL.md | both | 작업허가서, permit to work, PTW, hot work permit, 화기작업, 밀폐공간작업, confined space | safety-workflow-manager |
+| permit-to-work | 1.0.1 | .claude/skills/permit-to-work/SKILL.md | both | 작업허가서, permit to work, PTW, hot work permit, 화기작업, 밀폐공간작업, confined space | safety-workflow-manager |
 | platform-command-lifecycle-manager | 1.0.0 | .claude/skills/platform-command-lifecycle-manager/SKILL.md | both | create platform command, new .claude command, new .gemini command, platform command lifecycle, command parity, propagate command | pm |
 | platform-skill-lifecycle-manager | 1.0.0 | .claude/skills/platform-skill-lifecycle-manager/SKILL.md | both | create platform skill, new .claude skill, new .gemini skill, platform skill version, platform skill lifecycle, update platform skill | pm |
 | process-hazard-screening | 1.0 | .claude/skills/process-hazard-screening/SKILL.md | both | PSM 적용대상, process hazard screening, 위해물질 보유량, 공정안전관리, PHA 대상 여부, 사고대비물질, 화학공장 초기 위해평가 | ehschem-agent |
@@ -135,7 +135,7 @@
 | dispatch-parallel.ts | 1.0.1 | scripts/dispatch-parallel.ts | N/A |
 | dispatch-serial.ts | 1.0.0 | scripts/dispatch-serial.ts | N/A |
 | dispatch.ts | 1.0.0 | scripts/dispatch.ts | N/A |
-| domain-config.ts | 1.3.0 | scripts/domain-config.ts | N/A |
+| domain-config.ts | 1.4.0 | scripts/domain-config.ts | N/A |
 | encoding-utils.ts | 1.0.0 | scripts/lib/encoding-utils.ts | fs, path |
 | error-handling.ts | 1.1.0 | scripts/lib/error-handling.ts | N/A |
 | fetch-legalize.ts | 1.0.0 | scripts/fetch-legalize.ts | child_process, fs, path |
@@ -151,7 +151,7 @@
 | qa-gate.ts | N/A | scripts/qa-gate.ts | bun |
 | readme-lifecycle-audit.ts | 1.0.2 | scripts/readme-lifecycle-audit.ts | N/A |
 | retry-handler.ts | 1.0.2 | scripts/retry-handler.ts | N/A |
-| safety-audit.ts | 4.2.1 | scripts/safety-audit.ts | js-yaml |
+| safety-audit.ts | 4.3.0 | scripts/safety-audit.ts | js-yaml |
 | skill-dependency-analysis.ts | 1.0.0 | scripts/skill-dependency-analysis.ts | N/A |
 | skill-lifecycle-audit.ts | 1.1.4 | scripts/skill-lifecycle-audit.ts | N/A |
 | start-mcp.ts | 1.0.0 | scripts/start-mcp.ts | child_process, path |
@@ -173,7 +173,7 @@
 | verify-agent-deliverables.ts | 1.0.0 | scripts/verify-agent-deliverables.ts | fs |
 | verify-memory.ts | 1.0.0 | scripts/verify-memory.ts | fs, path |
 | verify-readme-sync.ts | 1.1.1 | scripts/verify-readme-sync.ts | bun, fs, path |
-| verify-scripts.ts | 1.0.1 | scripts/verify-scripts.ts | fs, path |
+| verify-scripts.ts | 1.0.2 | scripts/verify-scripts.ts | fs, path |
 | verify-skills.ts | 1.1.0 | scripts/verify-skills.ts | N/A |
 
 ---
