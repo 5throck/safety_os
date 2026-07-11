@@ -1,0 +1,11 @@
+{
+  "id": "CA-2026-0009",
+  "finding_id": "FIND-2026-0009",
+  "date_assigned": "2026-07-05",
+  "description": "All 10 thin PSM workflows upgraded to a 3-source legal_basis; a bonus finding during this pass also caught and fixed the same SAPA Article 7→4 mis-citation in 3 PSM workflows previously mis-assessed as OK (eap-emergency-planning, incident-investigation-psm, psm-compliance-audit). Tracked non-blocking at memory/backlog/psm-citation-thinness.md before closure.",
+  "responsible_party": "psm-agent",
+  "due_date": "2026-07-05",
+  "completed_date": "2026-07-05",
+  "status": "verified",
+  "verification_note": "bun scripts/safety-audit.ts re-run after fix — 618 files checked, 0 errors."
+}

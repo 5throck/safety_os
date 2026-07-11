@@ -33,14 +33,20 @@
  * v4.1.0 (2026-06-20): Added docs/_shared bilingual pair-consistency check —
  *   enforces the <name>.md (EN canonical) + <name>_ko.md (KO mirror) convention.
  *   Every markdown file in docs/_shared/ must have its language partner.
+ * v4.3.0 (2026-07-11): Closed audit coverage gap — workflows/daily/**,
+ *   workflows/emergency/**, workflows/compliance/**, and any other tree outside
+ *   workflows/domains/** now get the same array+minItems(≥3) legal_basis
+ *   validation that registered domains get (previously only a truthy check
+ *   applied). Added risk-assessment-agent ↔ psm-agent role-separation check,
+ *   mirroring the existing risk-assessment-agent ↔ gmp-qrm check.
  *
- * @version 4.2.1
+ * @version 4.3.0
  */
 
 import * as fs from 'node:fs';
 import * as path from 'node:path';
 import * as yaml from 'js-yaml';
-import { DOMAINS, CROSS_DOMAIN_REFS, KNOWN_INDUSTRIES } from './domain-config.ts';
+import { DOMAINS, CROSS_DOMAIN_REFS, KNOWN_INDUSTRIES, DEFAULT_MIN_WORKFLOW_LEGAL_BASIS } from './domain-config.ts';
 
 // Color helpers
 const GREEN = '\x1b[32m';
@@ -112,6 +118,18 @@ for (const file of schemaFiles) {
 
         if (!doc.legal_basis) {
             errors.push(`${rel}: missing legal_basis`);
+        } else if (!rel.includes('workflows/domains/')) {
+            // workflows/domains/** gets array+minItems validation from
+            // validateDomainWorkflow below (per-domain thresholds). Everything else
+            // (workflows/daily/**, workflows/emergency/**, workflows/compliance/**,
+            // and any future non-domain-registered tree) previously only got the
+            // truthy check above and silently bypassed the CSO's ≥3-source gate —
+            // enforce the same array+minItems policy here directly.
+            const isReference = doc.workflow_type === 'reference';
+            const reqMin = isReference ? 2 : DEFAULT_MIN_WORKFLOW_LEGAL_BASIS;
+            if (!Array.isArray(doc.legal_basis) || doc.legal_basis.length < reqMin) {
+                errors.push(`${rel}: workflow requires multi-source legal_basis (≥${reqMin})`);
+            }
         }
 
         if (!doc.status || !VALID_STATUSES.includes(doc.status)) {
@@ -207,6 +225,28 @@ if (fs.existsSync(qrmSkillPath)) {
     const content = fs.readFileSync(qrmSkillPath, 'utf-8');
     if (!content.includes('risk-assessment-agent')) {
         errors.push('skills/domains/gmp/qrm/SKILL.md: missing risk-assessment-agent scope separation reference');
+    }
+}
+
+// ── Role separation check (risk-assessment-agent vs psm-agent) ───────────────
+// General EHS workplace risk (risk-assessment-agent) vs. process-safety hazard
+// analysis (psm-agent PHA/HAZOP/MOC) must remain scoped separately to avoid
+// hazard misclassification. psm-agent.md previously claimed this separation was
+// "enforced the same way by safety-audit.ts" as the gmp-qrm check above — this
+// makes that claim true.
+const psmAgentPath = path.join(ROOT, 'agents', 'domains', 'functional', 'psm', 'psm-agent.md');
+if (fs.existsSync(psmAgentPath)) {
+    totalChecked++;
+    const content = fs.readFileSync(psmAgentPath, 'utf-8');
+    if (!content.includes('risk-assessment-agent')) {
+        errors.push('agents/domains/functional/psm/psm-agent.md: missing risk-assessment-agent scope separation reference');
+    }
+}
+if (fs.existsSync(riskAgentPath)) {
+    totalChecked++;
+    const content = fs.readFileSync(riskAgentPath, 'utf-8');
+    if (!content.includes('psm-agent')) {
+        errors.push('agents/_shared/risk-assessment-agent.md: missing psm-agent scope separation reference (general EHS risk vs. process safety)');
     }
 }
 

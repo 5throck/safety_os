@@ -1,7 +1,10 @@
 #!/usr/bin/env bun
 /**
  * verify-scripts.ts — Script Lifecycle Registry Verifier (Standalone Variant)
- * @version 1.0.1
+ * @version 1.0.2
+ * v1.0.2 (2026-07-11): walkScripts() now excludes node_modules/ and .git/ —
+ *   scripts/node_modules/ (a pre-existing local install artifact) was being
+ *   walked and its .ts type-definition files reported as "unregistered scripts".
  *
  * Validates that scripts/SCRIPTS.md Registry is in sync with actual script files,
  * enforces deprecation removal dates, and blocks on security advisories.
@@ -120,10 +123,14 @@ function parseRegistry(content: string): RegistryEntry[] {
 
 // ── Filesystem Scanner ───────────────────────────────────────────────────────
 
+const EXCLUDED_DIRS = new Set(["node_modules", ".git"]);
+
 function walkScripts(dir: string): string[] {
   return readdirSync(dir, { withFileTypes: true }).flatMap((entry) =>
     entry.isDirectory()
-      ? walkScripts(join(dir, entry.name))
+      ? EXCLUDED_DIRS.has(entry.name)
+        ? []
+        : walkScripts(join(dir, entry.name))
       : SCRIPT_EXTENSIONS.some((ext) => entry.name.endsWith(ext)) && entry.name !== SCRIPTS_MD_FILENAME
         ? [join(dir, entry.name)]
         : []

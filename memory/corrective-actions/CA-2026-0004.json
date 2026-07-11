@@ -1,0 +1,11 @@
+{
+  "id": "CA-2026-0004",
+  "finding_id": "FIND-2026-0004",
+  "date_assigned": "2026-07-05",
+  "description": "Replaced unverifiable '영업비밀보호법' citation with the already-verified, substantively-fitting K-REACH Article 13 (CBI/trade-secret protection for chemical composition data).",
+  "responsible_party": "psm-agent",
+  "due_date": "2026-07-05",
+  "completed_date": "2026-07-05",
+  "status": "verified",
+  "verification_note": "bun scripts/safety-audit.ts re-run after Batch 2 fixes — 618 files checked, 0 errors."
+}

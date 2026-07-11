@@ -5,7 +5,11 @@
  * define all domains in this config array. The audit script iterates and
  * applies the same validation logic to each domain.
  *
- * @version 1.3.0
+ * @version 1.4.0
+ * v1.4.0 (2026-07-11): Removed PSM's skip_workflow_validation blanket exemption —
+ *   14/15 PSM workflow schemas already use compliant 3-item legal_basis arrays;
+ *   the one remaining outlier (loto-lockout-tagout) was fixed to match rather than
+ *   exempting the entire domain from array-format validation.
  * v1.3.0 (2026-07-05): Replaced per-domain min_legal_basis/min_workflow_legal_basis
  *   hardcoding with DEFAULT_MIN_LEGAL_BASIS/DEFAULT_MIN_WORKFLOW_LEGAL_BASIS constants.
  *   Domains that need a lower threshold must set it explicitly (only PSM has
@@ -99,7 +103,6 @@ const RAW_DOMAINS: DomainConfig[] = [
         name: 'psm',
         tier: 'functional',
         required_evidence_fields: [],
-        skip_workflow_validation: true, // PSM schemas use plain-string legal_basis, not array
         description: 'Process Safety Management',
     },
     {

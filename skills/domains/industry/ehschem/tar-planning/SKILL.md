@@ -2,7 +2,7 @@
 name: tar-planning
 owner: ehschem-agent
 scope: workspace
-status: stub
+status: experimental
 description: >
   Chemical plant turnaround (TAR) shutdown planning — pre-TAR risk assessment,
   PSSR (Pre-Startup Safety Review), contractor surge management, and safe

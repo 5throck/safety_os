@@ -3,7 +3,7 @@
   "$id": "emergency-medical-record.json",
   "title": "Emergency Medical Response Record",
   "description": "Medical emergency response (cardiac arrest/allergy/severe injury).",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "type": "object",
   "required": ["record_id", "incident_id", "incident_type", "severity", "response_status", "legal_basis", "e_signature", "nomenclature", "audit_trail"],
   "properties": {
@@ -46,7 +46,7 @@
     "legal_basis": {
       "type": "array",
       "items": { "type": "string" },
-      "minItems": 2
+      "minItems": 3
     },
     "e_signature": { "$ref": "../_shared/base/common.schema.json#/definitions/e_signature" },
     "nomenclature": { "$ref": "../_shared/base/common.schema.json#/definitions/nomenclature" },

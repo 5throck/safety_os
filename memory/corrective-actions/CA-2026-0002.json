@@ -1,0 +1,11 @@
+{
+  "id": "CA-2026-0002",
+  "finding_id": "FIND-2026-0002",
+  "date_assigned": "2026-07-05",
+  "description": "Update msds/chemical-approval to cite 화학물질관리법 (CCA) Article 20 instead of superseded TCCL.",
+  "responsible_party": "msds-agent / docs-writer",
+  "due_date": "2026-07-05",
+  "completed_date": "2026-07-05",
+  "status": "verified",
+  "verification_note": "bun scripts/safety-audit.ts re-run after fix — 618 files checked, 0 errors."
+}

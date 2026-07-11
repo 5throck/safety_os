@@ -1,0 +1,12 @@
+{
+  "id": "FIND-2026-0002",
+  "date": "2026-07-05",
+  "type": "non-conformance",
+  "description": "workflows/domains/functional/msds/chemical-approval/schema.yaml cited '유해화학물질 관리법 (TCCL)', a statute documented in K-REACH.yaml as status: partially_superseded — largely absorbed into 화학물질관리법 (CCA). Schema cited a legacy/superseded statute name.",
+  "legal_basis": "화학물질관리법 (CCA) 제20조",
+  "severity": "critical",
+  "location": "workflows/domains/functional/msds/chemical-approval/schema.yaml",
+  "responsible_party": "msds-agent / docs-writer",
+  "status": "verified",
+  "corrective_action_id": "CA-2026-0002"
+}

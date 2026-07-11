@@ -2,7 +2,7 @@
 name: pre-construction-technical-review
 owner: gasterm-agent
 scope: workspace
-status: stub
+status: experimental
 description: >
   Execute KGS Code pre-construction technical review (시설·기술 기준) for
   gas terminal facilities (LNG/LPG/수소). Reviews design documentation,

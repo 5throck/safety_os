@@ -5,8 +5,8 @@
 | Property | Value |
 |----------|-------|
 | Document ID | 03-governance.md |
-| Status | Draft |
-| Date | 2026-06-05 |
+| Status | Active |
+| Date | 2026-07-11 |
 | Classification | Internal |
 
 ## 3.1 Hierarchy
@@ -32,9 +32,10 @@ In the Safety OS ecosystem, the PM agent assumes the critical role of Chief Safe
 
 The Safety Governance Manager is responsible for the strategic alignment of the organization's EHS objectives with regulatory requirements.
 
-*   **KPI Definition**: The SGM defines and tracks safety Key Performance Indicators (KPIs) such as Incident Frequency Rates and Audit Pass Rates.
+*   **KPI Definition**: The SGM defines and tracks safety Key Performance Indicators (KPIs) such as Incident Frequency Rates and Audit Pass Rates. See `docs/governance/kpi-definitions.md` for the current KPI set (LTIFR, Audit Pass Rate, Corrective Action Closure Rate).
 *   **Compliance Strategy**: It translates abstract regulatory requirements (like SAPA's mandate for an occupational safety and health management system) into concrete objectives.
 *   **Annual Planning**: The SGM assists in generating annual safety plans and distributing safety targets across different organizational units.
+*   **Policy Output**: Approved policies are written to `policies/` per the naming convention documented in `policies/README.md`.
 
 ## 3.4 Safety Workflow Manager (SWM)
 

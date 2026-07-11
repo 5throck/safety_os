@@ -1,0 +1,11 @@
+{
+  "id": "CA-2026-0008",
+  "finding_id": "FIND-2026-0008",
+  "date_assigned": "2026-07-05",
+  "description": "Glossary Art 31 entry reconciled with OSHA-KR-Training.yaml; 6 missing statute entries added to legal-glossary.yaml (v1.0.1→1.0.2); workflow_type: core added to all 10 GMP schemas; glp/study-protocol now cites 약사법 Article 34-3 specifically; daily/manufacturing schema↔README sync gaps reconciled in all 3 affected workflows.",
+  "responsible_party": "docs-writer",
+  "due_date": "2026-07-05",
+  "completed_date": "2026-07-05",
+  "status": "verified",
+  "verification_note": "bun scripts/safety-audit.ts re-run after Batch 2 fixes — 618 files checked, 0 errors."
+}

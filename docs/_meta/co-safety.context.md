@@ -39,27 +39,27 @@ PM (CSO — Chief Safety Officer)
 
 1. **`legal_basis` field is mandatory** in every workflow record — enforced by `scripts/safety-audit.ts`
 2. **Regulation content**: store metadata/references only — never embed full statutory text
-3. **Evidence schemas** (`evidence-models/base/`): semver bump + migration script required on any change
+3. **Evidence schemas** (`evidence-models/_shared/base/`): semver bump + migration script required on any change
 4. **Legal interpretation**: user/organization responsibility only — this system provides automation assistance, not legal advice
 
 ## Workflow Library
 
 Location: `workflows/daily/manufacturing/`
 
-| Workflow | Legal Basis | Agent Chain |
+| Workflow | Legal Basis (≥3 sources, see `regulations/KR/OSHA-KR.yaml`/`SAPA.yaml`) | Agent Chain |
 |----------|-------------|-------------|
-| risk-assessment | 제36조 | SWM → risk-assessment-agent |
-| permit-to-work | 제38조, 제39조 | SWM → risk-assessment-agent → compliance-agent |
-| equipment-inspection | 제93조 | SWM → audit-agent |
-| contractor-management | 제63조 | SWM → compliance-agent → risk-assessment-agent |
-| safety-training | 제29조 | SWM → compliance-agent |
-| safety-patrol | 제15조, 제16조 | SWM → risk-assessment-agent → audit-agent |
+| risk-assessment | 제36조, 제38조, SAPA 제4조 | SWM → risk-assessment-agent |
+| permit-to-work | 제98조, 제38조, SAPA 제4조 | SWM → risk-assessment-agent → compliance-agent |
+| equipment-inspection | 제93조, 제108조, SAPA 제4조 | SWM → audit-agent |
+| contractor-management | 제63조, 제61조, SAPA 제5조 | SWM → compliance-agent → risk-assessment-agent |
+| safety-training | 제29조, 제31조, SAPA 제8조 | SWM → compliance-agent |
+| safety-patrol | 제15조, 제16조, SAPA 제4조 | SWM → risk-assessment-agent → audit-agent |
 
 ## Evidence Trail
 
 | Schema | ID Format | Status |
 |--------|-----------|--------|
-| `evidence-models/base/finding.schema.json` | FIND-YYYY-NNNN | Phase B: read-only |
-| `evidence-models/base/corrective-action.schema.json` | CA-YYYY-NNNN | Phase B: read-only |
+| `evidence-models/_shared/base/finding.schema.json` | FIND-YYYY-NNNN | Phase B: read-only |
+| `evidence-models/_shared/base/corrective-action.schema.json` | CA-YYYY-NNNN | Phase B: read-only |
 
 > Agents are **read-only** on evidence-models until Phase B promotion is confirmed.

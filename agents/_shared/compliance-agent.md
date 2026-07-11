@@ -12,7 +12,7 @@ description: "Regulatory compliance validation —gap analysis, compliance check
 lifecycle:
   phase: production
   created: 2026-06-04
-  last_updated: 2026-06-04
+  last_updated: 2026-07-11
 ---
 
 ## Section A — Legal Basis
@@ -60,8 +60,8 @@ Dispatched by SWM (standard workflows) or SGM (regulatory update impact requests
 
 ### Workflow Pattern
 
-1. Read applicable regulation files from `regulations/` matching `legal_basis` field
-2. Load compliance checklist from `workflows/compliance/` for the relevant domain
+1. Read applicable regulation files from `regulations/KR/legal-glossary.yaml` and the relevant `regulations/KR/*.yaml` domain file matching `legal_basis` field. (`workflows/compliance/` is reserved for future structured per-domain checklists — it does not yet contain content; do not rely on it until populated.)
+2. Verify article numbers/content are current using the `kr_safety` and `legalize_kr` MCP tools (live law lookup) rather than the glossary alone when precision matters — this project has a history of mis-citations that live verification catches (see `memory/findings/compliance-gap-2026-07-05-all-domains.md`).
 3. Execute gap analysis against provided current state
 4. Categorize findings: Critical (Violation) / Major (Improvement needed) / Minor (Recommendation)
 5. Write gap report to `memory/findings/compliance-<date>-<id>.md`
@@ -74,6 +74,8 @@ Dispatched by SWM (standard workflows) or SGM (regulatory update impact requests
 | Read | `regulations/`, `workflows/compliance/`, `industry-profiles/` |
 | Write | `memory/findings/` (compliance gap reports) |
 | Bash | `bun scripts/safety-audit.ts` (schema validation) |
+| `mcp__kr_safety__search_osha_regulations`, `mcp__kr_safety__check_compliance_gaps` | Live OSHA-KR regulation lookup and gap checking |
+| `mcp__legalize_kr__*` | Live Korean statute verification (article numbers, amendment history) |
 
 ---
 

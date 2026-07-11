@@ -2,7 +2,7 @@
 name: mid-construction-inspection
 owner: gasterm-agent
 scope: workspace
-status: stub
+status: experimental
 description: >
   Execute KGS on-site mid-construction inspection for gas terminal facilities
   (LNG/LPG/수소). Verifies construction progress against approved design,

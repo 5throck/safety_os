@@ -1,0 +1,11 @@
+{
+  "id": "CA-2026-0007",
+  "finding_id": "FIND-2026-0007",
+  "date_assigned": "2026-07-05",
+  "description": "재난 및 안전관리 기본법 and 위험물안전관리법 confirmed real via legalize_kr; each of the 6 위험물안전관리법-citing workflows given a specific article (Art 27/22-2 for leak-response types, Art 5 for storage/handling types); 환경보전법 replaced with 산업안전보건법 Article 125 (Work Environment Measurement) in both affected files; 신재생에너지법 replaced with canonical 신에너지 및 재생에너지 개발·이용·보급 촉진법 Article 12.",
+  "responsible_party": "legal-agent",
+  "due_date": "2026-07-05",
+  "completed_date": "2026-07-05",
+  "status": "verified",
+  "verification_note": "bun scripts/safety-audit.ts re-run after Batch 2 fixes — 618 files checked, 0 errors."
+}

@@ -1,0 +1,12 @@
+{
+  "id": "FIND-2026-0007",
+  "date": "2026-07-05",
+  "type": "non-conformance",
+  "description": "Naming/article-precision gaps across gasterm/powergen/ehschem: 5 workflows cited informal '재난관리기본법' (canonical: 재난 및 안전관리 기본법, MST 283851); 6 workflows cited '위험물안전관리법' with no article number; 2 workflows (powergen/ash-chemical-waste-management, ehschem/environmental-monitoring) cited generic '환경보전법' matching neither of the two distinct environmental statutes tracked in the glossary; 1 workflow (powergen/renewable-energy-facility-safety) used the informal abbreviation '신재생에너지법' instead of the canonical statute name.",
+  "legal_basis": "재난 및 안전관리 기본법; 위험물안전관리법 제5조; 산업안전보건법 제125조",
+  "severity": "major",
+  "location": "workflows/domains/industry/{gasterm,powergen,ehschem}/**/schema.yaml",
+  "responsible_party": "legal-agent",
+  "status": "verified",
+  "corrective_action_id": "CA-2026-0007"
+}

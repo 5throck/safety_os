@@ -3,5 +3,8 @@ workflow_id: "risk-assessment"
 title: "위험성평가 (Risk Assessment)"
 status: "active"
 applicability: "mandatory"
-legal_basis: "산업안전보건법 제36조"
+legal_basis:
+  - "산업안전보건법 제36조 (위험성평가 실시)"
+  - "산업안전보건법 제38조 (안전조치)"
+  - "중대재해처벌법 제4조 (안전보건관리체계 구축 의무)"
 evidence_model: risk-assessment-record.json

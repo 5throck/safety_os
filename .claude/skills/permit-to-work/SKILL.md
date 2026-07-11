@@ -3,7 +3,7 @@ name: permit-to-work
 description: Trigger permit-to-work (PTW) issuance workflow for high-risk or non-routine work
 owner: safety-workflow-manager
 status: active
-version: 1.0.0
+version: 1.0.1
 metadata:
   triggers:
     - 작업허가서
@@ -32,7 +32,7 @@ Invoke this skill when a worker or supervisor requests authorization for non-rou
 
 1. **Work Type Identification** — Classify the work type (hot work, confined space, electrical, height, chemical, general high-risk). Select the applicable PTW form template.
 2. **Risk Assessment** — Invoke the `risk-assessment` skill. The completed risk assessment must be attached to the PTW before issuance. Risk level must be acceptable (below site threshold) or controls must reduce residual risk to acceptable.
-3. **Control Measure Verification** — Confirm all required control measures are in place prior to issuance: isolation verified, PPE available, emergency equipment present, communication established.
+3. **Control Measure Verification** — Confirm all required control measures are in place prior to issuance: isolation verified, PPE available, emergency equipment present, communication established. **If the work requires isolating hazardous energy on PSM-covered equipment (electrical, mechanical, hydraulic, pneumatic, thermal, chemical), co-issue with the `psm-loto` skill** (`skills/domains/functional/psm/loto/SKILL.md`) — LOTO and PTW are normally issued together for non-routine work; reference the LOTO `permit_number` in this PTW record and vice versa.
 4. **Permit Issuance** — Issue the permit with: permit number, work description, work area, permitted personnel, valid time window (start/expiry), required controls, issuing authority signature.
 5. **Post-Work Sign-Off** — Upon completion, the performing authority signs off confirming work area is safe and restored. Permit is formally closed. Document any deviations or incidents.
 

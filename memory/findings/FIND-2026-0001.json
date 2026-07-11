@@ -1,0 +1,12 @@
+{
+  "id": "FIND-2026-0001",
+  "date": "2026-07-05",
+  "type": "non-conformance",
+  "description": "6 emergency workflows (confined-space-rescue, disaster-response, electrical-emergency, high-angle-rescue, mechanical-accident, medical-emergency) cited 중대재해처벌법 Article 7 (Dual liability — corporate penalty) for the general safety-and-health assurance obligation, which is actually Article 4. disaster-response also cited a non-existent 'OSHA-KR Article 5'. Systemic, repeated mis-citation across the highest-stakes (life-safety, SAPA-exposure) workflow cluster.",
+  "legal_basis": "중대재해처벌법 제4조; 산업안전보건법 제54조",
+  "severity": "critical",
+  "location": "workflows/emergency/{confined-space-rescue,disaster-response,electrical-emergency,high-angle-rescue,mechanical-accident,medical-emergency}/schema.yaml",
+  "responsible_party": "PM (CSO) via compliance-agent",
+  "status": "verified",
+  "corrective_action_id": "CA-2026-0001"
+}

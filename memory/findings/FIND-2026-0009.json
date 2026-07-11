@@ -1,0 +1,12 @@
+{
+  "id": "FIND-2026-0009",
+  "date": "2026-07-05",
+  "type": "non-conformance",
+  "description": "10 of 15 PSM workflows (contractor-management, mi-inspection, moc-process, pha-hazop, psi-management, pssr-review, sop-management, employee-participation, hot-work-permit, psm-worker-training) cited only a single bare 'OSHA-KR Article 44' — technically exempt from the array/count rule at the time (skip_workflow_validation: true) but substantively thinner than sibling PSM workflows citing 3-4 well-matched sources.",
+  "legal_basis": "산업안전보건법 제44조; 중대재해처벌법 제4조",
+  "severity": "minor",
+  "location": "workflows/domains/functional/psm/{contractor-management,mi-inspection,moc-process,pha-hazop,psi-management,pssr-review,sop-management,employee-participation,hot-work-permit,psm-worker-training}/schema.yaml",
+  "responsible_party": "psm-agent",
+  "status": "verified",
+  "corrective_action_id": "CA-2026-0009"
+}

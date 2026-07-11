@@ -1,0 +1,12 @@
+{
+  "id": "FIND-2026-0006",
+  "date": "2026-07-05",
+  "type": "non-conformance",
+  "description": "workflows/emergency/confined-space-rescue/schema.yaml cited '산업안전보건법 Article 63 (밀폐공간 작업)'. Glossary confirms Art 63 = 'Ordering party's safety and health measures (도급인)', unrelated to confined-space work. The real confined-space article sits in a subordinate rule not initially indexed in legalize_kr/kr_safety.",
+  "legal_basis": "산업안전보건기준에 관한 규칙 제623조",
+  "severity": "major",
+  "location": "workflows/emergency/confined-space-rescue/schema.yaml",
+  "responsible_party": "legal-agent (via mcp-kr-legislation)",
+  "status": "verified",
+  "corrective_action_id": "CA-2026-0006"
+}

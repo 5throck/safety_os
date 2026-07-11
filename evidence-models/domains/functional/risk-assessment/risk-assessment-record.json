@@ -3,7 +3,7 @@
   "$id": "risk-assessment-record.json",
   "title": "Workplace Risk Assessment Record",
   "description": "Structured risk assessment record per OSHA-KR Article 36 (위험성평가 실시). Documents hazard identification, risk scoring, and control measures for workplace tasks.",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "type": "object",
   "required": [
     "record_id",
@@ -124,6 +124,12 @@
             ],
             "description": "Risk level before controls"
           },
+          "risk_score_before": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 25,
+            "description": "Numeric Likelihood × Severity product (1-25 scale) before controls, alongside the qualitative risk_level_before band. Added v1.1.0 to enable quantitative trend analysis and cross-record aggregation."
+          },
           "control_measures": {
             "type": "array",
             "items": {
@@ -180,6 +186,12 @@
               "critical"
             ],
             "description": "Residual risk level after controls"
+          },
+          "risk_score_after": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 25,
+            "description": "Numeric Likelihood × Severity product (1-25 scale) after controls, alongside the qualitative risk_level_after band. Added v1.1.0."
           }
         },
         "required": [
@@ -218,6 +230,24 @@
         "null"
       ],
       "description": "Reference to training-record.json for risk assessment communication training"
+    },
+    "incident_ref": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Reference to the originating incident/RCA record (e.g. memory/incidents/ or FIND-YYYY-NNNN), required in practice when assessment_type is 'post_incident'. Added v1.1.0."
+    },
+    "related_assessment_ref": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "type": "string"
+      },
+      "description": "References to related specialist assessment outputs (e.g. fall-hazard-assessor, ess-fire-risk-assessor, psm-agent HAZOP/PHA records) that inform or overlap with this assessment. Added v1.1.0.",
+      "default": null
     },
     "legal_basis": {
       "type": "array",
