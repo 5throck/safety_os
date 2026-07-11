@@ -6,6 +6,18 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+### Fixed (2026-07-11 — Documentation Freshness Audit)
+
+- **README.md/_ko**: Fixed stale domain counts (PSM 11→15, gasterm 8→12, daily 14→6 actual), file-count claim (458+→640+), added `contractor-safety`/`occupational-health` to Active Domains, added `policies/`/`docs/governance/`/`workflows/compliance/` to Repository Structure, fixed `legalize_kr` tool count (5→6), footer date.
+- **docs/_meta/architecture-overview.md**: Full rewrite — domain count 12→15 (5 functional + 10 industry, correcting the pre-2-tier-split classification where GxP was miscounted as functional), `safety-audit.ts` 4.2.1→4.3.0, evidence models 119→120, regulations 29→31, PSM inventory 11→15 workflows, added emergency evidence-model count and `policies/`/`docs/governance/` to Key Documents, fixed stale "Last Updated" header.
+- **docs/_shared/mcp-integration-guide.md/_ko**: Fixed MCP server name (`kr_legislation`→`mcp_kr_legislation`, matching `.mcp.json`), `legalize_kr` tool count (5→6), documented compliance-agent's specific MCP tool usage.
+- **docs/_shared/user-scenarios.md/_ko**: Fixed risk-assessment scenario's `legal_basis` example (single-source → 3-source array, matching the 2026-07-11 schema fix).
+- **docs/_shared/user-guide.md/_ko**: Added §7 Governance & KPIs (policies/, KPI definitions, finding→corrective-action traceability) and an Emergency Dispatch subsection documenting the E-01–E-10 scenario classification.
+- **docs/_shared/domain-classification-guide.md/_ko**: Added `contractor-safety`/`occupational-health` to the Tier 1 functional domain table; fixed "10+ domains" → "15 domains".
+- **docs/_shared/domain-onboarding-guide.md/_ko**: Fixed the folder-structure diagrams and all Step 2-9 path examples from the pre-2-tier flat `domains/<name>/` pattern to the actual `domains/<tier>/<name>/` pattern; documented `scripts/new-domain.ts` as the available automation; added the two missing domains to the Active Domains Registry; fixed the Korean mirror's stale "최소 2개" (min 2) legal_basis requirement to match the actual "min 3" policy already correct in the English version.
+- **scripts/new-domain.ts**: Fixed a stale agent-template comment claiming "min 2 for functional" legal_basis sources — policy has required min 3 for all domains since 2026-07-05.
+- **docs/_shared/tutorial.md/_ko**: Rewrote the flagship `psm-moc-record.json` worked example and its Field Guide table — the previous example used entirely fictional field names (`schema_version`, `change_info`, `hazard_assessment`, `required_actions`, `approvals.e_signature`, `audit_trail`) that don't exist in the real `evidence-models/domains/functional/psm/psm-moc-record.json` schema; also added `psm-loto-record.json` to psm-agent's listed outputs now that the LOTO skill is active.
+
 ### Fixed (2026-07-11 — Project Review R3 Remediation)
 
 - **scripts/domain-config.ts, scripts/safety-audit.ts**: Closed systemic audit-coverage gap — `workflows/daily/**`, `workflows/emergency/**`, and `workflows/compliance/**` now get the same `legal_basis` array + `minItems≥3` validation as registered domains (previously only a truthy check applied). Removed PSM's blanket `skip_workflow_validation` exemption. Added a `risk-assessment-agent` ↔ `psm-agent` role-separation check mirroring the existing `risk-assessment-agent` ↔ `gmp-qrm` check.

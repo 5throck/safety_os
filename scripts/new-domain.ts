@@ -11,7 +11,10 @@
  * Example:
  *   bun scripts/new-domain.ts cosmetics industry cosmetics
  *
- * @version 1.0.0
+ * @version 1.0.1
+ * v1.0.1 (2026-07-11): Fixed stale agent-template comment claiming "min 2 for
+ *   functional" legal_basis sources — policy has required min 3 for all domains
+ *   since 2026-07-05 (see domain-config.ts DEFAULT_MIN_LEGAL_BASIS).
  */
 
 import * as fs from 'node:fs';
@@ -73,7 +76,7 @@ lifecycle: {phase: production, created: "${new Date().toISOString().split('T')[0
 ---
 
 ## Section A — Legal Basis
-<!-- Add regulatory references (min 2 for functional, min 3 for industry) -->
+<!-- Add regulatory references (min 3 sources, both functional and industry tiers — see scripts/domain-config.ts DEFAULT_MIN_LEGAL_BASIS) -->
 
 ## Section B — Role & Responsibilities
 

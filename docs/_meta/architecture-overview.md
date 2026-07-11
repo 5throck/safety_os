@@ -1,7 +1,7 @@
 # Safety OS — Architecture Overview
 
-> **Last Updated**: 2026-06-19
-> **Active Domains**: 12 (7 functional + 5 industry)
+> **Last Updated**: 2026-07-11
+> **Active Domains**: 15 (5 functional + 10 industry)
 > **Architecture**: 2-Tier functional × industry matrix
 
 ## 1. System Overview
@@ -17,54 +17,62 @@ Safety OS is a multi-domain compliance orchestration platform for Korean EHS/GxP
 │  Strategy   │  Execution coordinator                             │
 │  KPI/Policy │  Dispatches to domain agents                       │
 ├─────────────┴───────────────────────────────────────────────────┤
-│                    Domain Agents (12 active)                      │
+│                    Domain Agents (15 active)                      │
 ├──────────────────────────┬──────────────────────────────────────┤
 │  Functional (Tier 1)     │  Industry (Tier 2)                    │
-│  PSM  MSDS  GMP  GDP     │  ehsconst  ehschem  gasterm           │
-│  GLP  GCP  GVP           │  powergen  meddevice                  │
+│  PSM  MSDS  Training      │  GMP  GDP  GLP  GCP  GVP              │
+│  contractor-safety        │  ehsconst  ehschem  gasterm           │
+│  occupational-health      │  powergen  meddevice                  │
 ├──────────────────────────┴──────────────────────────────────────┤
 │              Cross-Cutting Services (Tier 3)                      │
-│  Emergency (9 scenarios)  │  Daily EHS (14 workflows)            │
+│  Emergency (9 scenarios)  │  Daily EHS (6 workflows)             │
+│  Governance (policies/, docs/governance/ KPIs)                    │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
 ## 2. 2-Tier Matrix
 
 ```
-                 Pharma    Chemical    Gas/Energy   Power    Construction   MedDevice
-PSM (func)         -         ✓            ✓           ✓          -              -
-MSDS (func)        ✓         ✓            ✓           ✓          ✓              ✓
-GxP (func)         ✓(5)      -            -           -          -              -
-Emergency (cc)     ✓         ✓            ✓           ✓          ✓              ✓
+                 Pharma(GxP)  Chemical    Gas/Energy   Power    Construction   MedDevice
+PSM (func)           -          ✓            ✓           ✓          -              -
+MSDS (func)          ✓          ✓            ✓           ✓          ✓              ✓
+Training (func)      ✓          ✓            ✓           ✓          ✓              ✓
+Emergency (cc)       ✓          ✓            ✓           ✓          ✓              ✓
 ─────────────────────────────────────────────────────────────────────────────────────────
+GMP/GDP/GLP/GCP/GVP (ind)   ✓
 ehsconst (ind)                                                        ✓
-ehschem (ind)                ✓
-gasterm (ind)                            ✓
-powergen (ind)                                      ✓
-meddevice (ind)                                                                  ✓
+ehschem (ind)                    ✓
+gasterm (ind)                                ✓
+powergen (ind)                                            ✓
+meddevice (ind)                                                                     ✓
 ```
+
+> `contractor-safety` and `occupational-health` (functional) apply to TAR/Major-Turnaround surge scenarios across industry domains — not shown as matrix columns since they're triggered by event type (TAR), not a fixed industry.
 
 ## 3. Domain Inventory
 
-### Functional Domains (7)
+### Functional Domains (5)
 
 | Domain | Workflows | Evidence Models | Key Standard |
 |--------|-----------|-----------------|--------------|
-| PSM | 11 | 7+4 | OSHA-KR Art 44 (14 elements) |
+| PSM | 15 | 15 | OSHA-KR Art 44 (14 elements) |
 | MSDS | 7 | 6 | GHS Rev 9 + K-REACH |
+| Training | 8 | 5 | OSHA-KR Art 13/29/31/32/114 |
+| contractor-safety | 1 | 1 | TAR/Major Turnaround contractor surge |
+| occupational-health | 1 | 1 | TAR/Major Turnaround health screening |
+
+### Industry Domains (10)
+
+| Domain | Workflows | Evidence Models | Key Standard |
+|--------|-----------|-----------------|--------------|
 | GMP | 10 | 11 | KP-GMP + ICH Q7/Q9/Q10 |
 | GDP | 8 | 7 | KGDP + PIC/S |
 | GLP | 8 | 7 | OECD GLP + MAD |
 | GCP | 8 | 7 | KGCP + ICH E6(R3) |
 | GVP | 8 | 7 | ICH E2 series + EU GVP |
-
-### Industry Domains (5)
-
-| Domain | Workflows | Evidence Models | Key Standard |
-|--------|-----------|-----------------|--------------|
 | ehsconst | 9 | 9 | OSHA-KR + SAPA Art 12 |
 | ehschem | 8 | 6 | CCA + K-REACH + 환경법 |
-| gasterm | 8 | 7 | 고압가스법 + LPG법 + 수소법 |
+| gasterm | 12 | 11 | 고압가스법 + LPG법 + 수소법 |
 | powergen | 8 | 8 | 전기사업법 + 전기안전법 |
 | meddevice | 8 | 7 | KGMP-MD + ISO 13485 + ISO 14971 |
 
@@ -72,8 +80,9 @@ meddevice (ind)                                                                 
 
 | Service | Count | Coverage |
 |---------|-------|----------|
-| Emergency | 9 workflows | fire, disaster, medical, chemical, explosion, confined-space, high-angle, electrical, mechanical |
-| Daily EHS | 14 workflows | risk-assessment, permit-to-work, equipment-inspection, etc. |
+| Emergency | 9 workflows, 8 evidence models | fire, disaster, medical, chemical, explosion, confined-space, high-angle, electrical, mechanical (E-01–E-10 scenario classification, see `agents/_shared/emergency-agent.md`) |
+| Daily EHS | 6 workflows | `daily/manufacturing/`: risk-assessment, permit-to-work, contractor-management, equipment-inspection, safety-patrol, safety-training. (`chemical/`, `construction/`, `datacenter/`, `semiconductor/` are placeholder `_INDEX.md` stubs, not real workflows yet.) |
+| Governance | — | `policies/` (SGM-approved policy output), `docs/governance/kpi-definitions.md` (LTIFR, Audit Pass Rate, Corrective Action Closure Rate) |
 
 ## 4. Dispatch Flow
 
@@ -84,7 +93,7 @@ PM (CSO) → SWM
   ↓
 Industry Domain Agent (coordinator)
   ├── Industry-specific workflow (direct)
-  ├── Functional service dispatch (PSM/MSDS/GxP)
+  ├── Functional service dispatch (PSM/MSDS/Training)
   └── Emergency dispatch (if urgent)
 ```
 
@@ -97,12 +106,12 @@ Industry Domain Agent (coordinator)
 
 ## 5. Audit System
 
-`safety-audit.ts` v4.2.1 validates:
-- **134 workflow schema.yaml** files (legal_basis ≥2/3, status, applicability)
-- **119 evidence models** ($ref resolution, domain-specific common fields)
-- **29 regulations** (source_mcp validation)
-- **Role separation** (risk-assessment-agent ↔ gmp-qrm)
-- **12 domain-specific validations** (functional + industry)
+`safety-audit.ts` v4.3.0 validates:
+- **134 workflow schema.yaml** files (legal_basis ≥2/3, status, applicability) — including `workflows/daily/**`, `workflows/emergency/**`, and `workflows/compliance/**`, which get the same array/minItems(≥3) check as registered domains (closed 2026-07-11; previously only a truthy check applied to these trees)
+- **120 evidence models** ($ref resolution, domain-specific common fields)
+- **31 regulations** (source_mcp validation) — includes canonical `regulations/KR/OSHA-KR.yaml` and `SAPA.yaml` base files added 2026-07-11
+- **Role separation**: risk-assessment-agent ↔ gmp-qrm, and risk-assessment-agent ↔ psm-agent (added 2026-07-11)
+- **15 domain-specific validations** (5 functional + 10 industry)
 
 ## 6. Key Documents
 
@@ -113,3 +122,5 @@ Industry Domain Agent (coordinator)
 | Reference Workflow Pattern | `docs/_shared/reference-workflow-pattern.md` |
 | User Guide | `docs/_shared/user-guide.md` |
 | MCP Integration Guide | `docs/_shared/mcp-integration-guide.md` |
+| Governance Policies | `policies/README.md` |
+| KPI Definitions | `docs/governance/kpi-definitions.md` |

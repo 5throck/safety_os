@@ -18,15 +18,17 @@
 
 ---
 
-## Active Domains (13)
+## Active Domains (15)
 
 ### Functional Layer (Tier 1) — cross-industry methodology & data services
 
 | Domain | Coverage | Workflows |
 |--------|----------|-----------|
-| `psm` | Process Safety Management (OSHA 14 elements) | 11 |
+| `psm` | Process Safety Management (OSHA 14 elements) | 15 |
 | `msds` | Chemical Substance Safety / GHS Rev 9 | 7 |
 | `training` | Safety Training Management (OSHA-KR Art 13/29/31/32/114) | 8 |
+| `contractor-safety` | Contractor Safety Management (TAR/Major Turnaround surge scenarios) | 1 |
+| `occupational-health` | Occupational Health Surveillance (TAR/Major Turnaround health screening) | 1 |
 
 ### Industry Layer (Tier 2) — industry-specific operations
 
@@ -39,7 +41,7 @@
 | `gvp` | Post-Market Pharmacovigilance / ICH E2 | 8 |
 | `ehsconst` | Construction Safety / SAPA Article 12 | 9 |
 | `ehschem` | Chemical Plant / Refining·Petrochemical·Specialty | 8 |
-| `gasterm` | Gas Terminal / LNG·LPG·Hydrogen | 8 |
+| `gasterm` | Gas Terminal / LNG·LPG·Hydrogen | 12 |
 | `powergen` | Power Generation / Thermal·Renewable (nuclear excluded) | 8 |
 | `meddevice` | Medical Device / KGMP-MD·ISO 13485·ISO 14971 | 8 |
 
@@ -48,7 +50,7 @@
 | Service | Coverage |
 |---------|----------|
 | `emergency/` | 9 scenarios (fire, disaster, medical, chemical, explosion, rescue, electrical, mechanical) |
-| `daily/` | 14 EHS daily workflows (risk-assessment, permit-to-work, etc.) |
+| `daily/` | 6 EHS daily workflows under `daily/manufacturing/` (risk-assessment, permit-to-work, contractor-management, equipment-inspection, safety-patrol, safety-training); `chemical/`, `construction/`, `datacenter/`, `semiconductor/` are placeholder `_INDEX.md` stubs pending real workflows |
 
 ---
 
@@ -80,7 +82,7 @@
 ### Architecture & Design
 | Document | Purpose |
 |----------|---------|
-| [Architecture Overview](docs/_meta/architecture-overview.md) | 13-domain system architecture |
+| [Architecture Overview](docs/_meta/architecture-overview.md) | 15-domain system architecture |
 | [Domain Onboarding Guide](docs/_shared/domain-onboarding-guide.md) | 11-step SOP for adding new domains + Active Domains Registry |
 | [Reference Workflow Pattern](docs/_shared/reference-workflow-pattern.md) | Reference workflow design (10 applications) |
 
@@ -141,7 +143,7 @@ GITHUB_TOKEN=your_github_token_here
 ### Step 3 — Verify Installation
 
 ```bash
-bun scripts/safety-audit.ts              # 458+ files, 0 errors
+bun scripts/safety-audit.ts              # 640+ files, 0 errors
 ```
 
 ### Step 4 — Start Using with AI Tools
@@ -151,7 +153,7 @@ Open this project directory in Claude Code or Gemini CLI. The `.mcp.json` file i
 | MCP Server | Tools | Purpose |
 |------------|-------|---------|
 | `kr_safety` | 5 tools | Korean safety regulations search (OSHA-KR, SAPA, CCA), compliance gap analysis |
-| `legalize_kr` | 5 tools | Korean law structure parsing, version comparison, precedent search |
+| `legalize_kr` | 6 tools | Korean law structure parsing, version comparison, precedent search |
 | `mcp_kr_legislation` | 5 tools | Real-time legislation from 국가법령정보센터 API |
 
 No additional MCP configuration needed — just start chatting with your AI agent.
@@ -188,15 +190,18 @@ bun scripts/dev-sync.ts "feat: description of changes"
 ## Repository Structure
 
 ```
-agents/domains/functional/     ← PSM, MSDS, Training agents
+agents/domains/functional/     ← PSM, MSDS, Training, contractor-safety, occupational-health agents
 agents/domains/industry/       ← GxP (GMP/GDP/GLP/GCP/GVP), ehsconst, ehschem, gasterm, powergen, meddevice agents
 workflows/domains/functional/  ← cross-industry workflows
 workflows/domains/industry/    ← industry-specific workflows
 evidence-models/domains/       ← JSON schemas (functional/ + industry/)
 skills/domains/                ← SKILL.md + executable .ts skills
 workflows/emergency/           ← 9 cross-cutting emergency scenarios
-workflows/daily/               ← 14 daily EHS workflows
-regulations/KR/                ← Korean regulations (OSHA-KR, SAPA, MFDS, etc.)
+workflows/daily/               ← 6 daily EHS workflows (under daily/manufacturing/)
+workflows/compliance/          ← reserved for structured compliance checklists (not yet populated)
+policies/                      ← SGM-approved safety policy documents (see policies/README.md)
+docs/governance/               ← KPI definitions (LTIFR, Audit Pass Rate, Corrective Action Closure Rate)
+regulations/KR/                ← Korean regulations (OSHA-KR, SAPA, MFDS, etc.) + canonical OSHA-KR.yaml/SAPA.yaml
 regulations/international/     ← ICH, OECD, GHS
 ```
 
@@ -212,4 +217,4 @@ Safety OS is licensed under the [GNU Affero General Public License v3.0](LICENSE
 
 This system provides workflow automation assistance only. Regulatory interpretation and final compliance decisions are the responsibility of qualified legal/EHS/GxP professionals.
 
-*Last Updated: 2026-07-08*
+*Last Updated: 2026-07-11*

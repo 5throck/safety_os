@@ -4,9 +4,9 @@
 
 ## 1. Why This Guide Exists
 
-Safety OS has 10+ active domains. Historically, two natures have been mixed together:
+Safety OS has 15 active domains (5 functional + 10 industry). Historically, two natures have been mixed together:
 
-- **Functional domains**: Industry-agnostic; methodology- or data-driven (PSM, MSDS, Training)
+- **Functional domains**: Industry-agnostic; methodology- or data-driven (PSM, MSDS, Training, contractor-safety, occupational-health)
 - **Industry domains**: Centered on a specific industry's operations (ehsconst, gasterm, powergen, ehschem, meddevice, GxP family — gmp/gdp/glp/gcp/gvp)
 
 Consequences of the mixed layout:
@@ -25,9 +25,11 @@ This guide organizes the domains into a **3-tier classification system**.
 
 | Domain | Function | Example applicable industries |
 |--------|----------|-------------------------------|
-| `psm` | Process safety management methodology (PHA, MOC, PSSR, MI, PSI, SOP) | Chemicals, refining, **LNG/LPG bases**, large-scale power generation, semiconductors (specialty gases) |
+| `psm` | Process safety management methodology (PHA, MOC, PSSR, MI, PSI, SOP, LOTO) | Chemicals, refining, **LNG/LPG bases**, large-scale power generation, semiconductors (specialty gases) |
 | `msds` | Chemical substance data management (16 sections) | All industries (whenever chemicals are handled) |
 | `training` | Safety training management (OSHA-KR Art 13/29/31/32/114) | All industries |
+| `contractor-safety` | Contractor safety management (TAR/Major Turnaround surge scenarios) | Chemical plants, gas terminals, power generation during scheduled turnarounds |
+| `occupational-health` | Occupational health surveillance (TAR/Major Turnaround health screening) | Chemical plants, gas terminals, power generation during scheduled turnarounds |
 
 ### Tier 2: Industry Domains
 **Characteristic**: Centered on a specific industry's operations. Integrates the multi-agency regulations for that industry.
