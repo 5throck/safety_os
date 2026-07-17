@@ -2,14 +2,14 @@
 name: pre-construction-technical-review
 owner: gasterm-agent
 scope: workspace
-status: experimental
+status: active
 description: >
   Execute KGS Code pre-construction technical review (시설·기술 기준) for
   gas terminal facilities (LNG/LPG/수소). Reviews design documentation,
   material specifications, and construction plans against KGS safety requirements.
-version: 0.1.0
+version: 1.0.0
 created: 2026-07-09
-last_updated: 2026-07-09
+last_updated: 2026-07-17
 metadata:
   type: domain
   triggers:
@@ -19,49 +19,61 @@ metadata:
     - 시설기준 검토
     - 기술검토
     - 설계검토
+    - 사전기술검토
   legal_basis:
-    - 고압가스안전관리법 제16조 (고압가스의 제조허가 등)
-    - 고압가스안전관리법 시행규칙 제34조 (시설기준)
-    - KGS Code Section 3 (Design and Construction)
+    - 고압가스안전관리법 제22조의2 (기술검토)
+    - 고압가스안전관리법 시행규칙 제7조 (기술검토 신청 절차)
+    - 액화석유가스의 안전관리 및 사업법 제27조의2 (LPG 시설·기술기준 위임)
+    - 도시가스사업법 제17조의5 (시설·기술 기준)
 ---
 
 ## pre-construction-technical-review
 
-> **Status**: Stub — implementation required
-
 ### Purpose
 
-Execute Phase 1 of the KGS Code construction inspection: pre-construction technical review of facility design and construction plans.
+Execute Phase 1 of the KGS Code construction inspection: pre-construction technical review of facility design and construction plans, populating `evidence-models/domains/industry/gasterm/gasterm-pre-construction-review-record.json`.
 
 ### Scope
 
-- Design documentation review against KGS standards
+- Design documentation review against KGS standards (시설계획서, 배치도, 안전관리계획서)
 - Material specification verification
 - Safety system design adequacy
-- Environmental impact assessment coordination
-- Technical deviation identification
+- Technical deviation identification and supplement tracking
+- KGS 기술검토 신청서 (별지 제8호서식) processing
 
 ### Legal Basis
 
 | Law | Article | Requirement |
 |-----|---------|-------------|
-| 고압가스안전관리법 | Article 16 | 고압가스 제조/저장 허가 |
-| 고압가스안전관리법 시행규칙 | Article 34 | 시설기준 |
+| 고압가스안전관리법 | Article 22의2 | 기술검토 |
+| 고압가스안전관리법 시행규칙 | Article 7 | 기술검토 신청 절차 (별지 제8호서식) |
+| 액화석유가스의 안전관리 및 사업법 | Article 27의2 | LPG 시설·기술기준 위임 |
+| 도시가스사업법 | Article 17의5 | 시설·기술 기준 |
 | KGS Code | Section 3 | Design and Construction Standards |
 
-### Workflow (TODO)
+### Related Skills
 
-_Pre-construction technical review workflow to be implemented._
+- **`construction-permit-overview`** — orchestrates this skill as Phase 1; this skill's `review_result` gates dispatch of `mid-construction-inspection`.
 
-### Inputs (TODO)
+### Workflow
+
+1. **Application Preparation** — Assemble 시설계획서, 배치도, 안전관리계획서, and KGS Code reference materials. Determine `review_type` (new_construction/modification/expansion) and `facility_type`/`gas_type`.
+2. **KGS Technical Review Application** — Submit KGS 기술검토 신청 (별지 제8호서식) per 고압가스안전관리법 시행규칙 제7조. Record `application_date` and `kgs_review_id`.
+3. **Review Pending** — KGS 기술기준위원회 reviews (typically 2-4 weeks in practice). Record applicable `kgs_code_references` (e.g., KGS AC211, KGS FA121).
+4. **Result Receipt** — Record `review_result`: `pass` / `supplement_required` / `fail`. If `supplement_required`, populate `supplement_items[]` with the specific deficiencies requiring correction before resubmission.
+5. **Local Government Submission** — On `pass`, submit results to `local_government` (관할 지자체) as supporting documentation for the 변경허가 application; record `local_gov_submission_date`.
+6. **Closure** — Set `kgs_inspection_status` (certified/pending/failed/expired) reflecting the review outcome. Return `record_id` to the orchestrating `construction-permit-overview` record's `phases.pre_review.result_id`.
+
+### Inputs
 
 - P&ID and process documentation
 - Equipment specifications
 - Material certificates
 - Safety design basis
 
-### Outputs (TODO)
+### Outputs
 
-- Technical review checklist
-- Deviation report
-- Conditional approval documentation
+`gasterm-pre-construction-review-record.json`-conformant record including:
+- `review_result`, `supplement_items[]` (if applicable), `kgs_review_id`, `kgs_code_references[]`
+- `legal_basis` (>= 3 sources, drawn from the table above)
+- Deviation report and conditional approval documentation for supplement-required outcomes

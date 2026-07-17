@@ -41,7 +41,8 @@ export async function getComplianceGuide(topic: string): Promise<object> {
     topic,
     relevantLaws: laws,
     note: 'law.go.kr은 법령명 검색만 지원하며, 컴플라이언스 체크리스트를 생성하는 API가 아닙니다. 위 법령의 실제 조문은 interpret_regulation("<법령명> 제N조")으로 개별 조회하시기 바랍니다.',
-    source: '국가법령정보센터 (law.go.kr) 법령명 검색',
+    sourceLabel: '국가법령정보센터 (law.go.kr) 법령명 검색',
+    source: 'live_api' as const,
   };
 
   await cache.set(cacheKey, result, 21_600);
@@ -54,6 +55,7 @@ function noMatchResponse(topic: string, reason: string): object {
     relevantLaws: [],
     reason,
     note: 'law.go.kr은 법령명 검색만 지원합니다. 개념어·주제어 대신 구체적 법령명(예: "산업안전보건법")으로 다시 시도하거나, 국가법령정보센터에서 직접 검색하시기 바랍니다.',
-    source: '국가법령정보센터 (law.go.kr)',
+    sourceLabel: '국가법령정보센터 (law.go.kr)',
+    source: reason === 'MOCK_API=true' ? 'mock' as const : 'empty' as const,
   };
 }

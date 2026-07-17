@@ -47,7 +47,8 @@ export async function interpretRegulation(articleId: string): Promise<object> {
     articleNumber: parsed.articleNumber,
     articleTitle: match.조문제목 ?? null,
     content,
-    source: '국가법령정보센터 (law.go.kr) 조문 원문',
+    sourceLabel: '국가법령정보센터 (law.go.kr) 조문 원문',
+    source: 'live_api' as const,
     disclaimer: '이 결과는 법령 조문의 원문이며, 행정해석·판례·유권해석 등 2차 해석 자료가 아닙니다. 실제 적용 여부는 자격 있는 안전/법무 전문가의 확인이 필요합니다.',
   };
 
@@ -95,6 +96,7 @@ function unresolvedResponse(articleId: string, reason: string): object {
     interpretation: null,
     reason,
     note: '자동 조회에 실패했습니다. 정확한 조문은 국가법령정보센터(law.go.kr)에서 직접 확인하시기 바랍니다.',
-    source: '국가법령정보센터 (law.go.kr)',
+    sourceLabel: '국가법령정보센터 (law.go.kr)',
+    source: reason === 'MOCK_API=true' ? 'mock' as const : 'empty' as const,
   };
 }
