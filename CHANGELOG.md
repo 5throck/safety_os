@@ -6,6 +6,18 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+### Fixed (2026-07-17 — Project Review R4 Remediation)
+
+- **mcp/kr-legislation/tools/{current-law,amendments,interpret,guide}.ts**: Removed silent mock-data fallback that fired on live-API failure/empty-result (e.g. unregistered `OC=test` key) and returned fabricated law data indistinguishable from real data. Fallback to mock now requires explicit `MOCK_API=true`; all responses tagged with a `source: 'live_api' | 'mock' | 'empty'` field so callers/agents can detect provenance. Matches the honest-empty pattern already used by `mcp/kr-safety-regs/tools/search-osha.ts`.
+- **PROMOTION_CHECKLIST.md**: Full rewrite — agent paths corrected to actual `agents/_core/`, `agents/_shared/` locations; skill checklist expanded from 4 to 7 actual skills; Condition 6/7 statuses corrected from false "✅ Done" to honest "Pending"; verification commands fixed to actual script filenames; added note distinguishing the CSO-critical core 7 from the full 28-agent/15-domain roster.
+- **CLAUDE.md, GEMINI.md**: Fixed stale `evidence-models/**/*.json` lifecycle rule pointing to nonexistent `scripts/migrations/` — corrected to actual `evidence-models/migrations/` convention (per `evidence-models/migrations/README.md`), and clarified migrations are only required for breaking schema changes.
+- **workflows/compliance/**: Added `README.md` documenting the directory's purpose as a reserved extension point (validated by `safety-audit.ts` alongside `workflows/daily/**`/`workflows/emergency/**`) that is intentionally empty since `compliance-agent` currently works directly against `regulations/KR/legal-glossary.yaml`.
+
+### Added (2026-07-17 — Project Review R4 Remediation)
+
+- **scripts/test-runner.ts** (v1.0.0→1.1.0): Added `mcp-smoke` test suite (8 tool-invocation tests across kr-legislation, kr-safety-regs, legalize-kr) closing the long-standing TODO in `docs/_meta/superpowers/plans/2026-06-05-mcp-server-implementation.md`. Run via `bun scripts/test-runner.ts mcp-smoke`.
+- **skills/domains/industry/gasterm/{construction-permit-overview,pre-construction-technical-review,completion-inspection,mid-construction-inspection}/SKILL.md, skills/domains/industry/ehschem/tar-planning/SKILL.md**: Implemented all 5 previously-experimental/stub skills for real — `status: active`, concrete workflow procedures, `legal_basis` with 4 sources each, output format aligned to actual evidence-model schema fields.
+
 ### Fixed (2026-07-11 — Documentation Freshness Audit)
 
 - **README.md/_ko**: Fixed stale domain counts (PSM 11→15, gasterm 8→12, daily 14→6 actual), file-count claim (458+→640+), added `contractor-safety`/`occupational-health` to Active Domains, added `policies/`/`docs/governance/`/`workflows/compliance/` to Repository Structure, fixed `legalize_kr` tool count (5→6), footer date.
