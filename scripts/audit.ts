@@ -1,4 +1,4 @@
-// @version 2.6.1
+// @version 2.6.2
 import { $ } from 'bun';
 import * as fs from 'node:fs';
 import * as path from 'node:path';
@@ -472,6 +472,18 @@ if (hasBun) {
         else
             Pass("Lifecycle sync audit: all artifacts in sync");
     }
+    // Safety OS CSO gate: legal_basis >=3 on workflows/evidence-models (variant projects only)
+    // Mirrors the condition dev-sync.ts uses to invoke safety-audit.ts, so routine
+    // Write/Edit-triggered audit.ts runs (outside the /sync pipeline) also enforce
+    // the CSO legal_basis gate instead of only catching it at the next /sync.
+    if (fs.existsSync('variant.json') && fs.existsSync(path.join('scripts', 'safety-audit.ts'))) {
+        const out = await $`bun ${path.join('scripts', 'safety-audit.ts')}`.nothrow();
+        if (out.exitCode !== 0)
+            Fail("Safety OS audit detected issues (run 'bun scripts/safety-audit.ts' to see details)");
+        else
+            Pass('Safety OS audit: legal_basis and domain checks passed');
+    }
+
     // Platform lifecycle verification (Check E/F/G/H)
     if (fs.existsSync(path.join('scripts', 'verify-platform-lifecycle.ts'))) {
         try {
