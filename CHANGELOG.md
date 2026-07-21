@@ -6,6 +6,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+### Fixed (2026-07-22 — Project Review R5 Remediation)
+
+- **agents/_shared/risk-assessment-agent.md**: Fixed escalation-threshold contradiction — score `>= 12` "immediate escalation" language conflicted with `workflows/daily/manufacturing/risk-assessment/README.md`'s Medium band (6-12); changed threshold to `>= 13` so it aligns with the start of the High band.
+- **workflows/domains/functional/training/{new-hire-training,job-transfer-training,regular-safety-training,supervisor-training}/schema.yaml**: Fixed unresolvable `legal_basis` citation — "산업안전보건법 Article 15" (Safety and Health Management Supervisor duties, unrelated to training) was a copy-paste error not present in `training-agent.md` or `regulations/KR/legal-glossary.yaml`; replaced with 중대재해처벌법 Article 8, restoring a valid 3-source `legal_basis` array for each file.
+- **scripts/audit.ts** (v2.6.1→2.6.2): Wired `scripts/safety-audit.ts` into the PostToolUse QA gate (gated on `variant.json` existing) — previously only `/sync`/`dev-sync.ts` ran the CSO `legal_basis >=3` gate, so routine edits outside the sync pipeline went unchecked until the next sync.
+
+### Added (2026-07-22 — Project Review R5 Remediation)
+
+- **policies/enterprise-safety-governance-policy.md** (POL-001): First CSO-approved policy document — umbrella governance policy covering all industry profiles, citing 9 legal sources (OSHA-KR + SAPA), linked to LTIFR/Audit Pass Rate/Corrective Action Closure Rate KPIs, per the template in `policies/README.md`.
+
 ### Fixed (2026-07-17 — Project Review R4 Remediation)
 
 - **mcp/kr-legislation/tools/{current-law,amendments,interpret,guide}.ts**: Removed silent mock-data fallback that fired on live-API failure/empty-result (e.g. unregistered `OC=test` key) and returned fabricated law data indistinguishable from real data. Fallback to mock now requires explicit `MOCK_API=true`; all responses tagged with a `source: 'live_api' | 'mock' | 'empty'` field so callers/agents can detect provenance. Matches the honest-empty pattern already used by `mcp/kr-safety-regs/tools/search-osha.ts`.
