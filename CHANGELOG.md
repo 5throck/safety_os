@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+### Changed (2026-07-22 — context.md SSOT Alignment)
+
+- **docs/context.md**: Created at the correct SSOT location (`docs/context.md`, not `docs/_meta/`) as a verbatim mirror of `templates/common/docs/context.md` v2.0 — only the template's own placeholders (Project Overview one-liner, Type, Status) filled in. No project-specific restructuring; all divergence from the generic template now lives in `docs/co-safety.context.md` instead, per the template's own "IMMUTABLE after project creation" rule.
+- **docs/co-safety.context.md**: Moved from `docs/_meta/co-safety.context.md` to `docs/co-safety.context.md` (matching `docs/context.md`'s own pointer). Added Project Overview / Directory Layout / Key Files / Language Policy Note / Computational Integrity / Lifecycle Management sections that override or extend the SSOT template's generic versions with this project's actual (non-`src/`-based) structure — kept alongside the existing Regulatory Framework / Agent Hierarchy / Critical Rules / Workflow Library / Evidence Trail domain content.
+- **scripts/audit.ts** (v2.6.2→2.6.3): Added `PROMOTION_CHECKLIST.md`, `_ORIGIN.md`, `_COMMON_VERSION.md` to the standard-root-`.md` allowlist. These are legitimate root files for this variant but were never validated before because the "project-level checks" block only runs when `docs/context.md` exists at the SSOT path — which it now does for the first time.
+
 ### Fixed (2026-07-22 — Project Review R5 Remediation)
 
 - **agents/_shared/risk-assessment-agent.md**: Fixed escalation-threshold contradiction — score `>= 12` "immediate escalation" language conflicted with `workflows/daily/manufacturing/risk-assessment/README.md`'s Medium band (6-12); changed threshold to `>= 13` so it aligns with the start of the High band.

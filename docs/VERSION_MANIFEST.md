@@ -1,6 +1,6 @@
 # VERSION_MANIFEST.md
 
-**Generated**: 2026-07-21T23:02:40.068Z
+**Generated**: 2026-07-21T23:21:45.442Z
 **Manifest Version**: 1.0
 **Location**: docs\VERSION_MANIFEST.md
 
@@ -33,7 +33,7 @@
 | _shared/legal-agent | agents/_shared/legal-agent.md | medium | sonnet | 2026-07-10 |
 | _shared/occupational-health-agent | agents/_shared/occupational-health-agent.md | medium | sonnet | 2026-07-10 |
 | _shared/reporting-agent | agents/_shared/reporting-agent.md | medium | sonnet | 2026-07-10 |
-| _shared/risk-assessment-agent | agents/_shared/risk-assessment-agent.md | medium | sonnet | 2026-07-10 |
+| _shared/risk-assessment-agent | agents/_shared/risk-assessment-agent.md | medium | sonnet | 2026-07-21 |
 | domains/functional/msds/msds-agent | agents/domains/functional/msds/msds-agent.md | medium | sonnet | 2026-07-10 |
 | domains/functional/psm/psm-agent | agents/domains/functional/psm/psm-agent.md | medium | sonnet | 2026-07-11 |
 | domains/functional/training/training-agent | agents/domains/functional/training/training-agent.md | medium | sonnet | 2026-07-07 |
@@ -126,7 +126,7 @@
 | agent-verify.ts | 1.0.2 | scripts/agent-verify.ts | N/A |
 | analyze-git-history.ts | 1.0.0 | scripts/analyze-git-history.ts | child_process |
 | archive-memory.ts | 1.1.2 | scripts/archive-memory.ts | N/A |
-| audit.ts | 2.6.2 | scripts/audit.ts | bun |
+| audit.ts | 2.6.3 | scripts/audit.ts | bun |
 | auto-executor.ts | 1.0.0 | scripts/lib/auto-executor.ts | N/A |
 | check-pm-approval.ts | 1.0.1 | scripts/check-pm-approval.ts | N/A |
 | checkpoint-manager.ts | 1.0.0 | scripts/lib/checkpoint-manager.ts | N/A |
